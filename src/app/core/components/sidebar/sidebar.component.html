@@ -1,0 +1,64 @@
+<div
+    class="sidenav-container">
+  <div>
+    <button
+        mat-icon-button
+        (click)="estaExtendido = !estaExtendido"
+        style="margin: 10px;">
+      <mat-icon aria-label="Menu">menu</mat-icon>
+    </button>
+  </div>
+
+  <div class="menu-container">
+    <mat-nav-list>
+      <mat-list-item>
+        <mat-icon mat-list-icon>home</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Inicio</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>video_library</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Tutoriales</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>class</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Referentes conceptuales</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>info</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Acerca de</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>sentiment_very_satisfied</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Contribuir</h4>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon mat-list-icon>person</mat-icon>
+        <h4 mat-line *ngIf="estaExtendido">Iniciar sesion</h4>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+
+  <div class="footer">
+    <button
+        routerLink="/"
+        mat-button
+        style="padding: 0;">
+      <img src="./assets/img/icons/core/myrmex.svg"/>
+    </button>
+    <div
+        *ngIf="estaExtendido"
+        class="copyright">
+      <span>
+        Sistema Myrminki
+        <mat-icon
+            mat-icon
+            aria-hidden="true">
+          copyright
+        </mat-icon>
+      </span>
+      <span>Desarrollado por Pedro Barr.</span>
+      <span>Version 0.2</span>
+    </div>
+  </div>
+
+</div>
