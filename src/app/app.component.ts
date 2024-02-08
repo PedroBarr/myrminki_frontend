@@ -16,4 +16,9 @@ export class AppComponent {
     this.currentEvent = evt;
   }
 
+  handleStopPropagation (evt: MouseEvent) {
+    evt.preventDefault();
+    evt.stopPropagation();
+  }
+
 }

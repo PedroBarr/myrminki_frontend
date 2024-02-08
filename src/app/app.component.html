@@ -8,7 +8,11 @@
   </myrmex-background>
 
   <div id="site-content">
-    <myrmex-sidebar>
+    <myrmex-sidebar
+      (click)="handleStopPropagation($event)"
+      (dblclick)="handleStopPropagation($event)"
+      (contextmenu)="handleStopPropagation($event)"
+    >
     </myrmex-sidebar>
 
     <div
