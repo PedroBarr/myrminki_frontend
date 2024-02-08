@@ -17,3 +17,25 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   font-family: montserrat;
   src: url("assets/fonts/montserrat/Montserrat-Regular.ttf") format("opentype");
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+@for $i from 1 through 10 {
+  $gap: $i * 5;
+
+  .gap-#{$gap} {
+    gap: #{$gap}px;
+  }
+}
+
+.boxW100 {
+  width: 100%;
+}

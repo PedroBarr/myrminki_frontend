@@ -1,8 +1,9 @@
 .view-container {
-  left: 80px;
-  top: 15px;
   position: fixed;
+  left: 0px;
+  top: 0px;
   z-index: 0;
   height: 100vh;
+  padding: 15px 10px 15px 90px;
   overflow-y: auto;
 }

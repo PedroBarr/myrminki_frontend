@@ -23,8 +23,8 @@
 
 .title-container {
   .mat-card {
-    width: 96%;
-    margin-right: 4%;
+    width: 100%;
+    padding: unset;
   }
 
   .mat-card-title {
@@ -72,7 +72,7 @@
 
 .card-links {
   position: absolute;
-  top: 115%;
+  /* top: 115%; */
   height: 300px;
   width: 35%;
   margin: 0 1%;
