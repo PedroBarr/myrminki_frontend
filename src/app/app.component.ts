@@ -7,7 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title: string = 'myrminki-frontend';
+  currentEvent: MouseEvent | null = null;
 
   constructor () { }
+
+  handleBodyClick (evt: MouseEvent) {
+    evt.preventDefault();
+    this.currentEvent = evt;
+  }
 
 }

@@ -10,30 +10,19 @@
   </div>
 
   <div class="menu-container">
-    <mat-nav-list>
+    <mat-nav-list *ngFor="let option of siteOptions">
       <mat-list-item>
-        <mat-icon mat-list-icon>home</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Inicio</h4>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>video_library</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Tutoriales</h4>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>class</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Referentes conceptuales</h4>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>info</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Acerca de</h4>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>sentiment_very_satisfied</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Contribuir</h4>
-      </mat-list-item>
-      <mat-list-item>
-        <mat-icon mat-list-icon>person</mat-icon>
-        <h4 mat-line *ngIf="estaExtendido">Iniciar sesion</h4>
+
+        <a routerLink={{option.enlace}}>
+          <mat-icon mat-list-icon>{{option.icono}}</mat-icon>
+        </a>
+
+        <a
+            class="mat-list-text"
+            routerLink={{option.enlace}}>
+          <h4 mat-line *ngIf="estaExtendido">{{option.titulo}}</h4>
+        </a>
+
       </mat-list-item>
     </mat-nav-list>
   </div>

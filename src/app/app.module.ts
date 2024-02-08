@@ -1,12 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { ComponentsModule } from './core/components/components.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PagesModule } from './core/pages/pages.module';
 
 @NgModule({
   declarations: [
@@ -15,12 +16,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule,
     HttpClientModule,
+    BrowserAnimationsModule,
 
+    PagesModule,
     ComponentsModule,
 
     AppRoutingModule,
-
-    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

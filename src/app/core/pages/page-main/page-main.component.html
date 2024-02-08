@@ -1,0 +1,41 @@
+<div class="title-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        <h2>Sistema Myrminki</h2>
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        <h2>{{descriptorPrincipal.titulo}}</h2>
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>
+        {{descriptorPrincipal.descriptor}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<ng-container *ngFor="let enlace of descriptorEnlaces" >
+  <a
+      class="card-links"
+      style="left: {{enlace.desfase}}%;"
+      routerLink={{enlace.descriptor.enlace}}>
+    <mat-card class="card-links-container">
+
+      <mat-card-header>
+        <mat-card-title>
+          <h2>{{enlace.descriptor.anticipo}}</h2>
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{enlace.descriptor.propaganda}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </a>
+</ng-container>

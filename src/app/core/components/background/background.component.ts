@@ -1,8 +1,10 @@
 import {
     Component,
+    Input,
     ElementRef,
+    OnChanges,
     OnInit,
-    ViewChild
+    ViewChild,
 } from '@angular/core';
 
 @Component({
@@ -21,6 +23,7 @@ export class BackgroundComponent implements OnInit {
   _codigo: string;
   matriz_fondo: number[][] = [[0]];
 
+  @Input() public currentEvent: MouseEvent | null = null;
   constructor ( ) {
     this._codigo = ".";
   }
@@ -55,7 +58,7 @@ export class BackgroundComponent implements OnInit {
     this.init_canvas();
     const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
     canvas.addEventListener(
-      "mousedown",
+      "click",
       (evt: MouseEvent) => {
         this.interaccion_mouse(evt);
       }
@@ -84,6 +87,25 @@ export class BackgroundComponent implements OnInit {
       }
     );
 
+  }
+
+  ngOnChanges () {
+    if (this.currentEvent) {
+      const type = this.currentEvent.type;
+
+      switch (type) {
+        case "click":
+          this.interaccion_mouse(this.currentEvent);
+          break;
+        case "contextmenu":
+          this.interaccion_mouse_alter(this.currentEvent);
+          break;
+        case "dblclick":
+          this.interaccion_mouse_alter2(this.currentEvent);
+          break;
+        default: break;
+      }
+    }
   }
 
   alRedimensionar (e: Event) {
@@ -143,14 +165,38 @@ export class BackgroundComponent implements OnInit {
 
   interaccion_mouse (evt: MouseEvent) {
     this.#interactuar(evt.clientX,evt.clientY);
+
+    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (context) {
+      this.#dibujar(context);
+    }
+
   }
 
   interaccion_mouse_alter (evt: MouseEvent) {
     this.#interactuar_alter(evt.clientX,evt.clientY);
+
+    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (context) {
+      this.#dibujar(context);
+    }
+
   }
 
   interaccion_mouse_alter2 (evt: MouseEvent) {
     this.#interactuar_alter2(evt.clientX,evt.clientY);
+
+    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (context) {
+      this.#dibujar(context);
+    }
+
   }
 
   #interactuar(xPosMouse: number, yPosMouse: number) {
@@ -305,13 +351,6 @@ export class BackgroundComponent implements OnInit {
         break;
     }
 
-    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
-    const context = canvas.getContext('2d');
-
-    if (context) {
-      this.#dibujar(context);
-    }
-
   }
 
   #interactuar_alter(xPosMouse: number, yPosMouse: number) {
@@ -394,20 +433,18 @@ export class BackgroundComponent implements OnInit {
         break;
     }
 
-    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
-    const context = canvas.getContext('2d');
-
-    if (context) {
-      this.#dibujar(context);
-    }
   }
 
   #interactuar_alter2(xPosMouse: number, yPosMouse: number) {
-    const dist = Math.floor(Math.random() * (101 - 70) + 70);
+    const dist = Math.floor(Math.random() * (101 - 60) + 60);
 
-    for (let j = 0; j < 2; j++) {
-      for (let i = 0; i < 2; i++) {
-        this.#interactuar_alter(xPosMouse-Math.floor(dist/2)+(i*dist), yPosMouse-Math.floor(dist/2)+(j*dist));
+    for (let j = 0; j < 3; j++) {
+      for (let i = 0; i < 3; i++) {
+        this.#interactuar_alter(
+            xPosMouse-Math.floor(dist/1)+(i*dist),
+            yPosMouse-Math.floor(dist/1)+(j*dist)
+        );
+
       }
     }
   }
@@ -434,7 +471,7 @@ export class BackgroundComponent implements OnInit {
         if (this.matriz_fondo[fila][casilla] != 0) {
 
           if (this.matriz_fondo[fila][casilla] == 1) {
-            context.fillStyle = "#777";
+            context.fillStyle = "#ddd";
           }
           if (this.matriz_fondo[fila][casilla] == 2) {
             context.fillStyle = "#fff";

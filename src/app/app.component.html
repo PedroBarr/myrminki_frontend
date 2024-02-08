@@ -1,10 +1,19 @@
-<myrmex-background>
-</myrmex-background>
-
-<myrmex-sidebar>
-</myrmex-sidebar>
-
 <div
-    class="view-container">
-  <router-outlet></router-outlet>
+  id="site-container"
+  (click)="handleBodyClick($event)"
+  (dblclick)="handleBodyClick($event)"
+  (contextmenu)="handleBodyClick($event)"
+>
+  <myrmex-background [currentEvent]="currentEvent">
+  </myrmex-background>
+
+  <div id="site-content">
+    <myrmex-sidebar>
+    </myrmex-sidebar>
+
+    <div
+        class="view-container">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
