@@ -11,9 +11,9 @@
 
   <div class="menu-container">
     <mat-nav-list *ngFor="let option of siteOptions">
-      <mat-list-item>
+      <mat-list-item routerLink={{option.enlace}}>
 
-        <a routerLink={{option.enlace}}>
+        <a>
           <mat-icon mat-list-icon>{{option.icono}}</mat-icon>
         </a>
 
