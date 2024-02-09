@@ -1,4 +1,4 @@
-<div class="flex-column gap-20 boxW100">
+<div class="flex-column gap-30 boxW100 margin-bottom-30">
   <div class="title-container">
     <mat-card>
       <mat-card-header>
@@ -19,25 +19,32 @@
     </mat-card>
   </div>
 
-  <div class="flex-row" *ngFor="let enlace of descriptorEnlaces">
-    <a
-        class="card-links"
-        style="left: {{enlace.desfase}}%;"
-        routerLink={{enlace.descriptor.enlace}}>
-      <mat-card class="card-links-container">
+  <div
+    id="modes-picker-container"
+    class="flex-row"
+  >
+    <div
+      class="card-links-container"
+      *ngFor="let enlace of descriptorEnlaces"
+    >
+      <a
+          class="card-links"
+          routerLink={{enlace.descriptor.enlace}}>
+        <mat-card class="card-links-content">
 
-        <mat-card-header>
-          <mat-card-title>
-            <h2>{{enlace.descriptor.anticipo}}</h2>
-          </mat-card-title>
-        </mat-card-header>
+          <mat-card-header>
+            <mat-card-title>
+              <h2>{{enlace.descriptor.anticipo}}</h2>
+            </mat-card-title>
+          </mat-card-header>
 
-        <mat-card-content>
-          <p>
-            {{enlace.descriptor.propaganda}}
-          </p>
-        </mat-card-content>
-      </mat-card>
-    </a>
+          <mat-card-content>
+            <p>
+              {{enlace.descriptor.propaganda}}
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </a>
+    </div>
   </div>
 </div>

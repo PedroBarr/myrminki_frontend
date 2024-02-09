@@ -34,6 +34,26 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .gap-#{$gap} {
     gap: #{$gap}px;
   }
+
+  .margin-#{$gap} {
+    margin: #{$gap}px;
+  }
+
+  .margin-top-#{$gap} {
+    margin-top: #{$gap}px;
+  }
+
+  .margin-bottom-#{$gap} {
+    margin-bottom: #{$gap}px;
+  }
+
+  .margin-left-#{$gap} {
+    margin-left: #{$gap}px;
+  }
+
+  .margin-right-#{$gap} {
+    margin-right: #{$gap}px;
+  }
 }
 
 .boxW100 {
