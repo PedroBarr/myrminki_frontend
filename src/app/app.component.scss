@@ -1,9 +1,11 @@
 .view-container {
+  --side-spaces: 15px;
   position: fixed;
   left: 0px;
   top: 0px;
   z-index: 0;
+  width: calc(100vw - var(--side-spaces) * 2 + 5px - 70px);
   height: 100vh;
-  padding: 15px 10px 15px 85px;
+  padding: var(--side-spaces) calc(var(--side-spaces) - 5px) var(--side-spaces) calc(var(--side-spaces) + 70px);
   overflow-y: auto;
 }

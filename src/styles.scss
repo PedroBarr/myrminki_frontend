@@ -59,3 +59,44 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .boxW100 {
   width: 100%;
 }
+
+.boxH100 {
+  height: 100%;
+}
+
+.page-wrapper {
+  @extend .flex-column;
+  @extend .gap-30;
+  @extend .margin-bottom-30;
+  @extend .boxW100;
+}
+
+.flex-align-start {
+  display: flex;
+  align-items: flex-start;
+}
+
+.flex-align-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-align-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.flex-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+
+.flex-end {
+  display: flex;
+  justify-content: flex-end;
+}
