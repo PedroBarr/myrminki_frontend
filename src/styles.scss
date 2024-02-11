@@ -116,6 +116,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   align-items: flex-end;
 }
 
+.flex-align-space-between {
+  display: flex;
+  align-items: space-between;
+}
+
 .flex-start {
   display: flex;
   justify-content: flex-start;
@@ -129,4 +134,9 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-end {
   display: flex;
   justify-content: flex-end;
+}
+
+.flex-space-between {
+  display: flex;
+  justify-content: space-between;
 }

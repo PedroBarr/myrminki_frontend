@@ -43,9 +43,59 @@
                 class="body-tipo-pancarta"
                 *ngIf="slide.subtitulo"
               >
-                <p class="parrafo-tipo-pancarta">
+                <p class="subtitulo-tipo-pancarta">
                   {{slide.subtitulo}}
                 </p>
+              </mat-card-content>
+            </mat-card>
+
+            <mat-card
+              *ngIf="slide.tipoSlide === TIPOS_DIAPOSITIVA.TIPO_DESCRIPTOR"
+              class="card-tipo-descriptor"
+            >
+              <mat-card-header
+                class="header-tipo-descriptor"
+                *ngIf="slide.titulo"
+              >
+                <mat-card-title class="titulo-tipo-descriptor">
+                  <h2 class="titulo-etiqueta-tipo-descriptor">
+                    {{slide.titulo}}
+                  </h2>
+                </mat-card-title>
+                <mat-card-subtitle
+                  class="subtitulo-tipo-descriptor"
+                  *ngIf="slide.subtitulo"
+                >
+                  <h4 class="subtitulo-etiqueta-tipo-descriptor">
+                    {{slide.subtitulo}}
+                  </h4>
+                </mat-card-subtitle>
+              </mat-card-header>
+
+              <mat-card-content class="body-tipo-descriptor">
+                <div
+                  class="flex-row gap-10 flex-space-between body-tipo-descriptor-content"
+                >
+                  <div
+                    class="flex-align-center img-container-descriptor-tipo-descriptor"
+                    *ngIf="slide.imagen_descriptor"
+                  >
+                    <img
+                      class="img-descriptor-tipo-descriptor"
+                      [alt]="slide.imagen_descriptor_texto_alternativo"
+                      [src]="slide.imagen_descriptor"
+                    />
+                  </div>
+
+                  <div>
+                    <p
+                      class="parrafo-tipo-descriptor"
+                      *ngFor="let texto of slide.textos"
+                    >
+                      {{texto}}
+                    </p>
+                  </div>
+                </div>
               </mat-card-content>
             </mat-card>
           </swiper-slide>

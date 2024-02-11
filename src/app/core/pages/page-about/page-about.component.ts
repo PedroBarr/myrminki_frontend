@@ -73,13 +73,26 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
   async loadSlides() {
     this.slides = [
       {
-        tipoSlide: ACERCA_DE_TIPOS_DIAPOSITIVA.TIPO_PANCARTA,
+        tipoSlide: this.TIPOS_DIAPOSITIVA.TIPO_PANCARTA,
         titulo: 'Sistema Myrminki',
         subtitulo: 'Bienvenido.',
-        imagen_pancarta: 'http://localhost:4200/assets/img/icons/core/myrmex.svg',
+        imagen_pancarta:
+          'http://localhost:4200/assets/img/icons/core/myrmex.svg',
         imagen_pancarta_texto_alternativo: 'Logo Myrminki',
-      }
-    ] as AboutSlide[];
+      } as AboutSlide,
+      {
+        tipoSlide: this.TIPOS_DIAPOSITIVA.TIPO_DESCRIPTOR,
+        titulo: 'Sistema Myrminki',
+        subtitulo: 'Proyecto',
+        imagen_descriptor:
+          'http://localhost:4200/assets/img/icons/core/myrmex.svg',
+        imagen_descriptor_texto_alternativo: 'Logo Myrminki',
+        textos: [
+          `El Sistema Myrminki es un proyecto enfocado en la difusion de estrategias de implementacion para la metaheuristica OCH (Optimizador de la Colonia de Hormigas).`,
+          `Sirve de índice para diferentes implementaciones del OCH, con referentes biobliograficos actualizados por los usuarios e implementaciones de código ejecutables en vivo.`,
+        ],
+      } as AboutSlide,
+    ];
 
     this.total_slides = this.slides.length;
   }
