@@ -1,7 +1,7 @@
 import {
     Component
 } from '@angular/core';
-import { mapSite } from '../../constants/map.constant';
+import { mapSite } from 'src/app/shared/constants/map.constant';
 
 @Component({
   selector: 'myrmex-sidebar',
@@ -12,7 +12,11 @@ import { mapSite } from '../../constants/map.constant';
 export class SidebarComponent {
 
   estaExtendido: boolean = false;
-  siteOptions: { titulo: string; icono: string; enlace: string; }[] = mapSite;
+  siteOptions: {
+    titulo: string;
+    icono: string;
+    enlace: string;
+  }[] = mapSite;
 
   constructor ( ) { }
 

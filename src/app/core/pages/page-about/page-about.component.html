@@ -1,5 +1,5 @@
-<div class="page-wrapper">
-  <div class="flex-center">
+<div class="page-wrapper without-bottom-slope">
+  <div class="flex-center boxH100">
     <div id="about-content">
       <swiper-container
           #swiper
@@ -17,44 +17,34 @@
           [spaceBetween]="25"
           style="overflow: hidden"
       >
-
-          <swiper-slide>
-            <mat-card>
+          <swiper-slide *ngFor="let slide of slides">
+            <mat-card
+              *ngIf="slide.tipoSlide === TIPOS_DIAPOSITIVA.TIPO_PANCARTA"
+              class="card-tipo-pancarta"
+            >
               <img
-                alt="Logo Myrminki"
-                src="./assets/img/icons/core/myrmex.svg"
+                class="img-pancarta-tipo-pancarta"
+                [alt]="slide.imagen_pancarta_texto_alternativo"
+                [src]="slide.imagen_pancarta"
               />
 
-              <mat-card-header>
-                <mat-card-title>
-                  <h2>Sistema Myrminki</h2>
+              <mat-card-header
+                class="header-tipo-pancarta"
+                *ngIf="slide.titulo"
+              >
+                <mat-card-title class="titulo-tipo-pancarta">
+                  <h2 class="titulo-etiqueta-tipo-pancarta">
+                    {{slide.titulo}}
+                  </h2>
                 </mat-card-title>
               </mat-card-header>
 
-              <mat-card-content>
-                <p>
-                  Bienvenido.
-                </p>
-              </mat-card-content>
-            </mat-card>
-          </swiper-slide>
-
-          <swiper-slide>
-            <mat-card>
-              <img
-                alt="Logo Myrminki"
-                src="./assets/img/icons/core/myrmex.svg"
-              />
-
-              <mat-card-header>
-                <mat-card-title>
-                  <h2>Sistema Myrminki</h2>
-                </mat-card-title>
-              </mat-card-header>
-
-              <mat-card-content>
-                <p>
-                  Bienvenido.
+              <mat-card-content
+                class="body-tipo-pancarta"
+                *ngIf="slide.subtitulo"
+              >
+                <p class="parrafo-tipo-pancarta">
+                  {{slide.subtitulo}}
                 </p>
               </mat-card-content>
             </mat-card>

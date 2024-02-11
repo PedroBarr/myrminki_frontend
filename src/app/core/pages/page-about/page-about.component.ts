@@ -10,6 +10,11 @@ import {
   register as swiperRegister,
 } from 'swiper/element/bundle';
 
+import {
+  AboutSlide,
+  ACERCA_DE_TIPOS_DIAPOSITIVA,
+} from 'src/app/shared/models/about-slide.model';
+
 
 
 swiperRegister();
@@ -25,7 +30,9 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
 
   total_slides: number = 1;
   current_slide: number = 1;
-  slides: any[] = [];
+  slides: AboutSlide[] = [];
+
+  TIPOS_DIAPOSITIVA = ACERCA_DE_TIPOS_DIAPOSITIVA;
 
   @ViewChild('swiper') swiperRef: ElementRef | undefined;
 
@@ -64,7 +71,17 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
   * Load slides from API
   */
   async loadSlides() {
-    this.total_slides = 1;
+    this.slides = [
+      {
+        tipoSlide: ACERCA_DE_TIPOS_DIAPOSITIVA.TIPO_PANCARTA,
+        titulo: 'Sistema Myrminki',
+        subtitulo: 'Bienvenido.',
+        imagen_pancarta: 'http://localhost:4200/assets/img/icons/core/myrmex.svg',
+        imagen_pancarta_texto_alternativo: 'Logo Myrminki',
+      }
+    ] as AboutSlide[];
+
+    this.total_slides = this.slides.length;
   }
 
 }

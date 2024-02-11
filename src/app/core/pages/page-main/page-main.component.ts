@@ -3,7 +3,7 @@ import {
 } from '@angular/core';
 import {
   pageDescriptores
-} from '../../constants/descriptor.constant';
+} from 'src/app/shared/constants/descriptor.constant';
 
 @Component({
   selector: 'myrmex-page-main',

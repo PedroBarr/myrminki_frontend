@@ -28,6 +28,30 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   flex-direction: row;
 }
 
+.gap-off {
+  gap: 0px;
+}
+
+.margin-off {
+  margin: 0px;
+}
+
+.margin-top-off {
+  margin-top: 0px;
+}
+
+.margin-bottom-off {
+  margin-bottom: 0px;
+}
+
+.margin-left-off {
+  margin-left: 0px;
+}
+
+.margin-right-off {
+  margin-right: 0px;
+}
+
 @for $i from 1 through 10 {
   $gap: $i * 5;
 
@@ -69,6 +93,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   @extend .gap-30;
   @extend .margin-bottom-30;
   @extend .boxW100;
+  @extend .flex-center;
+  min-height: 100vh;
+
+  &.without-bottom-slope {
+    @extend .margin-bottom-off;
+  }
 }
 
 .flex-align-start {
