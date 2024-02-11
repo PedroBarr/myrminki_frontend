@@ -1,5 +1,31 @@
 <div class="page-wrapper without-bottom-slope">
-  <div class="flex-center boxH100">
+  <div class="flex-center flex-align-center boxH100">
+    <div
+      class="myrmex-navigation-container prev-navigation-container"
+      [ngClass]="{'disabled_swiper_navigation_container': current_slide === 0}"
+    >
+      <button
+        type="button"
+        (click)="navPrev()"
+        class="prev-navigation-button"
+      >
+        <svg
+          width="auto"
+          height="50px"
+          viewBox="0 0 11 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.38296 20.0762C0.111788 19.805 0.111788 19.3654 0.38296 19.0942L9.19758 10.2796L0.38296 1.46497C0.111788 1.19379 0.111788 0.754138 0.38296 0.482966C0.654131 0.211794 1.09379 0.211794 1.36496 0.482966L10.4341 9.55214C10.8359 9.9539 10.8359 10.6053 10.4341 11.007L1.36496 20.0762C1.09379 20.3474 0.654131 20.3474 0.38296 20.0762Z"
+            fill="currentColor"
+            transform-origin="center"
+            transform="rotate(180)"
+          >
+          </path>
+        </svg>
+      </button>
+    </div>
     <div id="about-content">
       <swiper-container
           #swiper
@@ -9,11 +35,8 @@
               el: '.bullets-container',
               type: 'bullets'
           }"
-          (slidechangetransitionend)="swiperSlideChanged()"
-          [navigation]="{
-              nextEl: '#swiper-forward',
-              disabledClass: 'disabled_swiper_button'
-          }"
+          (swiperslidechange)="swiperSlideChanged()"
+          navigation="false"
           [spaceBetween]="25"
           style="overflow: hidden"
       >
@@ -62,6 +85,7 @@
                     {{slide.titulo}}
                   </h2>
                 </mat-card-title>
+
                 <mat-card-subtitle
                   class="subtitulo-tipo-descriptor"
                   *ngIf="slide.subtitulo"
@@ -98,8 +122,92 @@
                 </div>
               </mat-card-content>
             </mat-card>
+
+            <div
+              *ngIf="slide.tipoSlide === TIPOS_DIAPOSITIVA.TIPO_PAR_DESCRIPTORES"
+              class="card-tipo-descriptores-container"
+            >
+              <mat-card
+                class="card-tipo-descriptor"
+                *ngFor="let descriptor of slide.titulos_descriptores; index as i_descriptor"
+              >
+                <mat-card-header
+                  class="header-tipo-descriptor"
+                  *ngIf="slide.titulos_descriptores && slide.titulos_descriptores[i_descriptor]"
+                >
+                  <mat-card-title class="titulo-tipo-descriptor">
+                    <h2 class="titulo-etiqueta-tipo-descriptor">
+                      {{slide.titulos_descriptores[i_descriptor]}}
+                    </h2>
+                  </mat-card-title>
+
+                  <mat-card-subtitle
+                    class="subtitulo-tipo-descriptor"
+                    *ngIf="slide.subtitulos_descriptores && slide.subtitulos_descriptores[i_descriptor]"
+                  >
+                    <h4 class="subtitulo-etiqueta-tipo-descriptor">
+                      {{slide.subtitulos_descriptores[i_descriptor]}}
+                    </h4>
+                  </mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content class="body-tipo-descriptor">
+                  <div
+                    class="flex-row gap-10 flex-space-between body-tipo-descriptor-content"
+                    [ngClass]="{'flex-row-reversed': (i_descriptor % 2 === 1)}"
+                  >
+                    <div
+                      class="flex-align-center img-container-descriptor-tipo-descriptores"
+                      *ngIf="slide.imagenes_descriptores && slide.imagenes_descriptores[i_descriptor]"
+                    >
+                      <img
+                        class="img-descriptor-tipo-descriptor"
+                        alt="{{(slide.imagenes_descriptores_textos_alternativos && slide.imagenes_descriptores_textos_alternativos[i_descriptor]) ? slide.imagenes_descriptores_textos_alternativos[i_descriptor] : null}}"
+                        [src]="slide.imagenes_descriptores[i_descriptor]"
+                      />
+                    </div>
+
+                    <div
+                      class="parrafo-tipo-descriptor-container"
+                      *ngIf="slide.textos_descriptores && slide.textos_descriptores[i_descriptor]"
+                    >
+                      <p
+                        class="parrafo-tipo-descriptor"
+                        *ngFor="let texto of slide.textos_descriptores[i_descriptor]"
+                      >
+                        {{texto}}
+                      </p>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            </div>
           </swiper-slide>
       </swiper-container>
+    </div>
+    <div
+      class="myrmex-navigation-container next-navigation-container"
+      [ngClass]="{'disabled_swiper_navigation_container': current_slide === total_slides - 1}"
+    >
+      <button
+        type="button"
+        (click)="navNext()"
+        class="next-navigation-button"
+      >
+        <svg
+          width="auto"
+          height="50px"
+          viewBox="0 0 11 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M0.38296 20.0762C0.111788 19.805 0.111788 19.3654 0.38296 19.0942L9.19758 10.2796L0.38296 1.46497C0.111788 1.19379 0.111788 0.754138 0.38296 0.482966C0.654131 0.211794 1.09379 0.211794 1.36496 0.482966L10.4341 9.55214C10.8359 9.9539 10.8359 10.6053 10.4341 11.007L1.36496 20.0762C1.09379 20.3474 0.654131 20.3474 0.38296 20.0762Z"
+            fill="currentColor"
+          >
+          </path>
+        </svg>
+      </button>
     </div>
   </div>
 </div>

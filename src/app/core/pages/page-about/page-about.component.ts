@@ -55,16 +55,12 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
     this.current_slide = index + 1;
   }
 
-  /**
-  * Go to next slide
-  */
   navNext() {
-    this.swiperRef?.nativeElement.swiper.update();
-    if (this.current_slide == this.total_slides - 1) {
-        this.current_slide = 0;
-    } else {
-        this.current_slide += 1;
-    }
+    this.swiperRef?.nativeElement.swiper.slideNext();
+  }
+
+  navPrev() {
+    this.swiperRef?.nativeElement.swiper.slidePrev();
   }
 
   /**
@@ -90,6 +86,40 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
         textos: [
           `El Sistema Myrminki es un proyecto enfocado en la difusion de estrategias de implementacion para la metaheuristica OCH (Optimizador de la Colonia de Hormigas).`,
           `Sirve de índice para diferentes implementaciones del OCH, con referentes biobliograficos actualizados por los usuarios e implementaciones de código ejecutables en vivo.`,
+        ],
+      } as AboutSlide,
+      {
+        tipoSlide: this.TIPOS_DIAPOSITIVA.TIPO_PAR_DESCRIPTORES,
+        titulos_descriptores: ['Misión', 'Visión'],
+        textos_descriptores: [
+          [
+            'Servir de centro de difusion de estrategias de implementacion de la metaheuristica OCH (Optimizador de la Colonia de Hormigas.',
+          ],
+          [
+            'Ser acogido por diferentes centros acad\u00e9micos para ense\u00f1ar sobre los problemas de optimizacion y sus metodos de solucion. Adem\u00e1s, se pretente dar alcance a la mayor cantidad de estrategias de implementacion posibles para el Optimizador de la Colonia de Hormiga.',
+            'También se busca prestar un servicio especializado para compañias que necesiten frecuentemente servicios de optimización en sus procesos internos, para que cuenten con una herramienta práctica que les permita sortear esta posibilidad',
+          ],
+        ],
+      } as AboutSlide,
+      {
+        tipoSlide: this.TIPOS_DIAPOSITIVA.TIPO_PAR_DESCRIPTORES,
+        titulos_descriptores: ['Alta Lengua', 'API de Myrminki'],
+        subtitulos_descriptores: ['AL', undefined],
+        textos_descriptores: [
+          [
+            'El grupo Alta Lengua sirve como grupo interdiciplinario de miembros con una empresa que promueve la literacidad general y el uso de tecnologias en la cotidianidad.',
+          ],
+          [
+            'El API consumible de Myrminki sirve de backend para el Sistema Myrminki. Permite realizar peticiones relacionadas al objetivo del Sistema Myrminki.',
+          ],
+        ],
+        imagenes_descriptores: [
+          'http://localhost:4200/assets/img/icons/core/al.svg',
+          'http://localhost:4200/assets/img/icons/core/myrmex.svg',
+        ],
+        imagenes_descriptores_textos_alternativos: [
+          'Logo AL',
+          'Logo Myrminki',
         ],
       } as AboutSlide,
     ];

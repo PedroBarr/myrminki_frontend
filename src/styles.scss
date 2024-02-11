@@ -18,6 +18,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   src: url("assets/fonts/montserrat/Montserrat-Regular.ttf") format("opentype");
 }
 
+:root {
+  --myrmex-primary: #BD231E;
+}
+
 .flex-column {
   display: flex;
   flex-direction: column;
@@ -26,6 +30,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .flex-row {
   display: flex;
   flex-direction: row;
+}
+
+.flex-column-reversed {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.flex-row-reversed {
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .gap-off {
