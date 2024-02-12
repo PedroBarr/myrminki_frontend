@@ -89,7 +89,7 @@ swiper-container {
 }
 
 .myrmex-navigation-container.prev-navigation-container {
-  transform: skewX(calc(var(--skew-degrees) * -1));
+  transform: skewY(calc(var(--skew-degrees) * -1));
   margin-right: var(--navegation-spacing);
 }
 
@@ -99,11 +99,11 @@ swiper-container {
 }
 
 .myrmex-navigation-container.prev-navigation-container .prev-navigation-button > * {
-  transform: skewX(calc(var(--skew-degrees) * 1));
+  transform: skewY(calc(var(--skew-degrees) * 1));
 }
 
 .myrmex-navigation-container.next-navigation-container {
-  transform: skewX(calc(var(--skew-degrees) * 1));
+  transform: skewY(calc(var(--skew-degrees) * 1));
   margin-left: var(--navegation-spacing);
 }
 
@@ -113,7 +113,7 @@ swiper-container {
 }
 
 .myrmex-navigation-container.next-navigation-container .next-navigation-button > * {
-  transform: skewX(calc(var(--skew-degrees) * -1));
+  transform: skewY(calc(var(--skew-degrees) * -1));
 }
 
 #about-content {

@@ -3,8 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  baseUrl: 'http://localhost:5000/'
+  PRODUCTION: false,
+
+  MYRMEX_API: 'http://localhost:5000',
+  MYRMEX_ASSETS: 'http://localhost:5000/estaticos',
 };
 
 /*
