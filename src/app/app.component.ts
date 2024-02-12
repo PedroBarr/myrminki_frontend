@@ -1,15 +1,24 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
   title: string = 'myrminki-frontend';
   currentEvent: MouseEvent | null = null;
 
-  constructor () { }
+  _codigo: string;
+
+  constructor () {
+    this._codigo = ".";
+  }
+
+  ngOnInit ( ) {
+    window.addEventListener('keydown', this.activarJuegoMyrmex.bind(this));
+  }
 
   handleBodyClick (evt: MouseEvent) {
     evt.preventDefault();
@@ -19,6 +28,43 @@ export class AppComponent {
   handleStopPropagation (evt: MouseEvent) {
     evt.preventDefault();
     evt.stopPropagation();
+  }
+
+  activarJuegoMyrmex (e: KeyboardEvent) {
+    if (e.key == this._codigo.at(-1)) {
+      switch (this._codigo) {
+        case ".":
+          this._codigo = ".m";
+          break;
+        case ".m":
+          this._codigo = ".my";
+          break;
+        case ".my":
+          this._codigo = ".myr";
+          break;
+        case ".myr":
+          this._codigo = ".myrm";
+          break;
+        case ".myrm":
+          this._codigo = ".myrme";
+          break;
+        case ".myrme":
+          this._codigo = ".myrmex";
+          break;
+        case ".myrmex":
+          this._codigo = ".myrmex.";
+          break;
+        case ".myrmex.":
+          alert("this._easteregg.active()");
+          this._codigo = ".";
+          break;
+        default:
+          this._codigo = ".";
+          break;
+      }
+    } else {
+      this._codigo = ".";
+    }
   }
 
 }

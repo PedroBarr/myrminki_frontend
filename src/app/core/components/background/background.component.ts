@@ -20,13 +20,10 @@ export class BackgroundComponent implements OnInit {
       { static: true }
   ) miCanvas!: ElementRef;
 
-  _codigo: string;
   matriz_fondo: number[][] = [[0]];
 
   @Input() public currentEvent: MouseEvent | null = null;
-  constructor ( ) {
-    this._codigo = ".";
-  }
+  constructor ( ) { }
 
   init_matriz (filas:number, columnas: number) {
     this.matriz_fondo =
@@ -110,43 +107,6 @@ export class BackgroundComponent implements OnInit {
 
   alRedimensionar (e: Event) {
     this.init_canvas();
-  }
-
-  activarJuegoMyrmex (e: KeyboardEvent) {
-    if (e.key == this._codigo.at(-1)) {
-      switch (this._codigo) {
-        case ".":
-          this._codigo = ".m";
-          break;
-        case ".m":
-          this._codigo = ".my";
-          break;
-        case ".my":
-          this._codigo = ".myr";
-          break;
-        case ".myr":
-          this._codigo = ".myrm";
-          break;
-        case ".myrm":
-          this._codigo = ".myrme";
-          break;
-        case ".myrme":
-          this._codigo = ".myrmex";
-          break;
-        case ".myrmex":
-          this._codigo = ".myrmex.";
-          break;
-        case ".myrmex.":
-          alert("this._easteregg.active()");
-          this._codigo = ".";
-          break;
-        default:
-          this._codigo = ".";
-          break;
-      }
-    } else {
-      this._codigo = ".";
-    }
   }
 
   interaccion_bit (xPosCanvas: number, yPosCanvas: number, bit: number) {
