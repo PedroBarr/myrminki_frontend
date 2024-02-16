@@ -72,25 +72,34 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .gap-#{$gap} {
     gap: #{$gap}px;
   }
+}
 
-  .margin-#{$gap} {
-    margin: #{$gap}px;
+@for $i from 1 through 50 {
+  $space: $i * 1;
+
+  .margin-#{$space} {
+    margin: #{$space}px;
   }
 
-  .margin-top-#{$gap} {
-    margin-top: #{$gap}px;
+  .margin-top-#{$space} {
+    margin-top: #{$space}px;
   }
 
-  .margin-bottom-#{$gap} {
-    margin-bottom: #{$gap}px;
+  .margin-bottom-#{$space} {
+    margin-bottom: #{$space}px;
   }
 
-  .margin-left-#{$gap} {
-    margin-left: #{$gap}px;
+  .margin-left-#{$space} {
+    margin-left: #{$space}px;
   }
 
-  .margin-right-#{$gap} {
-    margin-right: #{$gap}px;
+  .margin-right-#{$space} {
+    margin-right: #{$space}px;
+  }
+
+  .margin-sides-#{$space} {
+    margin-left: #{$space}px;
+    margin-right: #{$space}px;
   }
 }
 

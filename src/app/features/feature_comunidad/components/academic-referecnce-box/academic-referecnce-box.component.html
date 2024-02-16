@@ -1,3 +1,101 @@
-<a>
-{{academicReference.apa_reference}}
-</a>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2 class="reference-title">{{academicReference.titulo_principal}}</h2>
+
+      <mat-chip-list>
+        <mat-chip *ngIf="academicReference.tipo_contenido">
+          {{academicReference.tipo_contenido}}
+        </mat-chip>
+
+        <mat-chip *ngIf="academicReference.volumen_periodico">
+          Vol. {{academicReference.volumen_periodico}}
+        </mat-chip>
+
+        <mat-chip *ngIf="academicReference.numero_periodico">
+          Num. {{academicReference.numero_periodico}}
+        </mat-chip>
+
+        <mat-chip *ngIf="academicReference.edicion">
+          Ed. {{academicReference.edicion}}
+        </mat-chip>
+
+        <mat-chip *ngIf="academicReference.anho">
+          {{academicReference.anho}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      {{academicReference.apa_reference}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="margin-sides-25">
+    <div class="datos-referentes-container">
+      <div
+        class="autores-list-container"
+        *ngIf="academicReference.autores && academicReference.autores.length"
+      >
+        {{academicReference.autores.join(', ')}}
+      </div>
+
+      <span *ngIf="academicReference.enlace_doi">
+        <a [href]="academicReference.enlace_doi" target="_blank">
+          {{academicReference.enlace_doi}}
+        </a>
+      </span>
+
+      <span *ngIf="academicReference.enlace_web">
+        <a [href]="academicReference.enlace_web" target="_blank">
+          {{academicReference.enlace_web}}
+        </a>
+      </span>
+
+      <span *ngIf="academicReference.isbn">
+        ISBN: {{academicReference.isbn}}
+      </span>
+
+      <span *ngIf="academicReference.editorial">
+        Editorial: {{
+          academicReference.editorial + (
+            academicReference.edicion ?
+            ', ' + academicReference.edicion + ' edición':
+            ''
+            ) + (
+            academicReference.anho ?
+            ', ' + academicReference.anho:
+            ''
+            )
+        }}
+      </span>
+
+      <span
+        *ngIf="academicReference.tipo_contenido_secundario && academicReference.titulo_secundario"
+      >
+        {{academicReference.tipo_contenido_secundario}}:
+          {{academicReference.titulo_secundario}}
+      </span>
+
+      <span *ngIf="academicReference.volumen_periodico">
+        Volumen: {{
+          academicReference.volumen_periodico + (
+            academicReference.numero_periodico ?
+            ' (' + academicReference.numero_periodico + ')':
+            ''
+            )
+        }}
+      </span>
+
+      <span
+        *ngIf="academicReference.editores && academicReference.editores.length"
+      >
+        Editores: {{academicReference.editores.join(', ')}}
+      </span>
+
+      <span *ngIf="academicReference.paginas">
+        PP: {{academicReference.paginas}}
+      </span>
+    </div>
+  </mat-card-content>
+</mat-card>

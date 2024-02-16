@@ -1,0 +1,42 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+.reference-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+}
+
+.mat-card-title {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+  margin-bottom: 0;
+}
+
+mat-card-subtitle {
+  margin-bottom: 10px;
+}
+
+.datos-referentes-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5px;
+  font-family: montserrat, sans-serif;
+  letter-spacing: 1px;
+}
+
+.autores-list-container {
+  color: var(--myrmex-primary);
+}
+
+mat-card-title mat-chip-list mat-chip {
+  background-color: var(--myrmex-primary);
+  color: #fff;
+}
