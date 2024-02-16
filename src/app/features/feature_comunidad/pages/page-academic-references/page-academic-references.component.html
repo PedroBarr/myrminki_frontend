@@ -1,0 +1,30 @@
+<div class="page-wrapper">
+  <div class="title-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Sistema Myrminki</h2>
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          <h2>Referentes conceptuales</h2>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{pageDescriptor}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div
+    class="flex-center flex-align-center boxW100 flex-column gap-20"
+  >
+    <myrmex-academic-referecnce-box
+      *ngFor="let academicReference of academicReferences"
+      [academicReference]="academicReference"
+    ></myrmex-academic-referecnce-box>
+  </div>
+</div>

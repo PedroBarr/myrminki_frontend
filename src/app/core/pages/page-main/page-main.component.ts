@@ -1,6 +1,7 @@
 import {
   Component
 } from '@angular/core';
+
 import {
   pageDescriptores
 } from 'src/app/shared/constants/descriptor.constant';

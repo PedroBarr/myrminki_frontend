@@ -17,10 +17,6 @@ import {
 } from './page-main/page-main.component';
 
 import {
-  PageMainSetUpComponent
-} from './page-main-set-up/page-main-set-up.component';
-
-import {
   PageNotFoundComponent
 } from './page-not-found/page-not-found.component';
 
@@ -33,7 +29,6 @@ import {
   declarations: [
     PageAboutComponent,
     PageMainComponent,
-    PageMainSetUpComponent,
     PageNotFoundComponent,
   ],
   imports: [
@@ -46,7 +41,6 @@ import {
   exports: [
     PageAboutComponent,
     PageMainComponent,
-    PageMainSetUpComponent,
     PageNotFoundComponent,
   ]
 })

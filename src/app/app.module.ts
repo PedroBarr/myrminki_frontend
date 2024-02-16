@@ -9,6 +9,14 @@ import { AppComponent } from './app.component';
 import { ComponentsModule } from './core/components/components.module';
 import { PagesModule } from './core/pages/pages.module';
 
+import {
+  PagesFeatureOptimizadoresModule
+} from './features/feature_optimizadores/pages/pages.module';
+
+import {
+  PagesFeatureComunidadModule
+} from './features/feature_comunidad/pages/pages.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -20,6 +28,10 @@ import { PagesModule } from './core/pages/pages.module';
 
     PagesModule,
     ComponentsModule,
+
+    PagesFeatureOptimizadoresModule,
+
+    PagesFeatureComunidadModule,
 
     AppRoutingModule,
   ],
