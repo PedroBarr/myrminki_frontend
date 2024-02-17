@@ -46,9 +46,9 @@
         </a>
       </span>
 
-      <span *ngIf="academicReference.enlace_web">
-        <a [href]="academicReference.enlace_web" target="_blank">
-          {{academicReference.enlace_web}}
+      <span *ngIf="academicReference.enlace_red">
+        <a [href]="academicReference.enlace_red" target="_blank">
+          {{academicReference.enlace_red}}
         </a>
       </span>
 
@@ -60,7 +60,7 @@
         Editorial: {{
           academicReference.editorial + (
             academicReference.edicion ?
-            ', ' + academicReference.edicion + ' edición':
+            ', ' + academicReference.edicion + ' edici\u00f3n':
             ''
             ) + (
             academicReference.anho ?

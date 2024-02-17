@@ -14,7 +14,7 @@ export class AcademicReference {
   public paginas: string | null = null;
   public volumen_periodico: string | null = null;
   public numero_periodico: string | null = null;
-  public enlace_web: string | null = null;
+  public enlace_red: string | null = null;
 
   constructor ( ) { }
 

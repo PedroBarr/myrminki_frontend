@@ -20,9 +20,7 @@ import {
 import { environment } from 'src/environments/environment';
 
 
-
 swiperRegister();
-
 
 
 @Component({
@@ -72,6 +70,7 @@ export class PageAboutComponent implements AfterViewChecked, OnInit {
   */
   async loadSlides() {
     const slides: AboutSlide[] = [];
+
     axios.get(
       environment.MYRMEX_API + '/acerca_de'
     )

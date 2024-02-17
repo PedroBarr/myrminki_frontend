@@ -10,14 +10,16 @@
   color: var(--myrmex-primary);
   font-family: code-pro-bold, sans-serif;
   letter-spacing: 3pt;
+  margin-bottom: 0;
 }
 
 .mat-card-title {
   display: flex;
   flex-direction: row;
-  gap: 20px;
+  align-items: center;
+  gap: 17px;
 
-  margin-bottom: 0;
+  margin-bottom: 16px;
 }
 
 mat-card-subtitle {
@@ -37,6 +39,6 @@ mat-card-subtitle {
 }
 
 mat-card-title mat-chip-list mat-chip {
-  background-color: var(--myrmex-primary);
+  background-color: var(--myrmex-primary-light);
   color: #fff;
 }
