@@ -1,21 +1,13 @@
 <mat-card>
   <mat-card-content>
-    <div>
-      <iframe
-        *ngIf="URLSeguro"
-        [src]="URLSeguro"
-        frameborder="0"
-        allowfullscreen
-      >
-      </iframe>
-
-      <button
-        mat-button
-        routerLink="{{tutorial.ruta ? tutorial.ruta : ''}}"
-      >
-        Ir a
-      </button>
-    </div>
+    <iframe
+      class="boxW100"
+      *ngIf="URLSeguro"
+      [src]="URLSeguro"
+      frameborder="0"
+      allowfullscreen
+    >
+    </iframe>
   </mat-card-content>
 
   <mat-card-header>
@@ -27,4 +19,13 @@
       {{tutorial.descripcion}}
     </mat-card-subtitle>
   </mat-card-header>
+
+  <button
+    class="goto-button"
+    mat-mini-fab
+    color="primary"
+    routerLink="{{tutorial.ruta ? tutorial.ruta : ''}}"
+  >
+    <mat-icon>start</mat-icon>
+  </button>
 </mat-card>

@@ -32,33 +32,24 @@ export class PageTutorialsComponent implements OnInit {
   * Load references from API
   */
   async loadTutorials ( ) {
-    this.tutorials = [
-      {
-        descripcion: 'En este video se presenta el tutorial de inicio de sesi\u00f3n del aplicativo',
-        enlace: 'https://youtu.be/xx0x0XxXxXX',
-        ruta: '/iniciar_sesion',
-      } as Tutorial,
-      {
-        descripcion: 'En este video se presenta el tutorial de inicio de sesi\u00f3n del aplicativo',
-        enlace: 'https://youtu.be/xx0x0XxXxXX',
-        ruta: '/iniciar_sesion',
-      } as Tutorial,
-      {
-        descripcion: 'En este video se presenta el tutorial de inicio de sesi\u00f3n del aplicativo',
-        enlace: 'https://youtu.be/xx0x0XxXxXX',
-        ruta: '/iniciar_sesion',
-      } as Tutorial,
-      {
-        descripcion: 'En este video se presenta el tutorial de inicio de sesi\u00f3n del aplicativo',
-        enlace: 'https://youtu.be/xx0x0XxXxXX',
-        ruta: '/iniciar_sesion',
-      } as Tutorial,
-      {
-        descripcion: 'En este video se presenta el tutorial de inicio de sesi\u00f3n del aplicativo',
-        enlace: 'https://youtu.be/xx0x0XxXxXX',
-        ruta: '/iniciar_sesion',
-      } as Tutorial,
-    ];
+    axios.get(
+      environment.MYRMEX_API + '/tutoriales'
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.length) {
+          this.tutorials = response.data.map((tutorial: any) => ({
+            descripcion: tutorial.descripcion,
+            enlace: tutorial.enlace,
+            ruta: tutorial.ruta,
+          } as Tutorial));
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
   }
 
 }
