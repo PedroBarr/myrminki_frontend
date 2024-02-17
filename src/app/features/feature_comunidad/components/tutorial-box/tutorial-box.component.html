@@ -1,0 +1,30 @@
+<mat-card>
+  <mat-card-content>
+    <div>
+      <iframe
+        *ngIf="URLSeguro"
+        [src]="URLSeguro"
+        frameborder="0"
+        allowfullscreen
+      >
+      </iframe>
+
+      <button
+        mat-button
+        routerLink="{{tutorial.ruta ? tutorial.ruta : ''}}"
+      >
+        Ir a
+      </button>
+    </div>
+  </mat-card-content>
+
+  <mat-card-header>
+    <mat-card-title *ngIf="tutorial.titulo">
+        {{tutorial.titulo}}
+    </mat-card-title>
+
+    <mat-card-subtitle *ngIf="tutorial.descripcion">
+      {{tutorial.descripcion}}
+    </mat-card-subtitle>
+  </mat-card-header>
+</mat-card>
