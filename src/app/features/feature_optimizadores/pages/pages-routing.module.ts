@@ -12,7 +12,7 @@ import {
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
-  {path: 'explorara', component: PageMainExplorerComponent },
+  {path: 'explorar', component: PageMainExplorerComponent },
 ];
 
 @NgModule({

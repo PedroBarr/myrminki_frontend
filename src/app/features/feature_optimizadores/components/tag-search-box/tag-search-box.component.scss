@@ -1,0 +1,23 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+
+  width: auto;
+}
+
+.etiqueta-chip {
+  background-color: var(--myrmex-primary-light);
+  color: #fff;
+}
+
+mat-card-content {
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.buscador-titulo {
+  font-family: montserrat, sans-serif;
+}

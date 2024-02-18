@@ -1,0 +1,31 @@
+<div class="page-wrapper">
+  <div class="title-container">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2>Sistema Myrminki</h2>
+        </mat-card-title>
+
+        <mat-card-subtitle>
+          <h2>Explorar</h2>
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-content>
+        <p>
+          {{pageDescriptor}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="optimizador-preview">
+    </div>
+
+    <myrmex-tag-search-box
+      (emitirSeleccion)="$event"
+      (emitirRemocion)="$event"
+    ></myrmex-tag-search-box>
+  </div>
+</div>

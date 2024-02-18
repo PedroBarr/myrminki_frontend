@@ -5,6 +5,10 @@ import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 
+import {
+  ComponentsFeatureOptimizadoresModule
+} from '../components/components.module';
+
 import { PagesRoutingModule } from './pages-routing.module';
 
 import {
@@ -27,6 +31,8 @@ import {
     CommonModule,
 
     MatCardModule,
+
+    ComponentsFeatureOptimizadoresModule,
 
     PagesRoutingModule,
   ],
