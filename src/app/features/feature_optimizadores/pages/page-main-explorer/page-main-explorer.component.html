@@ -21,11 +21,16 @@
 
   <div class="boxW100 flex-row flex-space-between">
     <div class="optimizador-preview">
+      <div *ngFor="let optimizador of optimizadores" class="optimizador-container">
+        <span>
+          {{optimizador}}
+        </span>
+      </div>
     </div>
 
     <myrmex-tag-search-box
-      (emitirSeleccion)="$event"
-      (emitirRemocion)="$event"
+      (emitirSeleccion)="seleccionEtiqueta($event)"
+      (emitirRemocion)="remocionEtiqueta($event)"
     ></myrmex-tag-search-box>
   </div>
 </div>

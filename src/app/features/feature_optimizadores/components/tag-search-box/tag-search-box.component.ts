@@ -26,12 +26,12 @@ import { environment } from 'src/environments/environment';
 export class TagSearchBoxComponent implements OnInit {
 
   controlBuscadorEtiqueta = new FormControl('');
-  etiquetas: string[] = [];
-  etiquetasFiltradas: Observable<string[]> = new Observable<string[]>();
-  etiquetasAgregadas: string[] = [];
+  etiquetas: any[] = [];
+  etiquetasFiltradas: Observable<any[]> = new Observable<any[]>();
+  etiquetasAgregadas: any[] = [];
 
-  @Output() emitirSeleccion = new EventEmitter<string>();
-  @Output() emitirRemocion = new EventEmitter<string>();
+  @Output() emitirSeleccion = new EventEmitter<any>();
+  @Output() emitirRemocion = new EventEmitter<any>();
 
   async ngOnInit ( ) {
     await this.loadTags();
@@ -45,13 +45,13 @@ export class TagSearchBoxComponent implements OnInit {
     );
   }
 
-  private _filtrar(valor_etiqueta: string): string[] {
+  private _filtrar(valor_etiqueta: any): any[] {
     const etiqueta_estandar = valor_etiqueta.toLowerCase();
 
     return this.etiquetas.filter(etiqueta =>
       (
-        etiqueta.toLowerCase().includes(etiqueta_estandar) &&
-        !(this.etiquetasAgregadas.includes(etiqueta))
+        etiqueta.etiqueta.toLowerCase().includes(etiqueta_estandar) &&
+        !(this.etiquetasAgregadas.find(etiquetaAgregada => etiquetaAgregada.id == etiqueta.id))
       )
     );
   }
@@ -68,7 +68,7 @@ export class TagSearchBoxComponent implements OnInit {
 
         if (response.data && response.data.length) {
           this.etiquetas = response.data.map((tipo_algoritmo: any) =>
-            tipo_algoritmo.etiqueta
+            tipo_algoritmo
           );
         }
       })
@@ -79,22 +79,23 @@ export class TagSearchBoxComponent implements OnInit {
   }
 
   selectEtiqueta (evt: MatAutocompleteSelectedEvent) {
-    const valor_etiqueta: string = evt.option.value;
+    const valor_etiqueta: any = evt.option.value;
+    const etiqueta: any = this.etiquetas.find(etiqueta => etiqueta.etiqueta == valor_etiqueta);
 
-    if (!(this.etiquetasAgregadas.includes(valor_etiqueta))) {
-      this.etiquetasAgregadas.push(valor_etiqueta);
+    if (!(this.etiquetasAgregadas.find(etiqueta => etiqueta.etiqueta == valor_etiqueta))) {
+      this.etiquetasAgregadas.push(etiqueta);
       this.controlBuscadorEtiqueta = new FormControl('');
       this.initEtiquetasFiltradas();
-      this.emitirSeleccion.emit(valor_etiqueta);
+      this.emitirSeleccion.emit(etiqueta);
     }
   }
 
-  removeEtiqueta (valor_etiqueta: string) {
-    if (this.etiquetasAgregadas.includes(valor_etiqueta)) {
+  removeEtiqueta (id_etiqueta: string) {
+    if (this.etiquetasAgregadas.find(etiqueta => etiqueta.id == id_etiqueta)) {
       this.etiquetasAgregadas = this.etiquetasAgregadas.filter(etiqueta => (
-        etiqueta != valor_etiqueta
+        etiqueta.id != id_etiqueta
       ));
-      this.emitirRemocion.emit(valor_etiqueta);
+      this.emitirRemocion.emit(id_etiqueta);
     }
   }
 

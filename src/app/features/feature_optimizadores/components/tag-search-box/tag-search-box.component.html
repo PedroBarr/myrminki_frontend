@@ -28,9 +28,9 @@
             <mat-option
               *ngFor=
                 "let etiqueta of etiquetasFiltradas | async; track etiqueta"
-              [value]="etiqueta"
+              [value]="etiqueta.etiqueta"
             >
-              {{etiqueta}}
+              {{etiqueta.etiqueta}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -42,8 +42,8 @@
             class="etiqueta-chip"
             *ngFor="let etiqueta of etiquetasAgregadas"
           >
-            {{etiqueta}}
-            <button matChipRemove (click)="removeEtiqueta(etiqueta)">
+            {{etiqueta.etiqueta}}
+            <button matChipRemove (click)="removeEtiqueta(etiqueta.id)">
               <mat-icon>cancel</mat-icon>
             </button>
           </mat-chip>
