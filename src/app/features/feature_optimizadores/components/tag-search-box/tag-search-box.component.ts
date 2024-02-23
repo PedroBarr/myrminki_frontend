@@ -14,6 +14,8 @@ import axios from 'axios';
 
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 
+import { Etiqueta } from '../../models/etiqueta.model';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -26,12 +28,12 @@ import { environment } from 'src/environments/environment';
 export class TagSearchBoxComponent implements OnInit {
 
   controlBuscadorEtiqueta = new FormControl('');
-  etiquetas: any[] = [];
-  etiquetasFiltradas: Observable<any[]> = new Observable<any[]>();
-  etiquetasAgregadas: any[] = [];
+  etiquetas: Etiqueta[] = [];
+  etiquetasFiltradas: Observable<Etiqueta[]> = new Observable<Etiqueta[]>();
+  etiquetasAgregadas: Etiqueta[] = [];
 
-  @Output() emitirSeleccion = new EventEmitter<any>();
-  @Output() emitirRemocion = new EventEmitter<any>();
+  @Output() emitirSeleccion = new EventEmitter<Etiqueta>();
+  @Output() emitirRemocion = new EventEmitter<string>();
 
   async ngOnInit ( ) {
     await this.loadTags();
@@ -45,7 +47,7 @@ export class TagSearchBoxComponent implements OnInit {
     );
   }
 
-  private _filtrar(valor_etiqueta: any): any[] {
+  private _filtrar(valor_etiqueta: string): Etiqueta[] {
     const etiqueta_estandar = valor_etiqueta.toLowerCase();
 
     return this.etiquetas.filter(etiqueta =>
@@ -67,9 +69,11 @@ export class TagSearchBoxComponent implements OnInit {
         console.log(response.data);
 
         if (response.data && response.data.length) {
-          this.etiquetas = response.data.map((tipo_algoritmo: any) =>
-            tipo_algoritmo
-          );
+          this.etiquetas = response.data.map((tipo_algoritmo: any) => ({
+            id: tipo_algoritmo.id,
+            etiqueta: tipo_algoritmo.etiqueta,
+            descripcion: tipo_algoritmo.descripcion,
+          } as Etiqueta));
         }
       })
       .catch(error => {
@@ -80,12 +84,17 @@ export class TagSearchBoxComponent implements OnInit {
 
   selectEtiqueta (evt: MatAutocompleteSelectedEvent) {
     const valor_etiqueta: any = evt.option.value;
-    const etiqueta: any = this.etiquetas.find(etiqueta => etiqueta.etiqueta == valor_etiqueta);
+    const etiqueta: Etiqueta | undefined =
+        this.etiquetas.find(etiqueta => etiqueta.etiqueta == valor_etiqueta);
 
-    if (!(this.etiquetasAgregadas.find(etiqueta => etiqueta.etiqueta == valor_etiqueta))) {
+    if (
+      etiqueta &&
+      !(this.etiquetasAgregadas.find(
+        etiqueta => etiqueta.etiqueta == valor_etiqueta
+      ))
+    ) {
       this.etiquetasAgregadas.push(etiqueta);
-      this.controlBuscadorEtiqueta = new FormControl('');
-      this.initEtiquetasFiltradas();
+      this.controlBuscadorEtiqueta.setValue('');
       this.emitirSeleccion.emit(etiqueta);
     }
   }
@@ -95,6 +104,7 @@ export class TagSearchBoxComponent implements OnInit {
       this.etiquetasAgregadas = this.etiquetasAgregadas.filter(etiqueta => (
         etiqueta.id != id_etiqueta
       ));
+      this.controlBuscadorEtiqueta.setValue('');
       this.emitirRemocion.emit(id_etiqueta);
     }
   }

@@ -74,12 +74,12 @@
   }
 }
 
-:has(> .optimizador-preview) {
+:has(> .optimizador-previsualizacion) {
   --gap: 20px;
   gap: var(--gap);
 }
 
-.optimizador-preview {
+.optimizador-previsualizacion {
   width: calc(60% - var(--gap));
 }
 
@@ -96,10 +96,19 @@ myrmex-tag-search-box {
 
   padding: 20px 15px;
 
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
   span {
     color: var(--myrmex-primary);
     font-family: code-pro-bold, sans-serif;
     letter-spacing: 3pt;
     margin-bottom: 0;
   }
+}
+
+.optimizador-previsualizacion mat-chip-list mat-chip {
+  background-color: var(--myrmex-primary-light);
+  color: #fff;
 }

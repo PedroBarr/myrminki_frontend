@@ -26,9 +26,11 @@
             (optionSelected)="selectEtiqueta($event)"
           >
             <mat-option
-              *ngFor=
-                "let etiqueta of etiquetasFiltradas | async; track etiqueta"
+              *ngFor="let etiqueta of etiquetasFiltradas | async"
               [value]="etiqueta.etiqueta"
+              matTooltip="{{etiqueta.descripcion}}"
+              [matTooltipShowDelay]="500"
+              [matTooltipHideDelay]="100"
             >
               {{etiqueta.etiqueta}}
             </mat-option>
@@ -41,6 +43,9 @@
           <mat-chip
             class="etiqueta-chip"
             *ngFor="let etiqueta of etiquetasAgregadas"
+            matTooltip="{{etiqueta.descripcion}}"
+            [matTooltipShowDelay]="500"
+            [matTooltipHideDelay]="100"
           >
             {{etiqueta.etiqueta}}
             <button matChipRemove (click)="removeEtiqueta(etiqueta.id)">

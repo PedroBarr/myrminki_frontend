@@ -7,6 +7,11 @@ import axios from 'axios';
 
 import { pageDescriptores } from '../../constants/descriptor.constant';
 
+import {
+  PrevisualizacionEntrada,
+  PrevisualizacionAlgoritmo,
+} from '../../models/optimizador.model';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,7 +25,7 @@ export class PageMainExplorerComponent implements OnInit {
   pageDescriptor: string = pageDescriptores['explorar'];
 
   etiquetasBuscadas: any[] = [];
-  optimizadores: string[] = [];
+  optimizadores: PrevisualizacionEntrada[] = [];
 
   ngOnInit ( ) {
     this.loadOptimizers();
@@ -42,9 +47,26 @@ export class PageMainExplorerComponent implements OnInit {
         console.log(response.data);
 
         if (response.data && response.data.length !== undefined && response.data.length !== null) {
-          this.optimizadores = response.data.map((optimizador: any) =>
-            optimizador.nombre
-          );
+          this.optimizadores = response.data.map((optimizador: any) => {
+            const objeto_base = {
+              titulo_entrada: optimizador.nombre,
+              etiquetas: optimizador.etiquetas.map(
+                  (etiqueta: any) => etiqueta.etiqueta
+                ),
+            };
+
+            switch (optimizador.categoria_optimizador) {
+              case 'ALGORITMO':
+                return new PrevisualizacionAlgoritmo({
+                  ...objeto_base,
+                  id: optimizador.clave_identificadora,
+                });
+              default:
+                return new PrevisualizacionEntrada({
+                  ...objeto_base,
+                });
+            }
+          });
         }
       })
       .catch(error => {

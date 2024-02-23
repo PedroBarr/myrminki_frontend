@@ -3,7 +3,7 @@ import {
     Input,
 } from '@angular/core';
 
-import { AcademicReference } from '../../models/academic-reference.model'
+import { AcademicReference } from '../../models/academic-reference.model';
 
 
 @Component({

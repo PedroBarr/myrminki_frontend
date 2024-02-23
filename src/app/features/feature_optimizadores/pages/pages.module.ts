@@ -4,6 +4,7 @@ import {
 import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
+import { MatChipsModule } from '@angular/material/chips';
 
 import {
   ComponentsFeatureOptimizadoresModule
@@ -31,6 +32,7 @@ import {
     CommonModule,
 
     MatCardModule,
+    MatChipsModule,
 
     ComponentsFeatureOptimizadoresModule,
 

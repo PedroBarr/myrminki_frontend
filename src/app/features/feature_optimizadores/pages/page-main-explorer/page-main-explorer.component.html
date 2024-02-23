@@ -20,11 +20,30 @@
   </div>
 
   <div class="boxW100 flex-row flex-space-between">
-    <div class="optimizador-preview">
-      <div *ngFor="let optimizador of optimizadores" class="optimizador-container">
+    <div class="optimizador-previsualizacion">
+      <div
+        class="optimizador-container"
+        *ngFor="let optimizador of optimizadores"
+        routerLink="{{optimizador.ruta_enlace()}}"
+      >
         <span>
-          {{optimizador}}
+          {{optimizador.titulo_entrada}}
         </span>
+
+        <p *ngIf="optimizador.tipo_entrada == 'ALGORITMO'">
+          Tipo: Algoritmo
+        </p>
+
+        <mat-chip-list>
+          <mat-chip
+            *ngFor="let etiqueta of optimizador.etiquetas"
+            disableRipple="false"
+            highlighted="false"
+            routerLink="{{optimizador.ruta_enlace()}}"
+          >
+            {{etiqueta}}
+          </mat-chip>
+        </mat-chip-list>
       </div>
     </div>
 
