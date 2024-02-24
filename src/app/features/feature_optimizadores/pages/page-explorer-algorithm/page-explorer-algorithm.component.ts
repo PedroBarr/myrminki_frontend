@@ -3,6 +3,8 @@ import {
     OnInit,
 } from '@angular/core';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 import axios from 'axios';
 
 import {
@@ -25,6 +27,11 @@ export class PageExplorerAlgorithmComponent implements OnInit {
   matematizacion_apertura: boolean = true;
   seudo_codigo_apertura: boolean = true;
 
+  constructor (
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
+
   ngOnInit ( ) {
     this.loadAlgorithm();
   }
@@ -46,7 +53,9 @@ export class PageExplorerAlgorithmComponent implements OnInit {
   */
   async loadAlgorithm ( ) {
     axios.get(
-      environment.MYRMEX_API + '/algoritmo/identificador/algrtm_init',
+      environment.MYRMEX_API +
+        '/algoritmo/identificador/' +
+        this.route.snapshot.paramMap.get('identificador'),
     )
       .then(response => {
         console.log(response.data);
