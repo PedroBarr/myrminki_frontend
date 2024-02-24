@@ -1,0 +1,100 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="algoritmo-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>{{algoritmo.titulo}}</h2>
+          </mat-card-title>
+
+          <mat-card-subtitle>
+            <mat-chip-list>
+              <mat-chip
+                *ngFor="let etiqueta of algoritmo.etiquetas"
+              >
+                {{etiqueta}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-accordion multi>
+            <mat-expansion-panel
+              hideToggle
+              [expanded]="descripcion_apertura"
+              (opened)="set_descripcion_apertura(true)"
+              (closed)="set_descripcion_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Descripción
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <markdown
+                class=""
+                [data]="algoritmo.descripcion_puntuada"
+              >
+              </markdown>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel
+              hideToggle
+              [expanded]="matematizacion_apertura"
+              (opened)="set_matematizacion_apertura(true)"
+              (closed)="set_matematizacion_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Matematización
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <markdown
+                class=""
+                katex
+                [data]="algoritmo.matematizacion_puntuada"
+              >
+              </markdown>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel
+              hideToggle
+              [expanded]="seudo_codigo_apertura"
+              (opened)="set_seudo_codigo_apertura(true)"
+              (closed)="set_seudo_codigo_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Seudo-código
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <markdown
+                class=""
+                lineHighlight
+                line="1-{{algoritmo.seudo_codigo_puntuado.length}}"
+                [data]="algoritmo.seudo_codigo_puntuado"
+              >
+              </markdown>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="parametros-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>Parámetros</h2>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -35,3 +35,28 @@ export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
   }
 
 }
+
+export class Algoritmo {
+
+  public titulo: string;
+  public etiquetas: string[];
+
+  public descripcion_puntuada: string;
+  public matematizacion_puntuada: string;
+  public seudo_codigo_puntuado: string;
+
+  constructor (obj: any = {
+    titulo: '',
+    etiquetas: [],
+    descripcion_puntuada: '',
+    matematizacion_puntuada: '',
+    seudo_codigo_puntuado: '',
+  }) {
+    this.titulo = obj.titulo;
+    this.etiquetas = obj.etiquetas;
+    this.descripcion_puntuada = obj.descripcion_puntuada;
+    this.matematizacion_puntuada = obj.matematizacion_puntuada;
+    this.seudo_codigo_puntuado = obj.seudo_codigo_puntuado;
+  }
+
+}

@@ -76,15 +76,16 @@
 
 :has(> .optimizador-previsualizacion) {
   --gap: 20px;
+  --optimizador-width: 60%;
   gap: var(--gap);
 }
 
 .optimizador-previsualizacion {
-  width: calc(60% - var(--gap));
+  width: calc(var(--optimizador-width) - var(--gap));
 }
 
 myrmex-tag-search-box {
-  width: 40%;
+  width: calc(100% - var(--optimizador-width));
 }
 
 .optimizador-container {

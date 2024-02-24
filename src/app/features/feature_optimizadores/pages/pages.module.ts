@@ -5,6 +5,14 @@ import { CommonModule } from '@angular/common';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
+
+import { MarkdownModule } from 'ngx-markdown';
+
+import 'prismjs';
+import 'prismjs/components/prism-typescript.min.js';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
 import {
   ComponentsFeatureOptimizadoresModule
@@ -20,6 +28,10 @@ import {
   PageMainExplorerComponent
 } from './page-main-explorer/page-main-explorer.component';
 
+import {
+  PageExplorerAlgorithmComponent
+} from './page-explorer-algorithm/page-explorer-algorithm.component';
+
 
 @NgModule({
   schemas: [
@@ -27,12 +39,16 @@ import {
   declarations: [
     PageMainSetUpComponent,
     PageMainExplorerComponent,
+    PageExplorerAlgorithmComponent,
   ],
   imports: [
     CommonModule,
 
     MatCardModule,
     MatChipsModule,
+    MatExpansionModule,
+
+    MarkdownModule.forRoot(),
 
     ComponentsFeatureOptimizadoresModule,
 
@@ -41,6 +57,7 @@ import {
   exports: [
     PageMainSetUpComponent,
     PageMainExplorerComponent,
+    PageExplorerAlgorithmComponent,
   ]
 })
 export class PagesFeatureOptimizadoresModule { }
