@@ -1,0 +1,105 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+
+  width: auto;
+}
+
+mat-card-title h2 {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.param-algrtm-container:first-child {
+  border-top-style: none;
+}
+
+.param-algrtm-container:last-child {
+  border-bottom-style: none;
+}
+
+.param-algrtm-container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.param-algrtm-tiltle,
+.param-algrtm-content {
+  width: 50%;
+}
+
+.param-algrtm-tiltle {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.param-algrtm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.param-algrtm-description {
+  font-size: 12px;
+}
+
+.param-algrtm-datos-container,
+.param-algrtm-restriccion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: var(--myrmex-primary);
+}
+
+.param-algrtm-datos-title,
+.param-algrtm-restriccion-title {
+  font-family: montserrat, sans-serif;
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: var(--myrmex-primary);
+  align-self: center;
+}
+
+.param-algrtm-datos-content,
+.param-algrtm-restriccion-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.param-algrtm-datos-content > *,
+.param-algrtm-restriccion-content > * {
+  width: 50%;
+  line-break: anywhere;
+  font-size: 12px;
+  text-align: right;
+}
+
+.param-algrtm-datos-content > .param-algrtm-datos-content-title,
+.param-algrtm-restriccion-content > .param-algrtm-datos-restriccion-title {
+  text-align: left;
+  color: var(--myrmex-primary-light);
+}

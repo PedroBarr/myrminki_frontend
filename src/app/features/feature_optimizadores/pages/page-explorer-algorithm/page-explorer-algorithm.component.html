@@ -34,6 +34,9 @@
 
               <markdown
                 class=""
+                katex
+                lineHighlight
+                line="1-{{algoritmo.descripcion_puntuada.length}}"
                 [data]="algoritmo.descripcion_puntuada"
               >
               </markdown>
@@ -54,6 +57,8 @@
               <markdown
                 class=""
                 katex
+                lineHighlight
+                line="1-{{algoritmo.matematizacion_puntuada.length}}"
                 [data]="algoritmo.matematizacion_puntuada"
               >
               </markdown>
@@ -73,6 +78,7 @@
 
               <markdown
                 class=""
+                katex
                 lineHighlight
                 line="1-{{algoritmo.seudo_codigo_puntuado.length}}"
                 [data]="algoritmo.seudo_codigo_puntuado"
@@ -84,17 +90,12 @@
       </mat-card>
     </div>
 
-    <div class="parametros-container">
-      <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h2>Parámetros</h2>
-          </mat-card-title>
-        </mat-card-header>
-
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
+    <div class="aditamentos-container">
+      <myrmex-paramz-algorithm-box
+        *ngIf="algoritmo.parametrizacion_id"
+        [paramz_algrtm_id]="algoritmo.parametrizacion_id"
+      >
+      </myrmex-paramz-algorithm-box>
     </div>
   </div>
 </div>

@@ -30,9 +30,15 @@
           {{optimizador.titulo_entrada}}
         </span>
 
-        <p *ngIf="optimizador.tipo_entrada == 'ALGORITMO'">
-          Tipo: Algoritmo
-        </p>
+        <div class="optimizador-datos-container">
+          <span *ngIf="optimizador.tipo_entrada == 'ALGORITMO'">
+            Tipo: Algoritmo
+          </span>
+
+          <span *ngFor="let dato of optimizador.lista_datos()">
+            {{dato[0]}}: {{dato[1]}}
+          </span>
+        </div>
 
         <mat-chip-list>
           <mat-chip

@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Par&aacute;metros</h2>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div
+      class="param-algrtm-container"
+      *ngFor="let param_algrtm of paramz_algrtm"
+    >
+      <span class="param-algrtm-tiltle"> {{param_algrtm.nombre}} </span>
+
+      <div class="param-algrtm-content">
+        <span class="param-algrtm-description">
+          {{param_algrtm.descripcion}}
+        </span>
+
+        <div
+          class="param-algrtm-datos-container"
+          *ngIf="param_algrtm.have_datos()"
+        >
+          <span class="param-algrtm-datos-title"> Datos </span>
+          <div
+            class="param-algrtm-datos-content"
+            *ngFor="let dato of param_algrtm.get_datos_list()"
+          >
+            <span class="param-algrtm-datos-content-title"> {{dato[0]}} </span>
+
+            <markdown
+              *ngIf="dato[0].includes('matema')"
+              katex
+              [data]="dato[1] + ' ($' + dato[1] + '$)'"
+            >
+            </markdown>
+
+            <span *ngIf="!(dato[0].includes('matema'))">
+              {{dato[1]}}
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="param-algrtm-restriccion-container"
+          *ngIf="param_algrtm.restricciones.length > 0"
+        >
+          <span class="param-algrtm-restriccion-title"> Restricciones </span>
+          <div
+            class="param-algrtm-restriccion-content"
+            *ngFor="let restriccion of param_algrtm.restricciones"
+          >
+            <span class="param-algrtm-datos-restriccion-title">
+              {{restriccion.tipo_restriccion}}
+            </span>
+
+            <span> {{restriccion.valor_restriccion}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

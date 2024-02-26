@@ -80,6 +80,11 @@ export class PageExplorerAlgorithmComponent implements OnInit {
           if (data.seudo_codigo)
             this.algoritmo.seudo_codigo_puntuado = data.seudo_codigo;
 
+          if (data.parametrizacion_algoritmo_diminutivo)
+            this.algoritmo.parametrizacion_id = (
+              data.parametrizacion_algoritmo_diminutivo
+            );
+
         }
       })
       .catch(error => {

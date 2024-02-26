@@ -14,14 +14,26 @@ import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
+import { MarkdownModule } from 'ngx-markdown';
+
+import 'prismjs';
+import 'prismjs/components/prism-typescript.min.js';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
+
 import {
   TagSearchBoxComponent
 } from './tag-search-box/tag-search-box.component';
+
+import {
+  ParamzAlgorithmBoxComponent
+} from './paramz-algorithm-box/paramz-algorithm-box.component';
 
 
 @NgModule({
   declarations: [
     TagSearchBoxComponent,
+    ParamzAlgorithmBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -39,10 +51,13 @@ import {
     MatListModule,
     MatTooltipModule,
 
+    MarkdownModule.forRoot(),
+
     RouterModule,
   ],
   exports: [
     TagSearchBoxComponent,
+    ParamzAlgorithmBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

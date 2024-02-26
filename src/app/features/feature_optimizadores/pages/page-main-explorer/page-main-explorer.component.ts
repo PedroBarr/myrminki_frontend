@@ -60,6 +60,9 @@ export class PageMainExplorerComponent implements OnInit {
                 return new PrevisualizacionAlgoritmo({
                   ...objeto_base,
                   id: optimizador.clave_identificadora,
+                  n_parametros: (
+                    optimizador.parametrizacion_algoritmo_cantidad_parametros
+                  ),
                 });
               default:
                 return new PrevisualizacionEntrada({

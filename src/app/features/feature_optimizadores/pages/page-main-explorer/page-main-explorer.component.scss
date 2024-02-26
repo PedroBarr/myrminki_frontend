@@ -113,3 +113,17 @@ myrmex-tag-search-box {
   background-color: var(--myrmex-primary-light);
   color: #fff;
 }
+
+.optimizador-datos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 12px;
+}
+
+.optimizador-datos-container > span {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  letter-spacing: normal;
+  color: unset;
+}
