@@ -10,6 +10,7 @@ import { pageDescriptores } from '../../constants/descriptor.constant';
 import {
   PrevisualizacionEntrada,
   PrevisualizacionAlgoritmo,
+  PrevisualizacionImplementacion,
 } from '../../models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -63,6 +64,20 @@ export class PageMainExplorerComponent implements OnInit {
                   n_parametros: (
                     optimizador.parametrizacion_algoritmo_cantidad_parametros
                   ),
+                  n_implementaciones: (
+                    optimizador.cantidad_implementaciones
+                  ),
+                });
+              case 'IMPLEMENTACION':
+                return new PrevisualizacionImplementacion({
+                  ...objeto_base,
+                  id: optimizador.clave_identificadora,
+                  n_parametros_algoritmo: (
+                    optimizador.parametrizacion_algoritmo_cantidad_parametros
+                  ),
+                  n_argumentaciones: optimizador.cantidad_argumentaciones,
+                  n_soluciones: optimizador.cantidad_soluciones,
+                  lenguaje_programacion: optimizador.lenguaje_programacion,
                 });
               default:
                 return new PrevisualizacionEntrada({

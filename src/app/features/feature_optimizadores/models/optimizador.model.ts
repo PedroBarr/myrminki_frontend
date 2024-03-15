@@ -1,6 +1,6 @@
 export class PrevisualizacionEntrada {
 
-  public tipo_entrada: 'ALGORITMO' | 'PROBLEMA' | undefined;
+  public tipo_entrada: 'ALGORITMO' | 'IMPLEMENTACION' | 'PROBLEMA' | undefined;
   public titulo_entrada: string = '';
   public etiquetas: string[] = [];
 
@@ -26,15 +26,18 @@ export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
 
   public id: number = 0;
   public n_parametros: number = 0;
+  public n_implementaciones: number = 0;
 
   constructor (obj: any = {
     id: '',
     n_parametros: 0,
+    n_implementaciones: 0,
   }) {
     super(obj);
     this.tipo_entrada = 'ALGORITMO';
     this.id = obj.id;
     this.n_parametros = obj.n_parametros;
+    this.n_implementaciones = obj.n_implementaciones;
   }
 
   override ruta_enlace ( ): string {
@@ -44,6 +47,7 @@ export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
   override lista_datos (): string[][] {
     return [
       ['N\u00famero de par\u00e1metros', String(this.n_parametros)],
+      ['N\u00famero de implementaciones', String(this.n_implementaciones)],
     ];
   }
 
@@ -112,6 +116,48 @@ export class ParametrizacionAlgoritmo {
 
   get_datos_list ( ): any[2][] {
     return Object.entries(this.datos);
+  }
+
+}
+
+export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
+
+  public id: number = 0;
+  public n_parametros_algoritmo: number = 0;
+  public n_argumentaciones: number = 0;
+  public n_soluciones: number = 0;
+  public lenguaje_programacion: string = '';
+
+  constructor (obj: any = {
+    id: '',
+    n_parametros_algoritmo: 0,
+    n_argumentaciones: 0,
+    n_soluciones: 0,
+    lenguaje_programacion: '',
+  }) {
+    super(obj);
+    this.tipo_entrada = 'IMPLEMENTACION';
+    this.id = obj.id;
+    this.n_parametros_algoritmo = obj.n_parametros_algoritmo;
+    this.n_argumentaciones = obj.n_argumentaciones;
+    this.n_soluciones = obj.n_soluciones;
+    this.lenguaje_programacion = obj.lenguaje_programacion;
+  }
+
+  override ruta_enlace ( ): string {
+    return '/implementacion/' + this.id;
+  }
+
+  override lista_datos (): string[][] {
+    return [
+      [
+        'N\u00famero de par\u00e1metros del algoritmo',
+        String(this.n_parametros_algoritmo)
+      ],
+      ['N\u00famero de argumentaciones', String(this.n_argumentaciones)],
+      ['N\u00famero de soluciones', String(this.n_soluciones)],
+      ['Lenguaje de programaci\u00f3n', this.lenguaje_programacion]
+    ];
   }
 
 }
