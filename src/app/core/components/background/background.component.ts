@@ -100,6 +100,9 @@ export class BackgroundComponent implements OnInit {
         case "dblclick":
           this.interaccion_mouse_alter2(this.currentEvent);
           break;
+        case "easterEggEvent":
+          this.interaccion_mouse_alter3();
+          break;
         default: break;
       }
     }
@@ -157,6 +160,32 @@ export class BackgroundComponent implements OnInit {
       this.#dibujar(context);
     }
 
+  }
+
+  interaccion_mouse_alter3 ( ) {
+    const body = document.querySelector('body');
+    const height: number = body?.clientHeight || 0;
+    const width: number = body?.clientWidth || 0;
+
+    const i: number = Math.floor(width / 280);
+    const j: number = Math.floor(height / 280);
+    const x_init: number = width / i / 2;
+    const y_init: number = height / (i * 2);
+    const x_delta: number = width / i;
+    const y_delta: number = height / i;
+
+    for (let x = x_init; x <= i * x_delta + x_init; x += x_delta) {
+      for (let y = y_init; y <= i * y_delta + y_init; y += y_delta) {
+        this.#interactuar_alter2(x, y);
+      }
+    }
+
+    const canvas: HTMLCanvasElement = this.miCanvas.nativeElement;
+    const context = canvas.getContext('2d');
+
+    if (context) {
+      this.#dibujar(context);
+    }
   }
 
   #interactuar(xPosMouse: number, yPosMouse: number) {

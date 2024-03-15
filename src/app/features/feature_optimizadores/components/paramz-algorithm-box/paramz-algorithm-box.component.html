@@ -26,7 +26,9 @@
             class="param-algrtm-datos-content"
             *ngFor="let dato of param_algrtm.get_datos_list()"
           >
-            <span class="param-algrtm-datos-content-title"> {{dato[0]}} </span>
+            <span class="param-algrtm-datos-content-title">
+              {{dato[0].replaceAll('_',' ')}}
+            </span>
 
             <markdown
               *ngIf="dato[0].includes('matema')"

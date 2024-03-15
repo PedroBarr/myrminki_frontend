@@ -82,6 +82,9 @@
 
 .optimizador-previsualizacion {
   width: calc(var(--optimizador-width) - var(--gap));
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 myrmex-tag-search-box {

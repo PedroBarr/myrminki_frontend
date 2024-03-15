@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
           this._codigo = ".myrmex.";
           break;
         case ".myrmex.":
-          alert("this._easteregg.active()");
+          this.juegoMyrmex();
           this._codigo = ".";
           break;
         default:
@@ -64,6 +64,13 @@ export class AppComponent implements OnInit {
       }
     } else {
       this._codigo = ".";
+    }
+  }
+
+  juegoMyrmex ( ) {
+    const active: Boolean = confirm("¿Desea activar el huevo de pascuua?");
+    if (active) {
+      this.currentEvent = new MouseEvent("easterEggEvent", { });
     }
   }
 
