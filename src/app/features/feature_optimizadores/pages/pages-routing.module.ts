@@ -13,11 +13,22 @@ import {
   PageExplorerAlgorithmComponent
 } from './page-explorer-algorithm/page-explorer-algorithm.component';
 
+import {
+  PageExplorerImplementationComponent
+} from './page-explorer-implementation/page-explorer-implementation.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
   {path: 'explorar', component: PageMainExplorerComponent },
-  {path: 'algoritmo/:identificador', component: PageExplorerAlgorithmComponent },
+  {
+    path: 'algoritmo/:identificador',
+    component: PageExplorerAlgorithmComponent
+  },
+  {
+    path: 'implementacion/:identificador',
+    component: PageExplorerImplementationComponent
+  },
 ];
 
 @NgModule({

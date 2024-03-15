@@ -161,3 +161,36 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
   }
 
 }
+
+export class Implementacion {
+
+  public titulo: string;
+  public etiquetas: string[];
+
+  public lenguaje_nombre: string;
+
+  public descripcion_puntuada: string;
+  public codigo_puntuado: string;
+
+  constructor (obj: any = {
+    titulo: '',
+    etiquetas: [],
+    lenguaje_nombre: '',
+    descripcion_puntuada: '',
+    codigo_puntuado: '',
+  }) {
+    this.titulo = obj.titulo;
+    this.etiquetas = obj.etiquetas;
+    this.lenguaje_nombre = obj.lenguaje_nombre;
+    this.descripcion_puntuada = obj.descripcion_puntuada;
+    this.codigo_puntuado = obj.codigo_puntuado;
+  }
+
+  getLenguajeEtiqueta (): string {
+    return (
+      this.lenguaje_nombre.substring(0, 1).toUpperCase() +
+      this.lenguaje_nombre.substring(1).toLowerCase()
+    );
+  }
+
+}

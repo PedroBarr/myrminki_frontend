@@ -32,6 +32,10 @@ import {
   PageExplorerAlgorithmComponent
 } from './page-explorer-algorithm/page-explorer-algorithm.component';
 
+import {
+  PageExplorerImplementationComponent
+} from './page-explorer-implementation/page-explorer-implementation.component';
+
 
 @NgModule({
   schemas: [
@@ -40,6 +44,7 @@ import {
     PageMainSetUpComponent,
     PageMainExplorerComponent,
     PageExplorerAlgorithmComponent,
+    PageExplorerImplementationComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +63,7 @@ import {
     PageMainSetUpComponent,
     PageMainExplorerComponent,
     PageExplorerAlgorithmComponent,
+    PageExplorerImplementationComponent,
   ]
 })
 export class PagesFeatureOptimizadoresModule { }
