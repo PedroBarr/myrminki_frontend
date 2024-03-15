@@ -68,7 +68,9 @@ export class AppComponent implements OnInit {
   }
 
   juegoMyrmex ( ) {
-    const active: Boolean = confirm("¿Desea activar el huevo de pascuua?");
+    const active: Boolean = confirm(
+      "Para activar el huevo de pascua presione aceptar"
+    );
     if (active) {
       this.currentEvent = new MouseEvent("easterEggEvent", { });
     }

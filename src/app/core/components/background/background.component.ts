@@ -167,8 +167,8 @@ export class BackgroundComponent implements OnInit {
     const height: number = body?.clientHeight || 0;
     const width: number = body?.clientWidth || 0;
 
-    const i: number = Math.floor(width / 280);
-    const j: number = Math.floor(height / 280);
+    const i: number = Math.floor(width / 250);
+    const j: number = Math.floor(height / 250);
     const x_init: number = width / i / 2;
     const y_init: number = height / (i * 2);
     const x_delta: number = width / i;
