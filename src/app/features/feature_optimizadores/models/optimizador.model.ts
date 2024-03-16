@@ -172,18 +172,26 @@ export class Implementacion {
   public descripcion_puntuada: string;
   public codigo_puntuado: string;
 
+  public parametrizacion_id: string;
+
   constructor (obj: any = {
     titulo: '',
     etiquetas: [],
     lenguaje_nombre: '',
     descripcion_puntuada: '',
     codigo_puntuado: '',
+    parametrizacion_id: '',
   }) {
     this.titulo = obj.titulo;
     this.etiquetas = obj.etiquetas;
     this.lenguaje_nombre = obj.lenguaje_nombre;
     this.descripcion_puntuada = obj.descripcion_puntuada;
     this.codigo_puntuado = obj.codigo_puntuado;
+
+    this.parametrizacion_id = obj.parametrizacion_id ?
+      obj.parametrizacion_id :
+      ''
+    ;
   }
 
   getLenguajeEtiqueta (): string {

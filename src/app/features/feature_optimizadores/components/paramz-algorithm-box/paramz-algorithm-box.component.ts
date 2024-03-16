@@ -39,7 +39,6 @@ export class ParamzAlgorithmBoxComponent implements OnInit, OnChanges {
   */
   async loadParamzAlgrtm ( ) {
     if (!this.paramz_algrtm_id) return;
-    console.log('In here', this.paramz_algrtm_id);
 
     await axios.get(
       environment.MYRMEX_API +
@@ -78,64 +77,6 @@ export class ParamzAlgorithmBoxComponent implements OnInit, OnChanges {
         console.error(error);
       })
       .finally(( ) => { });
-    /*this.paramz_algrtm.push(
-      new ParametrizacionAlgoritmo({
-        nombre: 'Constante K',
-        descripcion: 'Descripcion lorem ipsum que es una constante para leer alguito',
-        restricciones: [
-          {tipo_restriccion:'min',valor_restriccion:'0'}
-        ],
-        datos: {
-          clave: 'k_val',
-          defecto: 1,
-          nombre: 'Constante K',
-          representacion_matematica: 'k_{val}',
-          tipo: 'number'
-        },
-      }),
-      new ParametrizacionAlgoritmo({
-        nombre: 'Constante K',
-        descripcion: 'Descripcion lorem ipsum que es una constante para leer alguito',
-        restricciones: [
-          {tipo_restriccion:'min',valor_restriccion:'0'}
-        ],
-        datos: {
-          clave: 'k_val',
-          defecto: 1,
-          nombre: 'Constante K',
-          representacion_matematica: 'k_{val}',
-          tipo: 'number'
-        },
-      }),
-      new ParametrizacionAlgoritmo({
-        nombre: 'Constante K',
-        descripcion: 'Descripcion lorem ipsum que es una constante para leer alguito',
-        restricciones: [
-          {tipo_restriccion:'min',valor_restriccion:'0'}
-        ],
-        datos: {
-          clave: 'k_val',
-          defecto: 1,
-          nombre: 'Constante K',
-          representacion_matematica: 'k_{val}',
-          tipo: 'number'
-        },
-      }),
-      new ParametrizacionAlgoritmo({
-        nombre: 'Constante K',
-        descripcion: 'Descripcion lorem ipsum que es una constante para leer alguito',
-        restricciones: [
-          {tipo_restriccion:'min',valor_restriccion:'0'}
-        ],
-        datos: {
-          clave: 'k_val',
-          defecto: 1,
-          nombre: 'Constante K',
-          representacion_matematica: 'k_{val}',
-          tipo: 'number'
-        },
-      })
-    )*/
   }
 
 }
