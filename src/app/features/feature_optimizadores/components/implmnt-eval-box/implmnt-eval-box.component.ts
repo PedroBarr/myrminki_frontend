@@ -21,6 +21,7 @@ export class ImplmntEvalBoxComponent {
 
   @Input() implmnt_id: string  = '';
   @Input() arg_selecto: string | null = null;
+  @Input() args_editados: {[clave_param: string]: string} = {};
 
   /**
   * Eval code on API
@@ -38,6 +39,9 @@ export class ImplmntEvalBoxComponent {
       environment.MYRMEX_API +
         '/implementacion/identificador/' + this.implmnt_id + '/ejecutar/' +
           this.code_in + arg_url,
+      {
+        params: this.args_editados,
+      }
     )
       .then(response => {
         console.log(response.data);

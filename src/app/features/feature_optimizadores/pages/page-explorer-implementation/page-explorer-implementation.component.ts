@@ -28,6 +28,7 @@ export class PageExplorerImplementationComponent implements OnInit {
   codigo_apertura: boolean = true;
 
   arg_selecto: string | null = null;
+  args_editados: {[clave_param: string]: string} = {};
 
   constructor (
     private router: Router,
@@ -100,6 +101,10 @@ export class PageExplorerImplementationComponent implements OnInit {
 
   set_arg_selected (valor: string | null) {
     this.arg_selecto = valor;
+  }
+
+  set_args_editados (valor: {[clave_param: string]: string}) {
+    this.args_editados = valor;
   }
 
 }

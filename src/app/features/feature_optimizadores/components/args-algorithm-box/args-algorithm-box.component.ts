@@ -1,5 +1,6 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
@@ -24,6 +25,7 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
   paramz_algrtm: ParametrizacionAlgoritmo[] = [];
 
   @Input() paramz_algrtm_id: string  = '';
+  @Output() args_editados = new EventEmitter<{[clave_param: string]: string}>();
 
   async ngOnInit ( ) {
     await this.loadParamzAlgrtm();
@@ -54,6 +56,7 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
             this.paramz_algrtm = response.data.lista_parametros.map(
               (parametro: any) => {
                 const {
+                  clave,
                   nombre,
                   descripcion,
                   tipo,
@@ -69,6 +72,7 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
                       defecto,
                       valor: defecto,
                       valor_inicial: defecto,
+                      clave,
                     },
                 });
               }
@@ -87,6 +91,8 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
       'valor',
       this.paramz_algrtm[i_param].get_dato('valor_inicial')
     );
+
+    this.set_args_editados();
   }
 
   getParamTypeIcon (i_param: number): string {
@@ -97,6 +103,21 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
     if (tipo.includes('texto')) return 'title';
     if (tipo.includes('opcion')) return 'alt_route';
     return 'question_mark';
+  }
+
+  set_args_editados () {
+    const args: {[clave_param: string]: string} = {};
+
+    for (let param_algrtm of this.paramz_algrtm) {
+      if (
+        param_algrtm.get_dato('valor') !=
+          param_algrtm.get_dato('valor_inicial')
+      ) {
+        args[param_algrtm.get_dato('clave')] = param_algrtm.get_dato('valor');
+      }
+    }
+
+    this.args_editados.emit(args);
   }
 
 }

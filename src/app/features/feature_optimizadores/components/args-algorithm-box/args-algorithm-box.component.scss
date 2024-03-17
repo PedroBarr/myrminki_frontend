@@ -23,6 +23,10 @@
   margin-right: 0;
 }
 
+.mat-card.edited-arg {
+  background-color: var(--myrmex-primary-selected);
+}
+
 .mat-card-header {
   align-items: center;
 

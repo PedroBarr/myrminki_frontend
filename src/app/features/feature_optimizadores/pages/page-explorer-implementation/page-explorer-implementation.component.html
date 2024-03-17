@@ -59,6 +59,7 @@
               <myrmex-args-algorithm-box
                 *ngIf="implementacion.parametrizacion_id"
                 [paramz_algrtm_id]="implementacion.parametrizacion_id"
+                (args_editados)="set_args_editados($event)"
               >
               </myrmex-args-algorithm-box>
             </mat-expansion-panel>
@@ -93,6 +94,7 @@
         *ngIf="implementacion.implementacion_id"
         [implmnt_id]="implementacion.implementacion_id"
         [arg_selecto]="arg_selecto"
+        [args_editados]="args_editados"
       >
       </myrmex-implmnt-eval-box>
 

@@ -1,7 +1,7 @@
 <div id="param-algrtm-container">
   <mat-card
     *ngFor="let param_algrtm of paramz_algrtm; index as i_param"
-    [ngClass]="{'left-side': i_param % 2 == 0, 'right-side': i_param % 2 == 1}"
+    [ngClass]="{'left-side': i_param % 2 == 0, 'right-side': i_param % 2 == 1, 'edited-arg': param_algrtm.get_dato('valor') != param_algrtm.get_dato('valor_inicial')}"
   >
     <mat-card-header>
       <mat-icon mat-card-avatar color="primary">
@@ -28,6 +28,7 @@
           placeholder="Ej: {{param_algrtm.get_dato('defecto')}}"
           matInput
           [(ngModel)]="param_algrtm.datos['valor']"
+          (change)="set_args_editados()"
         >
       </mat-form-field>
     </mat-card-content>
