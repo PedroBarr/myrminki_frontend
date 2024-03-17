@@ -25,6 +25,7 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
   paramz_algrtm: ParametrizacionAlgoritmo[] = [];
 
   @Input() paramz_algrtm_id: string  = '';
+  @Input() arg_selecto_argumentos: {[clave_param: string]: string} = {};
   @Output() args_editados = new EventEmitter<{[clave_param: string]: string}>();
 
   async ngOnInit ( ) {
@@ -32,8 +33,12 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges ( changes: any ) {
-    if (changes.paramz_algrtm_id.firstChange) {
-      await this.loadParamzAlgrtm();
+    if (changes.paramz_algrtm_id) {
+      if (changes.paramz_algrtm_id.firstChange) await this.loadParamzAlgrtm();
+    }
+
+    if (changes.arg_selecto_argumentos) {
+      this.init_args();
     }
   }
 
@@ -118,6 +123,17 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
     }
 
     this.args_editados.emit(args);
+  }
+
+  init_args ( ) {
+    for (let param_algrtm of this.paramz_algrtm) {
+      if (this.arg_selecto_argumentos[param_algrtm.get_dato('clave')]) {
+        param_algrtm.set_dato(
+          'valor_inicial',
+          this.arg_selecto_argumentos[param_algrtm.get_dato('clave')]
+        );
+      }
+    }
   }
 
 }

@@ -29,6 +29,7 @@ export class PageExplorerImplementationComponent implements OnInit {
 
   arg_selecto: string | null = null;
   args_editados: {[clave_param: string]: string} = {};
+  arg_selecto_argumentos: {[clave_param: string]: string} = {};
 
   constructor (
     private router: Router,
@@ -99,12 +100,16 @@ export class PageExplorerImplementationComponent implements OnInit {
       .finally(( ) => { });
   }
 
-  set_arg_selected (valor: string | null) {
+  set_arg_selecto (valor: string | null) {
     this.arg_selecto = valor;
   }
 
   set_args_editados (valor: {[clave_param: string]: string}) {
     this.args_editados = valor;
+  }
+
+  set_arg_selecto_argumentos (valor: {[clave_param: string]: string}) {
+    this.arg_selecto_argumentos = valor;
   }
 
 }

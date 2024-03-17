@@ -28,6 +28,7 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
   @Input() paramz_algrtm_id: string  = '';
   @Output() emitir_seleccion = new EventEmitter<string | null>();
+  @Output() emitir_argumentos = new EventEmitter<{[clave_param: string]: string}>();
 
   async ngOnInit ( ) {
     await this.loadArgsParamz();
@@ -97,6 +98,15 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
   set_arg_selected (valor: string | null) {
     this.arg_selecto = valor;
     this.emitir_seleccion.emit(this.arg_selecto);
+
+    const arg_selecto: ArgumentoParametrizacion | undefined = (
+      this.args_paramz.find(
+        (arg_param: ArgumentoParametrizacion) =>
+        arg_param.clave_id == this.arg_selecto
+      )
+    )
+
+    if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
   }
 
 }

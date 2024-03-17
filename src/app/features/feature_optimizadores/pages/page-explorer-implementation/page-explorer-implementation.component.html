@@ -59,6 +59,7 @@
               <myrmex-args-algorithm-box
                 *ngIf="implementacion.parametrizacion_id"
                 [paramz_algrtm_id]="implementacion.parametrizacion_id"
+                [arg_selecto_argumentos]="arg_selecto_argumentos"
                 (args_editados)="set_args_editados($event)"
               >
               </myrmex-args-algorithm-box>
@@ -101,7 +102,8 @@
       <myrmex-args-implmnt-picker-box
         *ngIf="implementacion.parametrizacion_id"
         [paramz_algrtm_id]="implementacion.parametrizacion_id"
-        (emitir_seleccion)="set_arg_selected($event)"
+        (emitir_seleccion)="set_arg_selecto($event)"
+        (emitir_argumentos)="set_arg_selecto_argumentos($event)"
       >
       </myrmex-args-implmnt-picker-box>
     </div>
