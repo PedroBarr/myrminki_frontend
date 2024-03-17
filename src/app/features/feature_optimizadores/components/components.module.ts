@@ -33,12 +33,17 @@ import {
   ArgsAlgorithmBoxComponent
 } from './args-algorithm-box/args-algorithm-box.component';
 
+import {
+  ImplmntEvalBoxComponent
+} from './implmnt-eval-box/implmnt-eval-box.component';
+
 
 @NgModule({
   declarations: [
     TagSearchBoxComponent,
     ParamzAlgorithmBoxComponent,
     ArgsAlgorithmBoxComponent,
+    ImplmntEvalBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -64,6 +69,7 @@ import {
     TagSearchBoxComponent,
     ParamzAlgorithmBoxComponent,
     ArgsAlgorithmBoxComponent,
+    ImplmntEvalBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

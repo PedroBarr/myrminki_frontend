@@ -63,6 +63,9 @@ export class PageExplorerImplementationComponent implements OnInit {
         if (response.data) {
           const data = response.data;
 
+          if (data.diminutivo)
+            this.implementacion.implementacion_id = data.diminutivo;
+
           if (data.nombre)
             this.implementacion.titulo = data.nombre;
 

@@ -1,0 +1,48 @@
+<mat-card>
+  <mat-card-header>
+    <mat-icon mat-card-avatar color="primary"> terminal </mat-icon>
+
+    <mat-card-title> Ejecutar c&oacute;digo </mat-card-title>
+
+    <mat-card-subtitle>
+      Prueba una l&iacute;nea de c&oacute;digo con los
+      par&aacute;metros actuales
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field class="boxW100">
+      <mat-label> Expresi&oacute;n </mat-label>
+
+      <input
+        type="text"
+        placeholder="Ej: None"
+        matInput
+        [(ngModel)]="code_in"
+      >
+    </mat-form-field>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="eval_code()"
+    >
+      Ejecutar
+    </button>
+  </mat-card-actions>
+
+  <mat-card-content class="gap-off" *ngIf="code_out">
+    <mat-card-title class="margin-off"> Retorno </mat-card-title>
+
+    <markdown
+      class="markdown-fit"
+      katex
+      lineHighlight
+      line="1-{{code_out.length}}"
+      [data]="'```' + '\n' + code_out + '\n```'"
+    >
+    </markdown>
+  </mat-card-content>
+</mat-card>

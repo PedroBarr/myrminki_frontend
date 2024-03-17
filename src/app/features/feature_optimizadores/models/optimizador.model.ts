@@ -183,6 +183,7 @@ export class Implementacion {
   public descripcion_puntuada: string;
   public codigo_puntuado: string;
 
+  public implementacion_id: string;
   public parametrizacion_id: string;
 
   constructor (obj: any = {
@@ -191,6 +192,7 @@ export class Implementacion {
     lenguaje_nombre: '',
     descripcion_puntuada: '',
     codigo_puntuado: '',
+    implementacion_id: '',
     parametrizacion_id: '',
   }) {
     this.titulo = obj.titulo;
@@ -198,6 +200,11 @@ export class Implementacion {
     this.lenguaje_nombre = obj.lenguaje_nombre;
     this.descripcion_puntuada = obj.descripcion_puntuada;
     this.codigo_puntuado = obj.codigo_puntuado;
+
+    this.implementacion_id = obj.implementacion_id ?
+      obj.implementacion_id :
+      ''
+    ;
 
     this.parametrizacion_id = obj.parametrizacion_id ?
       obj.parametrizacion_id :

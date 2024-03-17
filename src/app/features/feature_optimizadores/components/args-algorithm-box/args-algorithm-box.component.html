@@ -4,16 +4,13 @@
     [ngClass]="{'left-side': i_param % 2 == 0, 'right-side': i_param % 2 == 1}"
   >
     <mat-card-header>
-      <mat-icon mat-card-avatar color="primary"> {{getParamTypeIcon(i_param)}} </mat-icon>
+      <mat-icon mat-card-avatar color="primary">
+        {{getParamTypeIcon(i_param)}}
+      </mat-icon>
 
-      <mat-card-title class="param-algrtm-tiltle">
-        {{param_algrtm.nombre}}
-      </mat-card-title>
+      <mat-card-title> {{param_algrtm.nombre}} </mat-card-title>
 
-      <mat-card-subtitle
-        class="param-algrtm-description"
-        *ngIf="param_algrtm.have_datos()"
-      >
+      <mat-card-subtitle *ngIf="param_algrtm.have_datos()">
         {{ param_algrtm.get_dato('tipo') }}
       </mat-card-subtitle>
     </mat-card-header>
