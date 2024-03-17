@@ -24,6 +24,7 @@ export class PageExplorerImplementationComponent implements OnInit {
   implementacion: Implementacion = new Implementacion();
 
   descripcion_apertura: boolean = true;
+  argumentacion_apertura: boolean = true;
   codigo_apertura: boolean = true;
 
   constructor (
@@ -37,6 +38,10 @@ export class PageExplorerImplementationComponent implements OnInit {
 
   set_descripcion_apertura (variable: boolean) {
     this.descripcion_apertura = variable;
+  }
+
+  set_argumentacion_apertura (variable: boolean) {
+    this.argumentacion_apertura = variable;
   }
 
   set_codigo_apertura (variable: boolean) {
@@ -74,6 +79,11 @@ export class PageExplorerImplementationComponent implements OnInit {
 
           if (data.codificacion)
             this.implementacion.codigo_puntuado = data.codificacion;
+
+          if (data.parametrizacion_algoritmo_identificador)
+            this.implementacion.parametrizacion_id = (
+              data.parametrizacion_algoritmo_identificador
+            );
 
         }
       })

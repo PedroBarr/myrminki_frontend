@@ -46,6 +46,25 @@
 
             <mat-expansion-panel
               hideToggle
+              [expanded]="argumentacion_apertura"
+              (opened)="set_argumentacion_apertura(true)"
+              (closed)="set_argumentacion_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Argumentaci&oacute;n
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <myrmex-args-algorithm-box
+                *ngIf="implementacion.parametrizacion_id"
+                [paramz_algrtm_id]="implementacion.parametrizacion_id"
+              >
+              </myrmex-args-algorithm-box>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel
+              hideToggle
               [expanded]="codigo_apertura"
               (opened)="set_codigo_apertura(true)"
               (closed)="set_codigo_apertura(false)"

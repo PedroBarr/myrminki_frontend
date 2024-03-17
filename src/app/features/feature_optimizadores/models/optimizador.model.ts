@@ -118,6 +118,17 @@ export class ParametrizacionAlgoritmo {
     return Object.entries(this.datos);
   }
 
+  get_dato ( clave_datos: string ): string {
+    if (this.have_datos() && this.datos[clave_datos])
+      return this.datos[clave_datos].toString();
+    return '';
+  }
+
+  set_dato ( clave_datos: string, valor: any ) {
+    if (this.have_datos() && this.datos[clave_datos])
+      this.datos[clave_datos] = valor;
+  }
+
 }
 
 export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {

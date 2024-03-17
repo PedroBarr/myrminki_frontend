@@ -29,11 +29,16 @@ import {
   ParamzAlgorithmBoxComponent
 } from './paramz-algorithm-box/paramz-algorithm-box.component';
 
+import {
+  ArgsAlgorithmBoxComponent
+} from './args-algorithm-box/args-algorithm-box.component';
+
 
 @NgModule({
   declarations: [
     TagSearchBoxComponent,
     ParamzAlgorithmBoxComponent,
+    ArgsAlgorithmBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +63,7 @@ import {
   exports: [
     TagSearchBoxComponent,
     ParamzAlgorithmBoxComponent,
+    ArgsAlgorithmBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
