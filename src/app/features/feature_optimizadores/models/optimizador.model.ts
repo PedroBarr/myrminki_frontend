@@ -249,3 +249,37 @@ export class ArgumentoParametrizacion {
   }
 
 }
+
+export class PrevisualizacionProblema extends PrevisualizacionEntrada {
+
+  public id: number = 0;
+  public n_parametros_problema: number = 0;
+  public n_instancias: number = 0;
+
+  constructor (obj: any = {
+    id: '',
+    n_parametros_problema: 0,
+    n_instancias: 0,
+  }) {
+    super(obj);
+    this.tipo_entrada = 'PROBLEMA';
+    this.id = obj.id;
+    this.n_parametros_problema = obj.n_parametros_problema;
+    this.n_instancias = obj.n_instancias;
+  }
+
+  override ruta_enlace ( ): string {
+    return '/problema/' + this.id;
+  }
+
+  override lista_datos (): string[][] {
+    return [
+      [
+        'N\u00famero de par\u00e1metros del problema',
+        String(this.n_parametros_problema)
+      ],
+      ['N\u00famero de instancias', String(this.n_instancias)],
+    ];
+  }
+
+}
