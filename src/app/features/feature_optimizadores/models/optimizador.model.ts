@@ -220,3 +220,32 @@ export class Implementacion {
   }
 
 }
+
+export class ArgumentoParametrizacion {
+
+  public clave_id: string | null;
+  public descripcion: string;
+  public argumentos: {[clave_param: string]: string};
+  public es_defecto: boolean;
+
+  constructor (obj: any = {
+    clave_id: null,
+    descripcion: '',
+    argumentos: {},
+    es_defecto: false,
+  }) {
+    this.clave_id = obj.clave_id;
+    this.descripcion = obj.descripcion;
+    this.argumentos = obj.argumentos;
+    this.es_defecto = obj.es_defecto;
+  }
+
+  have_argumentos ( ) {
+    return Object.keys(this.argumentos).length > 0;
+  }
+
+  get_argumentos_list ( ): any[2][] {
+    return Object.entries(this.argumentos);
+  }
+
+}

@@ -93,6 +93,12 @@
         [implmnt_id]="implementacion.implementacion_id"
       >
       </myrmex-implmnt-eval-box>
+
+      <myrmex-args-implmnt-picker-box
+        *ngIf="implementacion.parametrizacion_id"
+        [paramz_algrtm_id]="implementacion.parametrizacion_id"
+      >
+      </myrmex-args-implmnt-picker-box>
     </div>
   </div>
 </div>

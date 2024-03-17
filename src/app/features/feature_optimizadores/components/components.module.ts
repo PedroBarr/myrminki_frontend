@@ -8,6 +8,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -17,9 +18,9 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MarkdownModule } from 'ngx-markdown';
 
 import 'prismjs';
-import 'prismjs/components/prism-typescript.min.js';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
+import 'prismjs/components/prism-typescript.min.js';
 import 'prismjs/components/prism-python.min.js';
 
 import {
@@ -38,6 +39,10 @@ import {
   ImplmntEvalBoxComponent
 } from './implmnt-eval-box/implmnt-eval-box.component';
 
+import {
+  ArgsImplmntPickerBoxComponent
+} from './args-implmnt-picker-box/args-implmnt-picker-box.component';
+
 
 @NgModule({
   declarations: [
@@ -45,6 +50,7 @@ import {
     ParamzAlgorithmBoxComponent,
     ArgsAlgorithmBoxComponent,
     ImplmntEvalBoxComponent,
+    ArgsImplmntPickerBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +62,7 @@ import {
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
@@ -71,6 +78,7 @@ import {
     ParamzAlgorithmBoxComponent,
     ArgsAlgorithmBoxComponent,
     ImplmntEvalBoxComponent,
+    ArgsImplmntPickerBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
