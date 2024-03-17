@@ -86,6 +86,7 @@ mat-expansion-panel mat-panel-title {
 .arg-clave {
   display: block;
   width: 30%;
+  line-break: anywhere;
 
   color: var(--myrmex-primary);
   font-size: 14px;
@@ -93,7 +94,7 @@ mat-expansion-panel mat-panel-title {
 
 .arg-valor {
   display: block;
-  width: 60%;
+  width: 65%;
 }
 
 .mat-card.selected-args {
@@ -107,8 +108,4 @@ mat-expansion-panel mat-panel-title {
 
 .selected-args .arg-clave {
   font-weight: 900;
-}
-
-.selected-args .args-container {
-  border-left-color: #AAA;
 }
