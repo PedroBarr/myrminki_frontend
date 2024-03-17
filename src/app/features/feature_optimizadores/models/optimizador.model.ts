@@ -283,3 +283,33 @@ export class PrevisualizacionProblema extends PrevisualizacionEntrada {
   }
 
 }
+
+export class Problema {
+
+  public titulo: string;
+  public etiquetas: string[];
+
+  public descripcion_puntuada: string;
+  public matematizacion_puntuada: string;
+
+  public parametrizacion_id: string;
+
+  constructor (obj: any = {
+    titulo: '',
+    etiquetas: [],
+    descripcion_puntuada: '',
+    matematizacion_puntuada: '',
+    parametrizacion_id: '',
+  }) {
+    this.titulo = obj.titulo;
+    this.etiquetas = obj.etiquetas;
+    this.descripcion_puntuada = obj.descripcion_puntuada;
+    this.matematizacion_puntuada = obj.matematizacion_puntuada;
+
+    this.parametrizacion_id = obj.parametrizacion_id ?
+      obj.parametrizacion_id :
+      ''
+    ;
+  }
+
+}

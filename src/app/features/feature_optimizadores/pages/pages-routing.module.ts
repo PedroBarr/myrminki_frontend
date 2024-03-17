@@ -17,6 +17,10 @@ import {
   PageExplorerImplementationComponent
 } from './page-explorer-implementation/page-explorer-implementation.component';
 
+import {
+  PageExplorerProblemComponent
+} from './page-explorer-problem/page-explorer-problem.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
@@ -28,6 +32,10 @@ const routes: Routes = [
   {
     path: 'implementacion/:identificador',
     component: PageExplorerImplementationComponent
+  },
+  {
+    path: 'problema/:identificador',
+    component: PageExplorerProblemComponent
   },
 ];
 
