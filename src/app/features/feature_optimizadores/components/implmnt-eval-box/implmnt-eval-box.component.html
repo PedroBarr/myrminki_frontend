@@ -33,15 +33,14 @@
     </button>
   </mat-card-actions>
 
-  <mat-card-content class="gap-off" *ngIf="code_out">
+  <mat-card-content class="gap-off" *ngIf="code_out !== ''">
     <mat-card-title class="margin-off"> Retorno </mat-card-title>
 
     <markdown
       class="markdown-fit"
       katex
       lineHighlight
-      line="1-{{code_out.length}}"
-      [data]="'```' + '\n' + code_out + '\n```'"
+      [data]="'```\n' + code_out + '\n```'"
     >
     </markdown>
   </mat-card-content>

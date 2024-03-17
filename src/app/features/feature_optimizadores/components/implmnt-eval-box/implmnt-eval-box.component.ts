@@ -25,6 +25,8 @@ export class ImplmntEvalBoxComponent {
   * Eval code on API
   */
   async eval_code () {
+    if (!this.code_in) return;
+
     axios.get(
       environment.MYRMEX_API +
         '/implementacion/identificador/' + this.implmnt_id + '/ejecutar/' +
@@ -33,8 +35,11 @@ export class ImplmntEvalBoxComponent {
       .then(response => {
         console.log(response.data);
 
-        if (response.data && response.data.retorno) {
-          this.code_out = response.data.retorno;
+        if (
+          response.data &&
+          response.data.retorno !== undefined
+        ) {
+          this.code_out = String(response.data.retorno);
         } else this.code_out = '';
       })
       .catch(error => {
