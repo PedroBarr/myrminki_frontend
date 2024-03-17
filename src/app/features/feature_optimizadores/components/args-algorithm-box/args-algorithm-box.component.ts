@@ -134,6 +134,8 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
         );
       }
     }
+
+    this.set_args_editados();
   }
 
 }

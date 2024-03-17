@@ -35,8 +35,8 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
   }
 
   async ngOnChanges ( changes: any ) {
-    if (changes.paramz_algrtm_id.firstChange) {
-      await this.loadArgsParamz();
+    if (changes.paramz_algrtm_id) {
+      if (changes.paramz_algrtm_id.firstChange) await this.loadArgsParamz();
     }
   }
 
