@@ -1,7 +1,7 @@
 <div id="args-param-container">
   <mat-card
     *ngFor="let argumentacion of args_paramz; index as i_args"
-    [ngClass]="{'selected-args': argumentacion.clave_id == arg_selected}"
+    [ngClass]="{'selected-args': argumentacion.clave_id == arg_selecto}"
   >
     <mat-card-header>
       <mat-card-title> Argumentacion {{i_args}} </mat-card-title>
@@ -43,7 +43,7 @@
 
     <mat-card-actions
       align="end"
-      *ngIf="argumentacion.clave_id != arg_selected"
+      *ngIf="argumentacion.clave_id != arg_selecto"
     >
       <button
         mat-flat-button

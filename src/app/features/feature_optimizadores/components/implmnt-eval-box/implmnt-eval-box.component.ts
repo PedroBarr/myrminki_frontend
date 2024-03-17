@@ -20,6 +20,7 @@ export class ImplmntEvalBoxComponent {
   code_out: string = '';
 
   @Input() implmnt_id: string  = '';
+  @Input() arg_selecto: string | null = null;
 
   /**
   * Eval code on API
@@ -27,10 +28,16 @@ export class ImplmntEvalBoxComponent {
   async eval_code () {
     if (!this.code_in) return;
 
+    const arg_url: string = (
+      this.arg_selecto ?
+      ('/argumentacion_solucion/' + this.arg_selecto) :
+      ''
+    );
+
     axios.get(
       environment.MYRMEX_API +
         '/implementacion/identificador/' + this.implmnt_id + '/ejecutar/' +
-          this.code_in,
+          this.code_in + arg_url,
     )
       .then(response => {
         console.log(response.data);

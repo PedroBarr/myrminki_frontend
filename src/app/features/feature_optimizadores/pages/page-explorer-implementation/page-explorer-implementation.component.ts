@@ -27,6 +27,8 @@ export class PageExplorerImplementationComponent implements OnInit {
   argumentacion_apertura: boolean = true;
   codigo_apertura: boolean = true;
 
+  arg_selecto: string | null = null;
+
   constructor (
     private router: Router,
     private route: ActivatedRoute,
@@ -94,6 +96,10 @@ export class PageExplorerImplementationComponent implements OnInit {
         console.error(error);
       })
       .finally(( ) => { });
+  }
+
+  set_arg_selected (valor: string | null) {
+    this.arg_selecto = valor;
   }
 
 }

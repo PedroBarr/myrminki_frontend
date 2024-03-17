@@ -90,13 +90,16 @@
 
     <div class="aditamentos-container">
       <myrmex-implmnt-eval-box
+        *ngIf="implementacion.implementacion_id"
         [implmnt_id]="implementacion.implementacion_id"
+        [arg_selecto]="arg_selecto"
       >
       </myrmex-implmnt-eval-box>
 
       <myrmex-args-implmnt-picker-box
         *ngIf="implementacion.parametrizacion_id"
         [paramz_algrtm_id]="implementacion.parametrizacion_id"
+        (emitir_seleccion)="set_arg_selected($event)"
       >
       </myrmex-args-implmnt-picker-box>
     </div>

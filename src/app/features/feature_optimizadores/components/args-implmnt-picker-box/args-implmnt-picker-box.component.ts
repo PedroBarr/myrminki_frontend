@@ -1,5 +1,6 @@
 import {
   Component,
+  EventEmitter,
   Input,
   OnChanges,
   OnInit,
@@ -23,9 +24,10 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
   args_paramz: ArgumentoParametrizacion[] = [];
   arg_apertura: boolean[] = [];
-  arg_selected: string | null = null;
+  arg_selecto: string | null = null;
 
   @Input() paramz_algrtm_id: string  = '';
+  @Output() emitir_seleccion = new EventEmitter<string | null>();
 
   async ngOnInit ( ) {
     await this.loadArgsParamz();
@@ -63,7 +65,7 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
                 es_defecto,
               } = argumentacion;
 
-              if (es_defecto) this.arg_selected = clave_id;
+              if (es_defecto) this.set_arg_selected(clave_id);
 
               this.arg_apertura.push(false);
 
@@ -93,7 +95,8 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
   }
 
   set_arg_selected (valor: string | null) {
-    this.arg_selected = valor;
+    this.arg_selecto = valor;
+    this.emitir_seleccion.emit(this.arg_selecto);
   }
 
 }
