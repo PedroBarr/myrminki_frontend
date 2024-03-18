@@ -1,6 +1,6 @@
 export class PrevisualizacionEntrada {
 
-  public tipo_entrada: 'ALGORITMO' | 'IMPLEMENTACION' | 'PROBLEMA' | undefined;
+  public tipo_entrada: 'ALGORITMO' | 'IMPLEMENTACION' | 'PROBLEMA' | 'INSTANCIA' | undefined;
   public titulo_entrada: string = '';
   public etiquetas: string[] = [];
 
@@ -350,6 +350,99 @@ export class ParametrizacionProblema {
   set_dato ( clave_datos: string, valor: any ) {
     if (this.have_datos() && this.datos[clave_datos])
       this.datos[clave_datos] = valor;
+  }
+
+}
+
+export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
+
+  public id: number = 0;
+  public n_parametros_problema: number = 0;
+  public n_argumentaciones: number = 0;
+  public n_soluciones: number = 0;
+  public lenguaje_programacion: string = '';
+
+  constructor (obj: any = {
+    id: '',
+    n_parametros_problema: 0,
+    n_argumentaciones: 0,
+    n_soluciones: 0,
+    lenguaje_programacion: '',
+  }) {
+    super(obj);
+    this.tipo_entrada = 'INSTANCIA';
+    this.id = obj.id;
+    this.n_parametros_problema = obj.n_parametros_problema;
+    this.n_argumentaciones = obj.n_argumentaciones;
+    this.n_soluciones = obj.n_soluciones;
+    this.lenguaje_programacion = obj.lenguaje_programacion;
+  }
+
+  override ruta_enlace ( ): string {
+    return '/instancia/' + this.id;
+  }
+
+  override lista_datos (): string[][] {
+    return [
+      [
+        'N\u00famero de par\u00e1metros del problema',
+        String(this.n_parametros_problema)
+      ],
+      ['N\u00famero de argumentaciones', String(this.n_argumentaciones)],
+      ['N\u00famero de soluciones', String(this.n_soluciones)],
+      ['Lenguaje de programaci\u00f3n', this.lenguaje_programacion]
+    ];
+  }
+
+}
+
+export class Instancia {
+
+  public titulo: string;
+  public etiquetas: string[];
+
+  public lenguaje_nombre: string;
+
+  public descripcion_puntuada: string;
+  public matematizacion_puntuada: string;
+  public codigo_puntuado: string;
+
+  public instancia_id: string;
+  public parametrizacion_id: string;
+
+  constructor (obj: any = {
+    titulo: '',
+    etiquetas: [],
+    lenguaje_nombre: '',
+    descripcion_puntuada: '',
+    matematizacion_puntuada: '',
+    codigo_puntuado: '',
+    instancia_id: '',
+    parametrizacion_id: '',
+  }) {
+    this.titulo = obj.titulo;
+    this.etiquetas = obj.etiquetas;
+    this.lenguaje_nombre = obj.lenguaje_nombre;
+    this.descripcion_puntuada = obj.descripcion_puntuada;
+    this.matematizacion_puntuada = obj.matematizacion_puntuada;
+    this.codigo_puntuado = obj.codigo_puntuado;
+
+    this.instancia_id = obj.instancia_id ?
+      obj.instancia_id :
+      ''
+    ;
+
+    this.parametrizacion_id = obj.parametrizacion_id ?
+      obj.parametrizacion_id :
+      ''
+    ;
+  }
+
+  getLenguajeEtiqueta (): string {
+    return (
+      this.lenguaje_nombre.substring(0, 1).toUpperCase() +
+      this.lenguaje_nombre.substring(1).toLowerCase()
+    );
   }
 
 }
