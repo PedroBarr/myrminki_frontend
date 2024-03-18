@@ -72,9 +72,9 @@ export class PageExplorerProblemComponent implements OnInit {
           if (data.matematizacion)
             this.problema.matematizacion_puntuada = data.matematizacion;
 
-          if (data.parametrizacion_algoritmo_diminutivo)
+          if (data.parametrizacion_problema_diminutivo)
             this.problema.parametrizacion_id = (
-              data.parametrizacion_algoritmo_diminutivo
+              data.parametrizacion_problema_diminutivo
             );
 
         }

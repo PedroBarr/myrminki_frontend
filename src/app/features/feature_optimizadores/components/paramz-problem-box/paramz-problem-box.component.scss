@@ -1,0 +1,105 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+
+  width: auto;
+}
+
+mat-card-title h2 {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.param-problm-container:first-child {
+  border-top-style: none;
+}
+
+.param-problm-container:last-child {
+  border-bottom-style: none;
+}
+
+.param-problm-container {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  border-top-style: solid;
+  border-bottom-style: solid;
+  border-top-width: 1px;
+  border-bottom-width: 1px;
+}
+
+.param-problm-tiltle,
+.param-problm-content {
+  width: 50%;
+}
+
+.param-problm-tiltle {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.param-problm-content {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.param-problm-description {
+  font-size: 12px;
+}
+
+.param-problm-datos-container,
+.param-problm-restriccion-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: var(--myrmex-primary);
+}
+
+.param-problm-datos-title,
+.param-problm-restriccion-title {
+  font-family: montserrat, sans-serif;
+  letter-spacing: 1px;
+  font-size: 12px;
+  color: var(--myrmex-primary);
+  align-self: center;
+}
+
+.param-problm-datos-content,
+.param-problm-restriccion-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.param-problm-datos-content > *,
+.param-problm-restriccion-content > * {
+  width: 50%;
+  line-break: anywhere;
+  font-size: 12px;
+  text-align: right;
+}
+
+.param-problm-datos-content > .param-problm-datos-content-title,
+.param-problm-restriccion-content > .param-problm-datos-restriccion-title {
+  text-align: left;
+  color: var(--myrmex-primary-light);
+}

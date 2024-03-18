@@ -43,6 +43,10 @@ import {
   ArgsImplmntPickerBoxComponent
 } from './args-implmnt-picker-box/args-implmnt-picker-box.component';
 
+import {
+  ParamzProblemBoxComponent
+} from './paramz-problem-box/paramz-problem-box.component';
+
 
 @NgModule({
   declarations: [
@@ -51,6 +55,7 @@ import {
     ArgsAlgorithmBoxComponent,
     ImplmntEvalBoxComponent,
     ArgsImplmntPickerBoxComponent,
+    ParamzProblemBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +84,7 @@ import {
     ArgsAlgorithmBoxComponent,
     ImplmntEvalBoxComponent,
     ArgsImplmntPickerBoxComponent,
+    ParamzProblemBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

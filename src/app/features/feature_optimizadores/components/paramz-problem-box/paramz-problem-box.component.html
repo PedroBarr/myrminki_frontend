@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>Par&aacute;metros</h2>
+    </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <div
+      class="param-problm-container"
+      *ngFor="let param_problm of paramz_problm"
+    >
+      <span class="param-problm-tiltle"> {{param_problm.nombre}} </span>
+
+      <div class="param-problm-content">
+        <span class="param-problm-description">
+          {{param_problm.descripcion}}
+        </span>
+
+        <div
+          class="param-problm-datos-container"
+          *ngIf="param_problm.have_datos()"
+        >
+          <span class="param-problm-datos-title"> Datos </span>
+          <div
+            class="param-problm-datos-content"
+            *ngFor="let dato of param_problm.get_datos_list()"
+          >
+            <span class="param-problm-datos-content-title">
+              {{dato[0].replaceAll('_',' ')}}
+            </span>
+
+            <markdown
+              *ngIf="dato[0].includes('matema')"
+              katex
+              [data]="dato[1] + ' ($' + dato[1] + '$)'"
+            >
+            </markdown>
+
+            <span *ngIf="!(dato[0].includes('matema'))">
+              {{dato[1]}}
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="param-problm-restriccion-container"
+          *ngIf="param_problm.restricciones.length > 0"
+        >
+          <span class="param-problm-restriccion-title"> Restricciones </span>
+          <div
+            class="param-problm-restriccion-content"
+            *ngFor="let restriccion of param_problm.restricciones"
+          >
+            <span class="param-problm-datos-restriccion-title">
+              {{restriccion.tipo_restriccion}}
+            </span>
+
+            <span> {{restriccion.valor_restriccion}} </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

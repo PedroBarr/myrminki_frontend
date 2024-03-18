@@ -313,3 +313,43 @@ export class Problema {
   }
 
 }
+
+export class ParametrizacionProblema {
+
+  public nombre: string;
+  public descripcion: string;
+  public restricciones: restriccion[];
+  public datos: {[clave_datos: string]: any};
+
+  constructor (obj: any = {
+    nombre: '',
+    descripcion: '',
+    restricciones: [],
+    datos: {},
+  }) {
+    this.nombre = obj.nombre;
+    this.descripcion = obj.descripcion;
+    this.restricciones = obj.restricciones;
+    this.datos = obj.datos;
+  }
+
+  have_datos ( ) {
+    return Object.keys(this.datos).length > 0;
+  }
+
+  get_datos_list ( ): any[2][] {
+    return Object.entries(this.datos);
+  }
+
+  get_dato ( clave_datos: string ): string {
+    if (this.have_datos() && this.datos[clave_datos])
+      return this.datos[clave_datos].toString();
+    return '';
+  }
+
+  set_dato ( clave_datos: string, valor: any ) {
+    if (this.have_datos() && this.datos[clave_datos])
+      this.datos[clave_datos] = valor;
+  }
+
+}
