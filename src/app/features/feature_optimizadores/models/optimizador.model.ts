@@ -224,13 +224,13 @@ export class Implementacion {
 export class ArgumentoParametrizacion {
 
   public clave_id: string | null;
-  public descripcion: string;
+  public descripcion: string | null;
   public argumentos: {[clave_param: string]: string};
   public es_defecto: boolean;
 
   constructor (obj: any = {
     clave_id: null,
-    descripcion: '',
+    descripcion: null,
     argumentos: {},
     es_defecto: false,
   }) {

@@ -1,0 +1,43 @@
+<div id="param-problm-container">
+  <mat-card
+    *ngFor="let param_problm of paramz_problm; index as i_param"
+    [ngClass]="{'left-side': i_param % 2 == 0, 'right-side': i_param % 2 == 1, 'edited-arg': param_problm.get_dato('valor') != param_problm.get_dato('valor_inicial')}"
+  >
+    <mat-card-header>
+      <mat-icon mat-card-avatar color="primary">
+        {{getParamTypeIcon(i_param)}}
+      </mat-icon>
+
+      <mat-card-title> {{param_problm.nombre}} </mat-card-title>
+
+      <mat-card-subtitle *ngIf="param_problm.have_datos()">
+        {{ param_problm.get_dato('tipo') }}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-form-field class="boxW100" *ngIf="param_problm.have_datos()">
+        <mat-label> Valor de {{param_problm.nombre}} </mat-label>
+
+        <input
+          type="text"
+          placeholder="Ej: {{param_problm.get_dato('defecto')}}"
+          matInput
+          [(ngModel)]="param_problm.datos['valor']"
+          (change)="set_args_editados()"
+        >
+      </mat-form-field>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="reinitParam(i_param)"
+      >
+        <mat-icon>restart_alt</mat-icon>
+        Reiniciar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
