@@ -47,6 +47,10 @@ import {
   ParamzProblemBoxComponent
 } from './paramz-problem-box/paramz-problem-box.component';
 
+import {
+  InstcEvalBoxComponent
+} from './instc-eval-box/instc-eval-box.component';
+
 
 @NgModule({
   declarations: [
@@ -56,6 +60,7 @@ import {
     ImplmntEvalBoxComponent,
     ArgsImplmntPickerBoxComponent,
     ParamzProblemBoxComponent,
+    InstcEvalBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -85,6 +90,7 @@ import {
     ImplmntEvalBoxComponent,
     ArgsImplmntPickerBoxComponent,
     ParamzProblemBoxComponent,
+    InstcEvalBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
