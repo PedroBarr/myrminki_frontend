@@ -119,13 +119,13 @@ export class ParametrizacionAlgoritmo {
   }
 
   get_dato ( clave_datos: string ): string {
-    if (this.have_datos() && this.datos[clave_datos])
+    if (this.have_datos() && this.datos[clave_datos] != undefined)
       return this.datos[clave_datos].toString();
     return '';
   }
 
   set_dato ( clave_datos: string, valor: any ) {
-    if (this.have_datos() && this.datos[clave_datos])
+    if (this.have_datos() && this.datos[clave_datos] != undefined)
       this.datos[clave_datos] = valor;
   }
 
@@ -342,13 +342,13 @@ export class ParametrizacionProblema {
   }
 
   get_dato ( clave_datos: string ): string {
-    if (this.have_datos() && this.datos[clave_datos])
+    if (this.have_datos() && this.datos[clave_datos] != undefined)
       return this.datos[clave_datos].toString();
     return '';
   }
 
   set_dato ( clave_datos: string, valor: any ) {
-    if (this.have_datos() && this.datos[clave_datos])
+    if (this.have_datos() && this.datos[clave_datos] != undefined)
       this.datos[clave_datos] = valor;
   }
 
