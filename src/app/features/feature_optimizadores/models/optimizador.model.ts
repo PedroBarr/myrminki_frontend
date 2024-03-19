@@ -1,6 +1,6 @@
 export class PrevisualizacionEntrada {
 
-  public tipo_entrada: 'ALGORITMO' | 'IMPLEMENTACION' | 'PROBLEMA' | 'INSTANCIA' | undefined;
+  public tipo_entrada: 'ALGORITMO' | 'IMPLEMENTACION' | 'PROBLEMA' | 'INSTANCIA' | 'SOLUCION' | undefined;
   public titulo_entrada: string = '';
   public etiquetas: string[] = [];
 
@@ -470,6 +470,89 @@ export class Instancia {
       this.lenguaje_nombre.substring(0, 1).toUpperCase() +
       this.lenguaje_nombre.substring(1).toLowerCase()
     );
+  }
+
+}
+
+export class PrevisualizacionSolucion extends PrevisualizacionEntrada {
+
+  public id: number = 0;
+  public lenguaje_programacion: string = '';
+
+  public nombre_algoritmo: string = '';
+  public n_parametros_algoritmo: number = 0;
+  public lenguaje_programacion_implementacion: string = '';
+
+  public nombre_problema: string = '';
+  public n_parametros_problema: number = 0;
+  public lenguaje_programacion_instancia: string = '';
+
+  constructor (obj: any = {
+    id: '',
+    lenguaje_programacion: '',
+    nombre_algoritmo: '',
+    n_parametros_algoritmo: 0,
+    lenguaje_programacion_implementacion: '',
+    nombre_problema: '',
+    n_parametros_problema: 0,
+    lenguaje_programacion_instancia: '',
+  }) {
+    super(obj);
+    this.tipo_entrada = 'SOLUCION';
+    this.id = obj.id;
+    this.lenguaje_programacion = obj.lenguaje_programacion;
+    this.nombre_algoritmo = obj.nombre_algoritmo;
+    this.n_parametros_algoritmo = obj.n_parametros_algoritmo;
+
+    this.lenguaje_programacion_implementacion = (
+      obj.lenguaje_programacion_implementacion
+    );
+
+    this.nombre_problema = obj.nombre_problema;
+    this.n_parametros_problema = obj.n_parametros_problema;
+
+    this.lenguaje_programacion_instancia = (
+      obj.lenguaje_programacion_instancia
+    );
+  }
+
+  override ruta_enlace ( ): string {
+    return '/solucion/' + this.id;
+  }
+
+  override lista_datos (): string[][] {
+    const lista: string[][] = [];
+
+    lista.push([
+      'Lenguaje de programaci\u00f3n',
+      String(this.lenguaje_programacion
+    )]);
+
+    lista.push(['Nombre del algoritmo', String(this.nombre_algoritmo)]);
+
+    lista.push([
+      'N\u00famero de par\u00e1metros del algoritmo',
+      String(this.n_parametros_algoritmo
+    )]);
+
+    lista.push([
+      'Lenguaje de programaci\u00f3n de la implementaci\u00f3n',
+      String(this.lenguaje_programacion_implementacion)
+    ]);
+
+    lista.push(['Nombre del problema', String(this.nombre_problema)]);
+
+    lista.push([
+      'N\u00famero de par\u00e1metros del problema',
+      String(this.n_parametros_problema)
+    ]);
+
+    lista.push([
+      'Lenguaje de programaci\u00f3n de la instancia',
+      String(this.lenguaje_programacion_instancia)
+    ]);
+
+    return lista;
   }
 
 }

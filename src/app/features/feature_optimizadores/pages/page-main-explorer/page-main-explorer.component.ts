@@ -13,6 +13,7 @@ import {
   PrevisualizacionImplementacion,
   PrevisualizacionProblema,
   PrevisualizacionInstancia,
+  PrevisualizacionSolucion,
 } from '../../models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -104,6 +105,26 @@ export class PageMainExplorerComponent implements OnInit {
                   n_argumentaciones: optimizador.cantidad_argumentaciones,
                   n_soluciones: optimizador.cantidad_soluciones,
                   lenguaje_programacion: optimizador.lenguaje_programacion,
+                });
+              case 'SOLUCION':
+                return new PrevisualizacionSolucion({
+                  ...objeto_base,
+                  id: optimizador.clave_identificadora,
+                  lenguaje_programacion: optimizador.lenguaje_programacion,
+                  nombre_algoritmo: optimizador.algoritmo,
+                  n_parametros_algoritmo: (
+                    optimizador.parametrizacion_algoritmo_cantidad_parametros
+                  ),
+                  lenguaje_programacion_implementacion: (
+                    optimizador.implementacion_lenguaje_programacion
+                  ),
+                  nombre_problema: optimizador.problema,
+                  n_parametros_problema: (
+                    optimizador.parametrizacion_problema_cantidad_parametros
+                  ),
+                  lenguaje_programacion_instancia: (
+                    optimizador.instancia_lenguaje_programacion
+                  ),
                 });
               default:
                 return new PrevisualizacionEntrada({
