@@ -74,6 +74,7 @@ export class PageMainExplorerComponent implements OnInit {
                 return new PrevisualizacionImplementacion({
                   ...objeto_base,
                   id: optimizador.clave_identificadora,
+                  nombre_algoritmo: optimizador.algoritmo,
                   n_parametros_algoritmo: (
                     optimizador.parametrizacion_algoritmo_cantidad_parametros
                   ),
@@ -96,6 +97,7 @@ export class PageMainExplorerComponent implements OnInit {
                 return new PrevisualizacionInstancia({
                   ...objeto_base,
                   id: optimizador.clave_identificadora,
+                  nombre_problema: optimizador.problema,
                   n_parametros_problema: (
                     optimizador.parametrizacion_problema_cantidad_parametros
                   ),

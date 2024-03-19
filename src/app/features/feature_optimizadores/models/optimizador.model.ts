@@ -134,6 +134,7 @@ export class ParametrizacionAlgoritmo {
 export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
 
   public id: number = 0;
+  public nombre_algoritmo: string = '';
   public n_parametros_algoritmo: number = 0;
   public n_argumentaciones: number = 0;
   public n_soluciones: number = 0;
@@ -141,6 +142,7 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
 
   constructor (obj: any = {
     id: '',
+    nombre_algoritmo: '',
     n_parametros_algoritmo: 0,
     n_argumentaciones: 0,
     n_soluciones: 0,
@@ -149,6 +151,7 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
     super(obj);
     this.tipo_entrada = 'IMPLEMENTACION';
     this.id = obj.id;
+    this.nombre_algoritmo = obj.nombre_algoritmo;
     this.n_parametros_algoritmo = obj.n_parametros_algoritmo;
     this.n_argumentaciones = obj.n_argumentaciones;
     this.n_soluciones = obj.n_soluciones;
@@ -160,15 +163,27 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
   }
 
   override lista_datos (): string[][] {
-    return [
-      [
-        'N\u00famero de par\u00e1metros del algoritmo',
-        String(this.n_parametros_algoritmo)
-      ],
-      ['N\u00famero de argumentaciones', String(this.n_argumentaciones)],
-      ['N\u00famero de soluciones', String(this.n_soluciones)],
-      ['Lenguaje de programaci\u00f3n', this.lenguaje_programacion]
-    ];
+    const lista: string[][] = [];
+
+    if (this.nombre_algoritmo != '')
+      lista.push(['Nombre del algoritmo', this.nombre_algoritmo]);
+
+    lista.push([
+      'N\u00famero de par\u00e1metros del algoritmo',
+      String(this.n_parametros_algoritmo)
+    ]);
+
+    lista.push([
+      'N\u00famero de argumentaciones', String(this.n_argumentaciones)
+    ]);
+
+    lista.push(['N\u00famero de soluciones', String(this.n_soluciones)]);
+
+    lista.push([
+      'Lenguaje de programaci\u00f3n', this.lenguaje_programacion
+    ]);
+
+    return lista;
   }
 
 }
@@ -357,6 +372,7 @@ export class ParametrizacionProblema {
 export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
 
   public id: number = 0;
+  public nombre_problema: string = '';
   public n_parametros_problema: number = 0;
   public n_argumentaciones: number = 0;
   public n_soluciones: number = 0;
@@ -364,6 +380,7 @@ export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
 
   constructor (obj: any = {
     id: '',
+    nombre_problema: '',
     n_parametros_problema: 0,
     n_argumentaciones: 0,
     n_soluciones: 0,
@@ -372,6 +389,7 @@ export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
     super(obj);
     this.tipo_entrada = 'INSTANCIA';
     this.id = obj.id;
+    this.nombre_problema = obj.nombre_problema;
     this.n_parametros_problema = obj.n_parametros_problema;
     this.n_argumentaciones = obj.n_argumentaciones;
     this.n_soluciones = obj.n_soluciones;
@@ -383,15 +401,24 @@ export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
   }
 
   override lista_datos (): string[][] {
-    return [
-      [
-        'N\u00famero de par\u00e1metros del problema',
-        String(this.n_parametros_problema)
-      ],
-      ['N\u00famero de argumentaciones', String(this.n_argumentaciones)],
-      ['N\u00famero de soluciones', String(this.n_soluciones)],
-      ['Lenguaje de programaci\u00f3n', this.lenguaje_programacion]
-    ];
+    const lista: string[][] = [];
+
+    if (this.nombre_problema != '')
+      lista.push(['Nombre del problema', this.nombre_problema]);
+    lista.push([
+      'N\u00famero de par\u00e1metros del problema',
+      String(this.n_parametros_problema)
+    ]);
+
+    lista.push([
+      'N\u00famero de argumentaciones',
+      String(this.n_argumentaciones)
+    ]);
+
+    lista.push(['N\u00famero de soluciones', String(this.n_soluciones)]);
+    lista.push(['Lenguaje de programaci\u00f3n', this.lenguaje_programacion]);
+
+    return lista;
   }
 
 }
