@@ -63,13 +63,14 @@ export class ArgsProblemBoxComponent implements OnInit, OnChanges {
                 const {
                   clave,
                   nombre,
+                  descripcion,
                   tipo,
                   defecto,
                 } = parametro;
 
                 return new ParametrizacionAlgoritmo({
                     nombre,
-                    descripcion: null,
+                    descripcion,
                     restricciones: [],
                     datos: {
                       tipo,

@@ -16,6 +16,10 @@
     </mat-card-header>
 
     <mat-card-content>
+      <span class="param-problm-description">
+        {{param_problm.descripcion}}
+      </span>
+
       <mat-form-field class="boxW100" *ngIf="param_problm.have_datos()">
         <mat-label> Valor de {{param_problm.nombre}} </mat-label>
 

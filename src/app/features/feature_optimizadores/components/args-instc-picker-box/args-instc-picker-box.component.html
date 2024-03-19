@@ -1,0 +1,54 @@
+<div id="args-param-container">
+  <mat-card
+    *ngFor="let argumentacion of args_paramz; index as i_args"
+    [ngClass]="{'selected-args': argumentacion.clave_id == arg_selecto}"
+  >
+    <mat-card-header>
+      <mat-card-title> Argumentacion {{i_args}} </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-accordion multi *ngIf="argumentacion.have_argumentos()">
+        <mat-expansion-panel
+          hideToggle
+          [expanded]="get_arg_apertura(i_args)"
+          (opened)="set_arg_apertura(i_args, true)"
+          (closed)="set_arg_apertura(i_args, false)"
+        >
+          <mat-expansion-panel-header
+            collapsedHeight="30px"
+            expandedHeight="30px"
+          >
+            <mat-panel-title>
+              Argumentos
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div class="args-container">
+            <div
+              class="args-content"
+              *ngFor="let argumento of argumentacion.get_argumentos_list()"
+            >
+              <span class="arg-clave"> {{argumento[0]}} </span>
+              <span class="arg-valor"> {{argumento[1]}} </span>
+            </div>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-card-content>
+
+    <mat-card-actions
+      align="end"
+      *ngIf="argumentacion.clave_id != arg_selecto"
+    >
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="set_arg_selected(argumentacion.clave_id)"
+      >
+        <mat-icon>checklist</mat-icon>
+        Seleccionar
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>

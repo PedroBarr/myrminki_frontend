@@ -55,6 +55,10 @@ import {
   ArgsProblemBoxComponent
 } from './args-problem-box/args-problem-box.component';
 
+import {
+  ArgsInstcPickerBoxComponent
+} from './args-instc-picker-box/args-instc-picker-box.component';
+
 
 @NgModule({
   declarations: [
@@ -66,6 +70,7 @@ import {
     ParamzProblemBoxComponent,
     InstcEvalBoxComponent,
     ArgsProblemBoxComponent,
+    ArgsInstcPickerBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -97,6 +102,7 @@ import {
     ParamzProblemBoxComponent,
     InstcEvalBoxComponent,
     ArgsProblemBoxComponent,
+    ArgsInstcPickerBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
