@@ -1,0 +1,89 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{implementacion.titulo}}</h2>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      <mat-chip-list>
+        <mat-chip> {{implementacion.getLenguajeEtiqueta()}} </mat-chip>
+
+        <mat-chip
+          *ngFor="let etiqueta of implementacion.etiquetas"
+        >
+          {{etiqueta}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-accordion multi>
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="descripcion_apertura"
+        (opened)="set_descripcion_apertura(true)"
+        (closed)="set_descripcion_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Descripci&oacute;n
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <markdown
+          class=""
+          katex
+          lineHighlight
+          line="1-{{implementacion.descripcion_puntuada.length}}"
+          [data]="implementacion.descripcion_puntuada"
+        >
+        </markdown>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="argumentacion_apertura"
+        (opened)="set_argumentacion_apertura(true)"
+        (closed)="set_argumentacion_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Argumentaci&oacute;n
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <myrmex-args-algorithm-box
+          *ngIf="args_editables && implementacion.parametrizacion_id"
+          [paramz_algrtm_id]="implementacion.parametrizacion_id"
+          [arg_selecto_argumentos]="arg_selecto_argumentos"
+          (args_editados)="set_args_editados($event)"
+        >
+        </myrmex-args-algorithm-box>
+
+        <div *ngIf="!args_editables && args_id"></div>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="codigo_apertura"
+        (opened)="set_codigo_apertura(true)"
+        (closed)="set_codigo_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            c&oacute;digo
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <markdown
+          class=""
+          katex
+          lineHighlight
+          [data]="'```' + implementacion.lenguaje_nombre + '\n' + implementacion.codigo_puntuado + '\n```'"
+        >
+        </markdown>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

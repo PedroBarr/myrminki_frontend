@@ -63,6 +63,10 @@ import {
   SolcnEvalBoxComponent
 } from './solcn-eval-box/solcn-eval-box.component';
 
+import {
+  ImplmntBoxComponent
+} from './implmnt-box/implmnt-box.component';
+
 
 @NgModule({
   declarations: [
@@ -76,6 +80,7 @@ import {
     ArgsProblemBoxComponent,
     ArgsInstcPickerBoxComponent,
     SolcnEvalBoxComponent,
+    ImplmntBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -109,6 +114,7 @@ import {
     ArgsProblemBoxComponent,
     ArgsInstcPickerBoxComponent,
     SolcnEvalBoxComponent,
+    ImplmntBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

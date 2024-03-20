@@ -3,13 +3,20 @@ import {
     OnInit,
 } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import { Router, ActivatedRoute } from '@angular/router';
 
 import axios from 'axios';
 
 import {
   Solucion,
+  Implementacion,
 } from '../../models/optimizador.model';
+
+import {
+  ImplmntBoxComponent
+} from '../../components/implmnt-box/implmnt-box.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -23,15 +30,18 @@ export class PageExplorerSolutionComponent implements OnInit {
 
   solucion: Solucion = new Solucion();
 
+  implementacion: Implementacion = new Implementacion();
+
   inspector_apertura: boolean = true;
   codigo_apertura: boolean = true;
 
-  implementacion_apertura: boolean = true;
-  instancia_apertura: boolean = true;
+  implementacion_apertura: boolean = false;
+  instancia_apertura: boolean = false;
 
   constructor (
     private router: Router,
     private route: ActivatedRoute,
+    public implementacion_emergente: MatDialog,
   ) { }
 
   ngOnInit ( ) {
@@ -48,6 +58,21 @@ export class PageExplorerSolutionComponent implements OnInit {
 
   set_implementacion_apertura (variable: boolean) {
     this.implementacion_apertura = variable;
+
+    const implementacion_referencia = this.implementacion_emergente.open(
+      ImplmntBoxComponent,
+      { panelClass: 'implementacion-emergente' }
+    );
+
+    const implementacion_componente = implementacion_referencia.componentInstance;
+    implementacion_componente.implementacion = this.implementacion;
+    implementacion_componente.args_editables = false;
+    implementacion_componente.secciones_colapsables = false;
+
+    implementacion_referencia.afterClosed().subscribe(result => {
+      console.log(result);
+      this.implementacion_apertura = !variable;
+    });
   }
 
   set_instancia_apertura (variable: boolean) {
@@ -86,8 +111,11 @@ export class PageExplorerSolutionComponent implements OnInit {
           if (data.codificacion)
             this.solucion.codigo_puntuado = data.codificacion;
 
-          if (data.implementacion_id)
+          if (data.implementacion_id) {
             this.solucion.implementacion_id = data.implementacion_id;
+            this.implementacion.implementacion_id = data.implementacion_id;
+            this.loadImplementation();
+          }
 
           if (data.argumentacion_solucion_id)
             this.solucion.argumentacion_implementacion_id = (
@@ -101,6 +129,54 @@ export class PageExplorerSolutionComponent implements OnInit {
             this.solucion.argumentacion_instancia_id = (
               data.argumentacion_instancia_id
             );
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load implementation from API
+  */
+  async loadImplementation ( ) {
+    axios.get(
+      environment.MYRMEX_API +
+        '/implementacion/identificador/' +
+          this.implementacion.implementacion_id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data = response.data;
+
+          if (data.diminutivo)
+            this.implementacion.implementacion_id = data.diminutivo;
+
+          if (data.nombre)
+            this.implementacion.titulo = data.nombre;
+
+          if (data.etiquetas)
+            this.implementacion.etiquetas = data.etiquetas.map(
+              (etiqueta: any) => etiqueta.etiqueta
+            );
+
+          if (data.lenguaje_nombre)
+            this.implementacion.lenguaje_nombre = data.lenguaje_nombre;
+
+          if (data.descripcion)
+            this.implementacion.descripcion_puntuada = data.descripcion;
+
+          if (data.codificacion)
+            this.implementacion.codigo_puntuado = data.codificacion;
+
+          if (data.parametrizacion_algoritmo_identificador)
+            this.implementacion.parametrizacion_id = (
+              data.parametrizacion_algoritmo_identificador
+            );
+
         }
       })
       .catch(error => {
