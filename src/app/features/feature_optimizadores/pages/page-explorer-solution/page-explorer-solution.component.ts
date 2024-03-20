@@ -83,7 +83,6 @@ export class PageExplorerSolutionComponent implements OnInit {
     );
 
     implementacion_componente.loadArgs();
-
     implementacion_componente.secciones_colapsables = false;
 
     implementacion_referencia.afterClosed().subscribe(result => {
@@ -102,6 +101,12 @@ export class PageExplorerSolutionComponent implements OnInit {
     const instancia_componente = instancia_referencia.componentInstance;
     instancia_componente.instancia = this.instancia;
     instancia_componente.args_editables = false;
+
+    instancia_componente.args_id = (
+      this.solucion.argumentacion_instancia_id
+    );
+
+    instancia_componente.loadArgs();
     instancia_componente.secciones_colapsables = false;
 
     instancia_referencia.afterClosed().subscribe(result => {

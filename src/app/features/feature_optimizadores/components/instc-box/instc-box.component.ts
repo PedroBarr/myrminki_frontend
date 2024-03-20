@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
 } from '@angular/core';
 
@@ -9,6 +10,7 @@ import axios from 'axios';
 
 import {
   Instancia,
+  ArgumentoParametrizacion,
 } from '../../models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -20,7 +22,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./instc-box.component.scss'],
 })
 
-export class InstcBoxComponent {
+export class InstcBoxComponent implements OnChanges {
 
   @Input() instancia: Instancia = new Instancia();
   @Input() args_editables: boolean = true;
@@ -39,6 +41,14 @@ export class InstcBoxComponent {
   matematizacion_apertura: boolean = true;
   argumentacion_apertura: boolean = true;
   codigo_apertura: boolean = true;
+
+  argumentacion: ArgumentoParametrizacion = new ArgumentoParametrizacion();
+
+  ngOnChanges (changes: any) {
+    if (changes.args_id) {
+      if (changes.args_id.firstChange) this.loadArgs();
+    }
+  }
 
   set_descripcion_apertura (variable: boolean) {
     if (!this.secciones_colapsables) return;
@@ -73,6 +83,35 @@ export class InstcBoxComponent {
   set_arg_selecto_argumentos (valor: {[clave_param: string]: string}) {
     this.arg_selecto_argumentos = valor;
     this.emitir_argumentos.emit(valor);
+  }
+
+  /**
+  * Load argumentacion from API
+  */
+  async loadArgs ( ) {
+    if (!this.args_id) return;
+
+    await axios.get(
+      environment.MYRMEX_API +
+      '/argumentacion_instancia/identificador/' + this.args_id
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data: any = response.data;
+
+          if (data.diminutivo)
+            this.argumentacion.clave_id = data.diminutivo;
+
+          if (data.diccionario_argumentos)
+            this.argumentacion.argumentos = data.diccionario_argumentos;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
   }
 
 }
