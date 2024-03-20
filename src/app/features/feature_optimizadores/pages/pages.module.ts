@@ -45,6 +45,10 @@ import {
   PageExplorerInstanceComponent
 } from './page-explorer-instance/page-explorer-instance.component';
 
+import {
+  PageExplorerSolutionComponent
+} from './page-explorer-solution/page-explorer-solution.component';
+
 
 @NgModule({
   schemas: [
@@ -56,6 +60,7 @@ import {
     PageExplorerImplementationComponent,
     PageExplorerProblemComponent,
     PageExplorerInstanceComponent,
+    PageExplorerSolutionComponent,
   ],
   imports: [
     CommonModule,
@@ -77,6 +82,7 @@ import {
     PageExplorerImplementationComponent,
     PageExplorerProblemComponent,
     PageExplorerInstanceComponent,
+    PageExplorerSolutionComponent,
   ]
 })
 export class PagesFeatureOptimizadoresModule { }

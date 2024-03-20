@@ -25,6 +25,10 @@ import {
   PageExplorerInstanceComponent
 } from './page-explorer-instance/page-explorer-instance.component';
 
+import {
+  PageExplorerSolutionComponent
+} from './page-explorer-solution/page-explorer-solution.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
@@ -44,6 +48,10 @@ const routes: Routes = [
   {
     path: 'instancia/:identificador',
     component: PageExplorerInstanceComponent
+  },
+  {
+    path: 'solucion/:identificador',
+    component: PageExplorerSolutionComponent
   },
 ];
 

@@ -556,3 +556,70 @@ export class PrevisualizacionSolucion extends PrevisualizacionEntrada {
   }
 
 }
+
+export class Solucion {
+
+  public titulo: string;
+  public etiquetas: string[];
+
+  public lenguaje_nombre: string;
+
+  public codigo_puntuado: string;
+
+  public solucion_id: string;
+  public implementacion_id: string;
+  public argumentacion_implementacion_id: string;
+  public instancia_id: string;
+  public argumentacion_instancia_id: string;
+
+  constructor (obj: any = {
+    titulo: '',
+    etiquetas: [],
+    lenguaje_nombre: '',
+    codigo_puntuado: '',
+    solucion_id: '',
+    implementacion_id: '',
+    argumentacion_implementacion_id: '',
+    instancia_id: '',
+    argumentacion_instancia_id: '',
+  }) {
+    this.titulo = obj.titulo;
+    this.etiquetas = obj.etiquetas;
+    this.lenguaje_nombre = obj.lenguaje_nombre;
+    this.codigo_puntuado = obj.codigo_puntuado;
+
+    this.solucion_id = obj.solucion_id ?
+      obj.solucion_id :
+      ''
+    ;
+
+    this.implementacion_id = obj.implementacion_id ?
+      obj.implementacion_id :
+      ''
+    ;
+
+    this.argumentacion_implementacion_id = (
+      obj.argumentacion_implementacion_id ?
+      obj.argumentacion_implementacion_id :
+      ''
+    );
+
+    this.instancia_id = obj.instancia_id ?
+      obj.instancia_id :
+      ''
+    ;
+
+    this.argumentacion_instancia_id = obj.argumentacion_instancia_id ?
+      obj.argumentacion_instancia_id :
+      ''
+    ;
+  }
+
+  getLenguajeEtiqueta (): string {
+    return (
+      this.lenguaje_nombre.substring(0, 1).toUpperCase() +
+      this.lenguaje_nombre.substring(1).toLowerCase()
+    );
+  }
+
+}

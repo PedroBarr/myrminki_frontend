@@ -1,0 +1,69 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="solucion-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2>{{solucion.titulo}}</h2>
+          </mat-card-title>
+
+          <mat-card-subtitle>
+            <mat-chip-list>
+              <mat-chip> {{solucion.getLenguajeEtiqueta()}} </mat-chip>
+
+              <mat-chip
+                *ngFor="let etiqueta of solucion.etiquetas"
+              >
+                {{etiqueta}}
+              </mat-chip>
+            </mat-chip-list>
+          </mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <mat-accordion multi>
+            <mat-expansion-panel
+              hideToggle
+              [expanded]="inspector_apertura"
+              (opened)="set_inspector_apertura(true)"
+              (closed)="set_inspector_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title> Inspector </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+
+            <mat-expansion-panel
+              hideToggle
+              [expanded]="codigo_apertura"
+              (opened)="set_codigo_apertura(true)"
+              (closed)="set_codigo_apertura(false)"
+            >
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  c&oacute;digo
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+
+              <markdown
+                class=""
+                katex
+                lineHighlight
+                [data]="'```' + solucion.lenguaje_nombre + '\n' + solucion.codigo_puntuado + '\n```'"
+              >
+              </markdown>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <!--myrmex-solcn-eval-box
+        *ngIf="solucion.solucion_id"
+        [solcn_id]="solucion.solucion_id"
+      >
+      </myrmex-solcn-eval-box-->
+    </div>
+  </div>
+</div>
