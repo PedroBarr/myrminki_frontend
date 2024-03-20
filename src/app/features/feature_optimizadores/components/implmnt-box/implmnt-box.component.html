@@ -61,6 +61,19 @@
         >
         </myrmex-args-algorithm-box>
 
+        <div
+          class="args-container"
+          *ngIf="!args_editables && args_id && argumentacion.clave_id"
+        >
+          <div
+            class="args-content"
+            *ngFor="let argumento of argumentacion.get_argumentos_list()"
+          >
+            <span class="arg-clave"> {{argumento[0]}} </span>
+            <span class="arg-valor"> {{argumento[1]}} </span>
+          </div>
+        </div>
+
         <div *ngIf="!args_editables && args_id"></div>
       </mat-expansion-panel>
 

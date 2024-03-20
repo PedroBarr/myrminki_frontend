@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   Output,
 } from '@angular/core';
 
@@ -9,6 +10,7 @@ import axios from 'axios';
 
 import {
   Implementacion,
+  ArgumentoParametrizacion,
 } from '../../models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -20,7 +22,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./implmnt-box.component.scss'],
 })
 
-export class ImplmntBoxComponent {
+export class ImplmntBoxComponent implements OnChanges{
 
   @Input() implementacion: Implementacion = new Implementacion();
   @Input() args_editables: boolean = true;
@@ -35,10 +37,17 @@ export class ImplmntBoxComponent {
   @Output() emitir_args_editados = new EventEmitter<{[clave_param: string]: string}>();
   @Output() emitir_argumentos = new EventEmitter<{[clave_param: string]: string}>();
 
-
   descripcion_apertura: boolean = true;
   argumentacion_apertura: boolean = true;
   codigo_apertura: boolean = true;
+
+  argumentacion: ArgumentoParametrizacion = new ArgumentoParametrizacion();
+
+  ngOnChanges (changes: any) {
+    if (changes.args_id) {
+      if (changes.args_id.firstChange) this.loadArgs();
+    }
+  }
 
   set_descripcion_apertura (variable: boolean) {
     if (!this.secciones_colapsables) return;
@@ -68,6 +77,35 @@ export class ImplmntBoxComponent {
   set_arg_selecto_argumentos (valor: {[clave_param: string]: string}) {
     this.arg_selecto_argumentos = valor;
     this.emitir_argumentos.emit(valor);
+  }
+
+  /**
+  * Load argumentacion from API
+  */
+  async loadArgs ( ) {
+    if (!this.args_id) return;
+
+    await axios.get(
+      environment.MYRMEX_API +
+      '/argumentacion_solucion/identificador/' + this.args_id
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data: any = response.data;
+
+          if (data.diminutivo)
+            this.argumentacion.clave_id = data.diminutivo;
+
+          if (data.diccionario_argumentos)
+            this.argumentacion.argumentos = data.diccionario_argumentos;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
   }
 
 }

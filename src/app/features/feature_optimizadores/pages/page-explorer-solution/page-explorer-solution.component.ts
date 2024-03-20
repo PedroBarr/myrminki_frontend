@@ -77,6 +77,13 @@ export class PageExplorerSolutionComponent implements OnInit {
 
     implementacion_componente.implementacion = this.implementacion;
     implementacion_componente.args_editables = false;
+
+    implementacion_componente.args_id = (
+      this.solucion.argumentacion_implementacion_id
+    );
+
+    implementacion_componente.loadArgs();
+
     implementacion_componente.secciones_colapsables = false;
 
     implementacion_referencia.afterClosed().subscribe(result => {
