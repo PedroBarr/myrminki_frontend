@@ -10,13 +10,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
-  Solucion,
   Implementacion,
+  Instancia,
+  Solucion,
 } from '../../models/optimizador.model';
 
 import {
   ImplmntBoxComponent
 } from '../../components/implmnt-box/implmnt-box.component';
+
+import {
+  InstcBoxComponent
+} from '../../components/instc-box/instc-box.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -31,6 +36,7 @@ export class PageExplorerSolutionComponent implements OnInit {
   solucion: Solucion = new Solucion();
 
   implementacion: Implementacion = new Implementacion();
+  instancia: Instancia = new Instancia();
 
   inspector_apertura: boolean = true;
   codigo_apertura: boolean = true;
@@ -42,6 +48,7 @@ export class PageExplorerSolutionComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     public implementacion_emergente: MatDialog,
+    public instancia_emergente: MatDialog,
   ) { }
 
   ngOnInit ( ) {
@@ -64,19 +71,35 @@ export class PageExplorerSolutionComponent implements OnInit {
       { panelClass: 'emergente' }
     );
 
-    const implementacion_componente = implementacion_referencia.componentInstance;
+    const implementacion_componente = (
+      implementacion_referencia.componentInstance
+    );
+
     implementacion_componente.implementacion = this.implementacion;
     implementacion_componente.args_editables = false;
     implementacion_componente.secciones_colapsables = false;
 
     implementacion_referencia.afterClosed().subscribe(result => {
-      console.log(result);
       this.implementacion_apertura = !variable;
     });
   }
 
   set_instancia_apertura (variable: boolean) {
     this.instancia_apertura = variable;
+
+    const instancia_referencia = this.instancia_emergente.open(
+      InstcBoxComponent,
+      { panelClass: 'emergente' }
+    );
+
+    const instancia_componente = instancia_referencia.componentInstance;
+    instancia_componente.instancia = this.instancia;
+    instancia_componente.args_editables = false;
+    instancia_componente.secciones_colapsables = false;
+
+    instancia_referencia.afterClosed().subscribe(result => {
+      this.instancia_apertura = !variable;
+    });
   }
 
   /**
@@ -122,8 +145,11 @@ export class PageExplorerSolutionComponent implements OnInit {
               data.argumentacion_solucion_id
             );
 
-          if (data.instancia_id)
+          if (data.instancia_id) {
             this.solucion.instancia_id = data.instancia_id;
+            this.instancia.instancia_id = data.instancia_id;
+            this.loadInstancia();
+          }
 
           if (data.argumentacion_instancia_id)
             this.solucion.argumentacion_instancia_id = (
@@ -175,6 +201,56 @@ export class PageExplorerSolutionComponent implements OnInit {
           if (data.parametrizacion_algoritmo_identificador)
             this.implementacion.parametrizacion_id = (
               data.parametrizacion_algoritmo_identificador
+            );
+
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load instancia from API
+  */
+  async loadInstancia ( ) {
+    axios.get(
+      environment.MYRMEX_API +
+        '/instancia/identificador/' + this.instancia.instancia_id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data = response.data;
+
+          if (data.diminutivo)
+            this.instancia.instancia_id = data.diminutivo;
+
+          if (data.nombre)
+            this.instancia.titulo = data.nombre;
+
+          if (data.etiquetas)
+            this.instancia.etiquetas = data.etiquetas.map(
+              (etiqueta: any) => etiqueta.etiqueta
+            );
+
+          if (data.lenguaje_nombre)
+            this.instancia.lenguaje_nombre = data.lenguaje_nombre;
+
+          if (data.descripcion)
+            this.instancia.descripcion_puntuada = data.descripcion;
+
+          if (data.matematizacion)
+            this.instancia.matematizacion_puntuada = data.matematizacion;
+
+          if (data.codificacion)
+            this.instancia.codigo_puntuado = data.codificacion;
+
+          if (data.parametrizacion_problema_identificador)
+            this.instancia.parametrizacion_id = (
+              data.parametrizacion_problema_identificador
             );
 
         }
