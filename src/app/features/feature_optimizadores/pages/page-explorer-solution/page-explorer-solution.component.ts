@@ -61,7 +61,7 @@ export class PageExplorerSolutionComponent implements OnInit {
 
     const implementacion_referencia = this.implementacion_emergente.open(
       ImplmntBoxComponent,
-      { panelClass: 'implementacion-emergente' }
+      { panelClass: 'emergente' }
     );
 
     const implementacion_componente = implementacion_referencia.componentInstance;

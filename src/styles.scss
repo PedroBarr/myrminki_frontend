@@ -23,7 +23,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   --myrmex-primary-light: #D96D69;
 
-  --myrmex-primary-selected: #FFACA3;
+  --myrmex-primary-selected: #EEBAB4;
 }
 
 .flex-column {
@@ -186,24 +186,29 @@ $my-app-warn:    mat-palette($mat-red, 500, 900, A100);
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);
 
-.implementacion-emergente .mat-dialog-container {
+.emergente .mat-dialog-container {
   padding: 0;
-  border-radius: 30px;
-  height: 50vw;
+
+  border-radius: 45px;
+  height: fit-content;
+  max-height: 80vh;
 }
 
-.implementacion-emergente .mat-dialog-container::-webkit-scrollbar-track {
+:has(> .mat-dialog-container::-webkit-scrollbar) {
+}
+
+.mat-dialog-container::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
   border-radius: 10px;
   background-color: #F5F5F5;
 }
 
-.implementacion-emergente .mat-dialog-container::-webkit-scrollbar {
+.mat-dialog-container::-webkit-scrollbar {
   width: 12px;
   background-color: transparent;
 }
 
-.implementacion-emergente .mat-dialog-container::-webkit-scrollbar-thumb {
+.mat-dialog-container::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: var(--myrmex-primary-light);
