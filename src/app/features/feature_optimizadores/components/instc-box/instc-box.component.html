@@ -1,0 +1,109 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <h2>{{instancia.titulo}}</h2>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      <mat-chip-list>
+        <mat-chip> {{instancia.getLenguajeEtiqueta()}} </mat-chip>
+
+        <mat-chip
+          *ngFor="let etiqueta of instancia.etiquetas"
+        >
+          {{etiqueta}}
+        </mat-chip>
+      </mat-chip-list>
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-accordion multi>
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="descripcion_apertura"
+        (opened)="set_descripcion_apertura(true)"
+        (closed)="set_descripcion_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Descripci&oacute;n
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <markdown
+          class=""
+          katex
+          lineHighlight
+          line="1-{{instancia.descripcion_puntuada.length}}"
+          [data]="instancia.descripcion_puntuada"
+        >
+        </markdown>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="matematizacion_apertura"
+        (opened)="set_matematizacion_apertura(true)"
+        (closed)="set_matematizacion_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Matematizaci&oacute;n
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <markdown
+          class=""
+          katex
+          lineHighlight
+          line="1-{{instancia.matematizacion_puntuada.length}}"
+          [data]="instancia.matematizacion_puntuada"
+        >
+        </markdown>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="argumentacion_apertura"
+        (opened)="set_argumentacion_apertura(true)"
+        (closed)="set_argumentacion_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Argumentaci&oacute;n
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <myrmex-args-problem-box
+          *ngIf="instancia.parametrizacion_id"
+          [paramz_problm_id]="instancia.parametrizacion_id"
+          [arg_selecto_argumentos]="arg_selecto_argumentos"
+          (args_editados)="set_args_editados($event)"
+        >
+        </myrmex-args-problem-box>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel
+        hideToggle
+        [expanded]="codigo_apertura"
+        (opened)="set_codigo_apertura(true)"
+        (closed)="set_codigo_apertura(false)"
+      >
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            c&oacute;digo
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <markdown
+          class=""
+          katex
+          lineHighlight
+          [data]="'```' + instancia.lenguaje_nombre + '\n' + instancia.codigo_puntuado + '\n```'"
+        >
+        </markdown>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

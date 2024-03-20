@@ -67,6 +67,10 @@ import {
   ImplmntBoxComponent
 } from './implmnt-box/implmnt-box.component';
 
+import {
+  InstcBoxComponent
+} from './instc-box/instc-box.component';
+
 
 @NgModule({
   declarations: [
@@ -81,6 +85,7 @@ import {
     ArgsInstcPickerBoxComponent,
     SolcnEvalBoxComponent,
     ImplmntBoxComponent,
+    InstcBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -115,6 +120,7 @@ import {
     ArgsInstcPickerBoxComponent,
     SolcnEvalBoxComponent,
     ImplmntBoxComponent,
+    InstcBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

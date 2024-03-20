@@ -23,11 +23,6 @@ export class PageExplorerInstanceComponent implements OnInit {
 
   instancia: Instancia = new Instancia();
 
-  descripcion_apertura: boolean = true;
-  matematizacion_apertura: boolean = true;
-  argumentacion_apertura: boolean = true;
-  codigo_apertura: boolean = true;
-
   arg_selecto: string | null = null;
   args_editados: {[clave_param: string]: string} = {};
   arg_selecto_argumentos: {[clave_param: string]: string} = {};
@@ -39,22 +34,6 @@ export class PageExplorerInstanceComponent implements OnInit {
 
   ngOnInit ( ) {
     this.loadInstancia();
-  }
-
-  set_descripcion_apertura (variable: boolean) {
-    this.descripcion_apertura = variable;
-  }
-
-  set_matematizacion_apertura (variable: boolean) {
-    this.matematizacion_apertura = variable;
-  }
-
-  set_argumentacion_apertura (variable: boolean) {
-    this.argumentacion_apertura = variable;
-  }
-
-  set_codigo_apertura (variable: boolean) {
-    this.codigo_apertura = variable;
   }
 
   /**
