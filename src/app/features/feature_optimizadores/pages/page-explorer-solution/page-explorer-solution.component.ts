@@ -26,6 +26,9 @@ export class PageExplorerSolutionComponent implements OnInit {
   inspector_apertura: boolean = true;
   codigo_apertura: boolean = true;
 
+  implementacion_apertura: boolean = true;
+  instancia_apertura: boolean = true;
+
   constructor (
     private router: Router,
     private route: ActivatedRoute,
@@ -41,6 +44,14 @@ export class PageExplorerSolutionComponent implements OnInit {
 
   set_codigo_apertura (variable: boolean) {
     this.codigo_apertura = variable;
+  }
+
+  set_implementacion_apertura (variable: boolean) {
+    this.implementacion_apertura = variable;
+  }
+
+  set_instancia_apertura (variable: boolean) {
+    this.instancia_apertura = variable;
   }
 
   /**

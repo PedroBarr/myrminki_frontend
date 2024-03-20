@@ -31,6 +31,30 @@
               <mat-expansion-panel-header>
                 <mat-panel-title> Inspector </mat-panel-title>
               </mat-expansion-panel-header>
+
+              <div class="boxW100 flex-row gap-10">
+                <button
+                  mat-flat-button
+                  class="boxW100"
+                  color="primary"
+                  *ngIf="solucion.implementacion_id && solucion.argumentacion_implementacion_id"
+                  (click)="set_implementacion_apertura(true)"
+                >
+                  <mat-icon>troubleshoot</mat-icon>
+                  Ver la instancia
+                </button>
+
+                <button
+                  mat-flat-button
+                  class="boxW100"
+                  color="primary"
+                  *ngIf="solucion.implementacion_id && solucion.argumentacion_implementacion_id"
+                  (click)="set_implementacion_apertura(true)"
+                >
+                  <mat-icon>emoji_objects</mat-icon>
+                  Ver la implementacion
+                </button>
+              </div>
             </mat-expansion-panel>
 
             <mat-expansion-panel
@@ -59,11 +83,22 @@
     </div>
 
     <div class="aditamentos-container">
-      <!--myrmex-solcn-eval-box
+      <myrmex-solcn-eval-box
         *ngIf="solucion.solucion_id"
         [solcn_id]="solucion.solucion_id"
       >
-      </myrmex-solcn-eval-box-->
+      </myrmex-solcn-eval-box>
+
+      <button
+        mat-flat-button
+        class="boxW100"
+        color="primary"
+        *ngIf="solucion.implementacion_id && solucion.argumentacion_implementacion_id"
+        (click)="set_implementacion_apertura(true)"
+      >
+        <mat-icon>code</mat-icon>
+        Ejecutar la soluci&oacute;n
+      </button>
     </div>
   </div>
 </div>

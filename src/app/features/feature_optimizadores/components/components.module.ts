@@ -59,6 +59,10 @@ import {
   ArgsInstcPickerBoxComponent
 } from './args-instc-picker-box/args-instc-picker-box.component';
 
+import {
+  SolcnEvalBoxComponent
+} from './solcn-eval-box/solcn-eval-box.component';
+
 
 @NgModule({
   declarations: [
@@ -71,6 +75,7 @@ import {
     InstcEvalBoxComponent,
     ArgsProblemBoxComponent,
     ArgsInstcPickerBoxComponent,
+    SolcnEvalBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -103,6 +108,7 @@ import {
     InstcEvalBoxComponent,
     ArgsProblemBoxComponent,
     ArgsInstcPickerBoxComponent,
+    SolcnEvalBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
