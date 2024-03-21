@@ -100,6 +100,14 @@ export class ArgsProblemBoxComponent implements OnInit, OnChanges {
     this.set_args_editados();
   }
 
+  reinitParams () {
+    for (let param_problm of this.paramz_problm) {
+      param_problm.set_dato('valor',param_problm.get_dato('valor_inicial'));
+    }
+
+    this.set_args_editados();
+  }
+
   getParamTypeIcon (i_param: number): string {
     const tipo = this.paramz_problm[i_param].get_dato('tipo');
 

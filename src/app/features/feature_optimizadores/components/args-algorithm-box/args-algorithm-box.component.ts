@@ -100,6 +100,14 @@ export class ArgsAlgorithmBoxComponent implements OnInit, OnChanges {
     this.set_args_editados();
   }
 
+  reinitParams () {
+    for (let param_algrtm of this.paramz_algrtm) {
+      param_algrtm.set_dato('valor',param_algrtm.get_dato('valor_inicial'));
+    }
+
+    this.set_args_editados();
+  }
+
   getParamTypeIcon (i_param: number): string {
     const tipo = this.paramz_algrtm[i_param].get_dato('tipo');
 
