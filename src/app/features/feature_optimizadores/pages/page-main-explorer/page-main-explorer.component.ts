@@ -29,6 +29,7 @@ export class PageMainExplorerComponent implements OnInit {
   pageDescriptor: string = pageDescriptores['explorar'];
 
   etiquetasBuscadas: any[] = [];
+  terminoBuscado: string = '';
   optimizadores: PrevisualizacionEntrada[] = [];
 
   ngOnInit ( ) {
@@ -39,12 +40,20 @@ export class PageMainExplorerComponent implements OnInit {
   * Load optimizers from API
   */
   async loadOptimizers ( ) {
+    const params: any = {};
+
+    if (this.etiquetasBuscadas.length > 0)
+      params.etiquetas = (
+        this.etiquetasBuscadas.map(etiqueta => etiqueta.id).join(',')
+      );
+
+    if (this.terminoBuscado.length >= 3)
+      params.termino = this.terminoBuscado;
+
     axios.get(
       environment.MYRMEX_API + '/explorar',
       {
-        params: {
-          etiquetas: this.etiquetasBuscadas.map(etiqueta => etiqueta.id).join(','),
-        }
+        params,
       }
     )
       .then(response => {

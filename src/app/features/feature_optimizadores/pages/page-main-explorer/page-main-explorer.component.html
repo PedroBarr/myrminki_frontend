@@ -21,6 +21,18 @@
 
   <div class="boxW100 flex-row flex-space-between">
     <div class="optimizador-previsualizacion">
+      <mat-form-field class="boxW100">
+        <mat-label> Busqueda </mat-label>
+
+        <input
+          type="text"
+          placeholder="Ej: Optimizador"
+          matInput
+          [(ngModel)]="terminoBuscado"
+          (change)="loadOptimizers()"
+        >
+      </mat-form-field>
+
       <div
         class="optimizador-container"
         *ngFor="let optimizador of optimizadores"
