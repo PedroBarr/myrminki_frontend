@@ -11,13 +11,12 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  selector: 'myrmex-args-algorithm-args-box',
-  templateUrl: './args-algorithm-args-box.component.html',
-  styleUrls: ['./args-algorithm-args-box.component.scss'],
+  selector: 'myrmex-args-box',
+  templateUrl: './args-box.component.html',
+  styleUrls: ['./args-box.component.scss'],
 })
 
-export class ArgsAlgorithmArgsBoxComponent {
-
+export class ArgsBoxComponent {
 
   @Input() argumentacion: ArgumentoParametrizacion = (
     new ArgumentoParametrizacion()

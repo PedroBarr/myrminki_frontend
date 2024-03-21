@@ -72,8 +72,8 @@ import {
 } from './instc-box/instc-box.component';
 
 import {
-  ArgsAlgorithmArgsBoxComponent
-} from './args-algorithm-args-box/args-algorithm-args-box.component';
+  ArgsBoxComponent
+} from './args-box/args-box.component';
 
 
 @NgModule({
@@ -90,7 +90,7 @@ import {
     SolcnEvalBoxComponent,
     ImplmntBoxComponent,
     InstcBoxComponent,
-    ArgsAlgorithmArgsBoxComponent,
+    ArgsBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -126,7 +126,7 @@ import {
     SolcnEvalBoxComponent,
     ImplmntBoxComponent,
     InstcBoxComponent,
-    ArgsAlgorithmArgsBoxComponent,
+    ArgsBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
