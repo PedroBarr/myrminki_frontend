@@ -28,15 +28,11 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-          <div class="args-container">
-            <div
-              class="args-content"
-              *ngFor="let argumento of argumentacion.get_argumentos_list()"
-            >
-              <span class="arg-clave"> {{argumento[0]}} </span>
-              <span class="arg-valor"> {{argumento[1]}} </span>
-            </div>
-          </div>
+          <myrmex-args-algorithm-args-box
+            [argumentacion]="argumentacion"
+            [esSelecto]="argumentacion.clave_id == arg_selecto"
+          >
+          </myrmex-args-algorithm-args-box>
         </mat-expansion-panel>
       </mat-accordion>
     </mat-card-content>

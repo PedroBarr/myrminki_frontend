@@ -1,0 +1,12 @@
+<div
+  class="args-container"
+  [ngClass]="{'selected-args': esSelecto}"
+>
+  <div
+    class="args-content"
+    *ngFor="let argumento of argumentacion.get_argumentos_list()"
+  >
+    <span class="arg-clave"> {{argumento[0]}} </span>
+    <span class="arg-valor"> {{argumento[1]}} </span>
+  </div>
+</div>
