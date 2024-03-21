@@ -1,0 +1,43 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title> Guardar y publicar argumentaci&oacute;n </mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <mat-form-field class="boxW100">
+      <mat-label> Descripci&oacute;n </mat-label>
+
+      <input
+        type="text"
+        placeholder="Ej: Valores para problemas continuos ca&oacute;ticos"
+        matInput
+        [(ngModel)]="argumentacion.descripcion"
+      >
+    </mat-form-field>
+
+    <div>
+      <span class="arg-paramz-seccion-title">
+        Argumentos
+      </span>
+
+      <myrmex-args-box
+        *ngIf="argumentacion.have_argumentos()"
+        [argumentacion]="argumentacion"
+      >
+      </myrmex-args-box>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions
+    align="end"
+  >
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="saveArgs()"
+    >
+      <mat-icon>save</mat-icon>
+      Guardar
+    </button>
+  </mat-card-actions>
+</mat-card>

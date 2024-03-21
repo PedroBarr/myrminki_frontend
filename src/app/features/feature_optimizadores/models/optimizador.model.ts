@@ -243,16 +243,18 @@ export class ArgumentoParametrizacion {
   public argumentos: {[clave_param: string]: string};
   public es_defecto: boolean;
 
-  constructor (obj: any = {
-    clave_id: null,
-    descripcion: null,
-    argumentos: {},
-    es_defecto: false,
-  }) {
-    this.clave_id = obj.clave_id;
-    this.descripcion = obj.descripcion;
-    this.argumentos = obj.argumentos;
-    this.es_defecto = obj.es_defecto;
+  constructor (obj: any = {}) {
+    const {
+      clave_id = null,
+      descripcion = null,
+      argumentos = {},
+      es_defecto = false,
+    } = obj;
+
+    this.clave_id = clave_id;
+    this.descripcion = descripcion;
+    this.argumentos = argumentos;
+    this.es_defecto = es_defecto;
   }
 
   have_argumentos ( ) {
@@ -261,6 +263,14 @@ export class ArgumentoParametrizacion {
 
   get_argumentos_list ( ): any[2][] {
     return Object.entries(this.argumentos);
+  }
+
+  build_post(): {[clave: string]: any} {
+    return {
+      diminutivo: this.clave_id,
+      descripcion: this.descripcion,
+      diccionario_argumentos: this.argumentos,
+    };
   }
 
 }

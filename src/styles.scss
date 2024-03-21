@@ -186,12 +186,19 @@ $my-app-warn:    mat-palette($mat-red, 500, 900, A100);
 $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 @include angular-material-theme($my-app-theme);
 
-.emergente .mat-dialog-container {
+.emergente .mat-dialog-container,
+.dialogo .mat-dialog-container {
   padding: 0;
-
-  border-radius: 45px;
   height: fit-content;
   max-height: 80vh;
+}
+
+.emergente .mat-dialog-container {
+  border-radius: 45px;
+}
+
+.dialogo .mat-dialog-container {
+  border-radius: 20px;
 }
 
 :has(> .mat-dialog-container::-webkit-scrollbar) {
@@ -212,4 +219,12 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
   background-color: var(--myrmex-primary-light);
+}
+
+.main-function-button-H {
+  height: 45px;
+}
+
+.esta_deshabilitado {
+  background-color: #e0e0e0 !important;
 }

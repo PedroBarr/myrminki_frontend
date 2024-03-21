@@ -7,9 +7,15 @@ import {
   Output,
 } from '@angular/core';
 
+import { MatDialog } from '@angular/material/dialog';
+
 import axios from 'axios';
 
 import { ArgumentoParametrizacion } from '../../models/optimizador.model';
+
+import {
+  ArgsImplmntEditorBoxComponent
+} from '../args-implmnt-editor-box/args-implmnt-editor-box.component';
 
 import { environment } from 'src/environments/environment';
 
@@ -26,9 +32,16 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
   arg_apertura: boolean[] = [];
   arg_selecto: string | null = null;
 
+  arg_editor_apertura: boolean = false;
+
   @Input() paramz_algrtm_id: string  = '';
+  @Input() args_editados: {[clave_param: string]: string} = {};
   @Output() emitir_seleccion = new EventEmitter<string | null>();
   @Output() emitir_argumentos = new EventEmitter<{[clave_param: string]: string}>();
+
+  constructor (
+    public arg_editor_emergente: MatDialog,
+  ) { }
 
   async ngOnInit ( ) {
     await this.loadArgsParamz();
@@ -95,6 +108,44 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
     this.arg_apertura[i_args] = valor;
   }
 
+  set_arg_editor_apertura (variable: boolean) {
+    if (this.es_guardable_argumentos()) return;
+
+    const arg_selecto: ArgumentoParametrizacion | undefined = (
+      this.args_paramz.find(
+        (arg_param: ArgumentoParametrizacion) =>
+        arg_param.clave_id == this.arg_selecto
+      )
+    )
+
+    const argumentos = (
+      arg_selecto ?
+      {...arg_selecto.argumentos, ...this.args_editados} :
+      {...this.args_editados}
+    );
+
+    this.arg_editor_apertura = variable;
+
+    const arg_editor_referencia = this.arg_editor_emergente.open(
+      ArgsImplmntEditorBoxComponent,
+      { panelClass: 'dialogo' }
+    );
+
+    const arg_editor_componente = arg_editor_referencia.componentInstance;
+
+    arg_editor_componente.paramz_algrtm_id = this.paramz_algrtm_id;
+    arg_editor_componente.argumentacion = new ArgumentoParametrizacion({
+      clave_id: this.paramz_algrtm_id + (new Date().getTime()),
+      descripcion: '',
+      argumentos,
+    });
+
+    arg_editor_referencia.afterClosed().subscribe(result => {
+      this.arg_editor_apertura = !variable;
+      this.loadArgsParamz();
+    });
+  }
+
   set_arg_selected (valor: string | null) {
     this.arg_selecto = valor;
     this.emitir_seleccion.emit(this.arg_selecto);
@@ -107,6 +158,10 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
     )
 
     if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
+  }
+
+  es_guardable_argumentos (): boolean {
+    return Object.keys(this.args_editados).length == 0;
   }
 
 }

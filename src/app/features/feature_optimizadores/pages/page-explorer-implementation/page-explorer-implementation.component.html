@@ -26,6 +26,7 @@
       <myrmex-args-implmnt-picker-box
         *ngIf="implementacion.parametrizacion_id"
         [paramz_algrtm_id]="implementacion.parametrizacion_id"
+        [args_editados]="args_editados"
         (emitir_seleccion)="set_arg_selecto($event)"
         (emitir_argumentos)="set_arg_selecto_argumentos($event)"
       >

@@ -1,0 +1,43 @@
+.mat-card {
+  background-color: #f7f7f7;
+  padding: 20px;
+  padding-bottom: 30px;
+
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+mat-card-title,
+.arg-paramz-seccion-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 15px !important;
+  letter-spacing: 3px;
+  line-height: normal;
+
+  margin-bottom: 5px !important;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-bottom: 0px !important;
+}
+
+.arg-paramz-seccion-title {
+  font-size: 12px !important;
+}
+
+mat-card-actions button {
+  font-size: 14px;
+}
+
+mat-card-actions button mat-icon {
+  font-size: 18px;
+  width: auto;
+  height: auto;
+}
