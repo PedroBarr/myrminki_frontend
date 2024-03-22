@@ -19,8 +19,9 @@
       <mat-card-header>
         <mat-icon
           mat-card-avatar
-          *ngIf="false && argumentacion.clave_id == arg_selecto && !es_guardable_argumentos()"
+          *ngIf="argumentacion.clave_id == arg_selecto && !es_guardable_argumentos()"
           color="primary"
+          (click)="init_save_as_args()"
         >
           save
         </mat-icon>

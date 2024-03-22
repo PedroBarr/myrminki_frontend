@@ -135,7 +135,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
     if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
   }
 
-  init_save_args () {
+  init_save_args ( ) {
     if (this.es_guardable_argumentos()) return;
 
     const arg_selecto: ArgumentoParametrizacion | undefined = (
@@ -160,6 +160,26 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
     );
 
     this.saveArgs(argumentacion);
+  }
+
+  init_save_as_args ( ) {
+    if (this.es_guardable_argumentos()) return;
+
+    const arg_selecto: ArgumentoParametrizacion | undefined = (
+      this.args_paramz.find(
+        (arg_param: ArgumentoParametrizacion) =>
+        arg_param.clave_id == this.arg_selecto
+      )
+    );
+
+    if (!arg_selecto) return;
+
+    arg_selecto.argumentos = {
+      ...arg_selecto.argumentos,
+      ...this.args_editados
+    };
+
+    this.saveArgs(arg_selecto);
   }
 
   es_guardable_argumentos (): boolean {
