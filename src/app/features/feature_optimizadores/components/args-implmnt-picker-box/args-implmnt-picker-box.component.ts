@@ -135,7 +135,7 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
     arg_editor_componente.paramz_algrtm_id = this.paramz_algrtm_id;
     arg_editor_componente.argumentacion = new ArgumentoParametrizacion({
-      clave_id: this.paramz_algrtm_id + (new Date().getTime()),
+      clave_id: this.paramz_algrtm_id + '_' + (new Date().getTime()),
       descripcion: '',
       argumentos,
     });

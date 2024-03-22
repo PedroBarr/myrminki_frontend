@@ -27,6 +27,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   arg_selecto: string | null = null;
 
   @Input() paramz_problm_id: string  = '';
+  @Input() args_editados: {[clave_param: string]: string} = {};
   @Output() emitir_seleccion = new EventEmitter<string | null>();
   @Output() emitir_argumentos = new EventEmitter<{[clave_param: string]: string}>();
 
@@ -85,6 +86,31 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
       .finally(( ) => { });
   }
 
+  /**
+  * Save argumentaciones from API
+  */
+  async saveArgs (argumentacion: ArgumentoParametrizacion) {
+    if (!argumentacion.clave_id) return;
+    if (!this.paramz_problm_id) return;
+
+    await axios.post(
+      environment.MYRMEX_API + '/parametrizacion_problema/identificador/' +
+        this.paramz_problm_id + '/argumentacion_instancia/actualizar',
+      argumentacion.build_post()
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.id) {
+          this.loadArgsParamz();
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
   get_arg_apertura (i_args: number) {
     if (this.arg_apertura.length > i_args) return this.arg_apertura[i_args];
     return false;
@@ -106,6 +132,37 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
     )
 
     if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
+  }
+
+  init_save_args () {
+    if (this.es_guardable_argumentos()) return;
+
+    const arg_selecto: ArgumentoParametrizacion | undefined = (
+      this.args_paramz.find(
+        (arg_param: ArgumentoParametrizacion) =>
+        arg_param.clave_id == this.arg_selecto
+      )
+    )
+
+    const argumentos = (
+      arg_selecto ?
+      {...arg_selecto.argumentos, ...this.args_editados} :
+      {...this.args_editados}
+    );
+
+    const argumentacion: ArgumentoParametrizacion = (
+      new ArgumentoParametrizacion({
+        clave_id: this.paramz_problm_id + '_' + (new Date().getTime()),
+        descripcion: '',
+        argumentos,
+      })
+    );
+
+    this.saveArgs(argumentacion);
+  }
+
+  es_guardable_argumentos (): boolean {
+    return Object.keys(this.args_editados).length == 0;
   }
 
 }
