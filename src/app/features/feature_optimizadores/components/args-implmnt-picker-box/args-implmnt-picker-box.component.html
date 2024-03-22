@@ -1,14 +1,14 @@
 <div class="boxW100 flex-column gap-10">
   <button
-    class="boxW100 main-function-button-H"
+    class="boxW100 main-function-button-H save-as-button"
     mat-flat-button
     color="primary"
     [disabled]="es_guardable_argumentos()"
     [ngClass]="{'esta_deshabilitado': es_guardable_argumentos()}"
     (click)="set_arg_editor_apertura(true)"
   >
-    <mat-icon>save</mat-icon>
-    Guardar y publicar argumentos actuales
+    <mat-icon>save_as</mat-icon>
+    Publicar argumentos actuales
   </button>
 
   <div id="args-param-container">
