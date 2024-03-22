@@ -66,7 +66,8 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
                 es_defecto,
               } = argumentacion;
 
-              if (es_defecto) this.set_arg_selected(clave_id);
+              if (this.arg_selecto == null && es_defecto)
+                this.set_arg_selected(clave_id);
 
               this.arg_apertura.push(false);
 
