@@ -238,6 +238,8 @@ export class Implementacion {
 
 export class ArgumentoParametrizacion {
 
+  public id: string | null;
+
   public clave_id: string | null;
   public descripcion: string | null;
   public argumentos: {[clave_param: string]: string};
@@ -245,12 +247,14 @@ export class ArgumentoParametrizacion {
 
   constructor (obj: any = {}) {
     const {
+      id = null,
       clave_id = null,
       descripcion = null,
       argumentos = {},
       es_defecto = false,
     } = obj;
 
+    this.id = id;
     this.clave_id = clave_id;
     this.descripcion = descripcion;
     this.argumentos = argumentos;
@@ -266,11 +270,15 @@ export class ArgumentoParametrizacion {
   }
 
   build_post(): {[clave: string]: any} {
-    return {
+    const post_data: {[clave: string]: any} = {
       diminutivo: this.clave_id,
       descripcion: this.descripcion,
       diccionario_argumentos: this.argumentos,
     };
+
+    if (this.id) post_data['id'] = this.id;
+
+    return post_data;
   }
 
 }

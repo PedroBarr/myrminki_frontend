@@ -71,6 +71,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
               this.arg_apertura.push(false);
 
               return new ArgumentoParametrizacion({
+                  id: clave_id,
                   clave_id,
                   descripcion: null,
                   argumentos: diccionario_argumentos,

@@ -1,3 +1,9 @@
+.save-as-button mat-icon {
+  font-size: 18px;
+  width: auto;
+  height: auto;
+}
+
 #args-param-container {
   display: flex;
   flex-direction: column;
@@ -10,6 +16,23 @@
   border-style: solid;
   border-radius: 10px;
   border-width: 1px;
+}
+
+mat-card-header:has(.mat-icon) {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+mat-card-header .mat-icon {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  width: auto;
+  height: fit-content;
+  padding: 2px;
+
+  font-size: 18px;
 }
 
 mat-card-title {

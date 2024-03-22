@@ -1,14 +1,14 @@
 <div class="boxW100 flex-column gap-10">
   <button
-    class="boxW100 main-function-button-H"
+    class="boxW100 main-function-button-H save-as-button"
     mat-flat-button
     color="primary"
     [disabled]="es_guardable_argumentos()"
     [ngClass]="{'esta_deshabilitado': es_guardable_argumentos()}"
     (click)="init_save_args()"
   >
-    <mat-icon>save</mat-icon>
-    Guardar y publicar argumentos actuales
+    <mat-icon>save_as</mat-icon>
+    Publicar argumentos actuales
   </button>
 
   <div id="args-param-container">
@@ -17,6 +17,14 @@
       [ngClass]="{'selected-args': argumentacion.clave_id == arg_selecto}"
     >
       <mat-card-header>
+        <mat-icon
+          mat-card-avatar
+          *ngIf="false && argumentacion.clave_id == arg_selecto && !es_guardable_argumentos()"
+          color="primary"
+        >
+          save
+        </mat-icon>
+
         <mat-card-title> Argumentacion {{i_args}} </mat-card-title>
       </mat-card-header>
 
