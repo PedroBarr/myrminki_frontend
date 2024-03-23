@@ -3,11 +3,11 @@
     class="boxW100 main-function-button-H save-as-button"
     mat-flat-button
     color="primary"
-    [disabled]="es_guardable_argumentos()"
-    [ngClass]="{'esta_deshabilitado': es_guardable_argumentos()}"
+    [disabled]="no_es_guardable_argumentos()"
+    [ngClass]="{'esta_deshabilitado': no_es_guardable_argumentos()}"
     (click)="init_save_args()"
   >
-    <mat-icon>save_as</mat-icon>
+    <mat-icon>save</mat-icon>
     Publicar argumentos actuales
   </button>
 
@@ -19,11 +19,11 @@
       <mat-card-header>
         <mat-icon
           mat-card-avatar
-          *ngIf="argumentacion.clave_id == arg_selecto && !es_guardable_argumentos()"
+          *ngIf="argumentacion.clave_id == arg_selecto && !no_es_editable_argumentos()"
           color="primary"
-          (click)="init_save_as_args()"
+          (click)="init_edit_args()"
         >
-          save
+          save_as
         </mat-icon>
 
         <mat-card-title> Argumentacion {{i_args}} </mat-card-title>

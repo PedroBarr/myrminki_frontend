@@ -45,6 +45,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   * Load argumentaciones parametrizacion from API
   */
   async loadArgsParamz ( ) {
+    console.log(this.paramz_problm_id, this.arg_selecto, );
     if (!this.paramz_problm_id) return;
 
     await axios.get(
@@ -56,10 +57,8 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
         console.log(response.data);
 
         if (response.data) {
-          this.arg_apertura = [];
-
           this.args_paramz = response.data.map(
-            (argumentacion: any) => {
+            (argumentacion: any, i_args: number) => {
               const {
                 clave_identificadora: clave_id,
                 diccionario_argumentos,
@@ -67,9 +66,10 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
               } = argumentacion;
 
               if (this.arg_selecto == null && es_defecto)
-                this.set_arg_selected(clave_id);
+                this.arg_selecto = clave_id;
 
-              this.arg_apertura.push(false);
+              if (this.arg_apertura.length >= i_args)
+                this.arg_apertura.push(false);
 
               return new ArgumentoParametrizacion({
                   id: clave_id,
@@ -85,13 +85,16 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.set_arg_selected(this.arg_selecto);
+      });
   }
 
   /**
   * Save argumentaciones from API
   */
   async saveArgs (argumentacion: ArgumentoParametrizacion) {
+    console.log(argumentacion, this.paramz_problm_id, this.arg_selecto);
     if (!argumentacion.clave_id) return;
     if (!this.paramz_problm_id) return;
 
@@ -104,6 +107,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
         console.log(response.data);
 
         if (response.data && response.data.id) {
+          this.arg_selecto = response.data.diminutivo;
           this.loadArgsParamz();
         }
       })
@@ -137,7 +141,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   }
 
   init_save_args ( ) {
-    if (this.es_guardable_argumentos()) return;
+    if (this.no_es_guardable_argumentos()) return;
 
     const arg_selecto: ArgumentoParametrizacion | undefined = (
       this.args_paramz.find(
@@ -163,8 +167,10 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
     this.saveArgs(argumentacion);
   }
 
-  init_save_as_args ( ) {
-    if (this.es_guardable_argumentos()) return;
+  init_edit_args ( ) {
+    console.log('Entro', this.args_editados);
+    if (this.no_es_editable_argumentos()) return;
+    console.log('Pasa 1', this.arg_selecto, this.args_paramz);
 
     const arg_selecto: ArgumentoParametrizacion | undefined = (
       this.args_paramz.find(
@@ -173,18 +179,28 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
       )
     );
 
+    console.log('arg', arg_selecto);
     if (!arg_selecto) return;
 
+    console.log('Pasa 2');
     arg_selecto.argumentos = {
       ...arg_selecto.argumentos,
       ...this.args_editados
     };
 
+    console.log('arg', arg_selecto);
     this.saveArgs(arg_selecto);
   }
 
-  es_guardable_argumentos (): boolean {
+  no_es_guardable_argumentos (): boolean {
     return Object.keys(this.args_editados).length == 0;
+  }
+
+  no_es_editable_argumentos (): boolean {
+    return (
+      this.arg_selecto == null ||
+      Object.keys(this.args_editados).length == 0
+    );
   }
 
 }
