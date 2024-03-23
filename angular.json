@@ -30,14 +30,16 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.min.css",
               "node_modules/katex/dist/katex.min.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
-              "node_modules/prismjs/themes/prism-okaidia.min.css",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.css",
             ],
             "scripts": [
               "node_modules/katex/dist/katex.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
             ]
           },
@@ -107,14 +109,16 @@
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.scss",
+              "node_modules/prismjs/themes/prism-okaidia.min.css",
               "node_modules/katex/dist/katex.min.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
-              "node_modules/prismjs/themes/prism-okaidia.min.css",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.css",
             ],
             "scripts": [
               "node_modules/katex/dist/katex.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
+              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
             ]
           }
