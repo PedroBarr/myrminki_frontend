@@ -1,0 +1,25 @@
+<div
+  class="optimizador-container"
+  routerLink="{{optimizador.ruta_enlace()}}"
+>
+  <span>
+    {{optimizador.titulo_entrada}}
+  </span>
+
+  <div class="optimizador-datos-container">
+    <span *ngFor="let dato of optimizador.lista_datos()">
+      {{dato[0]}}: {{dato[1]}}
+    </span>
+  </div>
+
+  <mat-chip-list>
+    <mat-chip
+      *ngFor="let etiqueta of optimizador.etiquetas"
+      disableRipple="false"
+      highlighted="false"
+      routerLink="{{optimizador.ruta_enlace()}}"
+    >
+      {{etiqueta}}
+    </mat-chip>
+  </mat-chip-list>
+</div>

@@ -33,36 +33,11 @@
         >
       </mat-form-field>
 
-      <div
-        class="optimizador-container"
+      <myrmex-optmzd-box
         *ngFor="let optimizador of optimizadores"
-        routerLink="{{optimizador.ruta_enlace()}}"
+        [optimizador]="optimizador"
       >
-        <span>
-          {{optimizador.titulo_entrada}}
-        </span>
-
-        <div class="optimizador-datos-container">
-          <span *ngIf="optimizador.tipo_entrada == 'ALGORITMO'">
-            Tipo: Algoritmo
-          </span>
-
-          <span *ngFor="let dato of optimizador.lista_datos()">
-            {{dato[0]}}: {{dato[1]}}
-          </span>
-        </div>
-
-        <mat-chip-list>
-          <mat-chip
-            *ngFor="let etiqueta of optimizador.etiquetas"
-            disableRipple="false"
-            highlighted="false"
-            routerLink="{{optimizador.ruta_enlace()}}"
-          >
-            {{etiqueta}}
-          </mat-chip>
-        </mat-chip-list>
-      </div>
+      </myrmex-optmzd-box>
     </div>
 
     <myrmex-tag-search-box

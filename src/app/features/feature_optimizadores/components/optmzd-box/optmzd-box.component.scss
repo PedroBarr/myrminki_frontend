@@ -1,0 +1,39 @@
+.optimizador-container {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+
+  padding: 20px 15px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  span {
+    color: var(--myrmex-primary);
+    font-family: code-pro-bold, sans-serif;
+    letter-spacing: 3pt;
+    margin-bottom: 0;
+  }
+}
+
+mat-chip-list mat-chip {
+  background-color: var(--myrmex-primary-light);
+  color: #fff;
+}
+
+.optimizador-datos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 12px;
+}
+
+.optimizador-datos-container > span {
+  font-family: montserrat, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  letter-spacing: normal;
+  color: unset;
+}

@@ -80,6 +80,10 @@ import {
   ArgsImplmntEditorBoxComponent
 } from './args-implmnt-editor-box/args-implmnt-editor-box.component';
 
+import {
+  OptmzdBoxComponent
+} from './optmzd-box/optmzd-box.component';
+
 
 @NgModule({
   declarations: [
@@ -97,6 +101,7 @@ import {
     InstcBoxComponent,
     ArgsBoxComponent,
     ArgsImplmntEditorBoxComponent,
+    OptmzdBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -135,6 +140,7 @@ import {
     InstcBoxComponent,
     ArgsBoxComponent,
     ArgsImplmntEditorBoxComponent,
+    OptmzdBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
