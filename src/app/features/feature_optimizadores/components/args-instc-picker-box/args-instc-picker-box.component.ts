@@ -45,7 +45,6 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   * Load argumentaciones parametrizacion from API
   */
   async loadArgsParamz ( ) {
-    console.log(this.paramz_problm_id, this.arg_selecto, );
     if (!this.paramz_problm_id) return;
 
     await axios.get(
@@ -94,7 +93,6 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   * Save argumentaciones from API
   */
   async saveArgs (argumentacion: ArgumentoParametrizacion) {
-    console.log(argumentacion, this.paramz_problm_id, this.arg_selecto);
     if (!argumentacion.clave_id) return;
     if (!this.paramz_problm_id) return;
 
@@ -168,9 +166,7 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
   }
 
   init_edit_args ( ) {
-    console.log('Entro', this.args_editados);
     if (this.no_es_editable_argumentos()) return;
-    console.log('Pasa 1', this.arg_selecto, this.args_paramz);
 
     const arg_selecto: ArgumentoParametrizacion | undefined = (
       this.args_paramz.find(
@@ -179,16 +175,13 @@ export class ArgsInstcPickerBoxComponent implements OnInit, OnChanges {
       )
     );
 
-    console.log('arg', arg_selecto);
     if (!arg_selecto) return;
 
-    console.log('Pasa 2');
     arg_selecto.argumentos = {
       ...arg_selecto.argumentos,
       ...this.args_editados
     };
 
-    console.log('arg', arg_selecto);
     this.saveArgs(arg_selecto);
   }
 
