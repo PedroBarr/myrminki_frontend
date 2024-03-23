@@ -143,7 +143,49 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
     });
 
     arg_editor_referencia.afterClosed().subscribe((result: any) => {
-      this.arg_selecto = result;
+      if (result) this.arg_selecto = result;
+
+      this.arg_editor_apertura = !variable;
+      this.loadArgsParamz();
+    });
+  }
+
+  set_arg_editor_apertura (variable: boolean) {
+    if (this.no_es_guardable_argumentos()) return;
+
+    const arg_selecto: ArgumentoParametrizacion | undefined = (
+      this.args_paramz.find(
+        (arg_param: ArgumentoParametrizacion) =>
+        arg_param.clave_id == this.arg_selecto
+      )
+    )
+
+    if (!arg_selecto) return;
+
+    const argumentos = {
+      ...arg_selecto.argumentos,
+      ...this.args_editados
+    };
+
+    this.arg_editor_apertura = variable;
+
+    const arg_editor_referencia = this.arg_editor_emergente.open(
+      ArgsImplmntEditorBoxComponent,
+      { panelClass: 'dialogo'}
+    );
+
+    const arg_editor_componente = arg_editor_referencia.componentInstance;
+
+    arg_editor_componente.paramz_algrtm_id = this.paramz_algrtm_id;
+    arg_editor_componente.argumentacion = new ArgumentoParametrizacion({
+      id: arg_selecto.clave_id,
+      clave_id: arg_selecto.clave_id,
+      descripcion: arg_selecto.descripcion,
+      argumentos,
+    });
+
+    arg_editor_referencia.afterClosed().subscribe((result: any) => {
+      if (result) this.arg_selecto = result;
 
       this.arg_editor_apertura = !variable;
       this.loadArgsParamz();

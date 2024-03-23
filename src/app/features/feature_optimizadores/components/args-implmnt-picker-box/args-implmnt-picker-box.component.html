@@ -17,6 +17,15 @@
       [ngClass]="{'selected-args': argumentacion.clave_id == arg_selecto}"
     >
       <mat-card-header>
+        <mat-icon
+          mat-card-avatar
+          *ngIf="argumentacion.clave_id == arg_selecto && !no_es_editable_argumentos()"
+          color="primary"
+          (click)="set_arg_editor_apertura(true)"
+        >
+          edit
+        </mat-icon>
+
         <mat-card-title> Argumentacion {{i_args}} </mat-card-title>
       </mat-card-header>
 

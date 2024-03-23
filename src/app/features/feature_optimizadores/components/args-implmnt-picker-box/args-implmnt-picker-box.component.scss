@@ -18,6 +18,23 @@
   border-width: 1px;
 }
 
+mat-card-header:has(.mat-icon) {
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+mat-card-header .mat-icon {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  width: auto;
+  height: fit-content;
+  padding: 2px;
+
+  font-size: 18px;
+}
+
 mat-card-title {
   color: var(--myrmex-primary);
   font-family: code-pro-bold, sans-serif;
