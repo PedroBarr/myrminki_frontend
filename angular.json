@@ -33,13 +33,12 @@
               "node_modules/prismjs/themes/prism-okaidia.min.css",
               "node_modules/katex/dist/katex.min.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
-              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.css",
             ],
             "scripts": [
               "node_modules/katex/dist/katex.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
-              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.js",
+              "node_modules/clipboard/dist/clipboard.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
             ]
           },
@@ -112,13 +111,12 @@
               "node_modules/prismjs/themes/prism-okaidia.min.css",
               "node_modules/katex/dist/katex.min.css",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
-              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.css",
             ],
             "scripts": [
               "node_modules/katex/dist/katex.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js",
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
-              "node_modules/prismjs/plugins/toolbar/prism-toolbar.min.js",
+              "node_modules/clipboard/dist/clipboard.min.js",
               "node_modules/prismjs/components/prism-python.min.js",
             ]
           }

@@ -108,8 +108,4 @@ export class ImplmntBoxComponent implements OnChanges{
       .finally(( ) => { });
   }
 
-  printa () {
-    console.log('asd');
-  }
-
 }

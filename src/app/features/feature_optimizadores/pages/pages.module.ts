@@ -12,6 +12,7 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 import { MarkdownModule } from 'ngx-markdown';
 
@@ -55,6 +56,10 @@ import {
   PageExplorerSolutionComponent
 } from './page-explorer-solution/page-explorer-solution.component';
 
+import {
+  PageEditorSolutionComponent
+} from './page-editor-solution/page-editor-solution.component';
+
 
 @NgModule({
   schemas: [
@@ -67,6 +72,7 @@ import {
     PageExplorerProblemComponent,
     PageExplorerInstanceComponent,
     PageExplorerSolutionComponent,
+    PageEditorSolutionComponent,
   ],
   imports: [
     CommonModule,
@@ -81,6 +87,7 @@ import {
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatSelectModule,
 
     MarkdownModule.forRoot(),
 
@@ -96,6 +103,7 @@ import {
     PageExplorerProblemComponent,
     PageExplorerInstanceComponent,
     PageExplorerSolutionComponent,
+    PageEditorSolutionComponent,
   ]
 })
 export class PagesFeatureOptimizadoresModule { }

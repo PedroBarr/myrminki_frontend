@@ -590,17 +590,19 @@ export class Solucion {
   public instancia_id: string;
   public argumentacion_instancia_id: string;
 
-  constructor (obj: any = {
-    titulo: '',
-    etiquetas: [],
-    lenguaje_nombre: '',
-    codigo_puntuado: '',
-    solucion_id: '',
-    implementacion_id: '',
-    argumentacion_implementacion_id: '',
-    instancia_id: '',
-    argumentacion_instancia_id: '',
-  }) {
+  constructor (obj: any = {}) {
+    const {
+      titulo = '',
+      etiquetas = [],
+      lenguaje_nombre = '',
+      codigo_puntuado = '',
+      solucion_id = '',
+      implementacion_id = '',
+      argumentacion_implementacion_id = '',
+      instancia_id = '',
+      argumentacion_instancia_id = '',
+    } = obj;
+
     this.titulo = obj.titulo;
     this.etiquetas = obj.etiquetas;
     this.lenguaje_nombre = obj.lenguaje_nombre;

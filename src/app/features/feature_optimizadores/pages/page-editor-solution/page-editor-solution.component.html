@@ -1,0 +1,100 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="solucion-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <mat-form-field class="boxW100">
+              <mat-label> T&iacute;tulo </mat-label>
+
+              <input
+                type="text"
+                placeholder="Ej: Aplicación del OCH para el problema P?NP"
+                matInput
+                [(ngModel)]="solucion.titulo"
+              >
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Lenguaje </mat-label>
+
+              <mat-select
+                [(ngModel)]="solucion.lenguaje_nombre"
+              >
+                <mat-option
+                  *ngFor="let lenguaje of lenguajes_habilitados"
+                  [value]="lenguaje"
+                >
+                  {{
+                    lenguaje.substring(0, 1).toUpperCase() +
+                    lenguaje.substring(1).toLowerCase()
+                  }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="seccion-editor">
+            <span class="seccion-title"> C&oacute;digo </span>
+
+            <markdown
+              *ngIf="codigo_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [clipboardButtonTemplate]="togglePreviewModeButton"
+              (onCopyToClipboardClick)="null"
+              [data]="'```' + solucion.lenguaje_nombre + '\n' + solucion.codigo_puntuado + '\n```'"
+            >
+            </markdown>
+
+            <ng-template #togglePreviewModeButton>
+              <button mat-icon-button class="toolbar-button" (click)="toggle_codigo_vista()">
+                <mat-icon>edit_note</mat-icon>
+              </button>
+            </ng-template>
+
+            <mat-form-field
+              *ngIf="codigo_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>C&oacute;digo de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3 "
+                placeholder="y: function = lambda x: x**4"
+                [(ngModel)]="solucion.codigo_puntuado"
+              ></textarea>
+
+              <button
+                matSuffix
+                mat-icon-button
+                class="toolbar-button form-field-toolbar"
+                (click)="toggle_codigo_vista()"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <button
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+      >
+        <mat-icon>save</mat-icon>
+        Guardar
+      </button>
+    </div>
+  </div>
+</div>

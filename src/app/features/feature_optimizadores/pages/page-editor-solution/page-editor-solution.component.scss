@@ -1,0 +1,70 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+:has(> .solucion-container) {
+  --gap: 20px;
+  --optimizador-width: 60%;
+  gap: var(--gap);
+}
+
+.solucion-container {
+  width: calc(var(--optimizador-width) - var(--gap));
+}
+
+.aditamentos-container {
+  width: calc(100% - var(--optimizador-width));
+  display: flex;
+
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-card-header {
+  width: 100%;
+
+  flex-direction: column;
+}
+
+mat-card-title {
+  width: 100%;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+mat-card-title mat-form-field {
+  color: var(--myrmex-primary);
+  font-size: 15px;
+}
+
+.seccion-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+}
+
+.toolbar-button {
+  width: auto;
+  height: auto;
+
+  color: white;
+  font-size: 14px !important;
+}
+
+.toolbar-button.form-field-toolbar {
+  color: #666;
+  font-size: 20px !important;
+
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.toolbar-button.form-field-toolbar:hover {
+  color: var(--myrmex-primary) !important;
+}

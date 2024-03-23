@@ -228,3 +228,11 @@ $my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
 .esta_deshabilitado {
   background-color: #e0e0e0 !important;
 }
+
+.toolbar-mat-form-field .mat-form-field-suffix {
+  /*
+  */
+  position: absolute !important;
+  top: 0px !important;
+  right: 0px !important;
+}
