@@ -68,10 +68,8 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
         console.log(response.data);
 
         if (response.data) {
-          this.arg_apertura = [];
-
           this.args_paramz = response.data.map(
-            (argumentacion: any) => {
+            (argumentacion: any, i_args: number) => {
               const {
                 clave_identificadora: clave_id,
                 descripcion,
@@ -79,9 +77,11 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
                 es_defecto,
               } = argumentacion;
 
-              if (es_defecto) this.set_arg_selected(clave_id);
+              if (this.arg_selecto == null && es_defecto)
+                this.arg_selecto = clave_id;
 
-              this.arg_apertura.push(false);
+              if (this.arg_apertura.length >= i_args)
+                this.arg_apertura.push(false);
 
               return new ArgumentoParametrizacion({
                   clave_id,
@@ -96,7 +96,9 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.set_arg_selected(this.arg_selecto);
+      });
   }
 
   get_arg_apertura (i_args: number) {
@@ -108,8 +110,8 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
     this.arg_apertura[i_args] = valor;
   }
 
-  set_arg_editor_apertura (variable: boolean) {
-    if (this.es_guardable_argumentos()) return;
+  set_arg_creador_apertura (variable: boolean) {
+    if (this.no_es_guardable_argumentos()) return;
 
     const arg_selecto: ArgumentoParametrizacion | undefined = (
       this.args_paramz.find(
@@ -128,7 +130,7 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
     const arg_editor_referencia = this.arg_editor_emergente.open(
       ArgsImplmntEditorBoxComponent,
-      { panelClass: 'dialogo' }
+      { panelClass: 'dialogo'}
     );
 
     const arg_editor_componente = arg_editor_referencia.componentInstance;
@@ -140,7 +142,9 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
       argumentos,
     });
 
-    arg_editor_referencia.afterClosed().subscribe(result => {
+    arg_editor_referencia.afterClosed().subscribe((result: any) => {
+      this.arg_selecto = result;
+
       this.arg_editor_apertura = !variable;
       this.loadArgsParamz();
     });
@@ -160,8 +164,15 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
     if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
   }
 
-  es_guardable_argumentos (): boolean {
+  no_es_guardable_argumentos (): boolean {
     return Object.keys(this.args_editados).length == 0;
+  }
+
+  no_es_editable_argumentos (): boolean {
+    return (
+      this.arg_selecto == null ||
+      Object.keys(this.args_editados).length == 0
+    );
   }
 
 }

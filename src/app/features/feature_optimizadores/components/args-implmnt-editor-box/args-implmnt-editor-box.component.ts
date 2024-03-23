@@ -46,7 +46,7 @@ export class ArgsImplmntEditorBoxComponent {
 
         if (response.data && response.data.id) {
           if (this.emergente_referencia) {
-            this.emergente_referencia.close();
+            this.emergente_referencia.close(response.data.diminutivo);
           }
         }
       })
