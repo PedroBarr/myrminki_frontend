@@ -36,6 +36,11 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
   @Input() paramz_algrtm_id: string  = '';
   @Input() args_editados: {[clave_param: string]: string} = {};
+
+  @Input() es_editor: boolean = true;
+  @Input() es_emergente: boolean = false;
+  @Input() con_defecto: boolean = true;
+
   @Output() emitir_seleccion = new EventEmitter<string | null>();
   @Output() emitir_argumentos = new EventEmitter<{[clave_param: string]: string}>();
 
@@ -68,7 +73,15 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
         console.log(response.data);
 
         if (response.data) {
-          this.args_paramz = response.data.map(
+          const data = (
+            this.con_defecto ?
+            response.data :
+            response.data.filter((argumentacion: any) =>
+              argumentacion.clave_identificadora != null
+            )
+          );
+
+          this.args_paramz = data.map(
             (argumentacion: any, i_args: number) => {
               const {
                 clave_identificadora: clave_id,

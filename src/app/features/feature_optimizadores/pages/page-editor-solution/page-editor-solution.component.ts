@@ -22,6 +22,10 @@ import {
 } from '../../components/implmnt-box/implmnt-box.component';
 
 import {
+  ArgsImplmntPickerBoxComponent
+} from '../../components/args-implmnt-picker-box/args-implmnt-picker-box.component';
+
+import {
   InstcBoxComponent
 } from '../../components/instc-box/instc-box.component';
 
@@ -38,18 +42,20 @@ export class PageEditorSolutionComponent implements OnInit {
   solucion: Solucion = new Solucion();
 
   lenguajes_habilitados: string[] = [];
-
   codigo_vista: 'E' | 'P' = 'E';
 
   implmnt_selector_apertura: boolean = false;
   implmnt_visor_apertura: boolean = false;
+  args_implmnt_selector_apertura: boolean = false;
 
   implmnt_selecto: string | null = null;
   paramz_implmnt_id_selected: string | null = null;
+  args_implmnt_selecto: string | null = null;
 
   constructor (
     public implmnt_selector_emergente: MatDialog,
     public implmnt_visor_emergente: MatDialog,
+    public args_implmnt_selector_emergente: MatDialog,
   ) { }
 
   async ngOnInit ( ) {
@@ -170,6 +176,40 @@ export class PageEditorSolutionComponent implements OnInit {
 
     implmnt_visor_referencia.afterClosed().subscribe((result: any) => {
       this.implmnt_visor_apertura = !variable;
+    });
+  }
+
+  set_args_implmnt_selector_apertura (variable: boolean) {
+    if (!this.paramz_implmnt_id_selected) return;
+
+    this.args_implmnt_selector_apertura = variable;
+
+    const args_implmnt_selector_referencia = (
+      this.args_implmnt_selector_emergente.open(
+        ArgsImplmntPickerBoxComponent,
+        { panelClass: 'emergente-selector'}
+      )
+    );
+
+    const args_implmnt_selector_componente = (
+      args_implmnt_selector_referencia.componentInstance
+    );
+
+    args_implmnt_selector_componente.paramz_algrtm_id = (
+      this.paramz_implmnt_id_selected
+    );
+    args_implmnt_selector_componente.es_editor = false;
+    args_implmnt_selector_componente.es_emergente = true;
+    args_implmnt_selector_componente.con_defecto = false;
+
+    args_implmnt_selector_componente.emitir_seleccion.subscribe((result: any) => {
+      if (result) console.log(result);
+
+      this.implmnt_selector_apertura = !variable;
+    });
+
+    args_implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
+      this.args_implmnt_selector_apertura = !variable;
     });
   }
 
