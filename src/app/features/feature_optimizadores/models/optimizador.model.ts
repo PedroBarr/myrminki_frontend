@@ -16,6 +16,10 @@ export class PrevisualizacionEntrada {
     return '/explorar';
   }
 
+  get_id ( ): string {
+    return '';
+  }
+
   lista_datos ( ): string[][] {
     return [];
   }
@@ -24,7 +28,7 @@ export class PrevisualizacionEntrada {
 
 export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
 
-  public id: number = 0;
+  public id: string = '';
   public n_parametros: number = 0;
   public n_implementaciones: number = 0;
 
@@ -42,6 +46,10 @@ export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
 
   override ruta_enlace ( ): string {
     return '/algoritmo/' + this.id;
+  }
+
+  override get_id ( ): string {
+    return this.id;
   }
 
   override lista_datos (): string[][] {
@@ -133,7 +141,7 @@ export class ParametrizacionAlgoritmo {
 
 export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
 
-  public id: number = 0;
+  public id: string = '';
   public nombre_algoritmo: string = '';
   public n_parametros_algoritmo: number = 0;
   public n_argumentaciones: number = 0;
@@ -160,6 +168,10 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
 
   override ruta_enlace ( ): string {
     return '/implementacion/' + this.id;
+  }
+
+  override get_id ( ): string {
+    return this.id;
   }
 
   override lista_datos (): string[][] {
@@ -285,7 +297,7 @@ export class ArgumentoParametrizacion {
 
 export class PrevisualizacionProblema extends PrevisualizacionEntrada {
 
-  public id: number = 0;
+  public id: string = '';
   public n_parametros_problema: number = 0;
   public n_instancias: number = 0;
 
@@ -303,6 +315,10 @@ export class PrevisualizacionProblema extends PrevisualizacionEntrada {
 
   override ruta_enlace ( ): string {
     return '/problema/' + this.id;
+  }
+
+  override get_id ( ): string {
+    return this.id;
   }
 
   override lista_datos (): string[][] {
@@ -389,7 +405,7 @@ export class ParametrizacionProblema {
 
 export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
 
-  public id: number = 0;
+  public id: string = '';
   public nombre_problema: string = '';
   public n_parametros_problema: number = 0;
   public n_argumentaciones: number = 0;
@@ -416,6 +432,10 @@ export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
 
   override ruta_enlace ( ): string {
     return '/instancia/' + this.id;
+  }
+
+  override get_id ( ): string {
+    return this.id;
   }
 
   override lista_datos (): string[][] {
@@ -494,7 +514,7 @@ export class Instancia {
 
 export class PrevisualizacionSolucion extends PrevisualizacionEntrada {
 
-  public id: number = 0;
+  public id: string = '';
   public lenguaje_programacion: string = '';
 
   public nombre_algoritmo: string = '';
@@ -536,6 +556,10 @@ export class PrevisualizacionSolucion extends PrevisualizacionEntrada {
 
   override ruta_enlace ( ): string {
     return '/solucion/' + this.id;
+  }
+
+  override get_id ( ): string {
+    return this.id;
   }
 
   override lista_datos (): string[][] {

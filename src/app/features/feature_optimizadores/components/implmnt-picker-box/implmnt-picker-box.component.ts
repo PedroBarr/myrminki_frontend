@@ -35,6 +35,7 @@ export class ImplmntPickerBoxComponent implements OnInit {
   implmnt_editor_apertura: boolean = false;
 
   @Input() implmnt_selecto: string | null = null;
+  @Input() es_emergente: boolean = false;
   @Output() emitir_seleccion = new EventEmitter<string | null>();
 
   constructor (

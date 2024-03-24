@@ -1,6 +1,7 @@
 <div
   class="optimizador-container"
-  routerLink="{{optimizador.ruta_enlace()}}"
+  (click)="do_action($event)"
+  [ngClass]="{'selecto-optimizador': es_selecto}"
 >
   <span>
     {{optimizador.titulo_entrada}}
@@ -17,9 +18,34 @@
       *ngFor="let etiqueta of optimizador.etiquetas"
       disableRipple="false"
       highlighted="false"
-      routerLink="{{optimizador.ruta_enlace()}}"
+      (click)="do_action($event)"
     >
       {{etiqueta}}
     </mat-chip>
   </mat-chip-list>
+
+  <div
+    class="boxW100 flex-row flex-end gap-10"
+    *ngIf="opcion_previsualizar"
+  >
+    <button
+      *ngIf="!es_selecto"
+      mat-flat-button
+      color="primary"
+      (click)="do_action($event)"
+    >
+      <mat-icon>checklist</mat-icon>
+      Seleccionar
+    </button>
+
+    <button
+      *ngIf="es_habilitado_previsualizacion()"
+      mat-flat-button
+      color="primary"
+      (click)="do_action($event)"
+    >
+      <mat-icon>visibility</mat-icon>
+      Previsualizar
+    </button>
+  </div>
 </div>

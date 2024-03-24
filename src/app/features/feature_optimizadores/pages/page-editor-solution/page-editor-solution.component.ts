@@ -14,8 +14,8 @@ import {
 } from '../../models/optimizador.model';
 
 import {
-  ImplmntBoxComponent
-} from '../../components/implmnt-box/implmnt-box.component';
+  ImplmntPickerBoxComponent
+} from '../../components/implmnt-picker-box/implmnt-picker-box.component';
 
 import {
   InstcBoxComponent
@@ -37,7 +37,13 @@ export class PageEditorSolutionComponent implements OnInit {
 
   codigo_vista: 'E' | 'P' = 'E';
 
-  constructor () { }
+  implmnt_selector_apertura: boolean = false;
+
+  implmnt_selecto: string | null = null;
+
+  constructor (
+    public implmnt_selector_emergente: MatDialog,
+  ) { }
 
   async ngOnInit ( ) {
     await this.loadLangs();
@@ -93,6 +99,39 @@ export class PageEditorSolutionComponent implements OnInit {
       !this.solucion.lenguaje_nombre ||
       !this.solucion.codigo_puntuado
     );
+  }
+
+  set_implmnt_selector_apertura (variable: boolean) {
+    this.implmnt_selector_apertura = variable;
+
+    const implmnt_selector_referencia = this.implmnt_selector_emergente.open(
+      ImplmntPickerBoxComponent,
+      { panelClass: 'emergente-selector'}
+    );
+
+    const implmnt_selector_componente = (
+      implmnt_selector_referencia.componentInstance
+    );
+
+    implmnt_selector_componente.implmnt_selecto = this.implmnt_selecto;
+    implmnt_selector_componente.es_emergente = true;
+    implmnt_selector_componente.emitir_seleccion.subscribe((result: any) => {
+      if (result) this.set_implmnt_selected(result);
+
+      this.implmnt_selector_apertura = !variable;
+    });
+
+    implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
+      if (result) this.set_implmnt_selected(result);
+
+      this.implmnt_selector_apertura = !variable;
+    });
+  }
+
+  set_implmnt_selected (valor: string | null) {
+    this.implmnt_selecto = valor;
+
+    if (valor) this.solucion.implementacion_id = valor;
   }
 
 }

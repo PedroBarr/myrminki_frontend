@@ -5,6 +5,8 @@ import {
   Output,
 } from '@angular/core';
 
+import { Router, ActivatedRoute } from '@angular/router';
+
 import axios from 'axios';
 
 import {
@@ -23,5 +25,44 @@ import { environment } from 'src/environments/environment';
 export class OptmzdBoxComponent {
 
   @Input() optimizador: PrevisualizacionEntrada = new PrevisualizacionEntrada();
+  @Input() es_selecto: boolean = false;
+  @Input() opcion_previsualizar: boolean = false;
+  @Input() tipo_accion: 'route' | 'emit' = 'route';
+  @Output() emitir_accion = new EventEmitter<string>();
+
+  constructor (
+    private router: Router,
+    private route: ActivatedRoute,
+  ) { }
+
+  do_action (event: MouseEvent) {
+    event.stopPropagation();
+
+    switch (this.tipo_accion) {
+      case 'emit':
+        this.emitir_accion.emit(this.optimizador.get_id());
+        break;
+      case 'route':
+      default:
+        this.router.navigateByUrl(this.optimizador.ruta_enlace());
+        break;
+    }
+  }
+
+  es_habilitado_previsualizacion ( ): boolean {
+    if (!this.opcion_previsualizar) return false;
+
+    const previsualizaciones_habilitadas: string[] = [
+    ];
+
+    if (
+      !previsualizaciones_habilitadas.includes(
+        String(this.optimizador.tipo_entrada)
+      )
+    )
+      return false;
+
+    return true;
+  }
 
 }

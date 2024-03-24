@@ -1,9 +1,27 @@
 <div class="boxW100 flex-column gap-10">
+  <span class="implmnt-title" *ngIf="es_emergente">
+    Implementaciones
+  </span>
+
   <div id="implmnt-container">
     <myrmex-optmzd-box
       *ngFor="let implementacion of implementaciones; index as i_implmnt"
       [optimizador]="implementacion"
+      [es_selecto]="implmnt_selecto == implementacion.get_id()"
+      [opcion_previsualizar]="es_emergente"
+      [tipo_accion]="es_emergente ? 'emit' : 'route'"
+      (emitir_accion)="set_implmnt_selected($event)"
     >
     </myrmex-optmzd-box>
   </div>
+
+  <button
+    *ngIf="es_emergente"
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    [mat-dialog-close]="implmnt_selecto"
+  >
+    Cerrar
+  </button>
 </div>

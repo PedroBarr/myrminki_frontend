@@ -1,96 +1,12 @@
-.save-as-button mat-icon {
-  font-size: 18px;
-  width: auto;
-  height: auto;
-}
-
-#args-param-container {
+#implmnt-container {
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
 
-.mat-card {
-  background-color: #f7f7f7;
-  border-color: #0004;
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 1px;
-}
-
-mat-card-header:has(.mat-icon) {
-  flex-direction: row-reverse;
-  justify-content: space-between;
-}
-
-mat-card-header .mat-icon {
-  display: flex;
-  align-items: center;
-  align-self: flex-start;
-
-  width: auto;
-  height: fit-content;
-  padding: 2px;
-
-  font-size: 18px;
-}
-
-mat-card-title {
+.implmnt-title {
   color: var(--myrmex-primary);
   font-family: code-pro-bold, sans-serif;
-  font-size: 15px !important;
-  letter-spacing: 3px;
-  line-height: normal;
-
-  margin-bottom: 5px !important;
-}
-
-mat-card-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-
-  margin-bottom: 0px !important;
-}
-
-.arg-paramz-description {
-  font-size: 12px;
-  line-height: normal;
-  margin-left: 20px;
-}
-
-mat-card-actions button {
-  width: 100%;
-  font-size: 14px;
-}
-
-mat-card-actions button mat-icon {
-  font-size: 18px;
-  width: auto;
-  height: auto;
-}
-
-mat-expansion-panel {
-  background-color: transparent;
-  box-shadow: none !important;
-}
-
-mat-expansion-panel-header {
-  height: 30px !important;
-  padding-left: 20px !important;
-}
-
-mat-expansion-panel mat-panel-title {
-  color: var(--myrmex-primary);
-  font-family: code-pro-bold, sans-serif;
-  font-size: 12px;
   letter-spacing: 3pt;
-}
-
-.mat-card.selected-args {
-  background-color: var(--myrmex-primary-selected);
-}
-
-.selected-args .arg-paramz-description {
-  color: black;
+  margin-bottom: 0;
 }
