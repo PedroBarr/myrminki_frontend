@@ -147,23 +147,29 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
   public n_argumentaciones: number = 0;
   public n_soluciones: number = 0;
   public lenguaje_programacion: string = '';
+  public parametros_algoritmo_id: string = '';
 
-  constructor (obj: any = {
-    id: '',
-    nombre_algoritmo: '',
-    n_parametros_algoritmo: 0,
-    n_argumentaciones: 0,
-    n_soluciones: 0,
-    lenguaje_programacion: '',
-  }) {
+  constructor (obj: any) {
+    const {
+      id = '',
+      nombre_algoritmo = '',
+      n_parametros_algoritmo = 0,
+      n_argumentaciones = 0,
+      n_soluciones = 0,
+      lenguaje_programacion = '',
+      parametros_algoritmo_id = '',
+    } = obj;
+
     super(obj);
     this.tipo_entrada = 'IMPLEMENTACION';
-    this.id = obj.id;
-    this.nombre_algoritmo = obj.nombre_algoritmo;
-    this.n_parametros_algoritmo = obj.n_parametros_algoritmo;
-    this.n_argumentaciones = obj.n_argumentaciones;
-    this.n_soluciones = obj.n_soluciones;
-    this.lenguaje_programacion = obj.lenguaje_programacion;
+    this.id = id;
+    this.nombre_algoritmo = nombre_algoritmo;
+    this.n_parametros_algoritmo = n_parametros_algoritmo;
+    this.n_argumentaciones = n_argumentaciones;
+    this.n_soluciones = n_soluciones;
+    this.lenguaje_programacion = lenguaje_programacion;
+
+    this.parametros_algoritmo_id = parametros_algoritmo_id;
   }
 
   override ruta_enlace ( ): string {

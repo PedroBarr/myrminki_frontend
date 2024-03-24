@@ -37,6 +37,7 @@ export class ImplmntPickerBoxComponent implements OnInit {
   @Input() implmnt_selecto: string | null = null;
   @Input() es_emergente: boolean = false;
   @Output() emitir_seleccion = new EventEmitter<string | null>();
+  @Output() emitir_parametros = new EventEmitter<string | null>();
 
   constructor (
     public implmnt_editor_emergente: MatDialog,
@@ -67,6 +68,7 @@ export class ImplmntPickerBoxComponent implements OnInit {
                 cantidad_argumentaciones: n_argumentaciones,
                 cantidad_soluciones: n_soluciones,
                 lenguaje_programacion,
+                parametrizacion_algoritmo_identificador: parametros_algoritmo_id,
               } = implementacion;
 
               const etiquetas = implementacion.etiquetas.map(
@@ -82,6 +84,7 @@ export class ImplmntPickerBoxComponent implements OnInit {
                 n_argumentaciones,
                 n_soluciones,
                 lenguaje_programacion,
+                parametros_algoritmo_id,
               });
             }
           );
@@ -118,18 +121,20 @@ export class ImplmntPickerBoxComponent implements OnInit {
 
   set_implmnt_selected (valor: string | null) {
     this.implmnt_selecto = valor;
-    this.emitir_seleccion.emit(this.implmnt_selecto);
 
-    /*
-    const arg_selecto: ArgumentoParametrizacion | undefined = (
-      this.args_paramz.find(
-        (arg_param: ArgumentoParametrizacion) =>
-        arg_param.clave_id == this.arg_selecto
+    const implmnt_selecto: PrevisualizacionImplementacion | undefined = (
+      this.implementaciones.find(
+        (implementacion: PrevisualizacionImplementacion) =>
+        implementacion.id == this.implmnt_selecto
       )
     )
 
-    if (arg_selecto) this.emitir_argumentos.emit(arg_selecto.argumentos);
-    */
+    if (implmnt_selecto) {
+      this.emitir_seleccion.emit(implmnt_selecto.id);
+      this.emitir_parametros.emit(implmnt_selecto.parametros_algoritmo_id);
+    } else {
+      this.implmnt_selecto = null;
+    }
   }
 
 }

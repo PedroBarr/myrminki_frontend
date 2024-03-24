@@ -45,6 +45,7 @@ export class PageEditorSolutionComponent implements OnInit {
   implmnt_visor_apertura: boolean = false;
 
   implmnt_selecto: string | null = null;
+  paramz_implmnt_id_selected: string | null = null;
 
   constructor (
     public implmnt_selector_emergente: MatDialog,
@@ -121,15 +122,20 @@ export class PageEditorSolutionComponent implements OnInit {
 
     implmnt_selector_componente.implmnt_selecto = this.implmnt_selecto;
     implmnt_selector_componente.es_emergente = true;
+
     implmnt_selector_componente.emitir_seleccion.subscribe((result: any) => {
       if (result) this.set_implmnt_selected(result);
 
       this.implmnt_selector_apertura = !variable;
     });
 
-    implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
-      if (result) this.set_implmnt_selected(result);
+    implmnt_selector_componente.emitir_parametros.subscribe((result: any) => {
+      if (result) this.set_paramz_implmnt_id_selected(result);
 
+      this.implmnt_selector_apertura = !variable;
+    });
+
+    implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
       this.implmnt_selector_apertura = !variable;
     });
   }
@@ -138,6 +144,10 @@ export class PageEditorSolutionComponent implements OnInit {
     this.implmnt_selecto = valor;
 
     if (valor) this.solucion.implementacion_id = valor;
+  }
+
+  set_paramz_implmnt_id_selected (valor: string | null) {
+    this.paramz_implmnt_id_selected = valor;
   }
 
   set_implmnt_visor_apertura (variable: boolean) {
