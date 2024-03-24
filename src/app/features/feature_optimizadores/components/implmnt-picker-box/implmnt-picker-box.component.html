@@ -1,0 +1,9 @@
+<div class="boxW100 flex-column gap-10">
+  <div id="implmnt-container">
+    <myrmex-optmzd-box
+      *ngFor="let implementacion of implementaciones; index as i_implmnt"
+      [optimizador]="implementacion"
+    >
+    </myrmex-optmzd-box>
+  </div>
+</div>

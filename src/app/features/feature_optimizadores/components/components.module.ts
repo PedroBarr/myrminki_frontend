@@ -84,6 +84,10 @@ import {
   OptmzdBoxComponent
 } from './optmzd-box/optmzd-box.component';
 
+import {
+  ImplmntPickerBoxComponent
+} from './implmnt-picker-box/implmnt-picker-box.component';
+
 
 @NgModule({
   declarations: [
@@ -102,6 +106,7 @@ import {
     ArgsBoxComponent,
     ArgsImplmntEditorBoxComponent,
     OptmzdBoxComponent,
+    ImplmntPickerBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -141,6 +146,7 @@ import {
     ArgsBoxComponent,
     ArgsImplmntEditorBoxComponent,
     OptmzdBoxComponent,
+    ImplmntPickerBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
