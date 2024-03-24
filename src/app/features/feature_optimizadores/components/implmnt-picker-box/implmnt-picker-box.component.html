@@ -11,6 +11,7 @@
       [opcion_previsualizar]="es_emergente"
       [tipo_accion]="es_emergente ? 'emit' : 'route'"
       (emitir_accion)="set_implmnt_selected($event)"
+      (emitir_visualizar)="set_implmnt_editor_apertura(true, $event)"
     >
     </myrmex-optmzd-box>
   </div>

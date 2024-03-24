@@ -29,6 +29,7 @@ export class OptmzdBoxComponent {
   @Input() opcion_previsualizar: boolean = false;
   @Input() tipo_accion: 'route' | 'emit' = 'route';
   @Output() emitir_accion = new EventEmitter<string>();
+  @Output() emitir_visualizar = new EventEmitter<string>();
 
   constructor (
     private router: Router,
@@ -53,6 +54,7 @@ export class OptmzdBoxComponent {
     if (!this.opcion_previsualizar) return false;
 
     const previsualizaciones_habilitadas: string[] = [
+      'IMPLEMENTACION'
     ];
 
     if (
@@ -63,6 +65,11 @@ export class OptmzdBoxComponent {
       return false;
 
     return true;
+  }
+
+  do_previsualizacion (event: MouseEvent) {
+    event.stopPropagation();
+    this.emitir_visualizar.emit(this.optimizador.get_id());
   }
 
 }

@@ -93,9 +93,7 @@ export class ImplmntPickerBoxComponent implements OnInit {
       .finally(( ) => { });
   }
 
-  set_implmnt_editor_apertura (variable: boolean) {
-    if (this.implmnt_selecto == null) return;
-
+  set_implmnt_editor_apertura (variable: boolean, implementacion_id: string) {
     this.implmnt_editor_apertura = variable;
 
     const implmnt_editor_referencia = this.implmnt_editor_emergente.open(
@@ -107,11 +105,11 @@ export class ImplmntPickerBoxComponent implements OnInit {
       implmnt_editor_referencia.componentInstance
     );
 
-    /*
-    implmnt_editor_componente.implementacion = this.implementacion;
     implmnt_editor_componente.args_editables = false;
     implmnt_editor_componente.secciones_colapsables = false;
-    */
+
+    implmnt_editor_componente.implementacion_id = implementacion_id;
+    implmnt_editor_componente.loadImplementation();
 
     implmnt_editor_referencia.afterClosed().subscribe((result: any) => {
       this.implmnt_editor_apertura = !variable;
