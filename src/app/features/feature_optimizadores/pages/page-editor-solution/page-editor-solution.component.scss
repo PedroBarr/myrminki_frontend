@@ -24,23 +24,16 @@
   gap: 10px;
 }
 
-mat-card-header {
-  width: 100%;
-
-  flex-direction: column;
-}
-
 mat-card-title {
-  width: 100%;
-
-  display: flex;
-  justify-content: space-between;
-  gap: 10px;
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
 }
 
 mat-card-title mat-form-field {
   color: var(--myrmex-primary);
-  font-size: 15px;
+  font-size: 18px;
 }
 
 .seccion-title {
@@ -67,4 +60,67 @@ mat-card-title mat-form-field {
 
 .toolbar-button.form-field-toolbar:hover {
   color: var(--myrmex-primary) !important;
+}
+
+.aditamentos-container mat-card-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 15px !important;
+
+  line-height: normal;
+  margin-bottom: 5px !important;
+}
+
+.inspector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+.rel-content {
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #666;
+
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+.rel-clave {
+  display: block;
+  width: 100%;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--myrmex-primary);
+
+  letter-spacing: 2px;
+  line-break: anywhere;
+  text-transform: uppercase;
+}
+
+.rel-actions {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  gap: 5px;
+
+  font-family: montserrat, sans-serif;
+  font-size: 12px;
+}
+
+.rel-actions button {
+  width: 100%;
+  font-size: 13px;
+}
+
+.rel-actions button mat-icon {
+  font-size: 20px;
+  width: auto;
 }

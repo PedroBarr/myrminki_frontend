@@ -3,7 +3,11 @@
     <div class="solucion-container">
       <mat-card>
         <mat-card-header>
-          <mat-card-title>
+          <mat-card-title> Creador de soluci&oacute;n </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="boxW100 flex-row gap-10 flex-space-between">
             <mat-form-field class="boxW100">
               <mat-label> T&iacute;tulo </mat-label>
 
@@ -32,10 +36,8 @@
                 </mat-option>
               </mat-select>
             </mat-form-field>
-          </mat-card-title>
-        </mat-card-header>
+          </div>
 
-        <mat-card-content class="seccion-container">
           <div class="seccion-editor">
             <span class="seccion-title"> C&oacute;digo </span>
 
@@ -87,14 +89,123 @@
     </div>
 
     <div class="aditamentos-container">
-      <button
-        class="boxW100 main-function-button-H"
-        mat-flat-button
-        color="primary"
-      >
-        <mat-icon>save</mat-icon>
-        Guardar
-      </button>
+      <div class="boxW100 flex-column gap-10">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title> Inspector </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="inspector-container">
+              <div class="rel-content">
+                <span class="rel-clave"> Implementaci&oacute;n </span>
+
+                <div class="rel-actions">
+                  <button
+                    *ngIf="solucion.implementacion_id"
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button>
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+
+              <div class="rel-content">
+                <span class="rel-clave">
+                  Argumentaci&oacute;n implementaci&oacute;n
+                </span>
+
+                <div class="rel-actions">
+                  <button
+                    *ngIf="solucion.argumentacion_implementacion_id"
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button>
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+
+              <div class="rel-content">
+                <span class="rel-clave"> Instancia </span>
+
+                <div class="rel-actions">
+                  <button
+                    *ngIf="solucion.instancia_id"
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button>
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+
+              <div class="rel-content">
+                <span class="rel-clave"> Argumentaci&oacute;n instancia </span>
+
+                <div class="rel-actions">
+                  <button
+                    *ngIf="solucion.argumentacion_instancia_id"
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button>
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button
+              class="boxW100 main-function-button-H"
+              mat-flat-button
+              color="primary"
+              [disabled]="no_es_guardable_solucion()"
+            >
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

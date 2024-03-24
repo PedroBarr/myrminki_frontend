@@ -82,4 +82,17 @@ export class PageEditorSolutionComponent implements OnInit {
   get_codigo_conteo ( ) {
     return this.solucion.codigo_puntuado.split(/\r\n|\r|\n/).length;
   }
+
+  no_es_guardable_solucion ( ): boolean {
+    return (
+      !this.solucion.implementacion_id ||
+      !this.solucion.argumentacion_implementacion_id ||
+      !this.solucion.instancia_id ||
+      !this.solucion.argumentacion_instancia_id ||
+      !this.solucion.titulo ||
+      !this.solucion.lenguaje_nombre ||
+      !this.solucion.codigo_puntuado
+    );
+  }
+
 }
