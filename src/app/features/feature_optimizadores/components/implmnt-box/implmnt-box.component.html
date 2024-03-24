@@ -42,6 +42,7 @@
       </mat-expansion-panel>
 
       <mat-expansion-panel
+        *ngIf="args_editables || args_id"
         hideToggle
         [expanded]="argumentacion_apertura"
         (opened)="set_argumentacion_apertura(true)"

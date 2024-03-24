@@ -25,6 +25,8 @@ import { environment } from 'src/environments/environment';
 export class ImplmntBoxComponent implements OnChanges{
 
   @Input() implementacion: Implementacion = new Implementacion();
+  @Input() implementacion_id: string | null = null;
+
   @Input() args_editables: boolean = true;
   @Input() secciones_colapsables: boolean = true;
   @Input() args_id: string = '';
@@ -100,6 +102,56 @@ export class ImplmntBoxComponent implements OnChanges{
 
           if (data.diccionario_argumentos)
             this.argumentacion.argumentos = data.diccionario_argumentos;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load implementation from API
+  */
+  async loadImplementation ( ) {
+    if (!this.implementacion_id) return;
+
+    axios.get(
+      environment.MYRMEX_API +
+        '/implementacion/identificador/' + this.implementacion_id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data = response.data;
+          this.implementacion = new Implementacion();
+
+          if (data.diminutivo)
+            this.implementacion.implementacion_id = data.diminutivo;
+
+          if (data.nombre)
+            this.implementacion.titulo = data.nombre;
+
+          if (data.etiquetas)
+            this.implementacion.etiquetas = data.etiquetas.map(
+              (etiqueta: any) => etiqueta.etiqueta
+            );
+
+          if (data.lenguaje_nombre)
+            this.implementacion.lenguaje_nombre = data.lenguaje_nombre;
+
+          if (data.descripcion)
+            this.implementacion.descripcion_puntuada = data.descripcion;
+
+          if (data.codificacion)
+            this.implementacion.codigo_puntuado = data.codificacion;
+
+          if (data.parametrizacion_algoritmo_identificador)
+            this.implementacion.parametrizacion_id = (
+              data.parametrizacion_algoritmo_identificador
+            );
+
         }
       })
       .catch(error => {
