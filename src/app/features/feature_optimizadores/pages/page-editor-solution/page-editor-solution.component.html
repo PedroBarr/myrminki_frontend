@@ -130,7 +130,7 @@
                 <div class="rel-actions">
                   <myrmex-args-box
                     *ngIf="solucion.argumentacion_implementacion_id"
-                    [argumentacion]="argumentacion"
+                    [argumentacion]="argumentacion_implmnt"
                   >
                   </myrmex-args-box>
 
@@ -155,6 +155,7 @@
                     mat-flat-button
                     color="primary"
                   >
+                    <!--(click)="set_implmnt_visor_apertura(true)"-->
                     <mat-icon>visibility</mat-icon>
                     Ver
                   </button>
@@ -162,6 +163,7 @@
                   <button
                     mat-flat-button
                     color="primary"
+                    (click)="set_instc_selector_apertura(true)"
                   >
                     <mat-icon>tune</mat-icon>
                     Modificar
@@ -185,6 +187,7 @@
                   <button
                     mat-flat-button
                     color="primary"
+                    [disabled]="!paramz_instc_id_selected"
                   >
                     <mat-icon>tune</mat-icon>
                     Modificar

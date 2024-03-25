@@ -30,6 +30,10 @@ import {
   InstcBoxComponent
 } from '../../components/instc-box/instc-box.component';
 
+import {
+  InstcPickerBoxComponent
+} from '../../components/instc-picker-box/instc-picker-box.component';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -48,16 +52,27 @@ export class PageEditorSolutionComponent implements OnInit {
   implmnt_selector_apertura: boolean = false;
   implmnt_visor_apertura: boolean = false;
   args_implmnt_selector_apertura: boolean = false;
+  instc_selector_apertura: boolean = false;
+  instc_visor_apertura: boolean = false;
+  args_instc_selector_apertura: boolean = false;
 
   implmnt_selecto: string | null = null;
   paramz_implmnt_id_selected: string | null = null;
   args_implmnt_selecto: string | null = null;
-  argumentacion: ArgumentoParametrizacion = new ArgumentoParametrizacion();
+  argumentacion_implmnt: ArgumentoParametrizacion = new ArgumentoParametrizacion();
+
+  instc_selecto: string | null = null;
+  paramz_instc_id_selected: string | null = null;
+  args_instc_selecto: string | null = null;
+  argumentacion_instc: ArgumentoParametrizacion = new ArgumentoParametrizacion();
 
   constructor (
     public implmnt_selector_emergente: MatDialog,
     public implmnt_visor_emergente: MatDialog,
     public args_implmnt_selector_emergente: MatDialog,
+    public instc_selector_emergente: MatDialog,
+    public instc_visor_emergente: MatDialog,
+    public args_instc_selector_emergente: MatDialog,
   ) { }
 
   async ngOnInit ( ) {
@@ -148,16 +163,6 @@ export class PageEditorSolutionComponent implements OnInit {
     });
   }
 
-  set_implmnt_selected (valor: string | null) {
-    this.implmnt_selecto = valor;
-
-    if (valor) this.solucion.implementacion_id = valor;
-  }
-
-  set_paramz_implmnt_id_selected (valor: string | null) {
-    this.paramz_implmnt_id_selected = valor;
-  }
-
   set_implmnt_visor_apertura (variable: boolean) {
     this.implmnt_visor_apertura = variable;
 
@@ -184,6 +189,16 @@ export class PageEditorSolutionComponent implements OnInit {
     implmnt_visor_referencia.afterClosed().subscribe((result: any) => {
       this.implmnt_visor_apertura = !variable;
     });
+  }
+
+  set_implmnt_selected (valor: string | null) {
+    this.implmnt_selecto = valor;
+
+    if (valor) this.solucion.implementacion_id = valor;
+  }
+
+  set_paramz_implmnt_id_selected (valor: string | null) {
+    this.paramz_implmnt_id_selected = valor;
   }
 
   set_args_implmnt_selector_apertura (variable: boolean) {
@@ -237,7 +252,49 @@ export class PageEditorSolutionComponent implements OnInit {
   }
 
   set_argumentos (valor: {[clave_param: string]: string}) {
-    this.argumentacion.argumentos = valor;
+    this.argumentacion_implmnt.argumentos = valor;
+  }
+
+  set_instc_selector_apertura (variable: boolean) {
+    this.instc_selector_apertura = variable;
+
+    const instc_selector_referencia = this.instc_selector_emergente.open(
+      InstcPickerBoxComponent,
+      { panelClass: 'emergente-selector'}
+    );
+
+    const instc_selector_componente = (
+      instc_selector_referencia.componentInstance
+    );
+
+    instc_selector_componente.instc_selecto = this.instc_selecto;
+    instc_selector_componente.es_emergente = true;
+
+    instc_selector_componente.emitir_seleccion.subscribe((result: any) => {
+      if (result) this.set_instc_selected(result);
+
+      this.instc_selector_apertura = !variable;
+    });
+
+    instc_selector_componente.emitir_parametros.subscribe((result: any) => {
+      if (result) this.set_paramz_instc_id_selected(result);
+
+      this.instc_selector_apertura = !variable;
+    });
+
+    instc_selector_referencia.afterClosed().subscribe((result: any) => {
+      this.instc_selector_apertura = !variable;
+    });
+  }
+
+  set_instc_selected (valor: string | null) {
+    this.instc_selecto = valor;
+
+    if (valor) this.solucion.instancia_id = valor;
+  }
+
+  set_paramz_instc_id_selected (valor: string | null) {
+    this.paramz_instc_id_selected = valor;
   }
 
 }
