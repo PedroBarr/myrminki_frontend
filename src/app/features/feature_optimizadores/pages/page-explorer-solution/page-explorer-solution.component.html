@@ -93,6 +93,17 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
+        *ngIf="solucion.solucion_id"
+        routerLink="/solucion/editor/{{solucion.solucion_id}}"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar la soluci&oacute;n
+      </button>
+
+      <button
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
         *ngIf="solucion.implementacion_id && solucion.argumentacion_implementacion_id"
       >
         <mat-icon>code</mat-icon>

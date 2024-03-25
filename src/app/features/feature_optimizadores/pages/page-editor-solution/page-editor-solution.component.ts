@@ -247,6 +247,29 @@ export class PageEditorSolutionComponent implements OnInit {
       .finally(( ) => { });
   }
 
+  /**
+  * Save argumentaciones from API
+  */
+  async saveArgs ( ) {
+    if (this.no_es_guardable_solucion()) return;
+
+    await axios.post(
+      environment.MYRMEX_API + '/solucion/actualizar',
+      this.solucion.build_post()
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.id) {
+          this.router.navigateByUrl('/solucion/visor/' + response.data.diminutivo);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
   toggle_codigo_vista ( ) {
     switch (this.codigo_vista) {
       case 'E':
@@ -518,29 +541,6 @@ export class PageEditorSolutionComponent implements OnInit {
 
   set_argumentacion_instancia (valor: {[clave_param: string]: string}) {
     this.argumentacion_instc.argumentos = valor;
-  }
-
-  /**
-  * Save argumentaciones from API
-  */
-  async saveArgs ( ) {
-    if (this.no_es_guardable_solucion()) return;
-
-    await axios.post(
-      environment.MYRMEX_API + '/solucion/actualizar',
-      this.solucion.build_post()
-    )
-      .then(response => {
-        console.log(response.data);
-
-        if (response.data && response.data.id) {
-          this.router.navigateByUrl('/solucion/' + response.data.diminutivo);
-        }
-      })
-      .catch(error => {
-        console.error(error);
-      })
-      .finally(( ) => { });
   }
 
 }

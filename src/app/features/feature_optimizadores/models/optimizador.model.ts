@@ -697,9 +697,15 @@ export class Solucion {
       (new Date().getTime())
     );
 
-    if (this.solucion_id) post_data['diminutivo'] = this.solucion_id;
+    if (this.solucion_id) {
+      post_data['id'] = this.solucion_id;
+    }
 
     return post_data;
+  }
+
+  ruta_enlace ( ): string {
+    return '/solucion/visor/' + this.solucion_id;
   }
 
 }
