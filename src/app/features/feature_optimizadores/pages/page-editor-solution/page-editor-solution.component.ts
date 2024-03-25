@@ -71,6 +71,8 @@ export class PageEditorSolutionComponent implements OnInit {
   argumentacion_instc: ArgumentoParametrizacion = new ArgumentoParametrizacion();
 
   constructor (
+    private router: Router,
+    private route: ActivatedRoute,
     public implmnt_selector_emergente: MatDialog,
     public implmnt_visor_emergente: MatDialog,
     public args_implmnt_selector_emergente: MatDialog,
@@ -379,6 +381,29 @@ export class PageEditorSolutionComponent implements OnInit {
 
   set_argumentacion_instancia (valor: {[clave_param: string]: string}) {
     this.argumentacion_instc.argumentos = valor;
+  }
+
+  /**
+  * Save argumentaciones from API
+  */
+  async saveArgs ( ) {
+    if (this.no_es_guardable_solucion()) return;
+
+    await axios.post(
+      environment.MYRMEX_API + '/solucion/actualizar',
+      this.solucion.build_post()
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.id) {
+          this.router.navigateByUrl('/solucion/' + response.data.diminutivo);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
   }
 
 }

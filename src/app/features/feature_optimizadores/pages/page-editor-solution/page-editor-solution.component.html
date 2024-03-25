@@ -13,7 +13,7 @@
 
               <input
                 type="text"
-                placeholder="Ej: Aplicación del OCH para el problema P?NP"
+                placeholder="Ej: Aplicaci&oacute;un del OCH para el problema P?NP"
                 matInput
                 [(ngModel)]="solucion.titulo"
               >
@@ -201,6 +201,7 @@
               mat-flat-button
               color="primary"
               [disabled]="no_es_guardable_solucion()"
+              (click)="saveArgs()"
             >
               <mat-icon>save</mat-icon>
               Guardar

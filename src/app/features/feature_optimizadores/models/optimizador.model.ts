@@ -677,4 +677,29 @@ export class Solucion {
     );
   }
 
+  build_post(): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {
+      argumentacion_instancia: this.argumentacion_instancia_id,
+      instancia: this.instancia_id,
+      argumentacion_solucion: this.argumentacion_implementacion_id,
+      implementacion: this.implementacion_id,
+      lenguaje: this.lenguaje_nombre,
+      nombre: this.titulo,
+      codificacion: this.codigo_puntuado,
+    };
+
+    post_data['diminutivo'] = (
+      'solcn_' +
+      this.implementacion_id +
+      '_' +
+      this.instancia_id +
+      '_' +
+      (new Date().getTime())
+    );
+
+    if (this.solucion_id) post_data['diminutivo'] = this.solucion_id;
+
+    return post_data;
+  }
+
 }
