@@ -83,6 +83,9 @@ export class PageEditorSolutionComponent implements OnInit {
 
   async ngOnInit ( ) {
     await this.loadLangs();
+
+    if (this.route.snapshot.paramMap.get('identificador') != null)
+      this.loadSolution();
   }
 
   /**
@@ -102,6 +105,140 @@ export class PageEditorSolutionComponent implements OnInit {
         ) {
           this.lenguajes_habilitados = response.data;
           this.solucion.lenguaje_nombre = response.data[0];
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load solution from API
+  */
+  async loadSolution ( ) {
+    axios.get(
+      environment.MYRMEX_API +
+        '/solucion/identificador/' +
+        this.route.snapshot.paramMap.get('identificador'),
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data = response.data;
+
+          if (data.diminutivo)
+            this.solucion.solucion_id = data.diminutivo;
+
+          if (data.nombre)
+            this.solucion.titulo = data.nombre;
+
+          if (data.etiquetas)
+            this.solucion.etiquetas = data.etiquetas.map(
+              (etiqueta: any) => etiqueta.etiqueta
+            );
+
+          if (data.lenguaje_nombre)
+            this.solucion.lenguaje_nombre = data.lenguaje_nombre;
+
+          if (data.codificacion) {
+            this.solucion.codigo_puntuado = data.codificacion;
+
+            this.codigo_vista = 'P';
+          }
+
+          if (data.implementacion_id) {
+            this.solucion.implementacion_id = data.implementacion_id;
+            this.implmnt_selecto = data.implementacion_id;
+          }
+
+          if (data.argumentacion_solucion_id)
+            this.solucion.argumentacion_implementacion_id = (
+              data.argumentacion_solucion_id
+            );
+            this.args_implmnt_selecto = data.argumentacion_solucion_id;
+            this.loadArgsImplmnt();
+
+          if (data.instancia_id) {
+            this.solucion.instancia_id = data.instancia_id;
+            this.instc_selecto = data.instancia_id;
+          }
+
+          if (data.argumentacion_instancia_id)
+            this.solucion.argumentacion_instancia_id = (
+              data.argumentacion_instancia_id
+            );
+            this.args_instc_selecto = data.argumentacion_instancia_id;
+            this.loadArgsInstc();
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load argumentacion implementacion from API
+  */
+  async loadArgsImplmnt ( ) {
+    if (!this.args_implmnt_selecto) return;
+
+    await axios.get(
+      environment.MYRMEX_API +
+      '/argumentacion_solucion/identificador/' + this.args_implmnt_selecto
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data: any = response.data;
+
+          if (data.diminutivo)
+            this.argumentacion_implmnt.clave_id = data.diminutivo;
+
+          if (data.diccionario_argumentos)
+            this.argumentacion_implmnt.argumentos = data.diccionario_argumentos;
+
+          if (data.parametrizacion_algoritmo_diminutivo)
+            this.paramz_implmnt_id_selected = (
+              data.parametrizacion_algoritmo_diminutivo
+            );
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load argumentacion instancia from API
+  */
+  async loadArgsInstc ( ) {
+    if (!this.args_instc_selecto) return;
+
+    await axios.get(
+      environment.MYRMEX_API +
+      '/argumentacion_instancia/identificador/' + this.args_instc_selecto
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data: any = response.data;
+
+          if (data.diminutivo)
+            this.argumentacion_instc.clave_id = data.diminutivo;
+
+          if (data.diccionario_argumentos)
+            this.argumentacion_instc.argumentos = data.diccionario_argumentos;
+
+          if (data.parametrizacion_problema_diminutivo)
+            this.paramz_instc_id_selected = (
+              data.parametrizacion_problema_diminutivo
+            );
         }
       })
       .catch(error => {

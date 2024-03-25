@@ -54,12 +54,21 @@ const routes: Routes = [
     component: PageExplorerInstanceComponent
   },
   {
-    path: 'solucion/editor',
-    component: PageEditorSolutionComponent
-  },
-  {
-    path: 'solucion/:identificador',
-    component: PageExplorerSolutionComponent
+    path: 'solucion',
+    children: [
+      {
+        path: 'editor',
+        component: PageEditorSolutionComponent,
+      },
+      {
+        path: 'editor/:identificador',
+        component: PageEditorSolutionComponent,
+      },
+      {
+        path: 'visor/:identificador',
+        component: PageExplorerSolutionComponent
+      },
+    ],
   },
 ];
 

@@ -566,7 +566,7 @@ export class PrevisualizacionSolucion extends PrevisualizacionEntrada {
   }
 
   override ruta_enlace ( ): string {
-    return '/solucion/' + this.id;
+    return '/solucion/visor/' + this.id;
   }
 
   override get_id ( ): string {
