@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
+  ArgumentoParametrizacion,
   Solucion,
 } from '../../models/optimizador.model';
 
@@ -51,6 +52,7 @@ export class PageEditorSolutionComponent implements OnInit {
   implmnt_selecto: string | null = null;
   paramz_implmnt_id_selected: string | null = null;
   args_implmnt_selecto: string | null = null;
+  argumentacion: ArgumentoParametrizacion = new ArgumentoParametrizacion();
 
   constructor (
     public implmnt_selector_emergente: MatDialog,
@@ -174,6 +176,11 @@ export class PageEditorSolutionComponent implements OnInit {
     implmnt_visor_componente.implementacion_id = this.implmnt_selecto;
     implmnt_visor_componente.loadImplementation();
 
+    if (this.args_implmnt_selecto) {
+      implmnt_visor_componente.args_id = this.args_implmnt_selecto;
+      implmnt_visor_componente.loadArgs();
+    }
+
     implmnt_visor_referencia.afterClosed().subscribe((result: any) => {
       this.implmnt_visor_apertura = !variable;
     });
@@ -198,19 +205,39 @@ export class PageEditorSolutionComponent implements OnInit {
     args_implmnt_selector_componente.paramz_algrtm_id = (
       this.paramz_implmnt_id_selected
     );
+
+    args_implmnt_selector_componente.arg_selecto = this.args_implmnt_selecto;
     args_implmnt_selector_componente.es_editor = false;
     args_implmnt_selector_componente.es_emergente = true;
     args_implmnt_selector_componente.con_defecto = false;
 
     args_implmnt_selector_componente.emitir_seleccion.subscribe((result: any) => {
-      if (result) console.log(result);
+      if (result) this.set_args_implmnt_selected(result);
 
       this.implmnt_selector_apertura = !variable;
     });
 
+    args_implmnt_selector_componente.emitir_argumentos.subscribe(
+      (result: any) => {
+        if (result) this.set_argumentos(result);
+
+        this.implmnt_selector_apertura = !variable;
+      }
+    );
+
     args_implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
       this.args_implmnt_selector_apertura = !variable;
     });
+  }
+
+  set_args_implmnt_selected (valor: string | null) {
+    this.args_implmnt_selecto = valor;
+
+    if (valor) this.solucion.argumentacion_implementacion_id = valor;
+  }
+
+  set_argumentos (valor: {[clave_param: string]: string}) {
+    this.argumentacion.argumentos = valor;
   }
 
 }

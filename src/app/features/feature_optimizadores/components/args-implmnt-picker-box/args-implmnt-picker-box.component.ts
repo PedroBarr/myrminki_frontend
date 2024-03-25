@@ -30,10 +30,10 @@ export class ArgsImplmntPickerBoxComponent implements OnInit, OnChanges {
 
   args_paramz: ArgumentoParametrizacion[] = [];
   arg_apertura: boolean[] = [];
-  arg_selecto: string | null = null;
 
   arg_editor_apertura: boolean = false;
 
+  @Input() arg_selecto: string | null = null;
   @Input() paramz_algrtm_id: string  = '';
   @Input() args_editados: {[clave_param: string]: string} = {};
 

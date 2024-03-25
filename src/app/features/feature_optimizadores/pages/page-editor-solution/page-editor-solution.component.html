@@ -128,14 +128,11 @@
                 </span>
 
                 <div class="rel-actions">
-                  <button
+                  <myrmex-args-box
                     *ngIf="solucion.argumentacion_implementacion_id"
-                    mat-flat-button
-                    color="primary"
+                    [argumentacion]="argumentacion"
                   >
-                    <mat-icon>visibility</mat-icon>
-                    Ver
-                  </button>
+                  </myrmex-args-box>
 
                   <button
                     mat-flat-button

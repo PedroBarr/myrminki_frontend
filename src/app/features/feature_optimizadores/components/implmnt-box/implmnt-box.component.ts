@@ -22,7 +22,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./implmnt-box.component.scss'],
 })
 
-export class ImplmntBoxComponent implements OnChanges{
+export class ImplmntBoxComponent implements OnChanges {
 
   @Input() implementacion: Implementacion = new Implementacion();
   @Input() implementacion_id: string | null = null;
