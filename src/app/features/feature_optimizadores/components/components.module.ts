@@ -88,6 +88,10 @@ import {
   ImplmntPickerBoxComponent
 } from './implmnt-picker-box/implmnt-picker-box.component';
 
+import {
+  InstcPickerBoxComponent
+} from './instc-picker-box/instc-picker-box.component';
+
 
 @NgModule({
   declarations: [
@@ -107,6 +111,7 @@ import {
     ArgsImplmntEditorBoxComponent,
     OptmzdBoxComponent,
     ImplmntPickerBoxComponent,
+    InstcPickerBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -147,6 +152,7 @@ import {
     ArgsImplmntEditorBoxComponent,
     OptmzdBoxComponent,
     ImplmntPickerBoxComponent,
+    InstcPickerBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

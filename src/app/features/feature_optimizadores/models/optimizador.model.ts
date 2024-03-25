@@ -417,23 +417,28 @@ export class PrevisualizacionInstancia extends PrevisualizacionEntrada {
   public n_argumentaciones: number = 0;
   public n_soluciones: number = 0;
   public lenguaje_programacion: string = '';
+  public parametros_problema_id: string = '';
 
-  constructor (obj: any = {
-    id: '',
-    nombre_problema: '',
-    n_parametros_problema: 0,
-    n_argumentaciones: 0,
-    n_soluciones: 0,
-    lenguaje_programacion: '',
-  }) {
+  constructor (obj: any) {
+    const {
+      id = '',
+      nombre_problema = '',
+      n_parametros_problema = 0,
+      n_argumentaciones = 0,
+      n_soluciones = 0,
+      lenguaje_programacion = '',
+      parametros_problema_id  = '',
+    } = obj;
+
     super(obj);
     this.tipo_entrada = 'INSTANCIA';
-    this.id = obj.id;
-    this.nombre_problema = obj.nombre_problema;
-    this.n_parametros_problema = obj.n_parametros_problema;
-    this.n_argumentaciones = obj.n_argumentaciones;
-    this.n_soluciones = obj.n_soluciones;
-    this.lenguaje_programacion = obj.lenguaje_programacion;
+    this.id = id;
+    this.nombre_problema = nombre_problema;
+    this.n_parametros_problema = n_parametros_problema;
+    this.n_argumentaciones = n_argumentaciones;
+    this.n_soluciones = n_soluciones;
+    this.lenguaje_programacion = lenguaje_programacion;
+    this.parametros_problema_id = parametros_problema_id;
   }
 
   override ruta_enlace ( ): string {

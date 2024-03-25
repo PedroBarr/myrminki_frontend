@@ -1,0 +1,28 @@
+<div class="boxW100 flex-column gap-10">
+  <span class="instc-title" *ngIf="es_emergente">
+    Instancias
+  </span>
+
+  <div id="instc-container">
+    <myrmex-optmzd-box
+      *ngFor="let instancia of instancias; index as i_instc"
+      [optimizador]="instancia"
+      [es_selecto]="instc_selecto == instancia.get_id()"
+      [opcion_previsualizar]="es_emergente"
+      [tipo_accion]="es_emergente ? 'emit' : 'route'"
+      (emitir_accion)="set_instc_selected($event)"
+      (emitir_visualizar)="set_instc_editor_apertura(true, $event)"
+    >
+    </myrmex-optmzd-box>
+  </div>
+
+  <button
+    *ngIf="es_emergente"
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+  >
+    Cerrar
+  </button>
+</div>
