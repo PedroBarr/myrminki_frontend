@@ -40,9 +40,23 @@
       </myrmex-optmzd-box>
     </div>
 
-    <myrmex-tag-search-box
-      (emitirSeleccion)="seleccionEtiqueta($event)"
-      (emitirRemocion)="remocionEtiqueta($event)"
-    ></myrmex-tag-search-box>
+    <div class="aditamentos-container">
+      <myrmex-tag-search-box
+        (emitirSeleccion)="seleccionEtiqueta($event)"
+        (emitirRemocion)="remocionEtiqueta($event)"
+      ></myrmex-tag-search-box>
+
+      <div class="boxW100 flex-column gap-5">
+        <button
+          class="boxW100 main-function-button-H"
+          mat-flat-button
+          color="primary"
+          routerLink="/solucion/editor"
+        >
+          <mat-icon>diversity_2</mat-icon>
+          Crear soluci&oacute;n
+        </button>
+      </div>
+    </div>
   </div>
 </div>

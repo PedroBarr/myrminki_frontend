@@ -87,6 +87,23 @@
   gap: 15px;
 }
 
-myrmex-tag-search-box {
+.aditamentos-container {
+  display: flex;
   width: calc(100% - var(--optimizador-width));
+
+  flex-direction: column;
+  gap: 10px;
+}
+
+myrmex-tag-search-box {
+  width: 100%;
+}
+
+.main-function-button-H {
+  height: 55px;
+  font-size: 15px;
+}
+
+.main-function-button-H mat-icon {
+  font-size: 20px;
 }
