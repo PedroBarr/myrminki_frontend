@@ -4,6 +4,13 @@
   height: auto;
 }
 
+.args-param-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
+}
+
 #args-param-container {
   display: flex;
   flex-direction: column;

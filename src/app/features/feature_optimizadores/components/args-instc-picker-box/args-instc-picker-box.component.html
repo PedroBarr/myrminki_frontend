@@ -1,8 +1,13 @@
 <div class="boxW100 flex-column gap-10">
+  <span class="args-param-title" *ngIf="es_emergente">
+    Argumentaciones
+  </span>
+
   <button
     class="boxW100 main-function-button-H save-as-button"
     mat-flat-button
     color="primary"
+    *ngIf="es_editor"
     [disabled]="no_es_guardable_argumentos()"
     [ngClass]="{'esta_deshabilitado': no_es_guardable_argumentos()}"
     (click)="init_save_args()"
@@ -70,4 +75,14 @@
       </mat-card-actions>
     </mat-card>
   </div>
+
+  <button
+    *ngIf="es_emergente"
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+  >
+    Cerrar
+  </button>
 </div>

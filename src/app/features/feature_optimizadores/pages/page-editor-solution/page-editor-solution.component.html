@@ -175,19 +175,17 @@
                 <span class="rel-clave"> Argumentaci&oacute;n instancia </span>
 
                 <div class="rel-actions">
-                  <button
+                  <myrmex-args-box
                     *ngIf="solucion.argumentacion_instancia_id"
-                    mat-flat-button
-                    color="primary"
+                    [argumentacion]="argumentacion_instc"
                   >
-                    <mat-icon>visibility</mat-icon>
-                    Ver
-                  </button>
+                  </myrmex-args-box>
 
                   <button
                     mat-flat-button
                     color="primary"
                     [disabled]="!paramz_instc_id_selected"
+                    (click)="set_args_instc_selector_apertura(true)"
                   >
                     <mat-icon>tune</mat-icon>
                     Modificar
