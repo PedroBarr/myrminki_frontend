@@ -54,7 +54,8 @@ export class OptmzdBoxComponent {
     if (!this.opcion_previsualizar) return false;
 
     const previsualizaciones_habilitadas: string[] = [
-      'IMPLEMENTACION'
+      'IMPLEMENTACION',
+      'INSTANCIA',
     ];
 
     if (

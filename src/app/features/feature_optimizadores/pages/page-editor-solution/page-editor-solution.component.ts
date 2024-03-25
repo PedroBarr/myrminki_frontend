@@ -287,6 +287,32 @@ export class PageEditorSolutionComponent implements OnInit {
     });
   }
 
+  set_instc_visor_apertura (variable: boolean) {
+    this.instc_visor_apertura = variable;
+
+    const instc_visor_referencia = this.instc_visor_emergente.open(
+      InstcBoxComponent,
+      { panelClass: 'emergente'}
+    );
+
+    const instc_visor_componente = instc_visor_referencia.componentInstance;
+
+    instc_visor_componente.args_editables = false;
+    instc_visor_componente.secciones_colapsables = false;
+
+    instc_visor_componente.instancia_id = this.instc_selecto;
+    instc_visor_componente.loadInstancia();
+
+    if (this.args_instc_selecto) {
+      instc_visor_componente.args_id = this.args_instc_selecto;
+      instc_visor_componente.loadArgs();
+    }
+
+    instc_visor_referencia.afterClosed().subscribe((result: any) => {
+      this.instc_visor_apertura = !variable;
+    });
+  }
+
   set_instc_selected (valor: string | null) {
     this.instc_selecto = valor;
 

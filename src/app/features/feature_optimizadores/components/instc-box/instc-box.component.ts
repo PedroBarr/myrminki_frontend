@@ -25,6 +25,8 @@ import { environment } from 'src/environments/environment';
 export class InstcBoxComponent implements OnChanges {
 
   @Input() instancia: Instancia = new Instancia();
+  @Input() instancia_id: string | null = null;
+
   @Input() args_editables: boolean = true;
   @Input() secciones_colapsables: boolean = true;
   @Input() args_id: string = '';
@@ -106,6 +108,57 @@ export class InstcBoxComponent implements OnChanges {
 
           if (data.diccionario_argumentos)
             this.argumentacion.argumentos = data.diccionario_argumentos;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => { });
+  }
+
+  /**
+  * Load instancia from API
+  */
+  async loadInstancia ( ) {
+    if (!this.instancia_id) return;
+
+    axios.get(
+      environment.MYRMEX_API + '/instancia/identificador/' + this.instancia_id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          const data = response.data;
+
+          if (data.diminutivo)
+            this.instancia.instancia_id = data.diminutivo;
+
+          if (data.nombre)
+            this.instancia.titulo = data.nombre;
+
+          if (data.etiquetas)
+            this.instancia.etiquetas = data.etiquetas.map(
+              (etiqueta: any) => etiqueta.etiqueta
+            );
+
+          if (data.lenguaje_nombre)
+            this.instancia.lenguaje_nombre = data.lenguaje_nombre;
+
+          if (data.descripcion)
+            this.instancia.descripcion_puntuada = data.descripcion;
+
+          if (data.matematizacion)
+            this.instancia.matematizacion_puntuada = data.matematizacion;
+
+          if (data.codificacion)
+            this.instancia.codigo_puntuado = data.codificacion;
+
+          if (data.parametrizacion_problema_identificador)
+            this.instancia.parametrizacion_id = (
+              data.parametrizacion_problema_identificador
+            );
+
         }
       })
       .catch(error => {

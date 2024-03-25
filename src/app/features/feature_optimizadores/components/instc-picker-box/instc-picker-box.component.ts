@@ -108,16 +108,15 @@ export class InstcPickerBoxComponent implements OnInit {
       instc_editor_referencia.componentInstance
     );
 
-    /*instc_editor_componente.args_editables = false;
-    implmnt_editor_componente.secciones_colapsables = false;
+    instc_editor_componente.args_editables = false;
+    instc_editor_componente.secciones_colapsables = false;
 
-    implmnt_editor_componente.implementacion_id = implementacion_id;
-    implmnt_editor_componente.loadImplementation();
+    instc_editor_componente.instancia_id = instancia_id;
+    instc_editor_componente.loadInstancia();
 
-    implmnt_editor_referencia.afterClosed().subscribe((result: any) => {
-      this.implmnt_editor_apertura = !variable;
+    instc_editor_referencia.afterClosed().subscribe((result: any) => {
+      this.instc_editor_apertura = !variable;
     });
-    */
   }
 
   set_instc_selected (valor: string | null) {
