@@ -23,14 +23,21 @@ export class ParamzAlgorithmBoxComponent implements OnInit, OnChanges {
   paramz_algrtm: ParametrizacionAlgoritmo[] = [];
 
   @Input() paramz_algrtm_id: string = '';
+  @Input() load_first_only: boolean = true;
 
   async ngOnInit ( ) {
     await this.loadParamzAlgrtm();
   }
 
   async ngOnChanges ( changes: any ) {
-    if (changes.paramz_algrtm_id.firstChange) {
-      await this.loadParamzAlgrtm();
+    if (changes.paramz_algrtm_id) {
+      if (this.load_first_only) {
+        if (changes.paramz_algrtm_id.firstChange) {
+          await this.loadParamzAlgrtm();
+        }
+      } else {
+        await this.loadParamzAlgrtm();
+      }
     }
   }
 

@@ -23,6 +23,7 @@ export class ParamzProblemBoxComponent implements OnInit, OnChanges {
   paramz_problm: ParametrizacionProblema[] = [];
 
   @Input() paramz_problem_id: string = '';
+  @Input() load_first_only: boolean = true;
 
   async ngOnInit ( ) {
     await this.loadParamzAlgrtm();
@@ -30,7 +31,13 @@ export class ParamzProblemBoxComponent implements OnInit, OnChanges {
 
   async ngOnChanges ( changes: any ) {
     if (changes.paramz_problem_id) {
-      if (changes.paramz_problem_id.firstChange) await this.loadParamzAlgrtm();
+      if (this.load_first_only) {
+        if (changes.paramz_problem_id.firstChange) {
+          await this.loadParamzAlgrtm();
+        }
+      } else {
+        await this.loadParamzAlgrtm();
+      }
     }
   }
 
