@@ -56,6 +56,7 @@ export class OptmzdBoxComponent {
     const previsualizaciones_habilitadas: string[] = [
       'IMPLEMENTACION',
       'INSTANCIA',
+      'PROBLEMA',
     ];
 
     if (
