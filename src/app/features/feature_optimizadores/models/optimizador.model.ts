@@ -182,7 +182,7 @@ export class PrevisualizacionImplementacion extends PrevisualizacionEntrada {
   }
 
   override ruta_enlace ( ): string {
-    return '/implementacion/' + this.id;
+    return '/implementacion/visor/' + this.id;
   }
 
   override get_id ( ): string {

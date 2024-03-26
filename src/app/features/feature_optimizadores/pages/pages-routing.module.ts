@@ -46,8 +46,13 @@ const routes: Routes = [
     component: PageExplorerAlgorithmComponent
   },
   {
-    path: 'implementacion/:identificador',
-    component: PageExplorerImplementationComponent
+    path: 'implementacion',
+    children: [
+      {
+        path: 'visor/:identificador',
+        component: PageExplorerImplementationComponent
+      },
+    ],
   },
   {
     path: 'problema/:identificador',
