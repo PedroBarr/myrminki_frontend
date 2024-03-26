@@ -1,9 +1,10 @@
 import {
-    Component,
-    OnInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
 } from '@angular/core';
-
-import { Router, ActivatedRoute } from '@angular/router';
 
 import axios from 'axios';
 
@@ -13,42 +14,49 @@ import {
 
 import { environment } from 'src/environments/environment';
 
+
 @Component({
-  selector: 'myrmex-page-explorer-problem',
-  templateUrl: './page-explorer-problem.component.html',
-  styleUrls: ['./page-explorer-problem.component.scss'],
+  selector: 'myrmex-problm-box',
+  templateUrl: './problm-box.component.html',
+  styleUrls: ['./problm-box.component.scss'],
 })
 
-export class PageExplorerProblemComponent implements OnInit {
+export class ProblmBoxComponent implements OnChanges {
 
-  problema: Problema = new Problema();
+  @Input() problema: Problema = new Problema();
+  @Input() problema_id: string | null = null;
 
-  constructor (
-    private router: Router,
-    private route: ActivatedRoute,
-  ) { }
+  @Input() secciones_colapsables: boolean = true;
 
-  ngOnInit ( ) {
-    this.loadProblem();
+  descripcion_apertura: boolean = true;
+  matematizacion_apertura: boolean = true;
+
+  ngOnChanges (changes: any) { }
+
+  set_descripcion_apertura (variable: boolean) {
+    if (!this.secciones_colapsables) return;
+    else this.descripcion_apertura = variable;
+  }
+
+  set_matematizacion_apertura (variable: boolean) {
+    if (!this.secciones_colapsables) return;
+    else this.matematizacion_apertura = variable;
   }
 
   /**
-  * Load problem from API
+  * Load problema from API
   */
-  async loadProblem ( ) {
+  async loadProblema ( ) {
+    if (!this.problema_id) return;
+
     axios.get(
-      environment.MYRMEX_API +
-        '/problema/identificador/' +
-        this.route.snapshot.paramMap.get('identificador'),
+      environment.MYRMEX_API + '/problema/identificador/' + this.problema_id,
     )
       .then(response => {
         console.log(response.data);
 
         if (response.data) {
           const data = response.data;
-
-          if (data.diminutivo)
-            this.problema.problema_id = data.diminutivo;
 
           if (data.nombre)
             this.problema.titulo = data.nombre;

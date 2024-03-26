@@ -347,22 +347,32 @@ export class Problema {
   public descripcion_puntuada: string;
   public matematizacion_puntuada: string;
 
+  public problema_id: string;
   public parametrizacion_id: string;
 
-  constructor (obj: any = {
-    titulo: '',
-    etiquetas: [],
-    descripcion_puntuada: '',
-    matematizacion_puntuada: '',
-    parametrizacion_id: '',
-  }) {
-    this.titulo = obj.titulo;
-    this.etiquetas = obj.etiquetas;
-    this.descripcion_puntuada = obj.descripcion_puntuada;
-    this.matematizacion_puntuada = obj.matematizacion_puntuada;
+  constructor (obj: any = {}) {
+    const {
+      titulo = '',
+      etiquetas = [],
+      descripcion_puntuada = '',
+      matematizacion_puntuada = '',
+      problema_id = '',
+      parametrizacion_id = '',
+    } = obj;
 
-    this.parametrizacion_id = obj.parametrizacion_id ?
-      obj.parametrizacion_id :
+    this.titulo = titulo;
+    this.etiquetas = etiquetas;
+    this.descripcion_puntuada = descripcion_puntuada;
+    this.matematizacion_puntuada = matematizacion_puntuada;
+
+    this.problema_id =
+      problema_id ?
+      problema_id :
+      ''
+    ;
+
+    this.parametrizacion_id = parametrizacion_id ?
+      parametrizacion_id :
       ''
     ;
   }
