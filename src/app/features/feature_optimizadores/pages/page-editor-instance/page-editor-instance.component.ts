@@ -130,10 +130,23 @@ export class PageEditorInstanceComponent implements OnInit {
             this.codigo_vista = 'P';
           }
 
-          if (data.parametrizacion_problema_identificador)
+          if (data.parametrizacion_problema_identificador) {
             this.instancia.parametrizacion_id = (
               data.parametrizacion_problema_identificador
             );
+
+            this.paramz_problm_selecto = (
+              data.parametrizacion_problema_identificador
+            );
+          }
+
+          if (data.problema_diminutivo) {
+            this.instancia.problema_id = (
+              data.problema_diminutivo
+            );
+
+            this.problm_selecto = data.problema_diminutivo;
+          }
 
         }
       })
