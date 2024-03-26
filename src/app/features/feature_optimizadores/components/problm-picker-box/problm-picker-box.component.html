@@ -1,0 +1,28 @@
+<div class="boxW100 flex-column gap-10">
+  <span class="problm-title" *ngIf="es_emergente">
+    Instancias
+  </span>
+
+  <div id="problm-container">
+    <myrmex-optmzd-box
+      *ngFor="let problema of problemas; index as i_instc"
+      [optimizador]="problema"
+      [es_selecto]="problm_selecto == problema.get_id()"
+      [opcion_previsualizar]="es_emergente"
+      [tipo_accion]="es_emergente ? 'emit' : 'route'"
+      (emitir_accion)="set_problm_selected($event)"
+      (emitir_visualizar)="set_problm_editor_apertura(true, $event)"
+    >
+    </myrmex-optmzd-box>
+  </div>
+
+  <button
+    *ngIf="es_emergente"
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    mat-dialog-close
+  >
+    Cerrar
+  </button>
+</div>

@@ -304,19 +304,30 @@ export class ArgumentoParametrizacion {
 export class PrevisualizacionProblema extends PrevisualizacionEntrada {
 
   public id: string = '';
+  public parametros_problema_id: string = '';
+
   public n_parametros_problema: number = 0;
   public n_instancias: number = 0;
 
-  constructor (obj: any = {
-    id: '',
-    n_parametros_problema: 0,
-    n_instancias: 0,
-  }) {
+  constructor (obj: any = {}) {
+    const {
+      id = '',
+      n_parametros_problema = 0,
+      n_instancias = 0,
+      parametros_problema_id = '',
+    } = obj;
+
     super(obj);
     this.tipo_entrada = 'PROBLEMA';
-    this.id = obj.id;
-    this.n_parametros_problema = obj.n_parametros_problema;
-    this.n_instancias = obj.n_instancias;
+    this.id = id;
+    this.n_parametros_problema = n_parametros_problema;
+    this.n_instancias = n_instancias;
+
+    this.parametros_problema_id = (
+      parametros_problema_id ?
+      parametros_problema_id :
+      ''
+    );
   }
 
   override ruta_enlace ( ): string {
