@@ -23,6 +23,17 @@
       >
       </myrmex-instc-eval-box>
 
+      <button
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+        *ngIf="instancia.instancia_id"
+        routerLink="/instancia/editor/{{instancia.instancia_id}}"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar la instancia
+      </button>
+
       <myrmex-args-instc-picker-box
         *ngIf="instancia.parametrizacion_id"
         [paramz_problm_id]="instancia.parametrizacion_id"
