@@ -13,6 +13,10 @@ import {
   Instancia
 } from '../../models/optimizador.model';
 
+import {
+  ProblmPickerBoxComponent
+} from '../../components/problm-picker-box/problm-picker-box.component';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -193,39 +197,39 @@ export class PageEditorInstanceComponent implements OnInit {
     );
   }
 
-  /*
-  set_implmnt_selector_apertura (variable: boolean) {
-    this.implmnt_selector_apertura = variable;
+  set_problm_selector_apertura (variable: boolean) {
+    this.problm_selector_apertura = variable;
 
-    const implmnt_selector_referencia = this.implmnt_selector_emergente.open(
-      ImplmntPickerBoxComponent,
+    const problm_selector_referencia = this.problm_selector_emergente.open(
+      ProblmPickerBoxComponent,
       { panelClass: 'emergente-selector'}
     );
 
-    const implmnt_selector_componente = (
-      implmnt_selector_referencia.componentInstance
+    const problm_selector_componente = (
+      problm_selector_referencia.componentInstance
     );
 
-    implmnt_selector_componente.implmnt_selecto = this.implmnt_selecto;
-    implmnt_selector_componente.es_emergente = true;
+    problm_selector_componente.problm_selecto = this.problm_selecto;
+    problm_selector_componente.es_emergente = true;
 
-    implmnt_selector_componente.emitir_seleccion.subscribe((result: any) => {
-      if (result) this.set_implmnt_selected(result);
+    problm_selector_componente.emitir_seleccion.subscribe((result: any) => {
+      if (result) this.set_problm_selected(result);
 
-      this.implmnt_selector_apertura = !variable;
+      this.problm_selector_apertura = !variable;
     });
 
-    implmnt_selector_componente.emitir_parametros.subscribe((result: any) => {
-      if (result) this.set_paramz_implmnt_id_selected(result);
+    problm_selector_componente.emitir_parametros.subscribe((result: any) => {
+      if (result) this.set_paramz_problm_selected(result);
 
-      this.implmnt_selector_apertura = !variable;
+      this.problm_selector_apertura = !variable;
     });
 
-    implmnt_selector_referencia.afterClosed().subscribe((result: any) => {
-      this.implmnt_selector_apertura = !variable;
+    problm_selector_referencia.afterClosed().subscribe((result: any) => {
+      this.problm_selector_apertura = !variable;
     });
   }
 
+  /*
   set_implmnt_visor_apertura (variable: boolean) {
     this.implmnt_visor_apertura = variable;
 
@@ -253,17 +257,21 @@ export class PageEditorInstanceComponent implements OnInit {
       this.implmnt_visor_apertura = !variable;
     });
   }
+  */
 
-  set_implmnt_selected (valor: string | null) {
-    this.implmnt_selecto = valor;
+  set_problm_selected (valor: string | null) {
+    this.problm_selecto = valor;
 
-    if (valor) this.solucion.implementacion_id = valor;
+    if (valor) this.instancia.problema_id = valor;
   }
 
-  set_paramz_implmnt_id_selected (valor: string | null) {
-    this.paramz_implmnt_id_selected = valor;
+  set_paramz_problm_selected (valor: string | null) {
+    this.paramz_problm_selecto = valor;
+
+    if (valor) this.instancia.parametrizacion_id = valor;
   }
 
+  /*
   set_args_implmnt_selector_apertura (variable: boolean) {
     if (!this.paramz_implmnt_id_selected) return;
 

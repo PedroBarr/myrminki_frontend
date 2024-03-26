@@ -90,7 +90,7 @@ export class ProblmPickerBoxComponent implements OnInit {
       .finally(( ) => { });
   }
 
-  set_problm_editor_apertura (variable: boolean, instancia_id: string) {
+  set_problm_editor_apertura (variable: boolean, problema_id: string) {
     this.problm_editor_apertura = variable;
 
     const problm_editor_referencia = this.problm_editor_emergente.open(

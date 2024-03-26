@@ -96,6 +96,10 @@ import {
   ProblmBoxComponent
 } from './problm-box/problm-box.component';
 
+import {
+  ProblmPickerBoxComponent
+} from './problm-picker-box/problm-picker-box.component';
+
 
 @NgModule({
   declarations: [
@@ -117,6 +121,7 @@ import {
     ImplmntPickerBoxComponent,
     InstcPickerBoxComponent,
     ProblmBoxComponent,
+    ProblmPickerBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -159,6 +164,7 @@ import {
     ImplmntPickerBoxComponent,
     InstcPickerBoxComponent,
     ProblmBoxComponent,
+    ProblmPickerBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }
