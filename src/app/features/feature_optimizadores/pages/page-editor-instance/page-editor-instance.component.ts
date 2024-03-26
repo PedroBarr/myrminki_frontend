@@ -14,6 +14,10 @@ import {
 } from '../../models/optimizador.model';
 
 import {
+  ProblmBoxComponent
+} from '../../components/problm-box/problm-box.component';
+
+import {
   ProblmPickerBoxComponent
 } from '../../components/problm-picker-box/problm-picker-box.component';
 
@@ -229,35 +233,26 @@ export class PageEditorInstanceComponent implements OnInit {
     });
   }
 
-  /*
-  set_implmnt_visor_apertura (variable: boolean) {
-    this.implmnt_visor_apertura = variable;
+  set_problm_visor_apertura (variable: boolean) {
+    this.problm_visor_apertura = variable;
 
-    const implmnt_visor_referencia = this.implmnt_visor_emergente.open(
-      ImplmntBoxComponent,
+    const problm_visor_referencia = this.problm_visor_emergente.open(
+      ProblmBoxComponent,
       { panelClass: 'emergente'}
     );
 
-    const implmnt_visor_componente = (
-      implmnt_visor_referencia.componentInstance
+    const problm_visor_componente = (
+      problm_visor_referencia.componentInstance
     );
 
-    implmnt_visor_componente.args_editables = false;
-    implmnt_visor_componente.secciones_colapsables = false;
+    problm_visor_componente.secciones_colapsables = false;
+    problm_visor_componente.problema_id = this.problm_selecto;
+    problm_visor_componente.loadProblema();
 
-    implmnt_visor_componente.implementacion_id = this.implmnt_selecto;
-    implmnt_visor_componente.loadImplementation();
-
-    if (this.args_implmnt_selecto) {
-      implmnt_visor_componente.args_id = this.args_implmnt_selecto;
-      implmnt_visor_componente.loadArgs();
-    }
-
-    implmnt_visor_referencia.afterClosed().subscribe((result: any) => {
-      this.implmnt_visor_apertura = !variable;
+    problm_visor_referencia.afterClosed().subscribe((result: any) => {
+      this.problm_visor_apertura = !variable;
     });
   }
-  */
 
   set_problm_selected (valor: string | null) {
     this.problm_selecto = valor;
