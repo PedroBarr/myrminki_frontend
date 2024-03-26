@@ -1,11 +1,3 @@
-.mat-card {
-  background-color: #f7f7f7;
-  border-color: #0004;
-  border-style: solid;
-  border-radius: 10px;
-  border-width: 1px;
-}
-
 :has(> .algoritmo-container) {
   --gap: 20px;
   --optimizador-width: 60%;
@@ -23,27 +15,4 @@
 
 .aditamentos-container {
   width: calc(100% - var(--optimizador-width));
-}
-
-mat-card-title h2 {
-  color: var(--myrmex-primary);
-  font-family: code-pro-bold, sans-serif;
-  letter-spacing: 3pt;
-  margin-bottom: 0;
-}
-
-mat-expansion-panel {
-  background-color: transparent;
-  box-shadow: none !important;
-}
-
-mat-expansion-panel-header {
-  height: 30px !important;
-  padding-left: 20px !important;
-}
-
-mat-expansion-panel mat-panel-title {
-  color: var(--myrmex-primary);
-  font-family: code-pro-bold, sans-serif;
-  letter-spacing: 3pt;
 }

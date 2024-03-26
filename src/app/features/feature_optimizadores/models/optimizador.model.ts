@@ -70,24 +70,33 @@ export class Algoritmo {
   public matematizacion_puntuada: string;
   public seudo_codigo_puntuado: string;
 
+  public algoritmo_id: string;
   public parametrizacion_id: string;
 
-  constructor (obj: any = {
-    titulo: '',
-    etiquetas: [],
-    descripcion_puntuada: '',
-    matematizacion_puntuada: '',
-    seudo_codigo_puntuado: '',
-    parametrizacion_id: '',
-  }) {
-    this.titulo = obj.titulo;
-    this.etiquetas = obj.etiquetas;
-    this.descripcion_puntuada = obj.descripcion_puntuada;
-    this.matematizacion_puntuada = obj.matematizacion_puntuada;
-    this.seudo_codigo_puntuado = obj.seudo_codigo_puntuado;
+  constructor (obj: any = {}) {
+    const {
+      titulo = '',
+      etiquetas = [],
+      descripcion_puntuada = '',
+      matematizacion_puntuada = '',
+      seudo_codigo_puntuado = '',
+      algoritmo_id = '',
+      parametrizacion_id = '',
+    } = obj;
 
-    this.parametrizacion_id = obj.parametrizacion_id ?
-      obj.parametrizacion_id :
+    this.titulo = titulo;
+    this.etiquetas = etiquetas;
+    this.descripcion_puntuada = descripcion_puntuada;
+    this.matematizacion_puntuada = matematizacion_puntuada;
+    this.seudo_codigo_puntuado = seudo_codigo_puntuado;
+
+    this.algoritmo_id = algoritmo_id ?
+      algoritmo_id :
+      ''
+    ;
+
+    this.parametrizacion_id = parametrizacion_id ?
+      parametrizacion_id :
       ''
     ;
   }

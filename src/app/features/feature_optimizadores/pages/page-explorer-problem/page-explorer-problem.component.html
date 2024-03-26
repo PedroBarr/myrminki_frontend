@@ -1,10 +1,7 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
     <div class="problema-container">
-      <myrmex-problm-box
-        *ngIf="problema.problema_id"
-        [problema]="problema"
-      >
+      <myrmex-problm-box *ngIf="problema.problema_id" [problema]="problema">
       </myrmex-problm-box>
     </div>
 

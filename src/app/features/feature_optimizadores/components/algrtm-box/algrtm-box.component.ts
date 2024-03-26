@@ -1,9 +1,10 @@
 import {
-    Component,
-    OnInit,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
 } from '@angular/core';
-
-import { Router, ActivatedRoute } from '@angular/router';
 
 import axios from 'axios';
 
@@ -13,58 +14,55 @@ import {
 
 import { environment } from 'src/environments/environment';
 
+
 @Component({
-  selector: 'myrmex-page-explorer-algorithm',
-  templateUrl: './page-explorer-algorithm.component.html',
-  styleUrls: ['./page-explorer-algorithm.component.scss'],
+  selector: 'myrmex-algrtm-box',
+  templateUrl: './algrtm-box.component.html',
+  styleUrls: ['./algrtm-box.component.scss'],
 })
 
-export class PageExplorerAlgorithmComponent implements OnInit {
+export class AlgrtmBoxComponent implements OnChanges {
 
-  algoritmo: Algoritmo = new Algoritmo();
+  @Input() algoritmo: Algoritmo = new Algoritmo();
+  @Input() algoritmo_id: string | null = null;
+
+  @Input() secciones_colapsables: boolean = true;
 
   descripcion_apertura: boolean = true;
   matematizacion_apertura: boolean = true;
   seudo_codigo_apertura: boolean = true;
 
-  constructor (
-    private router: Router,
-    private route: ActivatedRoute,
-  ) { }
-
-  ngOnInit ( ) {
-    this.loadAlgorithm();
-  }
+  ngOnChanges (changes: any) { }
 
   set_descripcion_apertura (variable: boolean) {
-    this.descripcion_apertura = variable;
+    if (!this.secciones_colapsables) return;
+    else this.descripcion_apertura = variable;
   }
 
   set_matematizacion_apertura (variable: boolean) {
-    this.matematizacion_apertura = variable;
+    if (!this.secciones_colapsables) return;
+    else this.matematizacion_apertura = variable;
   }
 
   set_seudo_codigo_apertura (variable: boolean) {
-    this.seudo_codigo_apertura = variable;
+    if (!this.secciones_colapsables) return;
+    else this.seudo_codigo_apertura = variable;
   }
 
   /**
   * Load algorithm from API
   */
   async loadAlgorithm ( ) {
+    if (!this.algoritmo_id) return;
+
     axios.get(
-      environment.MYRMEX_API +
-        '/algoritmo/identificador/' +
-        this.route.snapshot.paramMap.get('identificador'),
+      environment.MYRMEX_API + '/algoritmo/identificador/' + this.algoritmo_id,
     )
       .then(response => {
         console.log(response.data);
 
         if (response.data) {
           const data = response.data;
-
-          if (data.diminutivo)
-            this.algoritmo.algoritmo_id = data.diminutivo;
 
           if (data.nombre)
             this.algoritmo.titulo = data.nombre;
