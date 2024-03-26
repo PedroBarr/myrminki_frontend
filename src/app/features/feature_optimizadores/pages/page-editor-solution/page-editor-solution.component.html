@@ -47,13 +47,13 @@
               katex
               lineHighlight
               clipboard
-              [clipboardButtonTemplate]="togglePreviewModeButton"
+              [clipboardButtonTemplate]="toggleCodigoPreviewModeButton"
               (onCopyToClipboardClick)="null"
               [data]="'```' + solucion.lenguaje_nombre + '\n' + solucion.codigo_puntuado + '\n```'"
             >
             </markdown>
 
-            <ng-template #togglePreviewModeButton>
+            <ng-template #toggleCodigoPreviewModeButton>
               <button mat-icon-button class="toolbar-button" (click)="toggle_codigo_vista()">
                 <mat-icon>edit_note</mat-icon>
               </button>
@@ -68,7 +68,7 @@
               <textarea
                 matInput
                 cdkTextareaAutosize
-                cdkAutosizeMinRows="3 "
+                cdkAutosizeMinRows="3"
                 placeholder="y: function = lambda x: x**4"
                 [(ngModel)]="solucion.codigo_puntuado"
               ></textarea>
@@ -201,7 +201,7 @@
               mat-flat-button
               color="primary"
               [disabled]="no_es_guardable_solucion()"
-              (click)="saveArgs()"
+              (click)="saveSolution()"
             >
               <mat-icon>save</mat-icon>
               Guardar

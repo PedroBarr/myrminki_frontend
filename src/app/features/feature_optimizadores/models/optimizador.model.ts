@@ -484,32 +484,41 @@ export class Instancia {
   public codigo_puntuado: string;
 
   public instancia_id: string;
+  public problema_id: string;
   public parametrizacion_id: string;
 
-  constructor (obj: any = {
-    titulo: '',
-    etiquetas: [],
-    lenguaje_nombre: '',
-    descripcion_puntuada: '',
-    matematizacion_puntuada: '',
-    codigo_puntuado: '',
-    instancia_id: '',
-    parametrizacion_id: '',
-  }) {
-    this.titulo = obj.titulo;
-    this.etiquetas = obj.etiquetas;
-    this.lenguaje_nombre = obj.lenguaje_nombre;
-    this.descripcion_puntuada = obj.descripcion_puntuada;
-    this.matematizacion_puntuada = obj.matematizacion_puntuada;
-    this.codigo_puntuado = obj.codigo_puntuado;
+  constructor (obj: any = {}) {
+    const {
+      titulo = '',
+      etiquetas = [],
+      lenguaje_nombre = '',
+      descripcion_puntuada = '',
+      matematizacion_puntuada = '',
+      codigo_puntuado = '',
+      instancia_id = '',
+      problema_id = '',
+      parametrizacion_id = '',
+    } = obj;
 
-    this.instancia_id = obj.instancia_id ?
-      obj.instancia_id :
+    this.titulo = titulo;
+    this.etiquetas = etiquetas;
+    this.lenguaje_nombre = lenguaje_nombre;
+    this.descripcion_puntuada = descripcion_puntuada;
+    this.matematizacion_puntuada = matematizacion_puntuada;
+    this.codigo_puntuado = codigo_puntuado;
+
+    this.instancia_id = instancia_id ?
+      instancia_id :
       ''
     ;
 
-    this.parametrizacion_id = obj.parametrizacion_id ?
-      obj.parametrizacion_id :
+    this.problema_id = problema_id ?
+      problema_id :
+      ''
+    ;
+
+    this.parametrizacion_id = parametrizacion_id ?
+      parametrizacion_id :
       ''
     ;
   }
@@ -519,6 +528,12 @@ export class Instancia {
       this.lenguaje_nombre.substring(0, 1).toUpperCase() +
       this.lenguaje_nombre.substring(1).toLowerCase()
     );
+  }
+
+  build_post(): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {};
+
+    return post_data;
   }
 
 }

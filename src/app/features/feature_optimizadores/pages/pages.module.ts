@@ -60,6 +60,10 @@ import {
   PageEditorSolutionComponent
 } from './page-editor-solution/page-editor-solution.component';
 
+import {
+  PageEditorInstanceComponent
+} from './page-editor-instance/page-editor-instance.component';
+
 
 @NgModule({
   schemas: [
@@ -73,6 +77,7 @@ import {
     PageExplorerInstanceComponent,
     PageExplorerSolutionComponent,
     PageEditorSolutionComponent,
+    PageEditorInstanceComponent,
   ],
   imports: [
     CommonModule,
@@ -104,6 +109,7 @@ import {
     PageExplorerInstanceComponent,
     PageExplorerSolutionComponent,
     PageEditorSolutionComponent,
+    PageEditorInstanceComponent,
   ]
 })
 export class PagesFeatureOptimizadoresModule { }

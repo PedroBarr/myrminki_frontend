@@ -1,0 +1,235 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="instancia-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Creador de instancia </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="boxW100 flex-row gap-10 flex-space-between">
+            <mat-form-field class="boxW100">
+              <mat-label> T&iacute;tulo </mat-label>
+
+              <input
+                type="text"
+                placeholder="Ej: Instancia ligera del problema del guante o del cond&oacute;n"
+                matInput
+                [(ngModel)]="instancia.titulo"
+              >
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Lenguaje </mat-label>
+
+              <mat-select
+                [(ngModel)]="instancia.lenguaje_nombre"
+              >
+                <mat-option
+                  *ngFor="let lenguaje of lenguajes_habilitados"
+                  [value]="lenguaje"
+                >
+                  {{
+                    lenguaje.substring(0, 1).toUpperCase() +
+                    lenguaje.substring(1).toLowerCase()
+                  }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Descripci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_descripcion_vista()"
+                *ngIf="instancia.descripcion_puntuada"
+              >
+                <mat-icon *ngIf="descripcion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="descripcion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="descripcion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="instancia.descripcion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="descripcion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Descripci&oacute;n de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Descripci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="instancia.descripcion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Matematizaci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_matematizacion_vista()"
+                *ngIf="instancia.matematizacion_puntuada"
+              >
+                <mat-icon *ngIf="matematizacion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="matematizacion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="matematizacion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="instancia.matematizacion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="matematizacion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Matematizaci&oacute;n de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Matematizaci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="instancia.matematizacion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title"> C&oacute;digo </span>
+
+            <markdown
+              *ngIf="codigo_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [clipboardButtonTemplate]="toggleCodigoPreviewModeButton"
+              (onCopyToClipboardClick)="null"
+              [data]="'```' + instancia.lenguaje_nombre + '\n' + instancia.codigo_puntuado + '\n```'"
+            >
+            </markdown>
+
+            <ng-template #toggleCodigoPreviewModeButton>
+              <button
+                mat-icon-button
+                class="toolbar-button"
+                (click)="toggle_codigo_vista()"
+              >
+                <mat-icon>edit_note</mat-icon>
+              </button>
+            </ng-template>
+
+            <mat-form-field
+              *ngIf="codigo_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>C&oacute;digo de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="y: function = lambda x: x**4"
+                [(ngModel)]="instancia.codigo_puntuado"
+              ></textarea>
+
+              <button
+                matSuffix
+                mat-icon-button
+                class="toolbar-button form-field-toolbar"
+                (click)="toggle_codigo_vista()"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <div class="boxW100 flex-column gap-10">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title> Inspector </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="inspector-container">
+              <div class="rel-content">
+                <span class="rel-clave"> Problema </span>
+
+                <div class="rel-actions">
+                  <!--button
+                    *ngIf="instancia.problema_id"
+                    mat-flat-button
+                    color="primary"
+                    (click)="set_problm_visor_apertura(true)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button-->
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                  >
+                    <!--(click)="set_implmnt_selector_apertura(true)"-->
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button
+              class="boxW100 main-function-button-H"
+              mat-flat-button
+              color="primary"
+              [disabled]="no_es_guardable_instancia()"
+              (click)="saveInstance()"
+            >
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <myrmex-paramz-problem-box
+          *ngIf="instancia.parametrizacion_id"
+          [paramz_problem_id]="instancia.parametrizacion_id"
+        >
+        </myrmex-paramz-problem-box>
+      </div>
+    </div>
+  </div>
+</div>
