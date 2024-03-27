@@ -1,0 +1,141 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+}
+
+:has(> .implementacion-container) {
+  --gap: 20px;
+  --optimizador-width: 60%;
+  gap: var(--gap);
+}
+
+.implementacion-container {
+  width: calc(var(--optimizador-width) - var(--gap));
+}
+
+.aditamentos-container {
+  width: calc(100% - var(--optimizador-width));
+  display: flex;
+
+  flex-direction: column;
+  gap: 10px;
+}
+
+mat-card-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
+}
+
+mat-card-title mat-form-field {
+  color: var(--myrmex-primary);
+  font-size: 18px;
+}
+
+.seccion-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+}
+
+.seccion-button {
+  color: #666;
+  height: 20px;
+}
+
+.seccion-button mat-icon {
+  width: auto;
+  height: auto;
+
+  float: inline-end;
+  margin-right: 10px;
+
+  font-size: 20px !important;
+}
+
+.toolbar-button {
+  width: auto;
+  height: auto;
+
+  color: white;
+  font-size: 14px !important;
+}
+
+.toolbar-button.form-field-toolbar {
+  color: #666;
+  font-size: 20px !important;
+
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.toolbar-button.form-field-toolbar:hover {
+  color: var(--myrmex-primary) !important;
+}
+
+.aditamentos-container mat-card-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 15px !important;
+
+  line-height: normal;
+  margin-bottom: 5px !important;
+}
+
+.inspector-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  padding-top: 10px;
+  padding-left: 15px;
+  padding-bottom: 10px;
+}
+
+.rel-content {
+  border-left-style: solid;
+  border-left-width: 1px;
+  border-left-color: #666;
+
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+}
+
+.rel-clave {
+  display: block;
+  width: 100%;
+
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--myrmex-primary);
+
+  letter-spacing: 2px;
+  line-break: anywhere;
+  text-transform: uppercase;
+}
+
+.rel-actions {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  gap: 5px;
+
+  font-family: montserrat, sans-serif;
+  font-size: 12px;
+}
+
+.rel-actions button {
+  width: 100%;
+  font-size: 13px;
+}
+
+.rel-actions button mat-icon {
+  font-size: 20px;
+  width: auto;
+}

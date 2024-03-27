@@ -37,6 +37,10 @@ import {
   PageEditorInstanceComponent
 } from './page-editor-instance/page-editor-instance.component';
 
+import {
+  PageEditorImplementationComponent
+} from './page-editor-implementation/page-editor-implementation.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
@@ -49,29 +53,37 @@ const routes: Routes = [
     path: 'implementacion',
     children: [
       {
+        path: 'editor',
+        component: PageEditorImplementationComponent,
+      },
+      {
+        path: 'editor/:identificador',
+        component: PageEditorImplementationComponent,
+      },
+      {
         path: 'visor/:identificador',
-        component: PageExplorerImplementationComponent
+        component: PageExplorerImplementationComponent,
       },
     ],
   },
   {
     path: 'problema/:identificador',
-    component: PageExplorerProblemComponent
+    component: PageExplorerProblemComponent,
   },
   {
     path: 'instancia',
     children: [
       {
         path: 'editor',
-        component: PageEditorInstanceComponent
+        component: PageEditorInstanceComponent,
       },
       {
         path: 'editor/:identificador',
-        component: PageEditorInstanceComponent
+        component: PageEditorInstanceComponent,
       },
       {
         path: 'visor/:identificador',
-        component: PageExplorerInstanceComponent
+        component: PageExplorerInstanceComponent,
       },
     ],
   },
@@ -88,7 +100,7 @@ const routes: Routes = [
       },
       {
         path: 'visor/:identificador',
-        component: PageExplorerSolutionComponent
+        component: PageExplorerSolutionComponent,
       },
     ],
   },

@@ -1,0 +1,195 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="implementacion-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Creador de implementaci&oacute;n </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="boxW100 flex-row gap-10 flex-space-between">
+            <mat-form-field class="boxW100">
+              <mat-label> T&iacute;tulo </mat-label>
+
+              <input
+                type="text"
+                placeholder="Ej: Implementacion para n > 8 del descenso coordinado"
+                matInput
+                [(ngModel)]="implementacion.titulo"
+              >
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Lenguaje </mat-label>
+
+              <mat-select
+                [(ngModel)]="implementacion.lenguaje_nombre"
+              >
+                <mat-option
+                  *ngFor="let lenguaje of lenguajes_habilitados"
+                  [value]="lenguaje"
+                >
+                  {{
+                    lenguaje.substring(0, 1).toUpperCase() +
+                    lenguaje.substring(1).toLowerCase()
+                  }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Descripci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_descripcion_vista()"
+                *ngIf="implementacion.descripcion_puntuada"
+              >
+                <mat-icon *ngIf="descripcion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="descripcion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="descripcion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="implementacion.descripcion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="descripcion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Descripci&oacute;n de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Descripci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="implementacion.descripcion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title"> C&oacute;digo </span>
+
+            <markdown
+              *ngIf="codigo_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [clipboardButtonTemplate]="toggleCodigoPreviewModeButton"
+              (onCopyToClipboardClick)="null"
+              [data]="'```' + implementacion.lenguaje_nombre + '\n' + implementacion.codigo_puntuado + '\n```'"
+            >
+            </markdown>
+
+            <ng-template #toggleCodigoPreviewModeButton>
+              <button
+                mat-icon-button
+                class="toolbar-button"
+                (click)="toggle_codigo_vista()"
+              >
+                <mat-icon>edit_note</mat-icon>
+              </button>
+            </ng-template>
+
+            <mat-form-field
+              *ngIf="codigo_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>C&oacute;digo de la soluci&oacute;n</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="y: function = lambda x: x**4"
+                [(ngModel)]="implementacion.codigo_puntuado"
+              ></textarea>
+
+              <button
+                matSuffix
+                mat-icon-button
+                class="toolbar-button form-field-toolbar"
+                (click)="toggle_codigo_vista()"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <div class="boxW100 flex-column gap-10">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title> Inspector </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="inspector-container">
+              <div class="rel-content">
+                <span class="rel-clave"> Algoritmo </span>
+
+                <div class="rel-actions">
+                  <button
+                    *ngIf="implementacion.algoritmo_id"
+                    mat-flat-button
+                    color="primary"
+                    (click)="set_algrtm_visor_apertura(true)"
+                  >
+                    <mat-icon>visibility</mat-icon>
+                    Ver
+                  </button>
+
+                  <button
+                    mat-flat-button
+                    color="primary"
+                    (click)="set_algrtm_selector_apertura(true)"
+                  >
+                    <mat-icon>tune</mat-icon>
+                    Modificar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </mat-card-content>
+
+          <mat-card-actions align="end">
+            <button
+              class="boxW100 main-function-button-H"
+              mat-flat-button
+              color="primary"
+              [disabled]="no_es_guardable_implementacion()"
+              (click)="saveImplementation()"
+            >
+              <mat-icon>save</mat-icon>
+              Guardar
+            </button>
+          </mat-card-actions>
+        </mat-card>
+
+        <myrmex-paramz-algorithm-box
+          *ngIf="implementacion.parametrizacion_id"
+          [paramz_algrtm_id]="implementacion.parametrizacion_id"
+          [load_first_only]="false"
+        >
+        </myrmex-paramz-algorithm-box>
+      </div>
+    </div>
+  </div>
+</div>

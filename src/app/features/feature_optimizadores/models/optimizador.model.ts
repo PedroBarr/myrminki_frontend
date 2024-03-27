@@ -226,30 +226,39 @@ export class Implementacion {
   public codigo_puntuado: string;
 
   public implementacion_id: string;
+  public algoritmo_id: string;
   public parametrizacion_id: string;
 
-  constructor (obj: any = {
-    titulo: '',
-    etiquetas: [],
-    lenguaje_nombre: '',
-    descripcion_puntuada: '',
-    codigo_puntuado: '',
-    implementacion_id: '',
-    parametrizacion_id: '',
-  }) {
-    this.titulo = obj.titulo;
-    this.etiquetas = obj.etiquetas;
-    this.lenguaje_nombre = obj.lenguaje_nombre;
-    this.descripcion_puntuada = obj.descripcion_puntuada;
-    this.codigo_puntuado = obj.codigo_puntuado;
+  constructor (obj: any = {}) {
+    const {
+      titulo = '',
+      etiquetas = [],
+      lenguaje_nombre = '',
+      descripcion_puntuada = '',
+      codigo_puntuado = '',
+      implementacion_id = '',
+      parametrizacion_id = '',
+      algoritmo_id = '',
+    } = obj;
 
-    this.implementacion_id = obj.implementacion_id ?
-      obj.implementacion_id :
+    this.titulo = titulo;
+    this.etiquetas = etiquetas;
+    this.lenguaje_nombre = lenguaje_nombre;
+    this.descripcion_puntuada = descripcion_puntuada;
+    this.codigo_puntuado = codigo_puntuado;
+
+    this.implementacion_id = implementacion_id ?
+      implementacion_id :
       ''
     ;
 
-    this.parametrizacion_id = obj.parametrizacion_id ?
-      obj.parametrizacion_id :
+    this.algoritmo_id = algoritmo_id ?
+      algoritmo_id :
+      ''
+    ;
+
+    this.parametrizacion_id = parametrizacion_id ?
+      parametrizacion_id :
       ''
     ;
   }
@@ -259,6 +268,34 @@ export class Implementacion {
       this.lenguaje_nombre.substring(0, 1).toUpperCase() +
       this.lenguaje_nombre.substring(1).toLowerCase()
     );
+  }
+
+  build_post(): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {
+      /*
+      problema: this.problema_id,
+      lenguaje: this.lenguaje_nombre,
+      nombre: this.titulo,
+      descripcion: this.descripcion_puntuada,
+      matematizacion: this.matematizacion_puntuada,
+      codificacion: this.codigo_puntuado,
+      */
+    };
+
+    /*
+    post_data['diminutivo'] = (
+      'instc_' +
+      this.problema_id +
+      '_' +
+      (new Date().getTime())
+    );
+
+    if (this.instancia_id) {
+      post_data['id'] = this.instancia_id;
+    }
+    */
+
+    return post_data;
   }
 
 }
