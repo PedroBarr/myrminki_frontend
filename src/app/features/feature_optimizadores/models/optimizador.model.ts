@@ -378,7 +378,7 @@ export class PrevisualizacionProblema extends PrevisualizacionEntrada {
   }
 
   override ruta_enlace ( ): string {
-    return '/problema/' + this.id;
+    return '/problema/visor/' + this.id;
   }
 
   override get_id ( ): string {
