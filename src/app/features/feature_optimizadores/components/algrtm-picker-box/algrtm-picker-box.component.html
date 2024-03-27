@@ -1,15 +1,15 @@
 <div class="boxW100 flex-column gap-10">
-  <span class="problm-title" *ngIf="es_emergente"> Problemas </span>
+  <span class="algrtm-title" *ngIf="es_emergente"> Algoritmos </span>
 
   <div id="problm-container">
     <myrmex-optmzd-box
-      *ngFor="let problema of problemas; index as i_problm"
-      [optimizador]="problema"
-      [es_selecto]="problm_selecto == problema.get_id()"
+      *ngFor="let algoritmo of algoritmos; index as i_algrtm"
+      [optimizador]="algoritmo"
+      [es_selecto]="algrtm_selecto == algoritmo.get_id()"
       [opcion_previsualizar]="es_emergente"
       [tipo_accion]="es_emergente ? 'emit' : 'route'"
-      (emitir_accion)="set_problm_selected($event)"
-      (emitir_visualizar)="set_problm_editor_apertura(true, $event)"
+      (emitir_accion)="set_algrtm_selected($event)"
+      (emitir_visualizar)="set_algrtm_editor_apertura(true, $event)"
     >
     </myrmex-optmzd-box>
   </div>

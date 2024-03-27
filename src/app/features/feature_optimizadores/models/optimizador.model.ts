@@ -29,19 +29,25 @@ export class PrevisualizacionEntrada {
 export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
 
   public id: string = '';
+  public parametros_algoritmo_id: string = '';
+
   public n_parametros: number = 0;
   public n_implementaciones: number = 0;
 
-  constructor (obj: any = {
-    id: '',
-    n_parametros: 0,
-    n_implementaciones: 0,
-  }) {
+  constructor (obj: any = {}) {
+    const {
+      id = '',
+      parametros_algoritmo_id = '',
+      n_parametros = 0,
+      n_implementaciones = 0,
+    } = obj;
+
     super(obj);
     this.tipo_entrada = 'ALGORITMO';
-    this.id = obj.id;
-    this.n_parametros = obj.n_parametros;
-    this.n_implementaciones = obj.n_implementaciones;
+    this.id = id;
+    this.parametros_algoritmo_id = parametros_algoritmo_id;
+    this.n_parametros = n_parametros;
+    this.n_implementaciones = n_implementaciones;
   }
 
   override ruta_enlace ( ): string {

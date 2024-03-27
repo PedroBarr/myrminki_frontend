@@ -1,0 +1,12 @@
+#algrtm-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.algrtm-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  letter-spacing: 3pt;
+  margin-bottom: 0;
+}
