@@ -17,13 +17,12 @@ import {
   AlgrtmBoxComponent
 } from '../../components/algrtm-box/algrtm-box.component';
 
-/*
 import {
-  ProblmPickerBoxComponent
-} from '../../components/problm-picker-box/problm-picker-box.component';
-*/
+  AlgrtmPickerBoxComponent
+} from '../../components/algrtm-picker-box/algrtm-picker-box.component';
 
 import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'myrmex-page-editor-implementation',
@@ -207,37 +206,35 @@ export class PageEditorImplementationComponent implements OnInit {
   }
 
   set_algrtm_selector_apertura (variable: boolean) {
-    /*
-    this.problm_selector_apertura = variable;
+    this.algrtm_selector_apertura = variable;
 
-    const problm_selector_referencia = this.problm_selector_emergente.open(
-      ProblmPickerBoxComponent,
+    const algrtm_selector_referencia = this.algrtm_selector_emergente.open(
+      AlgrtmPickerBoxComponent,
       { panelClass: 'emergente-selector'}
     );
 
-    const problm_selector_componente = (
-      problm_selector_referencia.componentInstance
+    const algrtm_selector_componente = (
+      algrtm_selector_referencia.componentInstance
     );
 
-    problm_selector_componente.problm_selecto = this.problm_selecto;
-    problm_selector_componente.es_emergente = true;
+    algrtm_selector_componente.algrtm_selecto = this.algrtm_selecto;
+    algrtm_selector_componente.es_emergente = true;
 
-    problm_selector_componente.emitir_seleccion.subscribe((result: any) => {
-      if (result) this.set_problm_selected(result);
+    algrtm_selector_componente.emitir_seleccion.subscribe((result: any) => {
+      if (result) this.set_algrtm_selected(result);
 
-      this.problm_selector_apertura = !variable;
+      this.algrtm_selector_apertura = !variable;
     });
 
-    problm_selector_componente.emitir_parametros.subscribe((result: any) => {
-      if (result) this.set_paramz_problm_selected(result);
+    algrtm_selector_componente.emitir_parametros.subscribe((result: any) => {
+      if (result) this.set_paramz_algrtm_selected(result);
 
-      this.problm_selector_apertura = !variable;
+      this.algrtm_selector_apertura = !variable;
     });
 
-    problm_selector_referencia.afterClosed().subscribe((result: any) => {
-      this.problm_selector_apertura = !variable;
+    algrtm_selector_referencia.afterClosed().subscribe((result: any) => {
+      this.algrtm_selector_apertura = !variable;
     });
-    */
   }
 
   set_algrtm_visor_apertura (variable: boolean) {

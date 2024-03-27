@@ -57,6 +57,7 @@ export class OptmzdBoxComponent {
       'IMPLEMENTACION',
       'INSTANCIA',
       'PROBLEMA',
+      'ALGORITMO',
     ];
 
     if (
