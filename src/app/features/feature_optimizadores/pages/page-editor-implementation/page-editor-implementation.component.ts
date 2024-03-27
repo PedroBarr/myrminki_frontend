@@ -241,26 +241,24 @@ export class PageEditorImplementationComponent implements OnInit {
   }
 
   set_algrtm_visor_apertura (variable: boolean) {
-    /*
-    this.problm_visor_apertura = variable;
+    this.algrtm_visor_apertura = variable;
 
-    const problm_visor_referencia = this.problm_visor_emergente.open(
-      ProblmBoxComponent,
+    const algrtm_visor_referencia = this.algrtm_visor_emergente.open(
+      AlgrtmBoxComponent,
       { panelClass: 'emergente'}
     );
 
-    const problm_visor_componente = (
-      problm_visor_referencia.componentInstance
+    const algrtm_visor_componente = (
+      algrtm_visor_referencia.componentInstance
     );
 
-    problm_visor_componente.secciones_colapsables = false;
-    problm_visor_componente.problema_id = this.problm_selecto;
-    problm_visor_componente.loadProblema();
+    algrtm_visor_componente.secciones_colapsables = false;
+    algrtm_visor_componente.algoritmo_id = this.algrtm_selecto;
+    algrtm_visor_componente.loadAlgorithm();
 
-    problm_visor_referencia.afterClosed().subscribe((result: any) => {
-      this.problm_visor_apertura = !variable;
+    algrtm_visor_referencia.afterClosed().subscribe((result: any) => {
+      this.algrtm_visor_apertura = !variable;
     });
-    */
   }
 
   set_algrtm_selected (valor: string | null) {
