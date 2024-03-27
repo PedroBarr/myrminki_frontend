@@ -278,28 +278,23 @@ export class Implementacion {
 
   build_post(): {[clave: string]: any} {
     const post_data: {[clave: string]: any} = {
-      /*
-      problema: this.problema_id,
+      algoritmo: this.algoritmo_id,
       lenguaje: this.lenguaje_nombre,
       nombre: this.titulo,
       descripcion: this.descripcion_puntuada,
-      matematizacion: this.matematizacion_puntuada,
       codificacion: this.codigo_puntuado,
-      */
     };
 
-    /*
     post_data['diminutivo'] = (
-      'instc_' +
-      this.problema_id +
+      'implmnt_' +
+      this.algoritmo_id +
       '_' +
       (new Date().getTime())
     );
 
-    if (this.instancia_id) {
-      post_data['id'] = this.instancia_id;
+    if (this.implementacion_id) {
+      post_data['id'] = this.implementacion_id;
     }
-    */
 
     return post_data;
   }
