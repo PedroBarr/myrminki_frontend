@@ -41,6 +41,10 @@ import {
   PageEditorImplementationComponent
 } from './page-editor-implementation/page-editor-implementation.component';
 
+import {
+  PageEditorProblemComponent
+} from './page-editor-problem/page-editor-problem.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
@@ -69,6 +73,14 @@ const routes: Routes = [
   {
     path: 'problema',
     children: [
+      {
+        path: 'editor',
+        component: PageEditorProblemComponent,
+      },
+      {
+        path: 'editor/:identificador',
+        component: PageEditorProblemComponent,
+      },
       {
         path: 'visor/:identificador',
         component: PageExplorerProblemComponent,

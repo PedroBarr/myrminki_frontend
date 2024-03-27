@@ -435,6 +435,34 @@ export class Problema {
     ;
   }
 
+  build_post(): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {
+      /*
+      problema: this.problema_id,
+      lenguaje: this.lenguaje_nombre,
+      nombre: this.titulo,
+      descripcion: this.descripcion_puntuada,
+      matematizacion: this.matematizacion_puntuada,
+      codificacion: this.codigo_puntuado,
+      */
+    };
+
+    /*
+    post_data['diminutivo'] = (
+      'instc_' +
+      this.problema_id +
+      '_' +
+      (new Date().getTime())
+    );
+
+    if (this.instancia_id) {
+      post_data['id'] = this.instancia_id;
+    }
+    */
+
+    return post_data;
+  }
+
 }
 
 export class ParametrizacionProblema {

@@ -1,0 +1,128 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="problema-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Creador de problema </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="boxW100 flex-row gap-10 flex-space-between">
+            <mat-form-field class="boxW100">
+              <mat-label> T&iacute;tulo </mat-label>
+
+              <input
+                type="text"
+                placeholder="Ej: Problema de equivalencia topol&oacute;gica"
+                matInput
+                [(ngModel)]="problema.titulo"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Descripci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_descripcion_vista()"
+                *ngIf="problema.descripcion_puntuada"
+              >
+                <mat-icon *ngIf="descripcion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="descripcion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="descripcion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="problema.descripcion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="descripcion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Descripci&oacute;n del problema</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Descripci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="problema.descripcion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Matematizaci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_matematizacion_vista()"
+                *ngIf="problema.matematizacion_puntuada"
+              >
+                <mat-icon *ngIf="matematizacion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="matematizacion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="matematizacion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="problema.matematizacion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="matematizacion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Matematizaci&oacute;n del problema</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Matematizaci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="problema.matematizacion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <myrmex-tag-search-box
+        (emitirSeleccion)="null"
+        (emitirRemocion)="null"
+      ></myrmex-tag-search-box>
+
+      <div class="boxW100 flex-column gap-10">
+        <button
+          class="boxW100 main-function-button-H"
+          mat-flat-button
+          color="primary"
+          [disabled]="no_es_guardable_problema()"
+          (click)="saveProblem()"
+        >
+          <mat-icon>save</mat-icon>
+          Guardar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
