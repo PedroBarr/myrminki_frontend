@@ -153,7 +153,6 @@ export class ParamEditorBoxComponent implements OnInit, OnChanges {
     nombre_restric: string,
     input_posibilidad: any,
   ) {
-    console.log(this.get_restriccion_multi_list(nombre_restric));
     const valor = input_posibilidad.value;
     this.add_restriccion_multi(nombre_restric, valor);
     input_posibilidad.value = '';
