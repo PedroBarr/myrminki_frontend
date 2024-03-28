@@ -437,28 +437,16 @@ export class Problema {
 
   build_post(): {[clave: string]: any} {
     const post_data: {[clave: string]: any} = {
-      /*
-      problema: this.problema_id,
-      lenguaje: this.lenguaje_nombre,
       nombre: this.titulo,
       descripcion: this.descripcion_puntuada,
       matematizacion: this.matematizacion_puntuada,
-      codificacion: this.codigo_puntuado,
-      */
     };
 
-    /*
-    post_data['diminutivo'] = (
-      'instc_' +
-      this.problema_id +
-      '_' +
-      (new Date().getTime())
-    );
+    post_data['diminutivo'] = 'problm_' + (new Date().getTime());
 
-    if (this.instancia_id) {
-      post_data['id'] = this.instancia_id;
+    if (this.problema_id) {
+      post_data['id'] = this.problema_id;
     }
-    */
 
     return post_data;
   }
@@ -913,6 +901,47 @@ export class ParametroEditable {
     }
   }
 
+  restriccion_build_post (restric: restriccion): {[clave: string]: any} {
+    let valor: string;
+
+    switch (restric.tipo_restriccion) {
+      case 'tipo':
+      case 'opcion':
+        valor = (
+          restric.valor_restriccion
+            .substring(1, restric.valor_restriccion.length - 1)
+            .replace('||', '|')
+        );
+        break;
+      default:
+        valor = restric.valor_restriccion;
+        break;
+    }
+
+    return {
+      tipo: restric.tipo_restriccion,
+      valor,
+    };
+  }
+
+  build_post (): {[clave: string]: any} {
+    return {
+      clave: this.clave,
+      defecto: this.defecto,
+      descripcion: this.descripcion,
+      nombre: this.nombre,
+      representacion_matematica: this.representacion_matematica,
+      tipo: (
+        this.es_matricial ?
+        this.tipo + '[]'.repeat(this.dimensiones_matriciales) :
+        this.tipo
+      ),
+      restricciones: this.restricciones.map(
+        (restric: restriccion) => this.restriccion_build_post(restric)
+      ),
+    };
+  }
+
 }
 
 export class ParametrizacionEditable {
@@ -924,6 +953,23 @@ export class ParametrizacionEditable {
       params_list = [],
     } = obj;
     this.params_list = params_list;
+  }
+
+  build_post (
+    problema_id: string,
+    paramz_problm: string | null
+  ): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {
+      lista_parametros: this.params_list.map(
+        (param: ParametroEditable) => param.build_post()
+      ),
+    };
+
+    if (paramz_problm == null)
+      post_data['diminutivo'] = 'paramaz_' + problema_id;
+    else post_data['diminutivo'] = paramz_problm;
+
+    return post_data;
   }
 
 }

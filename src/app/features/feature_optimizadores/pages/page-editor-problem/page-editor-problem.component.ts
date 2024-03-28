@@ -97,8 +97,10 @@ export class PageEditorProblemComponent implements OnInit {
 
     const post_data = this.problema.build_post();
 
-    post_data['parametrizacion'] = this.paramz_problm.build_post();
-    post_data['parametrizacion']['diminutivo'] = '';
+    post_data['parametrizacion'] = this.paramz_problm.build_post(
+      post_data['diminutivo'],
+      null
+    );
 
     await axios.post(
       environment.MYRMEX_API + '/problema/actualizar',
@@ -108,7 +110,10 @@ export class PageEditorProblemComponent implements OnInit {
         console.log(response.data);
 
         if (response.data && response.data.id) {
-          this.router.navigateByUrl('/problema/visor/' + response.data.diminutivo);
+          this.router.navigateByUrl(
+            '/problema/visor/' +
+            response.data.diminutivo
+          );
         }
       })
       .catch(error => {
