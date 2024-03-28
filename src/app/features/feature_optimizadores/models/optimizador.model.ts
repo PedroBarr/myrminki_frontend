@@ -834,3 +834,48 @@ export class Solucion {
   }
 
 }
+
+export class ParametroEditable {
+
+  clave: string;
+  nombre: string;
+  representacion_matematica: string;
+  descripcion: string;
+  tipo: string;
+  defecto: any;
+  restricciones: restriccion[];
+
+  constructor (obj: any = {}) {
+    const {
+      clave = '',
+      nombre = '',
+      representacion_matematica = '',
+      descripcion = '',
+      tipo = '',
+      defecto = null,
+      restricciones = [],
+    } = obj;
+
+    this.clave = clave;
+    this.nombre = nombre;
+    this.representacion_matematica = representacion_matematica;
+    this.descripcion = descripcion;
+    this.tipo = tipo;
+    this.defecto = defecto;
+    this.restricciones = restricciones;
+  }
+
+}
+
+export class ParametrizacionEditable {
+
+  params_list: ParametroEditable[] = [];
+
+  constructor (obj: any = {}) {
+    const {
+      params_list = [],
+    } = obj;
+    this.params_list = params_list;
+  }
+
+}

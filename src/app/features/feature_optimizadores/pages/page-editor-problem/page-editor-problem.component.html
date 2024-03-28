@@ -117,12 +117,16 @@
           mat-flat-button
           color="primary"
           [disabled]="no_es_guardable_problema()"
+          [ngClass]="{'esta_deshabilitado': no_es_guardable_problema()}"
           (click)="saveProblem()"
         >
           <mat-icon>save</mat-icon>
           Guardar
         </button>
       </div>
+
+      <myrmex-paramz-problem-editor-box>
+      </myrmex-paramz-problem-editor-box>
     </div>
   </div>
 </div>

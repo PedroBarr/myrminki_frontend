@@ -1,0 +1,26 @@
+<div class="boxW100 flex-column gap-10">
+  <button
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    [disabled]="paramz_problm.length > 0"
+    [ngClass]="{'esta_deshabilitado': paramz_problm.length > 0}"
+    (click)="null"
+  >
+    <mat-icon>library_add_check</mat-icon>
+    Confirmar parametrizaci&oacute;n
+  </button>
+
+  <div id="param-problm-container">
+  </div>
+
+  <button
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    (click)="null"
+  >
+    <mat-icon>exposure_plus_1</mat-icon>
+    Confirmar parametrizaci&oacute;n
+  </button>
+</div>
