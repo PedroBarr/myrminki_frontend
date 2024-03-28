@@ -865,6 +865,16 @@ export class ParametroEditable {
     this.restricciones = restricciones;
   }
 
+  getParamTypeIcon ( ) {
+    const tipo = this.tipo;
+
+    if (tipo.includes('[') && tipo.includes(']')) return 'data_array';
+    if (tipo.includes('numero')) return 'numbers';
+    if (tipo.includes('texto')) return 'title';
+    if (tipo.includes('opcion')) return 'alt_route';
+    return 'question_mark';
+  }
+
 }
 
 export class ParametrizacionEditable {

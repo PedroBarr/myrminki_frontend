@@ -112,6 +112,10 @@ import {
   ParamzProblemEditorBoxComponent
 } from './paramz-problem-editor-box/paramz-problem-editor-box.component';
 
+import {
+  ParamEditorBoxComponent
+} from './param-editor-box/param-editor-box.component';
+
 
 @NgModule({
   declarations: [
@@ -137,6 +141,7 @@ import {
     AlgrtmBoxComponent,
     AlgrtmPickerBoxComponent,
     ParamzProblemEditorBoxComponent,
+    ParamEditorBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -183,6 +188,7 @@ import {
     AlgrtmBoxComponent,
     AlgrtmPickerBoxComponent,
     ParamzProblemEditorBoxComponent,
+    ParamEditorBoxComponent,
   ]
 })
 export class ComponentsFeatureOptimizadoresModule { }

@@ -1,4 +1,4 @@
-#param-problm-container {
+#param-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -19,18 +19,6 @@
   flex-direction: column;
   gap: 0;
   justify-content: center;
-}
-
-.mat-card.left-side {
-  margin-left: 0;
-}
-
-.mat-card.right-side {
-  margin-right: 0;
-}
-
-.mat-card.edited-arg {
-  background-color: var(--myrmex-primary-selected);
 }
 
 .mat-card-header {
@@ -65,24 +53,12 @@ mat-card-title {
   margin-left: var(--margin-offset);
 }
 
-mat-card-subtitle {
-  text-transform: uppercase;
-
-  margin-bottom: 0px;
-  margin-left: var(--margin-offset);
-}
-
 mat-card-content {
   display: flex;
   flex-direction: column;
   gap: 3px;
 
   margin-bottom: 0px !important;
-}
-
-.param-problm-description {
-  font-size: 12px;
-  line-height: normal;
 }
 
 mat-form-field {

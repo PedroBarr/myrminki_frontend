@@ -3,8 +3,8 @@
     class="boxW100"
     mat-flat-button
     color="primary"
-    [disabled]="paramz_problm.length > 0"
-    [ngClass]="{'esta_deshabilitado': paramz_problm.length > 0}"
+    [disabled]="paramz_problm.params_list.length > 0"
+    [ngClass]="{'esta_deshabilitado': paramz_problm.params_list.length > 0}"
     (click)="null"
   >
     <mat-icon>library_add_check</mat-icon>
@@ -12,6 +12,11 @@
   </button>
 
   <div id="param-problm-container">
+    <myrmex-param-editor-box
+      *ngFor="let param of paramz_problm.params_list"
+      [parameter]="param"
+    >
+    </myrmex-param-editor-box>
   </div>
 
   <button

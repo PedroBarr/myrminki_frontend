@@ -24,7 +24,7 @@ import { environment } from 'src/environments/environment';
 
 export class ParamzProblemEditorBoxComponent implements OnInit, OnChanges {
 
-  paramz_problm: ParametrizacionEditable[] = [];
+  paramz_problm: ParametrizacionEditable = new ParametrizacionEditable();
 
   @Input() paramz_problm_id: string  = '';
   @Output() emitir_confirmacion = new EventEmitter<{[clave_param: string]: any}[]>();
