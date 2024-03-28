@@ -41,4 +41,8 @@ export class ParamEditorBoxComponent implements OnInit, OnChanges {
     */
   }
 
+  set_es_matricial () {
+    this.parameter.es_matricial = !this.parameter.es_matricial;
+  }
+
 }

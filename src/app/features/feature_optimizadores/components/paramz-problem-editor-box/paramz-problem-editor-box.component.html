@@ -3,9 +3,10 @@
     class="boxW100"
     mat-flat-button
     color="primary"
-    [disabled]="paramz_problm.params_list.length > 0"
-    [ngClass]="{'esta_deshabilitado': paramz_problm.params_list.length > 0}"
-    (click)="null"
+    *ngIf="paramz_problm.params_list.length > 0"
+    [disabled]="!es_modificado"
+    [ngClass]="{'esta_deshabilitado': !es_modificado}"
+    (click)="confirm_parametrization()"
   >
     <mat-icon>library_add_check</mat-icon>
     Confirmar parametrizaci&oacute;n
@@ -15,6 +16,8 @@
     <myrmex-param-editor-box
       *ngFor="let param of paramz_problm.params_list"
       [parameter]="param"
+      [tipos]="tipos"
+      (emitir_cambios)="set_es_modificado(true)"
     >
     </myrmex-param-editor-box>
   </div>
@@ -23,7 +26,7 @@
     class="boxW100"
     mat-flat-button
     color="primary"
-    (click)="null"
+    (click)="add_paramz_problm_param()"
   >
     <mat-icon>exposure_plus_1</mat-icon>
     Confirmar parametrizaci&oacute;n

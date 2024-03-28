@@ -845,6 +845,9 @@ export class ParametroEditable {
   defecto: any;
   restricciones: restriccion[];
 
+  es_matricial: boolean;
+  dimensiones_matriciales: number;
+
   constructor (obj: any = {}) {
     const {
       clave = '',
@@ -854,6 +857,8 @@ export class ParametroEditable {
       tipo = '',
       defecto = null,
       restricciones = [],
+      es_matricial = false,
+      dimensiones_matriciales = 0,
     } = obj;
 
     this.clave = clave;
@@ -863,12 +868,15 @@ export class ParametroEditable {
     this.tipo = tipo;
     this.defecto = defecto;
     this.restricciones = restricciones;
+
+    this.es_matricial = es_matricial;
+    this.dimensiones_matriciales = dimensiones_matriciales;
   }
 
   getParamTypeIcon ( ) {
     const tipo = this.tipo;
 
-    if (tipo.includes('[') && tipo.includes(']')) return 'data_array';
+    if (this.es_matricial) return 'data_array';
     if (tipo.includes('numero')) return 'numbers';
     if (tipo.includes('texto')) return 'title';
     if (tipo.includes('opcion')) return 'alt_route';

@@ -1,18 +1,16 @@
 #param-container {
   display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  column-gap: 10px;
-  row-gap: 10px;
+  width: 100%;
 }
 
 .mat-card {
-  background-color: transparent;
-  border-style: none;
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
   border-radius: 10px;
+  border-width: 1px;
 
-  box-shadow: none;
-  width: 40%;
+  width: 100%;
   margin: 0 auto;
   flex-grow: 1;
   display: flex;
@@ -25,7 +23,6 @@
   align-items: center;
 
   margin-bottom: auto;
-  --margin-offset: -10px;
 }
 
 .mat-icon.mat-card-avatar {
@@ -48,9 +45,6 @@ mat-card-title {
   font-family: code-pro-bold, sans-serif;
   font-size: 15px !important;
   line-height: normal;
-
-  margin-bottom: 5px !important;
-  margin-left: var(--margin-offset);
 }
 
 mat-card-content {
@@ -86,4 +80,30 @@ mat-card-actions button mat-icon {
   font-size: 16px;
   width: auto;
   height: auto;
+}
+
+.form-field-fixed {
+  width: 100%;
+  margin: 0;
+}
+
+.seccion-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 14px;
+}
+
+.seccion-button {
+  color: #666;
+  height: 20px;
+}
+
+.seccion-button mat-icon {
+  width: auto;
+  height: auto;
+
+  float: inline-end;
+  margin-right: 10px;
+
+  font-size: 20px !important;
 }

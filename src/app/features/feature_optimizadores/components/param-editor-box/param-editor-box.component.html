@@ -9,9 +9,9 @@
     </mat-card-header>
 
     <mat-card-content class="seccion-container">
-      <div class="boxW100 flex-row gap-10 flex-space-between">
-        <mat-form-field class="boxW100">
-          <mat-label> Nombre </mat-label>
+      <div class="boxW100 flex-row gap-10 flex-space-between flex-align-center">
+        <mat-form-field class="form-field-fixed">
+          <mat-label> Nombre de par&aacute;metro </mat-label>
 
           <input
             type="text"
@@ -21,12 +21,10 @@
           >
         </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>  </mat-label>
+        <mat-form-field class="form-field-fixed">
+          <mat-label> Tipo de par&aacute;metro </mat-label>
 
-          <mat-select
-            [(ngModel)]="parameter.tipo"
-          >
+          <mat-select [(ngModel)]="parameter.tipo">
             <mat-option
               *ngFor="let tipo of tipos"
               [value]="tipo"
@@ -39,17 +37,83 @@
           </mat-select>
         </mat-form-field>
       </div>
+
+      <div
+        class="boxW100 flex-row gap-10 flex-space-between flex-align-center"
+        *ngIf="parameter.tipo"
+      >
+        <mat-checkbox
+          class="form-field-fixed"
+          color="primary"
+          [checked]="parameter.es_matricial"
+          (click)="set_es_matricial()"
+        >
+          Es matricial
+        </mat-checkbox>
+
+        <mat-form-field
+          class="form-field-fixed"
+          *ngIf="parameter.es_matricial"
+        >
+          <mat-label> Cantidad de dimensiones </mat-label>
+
+          <input
+            type="number"
+            matInput
+            [(ngModel)]="parameter.dimensiones_matriciales"
+          >
+        </mat-form-field>
+      </div>
     </mat-card-content>
 
-    <!--mat-card-actions align="end">
-      <button
-        mat-flat-button
-        color="primary"
-        (click)="reinitParam(i_param)"
-      >
-        <mat-icon>restart_alt</mat-icon>
-        Reiniciar
-      </button>
-    </mat-card-actions-->
-</mat-card>
+    <mat-card-content>
+      <div class="seccion-editor">
+        <span class="seccion-title"> Descriptores </span>
+
+        <div
+          class="boxW100 flex-row gap-10 flex-space-between flex-align-center"
+        >
+          <mat-form-field class="form-field-fixed">
+            <mat-label> Clave de identificaci&oacute;n </mat-label>
+            <input type="text" matInput [(ngModel)]="parameter.clave">
+          </mat-form-field>
+
+          <mat-form-field class="form-field-fixed">
+            <mat-label> Representacion matem&aacute;tica </mat-label>
+
+            <input
+              type="text"
+              matInput
+              [(ngModel)]="parameter.representacion_matematica"
+            >
+          </mat-form-field>
+        </div>
+
+        <mat-form-field class="form-field-fixed">
+          <mat-label> Descripci&oacute;n </mat-label>
+          <input type="text" matInput [(ngModel)]="parameter.descripcion">
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+
+    <mat-card-content *ngIf="parameter.tipo">
+      <div class="seccion-editor">
+        <span class="seccion-title"> Restrictores </span>
+
+        <mat-form-field class="form-field-fixed">
+          <mat-label> Valor por defecto </mat-label>
+          <input type="text" matInput [(ngModel)]="parameter.defecto">
+        </mat-form-field>
+
+        <!--button
+          mat-flat-button
+          color="primary"
+          (click)="reinitParam(i_param)"
+        >
+          <mat-icon>restart_alt</mat-icon>
+          Reiniciar
+        </button-->
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
