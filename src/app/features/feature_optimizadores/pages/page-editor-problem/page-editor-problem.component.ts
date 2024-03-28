@@ -8,7 +8,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
-  Problema
+  Problema,
+  ParametrizacionEditable,
 } from '../../models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -23,6 +24,7 @@ import { environment } from 'src/environments/environment';
 export class PageEditorProblemComponent implements OnInit {
 
   problema: Problema = new Problema();
+  paramz_problm: ParametrizacionEditable = new ParametrizacionEditable();
 
   descripcion_vista: 'E' | 'P' = 'E';
   matematizacion_vista: 'E' | 'P' = 'E';
@@ -93,9 +95,14 @@ export class PageEditorProblemComponent implements OnInit {
   async saveProblem ( ) {
     if (this.no_es_guardable_problema()) return;
 
+    const post_data = this.problema.build_post();
+
+    post_data['parametrizacion'] = this.paramz_problm.build_post();
+    post_data['parametrizacion']['diminutivo'] = '';
+
     await axios.post(
       environment.MYRMEX_API + '/problema/actualizar',
-      this.problema.build_post()
+      post_data,
     )
       .then(response => {
         console.log(response.data);
@@ -136,8 +143,14 @@ export class PageEditorProblemComponent implements OnInit {
     return (
       !this.problema.titulo ||
       !this.problema.descripcion_puntuada ||
-      !this.problema.matematizacion_puntuada
+      !this.problema.matematizacion_puntuada ||
+      !this.paramz_problm.params_list.length ||
+      this.paramz_problm.params_list.length == 0
     );
+  }
+
+  update_paramz (paramz: ParametrizacionEditable) {
+    this.paramz_problm = paramz;
   }
 
 }

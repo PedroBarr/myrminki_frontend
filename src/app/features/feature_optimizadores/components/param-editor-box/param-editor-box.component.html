@@ -63,7 +63,7 @@
           <mat-label> Cantidad de dimensiones </mat-label>
 
           <input
-            type="number"
+            type="text"
             matInput
             [(ngModel)]="parameter.dimensiones_matriciales"
             (change)="confirmar_cambios('dimensiones_matriciales', $event.target)"
@@ -154,7 +154,7 @@
               <mat-label> Valor de restricci&oacute;n {{restric}} </mat-label>
 
               <input
-                type="number"
+                type="text"
                 matInput
                 [value]="get_restriccion(restric)"
                 (change)="set_restriccion(restric, $event.target)"
