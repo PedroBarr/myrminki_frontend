@@ -32,7 +32,7 @@ export class ParamzProblemEditorBoxComponent implements OnInit, OnChanges {
 
   es_modificado: boolean = false;
 
-  @Input() paramz_problm_id: string  = '';
+  @Input() paramz_problm_id: string | null = null;
   @Output() emitir_confirmacion = new EventEmitter<ParametrizacionEditable>();
 
   async ngOnInit ( ) {
@@ -41,7 +41,7 @@ export class ParamzProblemEditorBoxComponent implements OnInit, OnChanges {
 
   async ngOnChanges ( changes: any ) {
     if (changes.paramz_problm_id) {
-      if (changes.paramz_problm_id.firstChange) await this.loadParamzProblm();
+      await this.loadParamzProblm();
     }
   }
 
@@ -60,40 +60,62 @@ export class ParamzProblemEditorBoxComponent implements OnInit, OnChanges {
         console.log(response.data);
 
         if (response.data) {
-          /*
           if (response.data.lista_parametros) {
-            this.paramz_problm = response.data.lista_parametros.map(
-              (parametro: any) => {
-                const {
-                  clave,
-                  nombre,
-                  descripcion,
-                  tipo,
-                  defecto,
-                } = parametro;
-
-                return new ParametrizacionAlgoritmo({
-                    nombre,
+            this.paramz_problm.params_list = (
+              response.data.lista_parametros.map(
+                (parametro: any) => {
+                  const {
+                    clave,
+                    defecto,
                     descripcion,
-                    restricciones: [],
-                    datos: {
-                      tipo,
-                      defecto,
-                      valor: defecto,
-                      valor_inicial: defecto,
+                    nombre,
+                    representacion_matematica,
+                    tipo,
+                  } = parametro;
+
+                  const restricciones = parametro.restricciones.map(
+                    (restric: any) => {
+                      if (restric.tipo == 'tipo' || restric.tipo == 'opcion') {
+                        return {
+                          tipo_restriccion: restric.tipo,
+                          valor_restriccion: (
+                            '|' +
+                            restric.valor.replaceAll('|', '||') +
+                            '|'
+                          ),
+                        }
+                      } else {
+                        return {
+                          tipo_restriccion: restric.tipo,
+                          valor_restriccion: restric.valor,
+                        }
+                      }
+                    }
+                  );
+
+                  return new ParametroEditable({
                       clave,
-                    },
-                });
-              }
+                      defecto,
+                      descripcion,
+                      nombre,
+                      representacion_matematica,
+                      tipo: tipo.replaceAll('[]',''),
+                      es_matricial: tipo.includes('[]'),
+                      dimensiones_matriciales: tipo.split('[]').length - 1,
+                      restricciones,
+                  });
+                }
+              )
             );
           }
-          */
         }
       })
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.confirm_parametrization();
+      });
   }
 
   /**

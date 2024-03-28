@@ -24,6 +24,8 @@ import { environment } from 'src/environments/environment';
 export class PageEditorProblemComponent implements OnInit {
 
   problema: Problema = new Problema();
+
+  parametrizacion_id: string | null = null;
   paramz_problm: ParametrizacionEditable = new ParametrizacionEditable();
 
   descripcion_vista: 'E' | 'P' = 'E';
@@ -77,10 +79,13 @@ export class PageEditorProblemComponent implements OnInit {
             this.matematizacion_vista = 'P';
           }
 
-          if (data.parametrizacion_problema_diminutivo)
+          if (data.parametrizacion_problema_diminutivo) {
             this.problema.parametrizacion_id = (
               data.parametrizacion_problema_diminutivo
             );
+
+            this.parametrizacion_id = data.parametrizacion_problema_diminutivo;
+          }
         }
       })
       .catch(error => {
@@ -98,8 +103,8 @@ export class PageEditorProblemComponent implements OnInit {
     const post_data = this.problema.build_post();
 
     post_data['parametrizacion'] = this.paramz_problm.build_post(
-      post_data['diminutivo'],
-      null
+      this.problema.problema_id ? post_data['id'] : post_data['diminutivo'],
+      this.parametrizacion_id ? this.parametrizacion_id : null
     );
 
     await axios.post(
