@@ -883,6 +883,36 @@ export class ParametroEditable {
     return 'question_mark';
   }
 
+  set_dato (nombre_dato: string, dato: any) {
+    switch (nombre_dato) {
+      case 'clave':
+        this.clave = String(dato);
+        break;
+      case 'nombre':
+        this.nombre = String(dato);
+        break;
+      case 'representacion_matematica':
+        this.representacion_matematica = String(dato);
+        break;
+      case 'descripcion':
+        this.descripcion = String(dato);
+        break;
+      case 'tipo':
+        this.restricciones = [];
+        this.tipo = String(dato);
+        break;
+      case 'es_matricial':
+        this.es_matricial = dato;
+        break;
+      case 'dimensiones_matriciales':
+        this.dimensiones_matriciales = Number(dato);
+        break;
+      case 'restricciones':
+        this.restricciones = dato;
+        break;
+    }
+  }
+
 }
 
 export class ParametrizacionEditable {

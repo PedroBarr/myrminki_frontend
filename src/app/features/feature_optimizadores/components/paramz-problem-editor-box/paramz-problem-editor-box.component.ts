@@ -129,9 +129,28 @@ export class ParamzProblemEditorBoxComponent implements OnInit, OnChanges {
   }
 
   confirm_parametrization () {
-    console.log(this.paramz_problm);
     this.emitir_confirmacion.emit(this.paramz_problm);
     this.es_modificado = false;
+  }
+
+  cargar_cambios (i_param: number, cambios: any[2]) {
+    this.paramz_problm.params_list[i_param].set_dato(String(cambios[0]), cambios[1]);
+    this.set_es_modificado(true);
+  }
+
+  get_restricciones (i_param: number): {[clave_restrc: string]: any} {
+    const param: ParametroEditable = this.paramz_problm.params_list[i_param];
+
+    let restricciones = param.tipo ? this.restricciones[param.tipo] : {};
+
+    if (param.es_matricial) {
+      restricciones = {
+        ...restricciones,
+        ...this.restricciones['arreglo']
+      }
+    }
+
+    return restricciones;
   }
 
 }

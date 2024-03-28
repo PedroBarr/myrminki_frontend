@@ -18,13 +18,17 @@
             placeholder="Ej: Cantidad de variables"
             matInput
             [(ngModel)]="parameter.nombre"
+            (change)="confirmar_cambios('nombre', $event.target)"
           >
         </mat-form-field>
 
         <mat-form-field class="form-field-fixed">
           <mat-label> Tipo de par&aacute;metro </mat-label>
 
-          <mat-select [(ngModel)]="parameter.tipo">
+          <mat-select
+            [(ngModel)]="parameter.tipo"
+            (selectionChange)="confirmar_cambios('tipo', $event)"
+          >
             <mat-option
               *ngFor="let tipo of tipos"
               [value]="tipo"
@@ -45,6 +49,7 @@
         <mat-checkbox
           class="form-field-fixed"
           color="primary"
+          [style]="{'align-self': 'flex-start'}"
           [checked]="parameter.es_matricial"
           (click)="set_es_matricial()"
         >
@@ -61,6 +66,7 @@
             type="number"
             matInput
             [(ngModel)]="parameter.dimensiones_matriciales"
+            (change)="confirmar_cambios('dimensiones_matriciales', $event.target)"
           >
         </mat-form-field>
       </div>
@@ -75,7 +81,12 @@
         >
           <mat-form-field class="form-field-fixed">
             <mat-label> Clave de identificaci&oacute;n </mat-label>
-            <input type="text" matInput [(ngModel)]="parameter.clave">
+            <input
+              type="text"
+              matInput
+              [(ngModel)]="parameter.clave"
+              (change)="confirmar_cambios('clave', $event.target)"
+            >
           </mat-form-field>
 
           <mat-form-field class="form-field-fixed">
@@ -85,13 +96,19 @@
               type="text"
               matInput
               [(ngModel)]="parameter.representacion_matematica"
+              (change)="confirmar_cambios('representacion_matematica', $event.target)"
             >
           </mat-form-field>
         </div>
 
         <mat-form-field class="form-field-fixed">
           <mat-label> Descripci&oacute;n </mat-label>
-          <input type="text" matInput [(ngModel)]="parameter.descripcion">
+          <input
+            type="text"
+            matInput
+            [(ngModel)]="parameter.descripcion"
+            (change)="confirmar_cambios('descripcion', $event.target)"
+          >
         </mat-form-field>
       </div>
     </mat-card-content>
@@ -102,17 +119,147 @@
 
         <mat-form-field class="form-field-fixed">
           <mat-label> Valor por defecto </mat-label>
-          <input type="text" matInput [(ngModel)]="parameter.defecto">
+          <input
+            type="text"
+            matInput
+            [(ngModel)]="parameter.defecto"
+            (change)="confirmar_cambios('defecto', $event.target)"
+          >
         </mat-form-field>
 
-        <!--button
-          mat-flat-button
-          color="primary"
-          (click)="reinitParam(i_param)"
-        >
-          <mat-icon>restart_alt</mat-icon>
-          Reiniciar
-        </button-->
+        <div *ngFor="let restric of get_restricciones_list()">
+          <button
+            class="boxW100"
+            mat-button
+            color="primary"
+            *ngIf="!have_restriccion(restric)"
+            (click)="add_restriccion(restric)"
+          >
+            <mat-icon>add_link</mat-icon>
+            Agregar restricci&oacute;n {{restric}}
+          </button>
+
+          <div
+            class="boxW100 flex-row gap-10 flex-space-between flex-align-center"
+            *ngIf="have_restriccion(restric)"
+          >
+            <span class="restriccion-title">
+              Restricci&oacute;n {{restric}}
+            </span>
+
+            <mat-form-field
+              class="form-field-fixed"
+              *ngIf="restricciones[restric] == 'int' || restricciones[restric] == 'float'"
+            >
+              <mat-label> Valor de restricci&oacute;n {{restric}} </mat-label>
+
+              <input
+                type="number"
+                matInput
+                [value]="get_restriccion(restric)"
+                (change)="set_restriccion(restric, $event.target)"
+              >
+            </mat-form-field>
+
+            <mat-form-field
+              class="form-field-fixed"
+              *ngIf="restricciones[restric] == 'str'"
+            >
+              <mat-label> Valor de restricci&oacute;n {{restric}} </mat-label>
+
+              <input
+                type="text"
+                matInput
+                [value]="get_restriccion(restric)"
+                (change)="set_restriccion(restric, $event.target)"
+              >
+            </mat-form-field>
+
+            <mat-form-field
+              class="form-field-fixed"
+              *ngIf="restricciones[restric] == 'bool'"
+            >
+              <mat-label> Valor de restricci&oacute;n {{restric}} </mat-label>
+
+              <mat-select
+                [value]="get_restriccion(restric)"
+                (selectionChange)="set_restriccion(restric, $event)"
+              >
+                <mat-option value="True"> True </mat-option>
+                <mat-option value="False"> False </mat-option>
+              </mat-select>
+            </mat-form-field>
+
+            <div
+              class="form-field-fixed flex-column"
+              *ngIf="restricciones[restric] == 'list'"
+            >
+              <div
+                class="form-field-fixed flex-row flex-align-center"
+                *ngFor="let posibilidad of get_restriccion_multi_list(restric)"
+              >
+                <mat-checkbox
+                  class="form-field-fixed"
+                  color="primary"
+                  [checked]="true"
+                >
+                  {{ posibilidad }}
+                </mat-checkbox>
+
+                <button
+                  mat-icon-button
+                  color="primary"
+                  (click)="remove_restriccion_multi(restric, posibilidad)"
+                >
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </div>
+
+              <div class="form-field-fixed flex-row flex-align-center">
+                <mat-form-field class="form-field-fixed">
+                  <mat-label> Nombre opci&oacute;n </mat-label>
+
+                  <input
+                    type="text"
+                    matInput
+                    #nombreOpcion
+                  >
+                </mat-form-field>
+
+                <button
+                  mat-icon-button
+                  color="primary"
+                  (click)="add_restriccion_multi_from_input(restric, nombreOpcion)"
+                >
+                  <mat-icon>add</mat-icon>
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="form-field-fixed flex-column"
+              *ngIf="restricciones[restric].constructor.name == 'Array'"
+            >
+              <mat-checkbox
+                class="form-field-fixed"
+                color="primary"
+                *ngFor="let posibilidad of restricciones[restric]"
+                [checked]="get_restriccion_multi(restric, posibilidad)"
+                (click)="set_restriccion_multi(restric, posibilidad)"
+              >
+                {{ posibilidad }}
+              </mat-checkbox>
+            </div>
+
+            <button
+              mat-icon-button
+              color="primary"
+              (click)="remove_restriccion(restric)"
+            >
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </div>
+        </div>
       </div>
     </mat-card-content>
   </mat-card>
