@@ -7,15 +7,15 @@
 
   <mat-card-content>
     <div class="flex-column">
-      <div *ngIf="editor_mode == 'E'">
+      <div class="flex-column gap-10" *ngIf="editor_mode == 'E'">
         <mat-form-field class="boxW100">
           <mat-label>Nombre de etiqueta</mat-label>
 
           <input
-            #nombreEtiqueta
             type="text"
             placeholder="Nombra la etiqueta"
             matInput
+            [(ngModel)]="nombreEtiqueta"
           >
         </mat-form-field>
 
@@ -23,11 +23,21 @@
           <mat-label>Descripci&oacute; de etiqueta</mat-label>
 
           <textarea
-            #descripcionEtiqueta
             matInput
             placeholder="Describe la etiqueta"
+            [(ngModel)]="descripcionEtiqueta"
           ></textarea>
         </mat-form-field>
+
+        <button
+          mat-flat-button
+          color="primary"
+          [disabled]="nombreEtiqueta == '' || descripcionEtiqueta == ''"
+          (click)="saveTag()"
+        >
+          <mat-icon>beenhere</mat-icon>
+          Agregar etiqueta
+        </button>
       </div>
 
       <form *ngIf="editor_mode == 'B'">
@@ -50,14 +60,13 @@
             (optionSelected)="selectEtiqueta($event)"
           >
             <mat-option
+              #opcionAgregar
               *ngIf="es_editor && buscadorEtiqueta.value.length > 0"
               matTooltip="Agrega una nueva etiqueta"
               [matTooltipShowDelay]="500"
               [matTooltipHideDelay]="100"
-              (click)="setUpEditor(buscadorEtiqueta)"
-            >
-              Agregar {{buscadorEtiqueta.value}}
-            </mat-option>
+              (click)="setUpEditor(opcionAgregar)"
+            >Agregar {{buscadorEtiqueta.value}}</mat-option>
 
             <mat-option
               *ngFor="let etiqueta of etiquetasFiltradas | async"

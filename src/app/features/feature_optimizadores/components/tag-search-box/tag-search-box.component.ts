@@ -33,6 +33,11 @@ export class TagSearchBoxComponent implements OnInit {
   controlBuscadorEtiqueta = new FormControl('');
   editor_mode: 'E' | 'B' = 'B';
 
+  nombreEtiqueta: string = '';
+  descripcionEtiqueta: string = '';
+
+  cabeceraOpcionNueva = 'Agregar ';
+
   etiquetasFiltradas: Observable<Etiqueta[]> = new Observable<Etiqueta[]>();
   etiquetasAgregadas: Etiqueta[] = [];
 
@@ -88,6 +93,41 @@ export class TagSearchBoxComponent implements OnInit {
       .finally(( ) => { });
   }
 
+  /**
+  * Save tag from API
+  */
+  async saveTag ( ) {
+    await axios.post(
+      environment.MYRMEX_API + '/tipo_algoritmo/actualizar',
+      {
+        'etiqueta': this.nombreEtiqueta,
+        'descripcion': this.descripcionEtiqueta,
+      }
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.id) {
+          const etiqueta: Etiqueta = ({
+            id: response.data.id,
+            etiqueta: response.data.etiqueta,
+            descripcion: response.data.descripcion,
+          } as Etiqueta);
+
+          this.etiquetasAgregadas.push(etiqueta);
+          this.controlBuscadorEtiqueta.setValue('');
+          this.emitirSeleccion.emit(etiqueta);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(async ( ) => {
+        await this.loadTags();
+        this.editor_mode = 'B';
+      });
+  }
+
   selectEtiqueta (evt: MatAutocompleteSelectedEvent) {
     const valor_etiqueta: any = evt.option.value;
     const etiqueta: Etiqueta | undefined =
@@ -115,8 +155,20 @@ export class TagSearchBoxComponent implements OnInit {
     }
   }
 
-  setUpEditor (buscador: any) {
-    console.log(buscador);
+  setUpEditor (opcion: any) {
+    const valor = (
+      opcion
+        ._element
+        .nativeElement
+        .textContent
+        .replace(this.cabeceraOpcionNueva, '')
+    );
+
+    this.nombreEtiqueta = valor;
+    this.descripcionEtiqueta = '';
+
+    this.controlBuscadorEtiqueta.setValue('');
+    this.editor_mode = 'E';
   }
 
 }
