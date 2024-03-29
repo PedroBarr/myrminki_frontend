@@ -107,6 +107,23 @@ export class Algoritmo {
     ;
   }
 
+  build_post(): {[clave: string]: any} {
+    const post_data: {[clave: string]: any} = {
+      nombre: this.titulo,
+      descripcion: this.descripcion_puntuada,
+      matematizacion: this.matematizacion_puntuada,
+      seudo_codigo: this.seudo_codigo_puntuado,
+    };
+
+    post_data['diminutivo'] = 'problm_' + (new Date().getTime());
+
+    if (this.algoritmo_id) {
+      post_data['id'] = this.algoritmo_id;
+    }
+
+    return post_data;
+  }
+
 }
 
 interface restriccion {

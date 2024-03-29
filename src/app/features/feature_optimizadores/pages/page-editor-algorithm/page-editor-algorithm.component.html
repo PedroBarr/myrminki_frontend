@@ -1,0 +1,185 @@
+<div class="page-wrapper">
+  <div class="boxW100 flex-row flex-space-between">
+    <div class="algoritmo-container">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title> Creador de algoritmo </mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content class="seccion-container">
+          <div class="boxW100 flex-row gap-10 flex-space-between">
+            <mat-form-field class="boxW100">
+              <mat-label> T&iacute;tulo </mat-label>
+
+              <input
+                type="text"
+                placeholder="Ej: Algoritmo de progrmaci&oacute;n din&aacute;mica probabil&iacute;stica"
+                matInput
+                [(ngModel)]="algoritmo.titulo"
+              >
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Descripci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_descripcion_vista()"
+                *ngIf="algoritmo.descripcion_puntuada"
+              >
+                <mat-icon *ngIf="descripcion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="descripcion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="descripcion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="algoritmo.descripcion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="descripcion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Descripci&oacute;n del algoritmo</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Descripci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="algoritmo.descripcion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title flex-row flex-space-between">
+              Matematizaci&oacute;n
+
+              <button
+                mat-icon-button
+                class="seccion-button"
+                (click)="toggle_matematizacion_vista()"
+                *ngIf="algoritmo.matematizacion_puntuada"
+              >
+                <mat-icon *ngIf="matematizacion_vista == 'P'">edit_note</mat-icon>
+                <mat-icon *ngIf="matematizacion_vista == 'E'">visibility</mat-icon>
+              </button>
+            </span>
+
+            <markdown
+              *ngIf="matematizacion_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [data]="algoritmo.matematizacion_puntuada"
+            >
+            </markdown>
+
+            <mat-form-field
+              *ngIf="matematizacion_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Matematizaci&oacute;n del algoritmo</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="Matematizaci&oacute;n en un lenguaje de marcado ligero"
+                [(ngModel)]="algoritmo.matematizacion_puntuada"
+              ></textarea>
+            </mat-form-field>
+          </div>
+
+          <div class="seccion-editor">
+            <span class="seccion-title"> Seudo-c&oacute;digo </span>
+
+            <markdown
+              *ngIf="seudo_codigo_vista == 'P'"
+              class=""
+              katex
+              lineHighlight
+              clipboard
+              [clipboardButtonTemplate]="toggleSeudoCodigoPreviewModeButton"
+              (onCopyToClipboardClick)="null"
+              [data]="'```' + '\n' + algoritmo.seudo_codigo_puntuado + '\n```'"
+            >
+            </markdown>
+
+            <ng-template #toggleSeudoCodigoPreviewModeButton>
+              <button
+                mat-icon-button
+                class="toolbar-button"
+                (click)="toggle_seudo_codigo_vista()"
+              >
+                <mat-icon>edit_note</mat-icon>
+              </button>
+            </ng-template>
+
+            <mat-form-field
+              *ngIf="seudo_codigo_vista == 'E'"
+              class="boxW100 toolbar-mat-form-field"
+            >
+              <mat-label>Seudo-c&oacute;digo del algoritmo</mat-label>
+
+              <textarea
+                matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="3"
+                placeholder="y: function = lambda x: x**4"
+                [(ngModel)]="algoritmo.seudo_codigo_puntuado"
+              ></textarea>
+
+              <button
+                matSuffix
+                mat-icon-button
+                class="toolbar-button form-field-toolbar"
+                (click)="toggle_seudo_codigo_vista()"
+              >
+                <mat-icon>visibility</mat-icon>
+              </button>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="aditamentos-container">
+      <myrmex-tag-search-box
+        (emitirSeleccion)="null"
+        (emitirRemocion)="null"
+      ></myrmex-tag-search-box>
+
+      <div class="boxW100 flex-column gap-10">
+        <button
+          class="boxW100 main-function-button-H"
+          mat-flat-button
+          color="primary"
+          [disabled]="no_es_guardable_algoritmo()"
+          [ngClass]="{'esta_deshabilitado': no_es_guardable_algoritmo()}"
+          (click)="saveAlgorithm()"
+        >
+          <mat-icon>save</mat-icon>
+          Guardar
+        </button>
+      </div>
+
+      <myrmex-paramz-algrtm-editor-box
+        [paramz_algrtm_id]="parametrizacion_id"
+        (emitir_confirmacion)="update_paramz($event)"
+      >
+      </myrmex-paramz-algrtm-editor-box>
+    </div>
+  </div>
+</div>

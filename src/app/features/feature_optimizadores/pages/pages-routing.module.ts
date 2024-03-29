@@ -45,6 +45,10 @@ import {
   PageEditorProblemComponent
 } from './page-editor-problem/page-editor-problem.component';
 
+import {
+  PageEditorAlgorithmComponent
+} from './page-editor-algorithm/page-editor-algorithm.component';
+
 
 const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
@@ -54,11 +58,11 @@ const routes: Routes = [
     children: [
       {
         path: 'editor',
-        component: PageExplorerAlgorithmComponent,
+        component: PageEditorAlgorithmComponent,
       },
       {
         path: 'editor/:identificador',
-        component: PageExplorerAlgorithmComponent,
+        component: PageEditorAlgorithmComponent,
       },
       {
         path: 'visor/:identificador',
