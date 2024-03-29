@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
 } from '@angular/core';
@@ -27,10 +28,15 @@ import { environment } from 'src/environments/environment';
 
 export class TagSearchBoxComponent implements OnInit {
 
-  controlBuscadorEtiqueta = new FormControl('');
   etiquetas: Etiqueta[] = [];
+
+  controlBuscadorEtiqueta = new FormControl('');
+  editor_mode: 'E' | 'B' = 'B';
+
   etiquetasFiltradas: Observable<Etiqueta[]> = new Observable<Etiqueta[]>();
   etiquetasAgregadas: Etiqueta[] = [];
+
+  @Input() es_editor: boolean = false;
 
   @Output() emitirSeleccion = new EventEmitter<Etiqueta>();
   @Output() emitirRemocion = new EventEmitter<string>();
@@ -107,6 +113,10 @@ export class TagSearchBoxComponent implements OnInit {
       this.controlBuscadorEtiqueta.setValue('');
       this.emitirRemocion.emit(id_etiqueta);
     }
+  }
+
+  setUpEditor (buscador: any) {
+    console.log(buscador);
   }
 
 }

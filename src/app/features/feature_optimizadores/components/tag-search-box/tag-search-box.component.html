@@ -7,11 +7,35 @@
 
   <mat-card-content>
     <div class="flex-column">
-      <form>
+      <div *ngIf="editor_mode == 'E'">
+        <mat-form-field class="boxW100">
+          <mat-label>Nombre de etiqueta</mat-label>
+
+          <input
+            #nombreEtiqueta
+            type="text"
+            placeholder="Nombra la etiqueta"
+            matInput
+          >
+        </mat-form-field>
+
+        <mat-form-field class="boxW100">
+          <mat-label>Descripci&oacute; de etiqueta</mat-label>
+
+          <textarea
+            #descripcionEtiqueta
+            matInput
+            placeholder="Describe la etiqueta"
+          ></textarea>
+        </mat-form-field>
+      </div>
+
+      <form *ngIf="editor_mode == 'B'">
         <mat-form-field class="boxW100">
           <mat-label>Buscador de etiqueta</mat-label>
 
           <input
+            #buscadorEtiqueta
             type="text"
             placeholder="Agrega una etiqueta"
             aria-label="Buscador de etiqueta"
@@ -25,6 +49,16 @@
             #auto="matAutocomplete"
             (optionSelected)="selectEtiqueta($event)"
           >
+            <mat-option
+              *ngIf="es_editor && buscadorEtiqueta.value.length > 0"
+              matTooltip="Agrega una nueva etiqueta"
+              [matTooltipShowDelay]="500"
+              [matTooltipHideDelay]="100"
+              (click)="setUpEditor(buscadorEtiqueta)"
+            >
+              Agregar {{buscadorEtiqueta.value}}
+            </mat-option>
+
             <mat-option
               *ngFor="let etiqueta of etiquetasFiltradas | async"
               [value]="etiqueta.etiqueta"
