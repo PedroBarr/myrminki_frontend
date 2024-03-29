@@ -6,6 +6,17 @@
     </div>
 
     <div class="aditamentos-container">
+      <button
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+        *ngIf="algoritmo.algoritmo_id"
+        routerLink="/algoritmo/editor/{{algoritmo.algoritmo_id}}"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar el problema
+      </button>
+
       <myrmex-paramz-algorithm-box
         *ngIf="algoritmo.parametrizacion_id"
         [paramz_algrtm_id]="algoritmo.parametrizacion_id"

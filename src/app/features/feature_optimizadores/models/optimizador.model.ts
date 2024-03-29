@@ -51,7 +51,7 @@ export class PrevisualizacionAlgoritmo extends PrevisualizacionEntrada {
   }
 
   override ruta_enlace ( ): string {
-    return '/algoritmo/' + this.id;
+    return '/algoritmo/visor/' + this.id;
   }
 
   override get_id ( ): string {

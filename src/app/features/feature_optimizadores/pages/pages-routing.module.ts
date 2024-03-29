@@ -50,8 +50,21 @@ const routes: Routes = [
   {path: 'configurara', component: PageMainSetUpComponent },
   {path: 'explorar', component: PageMainExplorerComponent },
   {
-    path: 'algoritmo/:identificador',
-    component: PageExplorerAlgorithmComponent,
+    path: 'algoritmo',
+    children: [
+      {
+        path: 'editor',
+        component: PageExplorerAlgorithmComponent,
+      },
+      {
+        path: 'editor/:identificador',
+        component: PageExplorerAlgorithmComponent,
+      },
+      {
+        path: 'visor/:identificador',
+        component: PageExplorerAlgorithmComponent,
+      },
+    ],
   },
   {
     path: 'implementacion',
