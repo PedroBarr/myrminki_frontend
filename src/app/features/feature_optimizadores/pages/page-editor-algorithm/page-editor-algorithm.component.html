@@ -157,9 +157,9 @@
 
     <div class="aditamentos-container">
       <myrmex-tag-search-box
+        [etiquetas_iniciales]="etiquetas"
         [es_editor]="true"
-        (emitirSeleccion)="null"
-        (emitirRemocion)="null"
+        (emitirRemocion)="remove_etiqueta($event)"
       ></myrmex-tag-search-box>
 
       <div class="boxW100 flex-column gap-10">

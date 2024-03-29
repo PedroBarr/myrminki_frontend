@@ -2,6 +2,7 @@ import {
   Component,
   EventEmitter,
   Input,
+  OnChanges,
   OnInit,
   Output,
 } from '@angular/core';
@@ -26,7 +27,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./tag-search-box.component.scss'],
 })
 
-export class TagSearchBoxComponent implements OnInit {
+export class TagSearchBoxComponent implements OnInit, OnChanges {
 
   etiquetas: Etiqueta[] = [];
 
@@ -41,6 +42,7 @@ export class TagSearchBoxComponent implements OnInit {
   etiquetasFiltradas: Observable<Etiqueta[]> = new Observable<Etiqueta[]>();
   etiquetasAgregadas: Etiqueta[] = [];
 
+  @Input() etiquetas_iniciales: Etiqueta[] = [];
   @Input() es_editor: boolean = false;
 
   @Output() emitirSeleccion = new EventEmitter<Etiqueta>();
@@ -49,6 +51,12 @@ export class TagSearchBoxComponent implements OnInit {
   async ngOnInit ( ) {
     await this.loadTags();
     this.initEtiquetasFiltradas();
+  }
+
+  ngOnChanges (changes: any) {
+    if (changes.etiquetas_iniciales) {
+      this.etiquetasAgregadas = this.etiquetas_iniciales;
+    }
   }
 
   initEtiquetasFiltradas ( ) {
