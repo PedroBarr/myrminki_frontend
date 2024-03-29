@@ -115,10 +115,11 @@ export class Algoritmo {
       seudo_codigo: this.seudo_codigo_puntuado,
     };
 
-    post_data['diminutivo'] = 'problm_' + (new Date().getTime());
+    post_data['diminutivo'] = 'algrtm_' + (new Date().getTime());
 
     if (this.algoritmo_id) {
       post_data['id'] = this.algoritmo_id;
+      post_data['diminutivo'] = post_data['id'];
     }
 
     return post_data;
@@ -311,6 +312,7 @@ export class Implementacion {
 
     if (this.implementacion_id) {
       post_data['id'] = this.implementacion_id;
+      post_data['diminutivo'] = post_data['id'];
     }
 
     return post_data;
@@ -463,6 +465,7 @@ export class Problema {
 
     if (this.problema_id) {
       post_data['id'] = this.problema_id;
+      post_data['diminutivo'] = post_data['id'];
     }
 
     return post_data;
@@ -650,6 +653,7 @@ export class Instancia {
 
     if (this.instancia_id) {
       post_data['id'] = this.instancia_id;
+      post_data['diminutivo'] = post_data['id'];
     }
 
     return post_data;
@@ -824,15 +828,16 @@ export class Solucion {
 
     post_data['diminutivo'] = (
       'solcn_' +
-      this.implementacion_id +
-      '_' +
       this.instancia_id +
+      '_' +
+      this.implementacion_id +
       '_' +
       (new Date().getTime())
     );
 
     if (this.solucion_id) {
       post_data['id'] = this.solucion_id;
+      post_data['diminutivo'] = post_data['id'];
     }
 
     return post_data;
