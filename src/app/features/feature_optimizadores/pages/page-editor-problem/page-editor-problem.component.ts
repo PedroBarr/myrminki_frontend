@@ -12,6 +12,8 @@ import {
   ParametrizacionEditable,
 } from '../../models/optimizador.model';
 
+import { Etiqueta } from '../../models/etiqueta.model';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -27,6 +29,7 @@ export class PageEditorProblemComponent implements OnInit {
 
   parametrizacion_id: string | null = null;
   paramz_problm: ParametrizacionEditable = new ParametrizacionEditable();
+  etiquetas: Etiqueta[] = [];
 
   descripcion_vista: 'E' | 'P' = 'E';
   matematizacion_vista: 'E' | 'P' = 'E';
@@ -62,10 +65,19 @@ export class PageEditorProblemComponent implements OnInit {
           if (data.nombre)
             this.problema.titulo = data.nombre;
 
-          if (data.etiquetas)
+          if (data.etiquetas) {
             this.problema.etiquetas = data.etiquetas.map(
               (etiqueta: any) => etiqueta.etiqueta
             );
+
+            this.etiquetas = data.etiquetas.map(
+              (tipo_algoritmo: any) => ({
+                id: tipo_algoritmo.id,
+                etiqueta: tipo_algoritmo.etiqueta,
+                descripcion: tipo_algoritmo.descripcion,
+              } as Etiqueta)
+            );
+          }
 
           if (data.descripcion) {
             this.problema.descripcion_puntuada = data.descripcion;
@@ -105,6 +117,14 @@ export class PageEditorProblemComponent implements OnInit {
     post_data['parametrizacion'] = this.paramz_problm.build_post(
       this.problema.problema_id ? post_data['id'] : post_data['diminutivo'],
       this.parametrizacion_id ? this.parametrizacion_id : null
+    );
+
+    post_data['tipificacion'] = this.etiquetas.map(
+      (etiqueta: any) => {
+        const etiqueta_obj = new Etiqueta();
+        etiqueta_obj.fill_obj(etiqueta);
+        return etiqueta_obj.build_post()
+      }
     );
 
     await axios.post(
@@ -161,6 +181,12 @@ export class PageEditorProblemComponent implements OnInit {
 
   update_paramz (paramz: ParametrizacionEditable) {
     this.paramz_problm = paramz;
+  }
+
+  remove_etiqueta (etiqueta_id: string) {
+    this.etiquetas = this.etiquetas.filter(
+      (etiqueta: Etiqueta) => etiqueta.id != etiqueta_id
+    );
   }
 
 }
