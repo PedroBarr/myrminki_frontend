@@ -1,0 +1,35 @@
+<div class="boxW100 flex-column gap-10">
+  <button
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    *ngIf="paramz_algrtm.params_list.length > 0"
+    [disabled]="!es_modificado"
+    [ngClass]="{'esta_deshabilitado': !es_modificado}"
+    (click)="confirm_parametrization()"
+  >
+    <mat-icon>library_add_check</mat-icon>
+    Confirmar parametrizaci&oacute;n
+  </button>
+
+  <div id="param-algrtm-container">
+    <myrmex-param-editor-box
+      *ngFor="let param of paramz_algrtm.params_list; index as i_param"
+      [parameter]="param"
+      [tipos]="tipos"
+      [restricciones]="get_restricciones(i_param)"
+      (emitir_cambios)="cargar_cambios(i_param, $event)"
+    >
+    </myrmex-param-editor-box>
+  </div>
+
+  <button
+    class="boxW100"
+    mat-flat-button
+    color="primary"
+    (click)="add_paramz_algrtm_param()"
+  >
+    <mat-icon>exposure_plus_1</mat-icon>
+    Agregar par&aacute;metro
+  </button>
+</div>
