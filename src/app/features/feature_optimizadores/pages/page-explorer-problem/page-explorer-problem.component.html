@@ -6,6 +6,17 @@
     </div>
 
     <div class="aditamentos-container">
+      <button
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+        *ngIf="problema.problema_id"
+        routerLink="/problema/editor/{{problema.problema_id}}"
+      >
+        <mat-icon>edit</mat-icon>
+        Editar la problema
+      </button>
+
       <myrmex-paramz-problem-box
         *ngIf="problema.parametrizacion_id"
         [paramz_problem_id]="problema.parametrizacion_id"
