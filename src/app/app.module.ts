@@ -17,6 +17,9 @@ import {
   PagesFeatureComunidadModule
 } from './features/feature_comunidad/pages/pages.module';
 
+// import { ComponentsFeatureAutentificacionModule } from './features/feature_autentificacion/components/components.module';
+import { ServicesFeatureAutentificacionModule } from './features/feature_autentificacion/services/services.module';
+
 @NgModule({
   declarations: [
     AppComponent
@@ -35,7 +38,9 @@ import {
 
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    ServicesFeatureAutentificacionModule,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
