@@ -17,7 +17,7 @@ import {
   PagesFeatureComunidadModule
 } from './features/feature_comunidad/pages/pages.module';
 
-// import { ComponentsFeatureAutentificacionModule } from './features/feature_autentificacion/components/components.module';
+import { PagesFeatureAutentificacionModule } from './features/feature_autentificacion/pages/pages.module';
 import { ServicesFeatureAutentificacionModule } from './features/feature_autentificacion/services/services.module';
 
 @NgModule({
@@ -35,6 +35,8 @@ import { ServicesFeatureAutentificacionModule } from './features/feature_autenti
     PagesFeatureOptimizadoresModule,
 
     PagesFeatureComunidadModule,
+
+    PagesFeatureAutentificacionModule,
 
     AppRoutingModule,
   ],
