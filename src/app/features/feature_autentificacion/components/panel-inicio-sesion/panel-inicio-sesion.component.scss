@@ -1,4 +1,111 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+
+  width: 100%;
+  margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+}
+
+.mat-card-header {
+  align-items: center;
+  margin-bottom: auto;
+}
+
+.mat-icon.mat-card-avatar {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+
+  width: auto;
+  height: fit-content;
+  padding: 2px;
+  background-color: var(--myrmex-primary);
+  border-radius: 50%;
+
+  color: white;
+  font-size: 18px;
+}
+
+mat-card-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 15px !important;
+  line-height: normal;
+  margin-bottom: 5px !important;
+}
+
+mat-card-subtitle {
+  text-transform: uppercase;
+
+  margin-bottom: 0px;
+  margin-left: var(--margin-offset);
+  font-size: 12px !important;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  margin-bottom: 0px !important;
+}
+
+mat-form-field {
+  margin: 5px 10px 0;
+  width: auto;
+}
+
+mat-card-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+  padding: 0;
+  margin: auto 0;
+}
+
+mat-card-actions button {
+  width: 100%;
+  font-size: 12px;
+}
+
+.form-field-fixed {
+  width: 100%;
+  margin: 0;
+}
+
 .fields-container{
   display: flex;
   flex-direction: column;
+}
+
+.button-on-field {
+  color: #666;
+}
+
+.mensaje-error {
+  background-color: var(--myrmex-primary-light);
+  color: white;
+
+  text-transform: uppercase;
+  font-size: 12px !important;
+
+  width: 100%;
+  text-align: center;
+
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  padding-top: 4px;
+  padding-bottom: 4px;
 }

@@ -1,4 +1,7 @@
-import { Injectable, inject } from '@angular/core';
+import {
+  Injectable,
+  inject,
+} from '@angular/core';
 
 import {
   CanActivateFn,
@@ -9,12 +12,14 @@ import {
 } from '@angular/router';
 
 
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+
 import { environment } from 'src/environments/environment';
 
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 /* Claves de la guarda */
 const myrmex_autentificacion_simbolica = 'jwt_myrmex';
+const ruta_inicio_sesion = '/iniciar_sesion';
 
 
 @Injectable({
@@ -24,9 +29,7 @@ export class AuthenticationStorage {
 
   private _storage: Storage | null = null;
 
-  constructor(
-      private storage: Storage,
-  ) {
+  constructor( ) {
     this.init();
   }
 
@@ -56,6 +59,10 @@ export class AuthenticationStorage {
 
   public async clear() {
     this._storage?.clear();
+  }
+
+  async login (simbolismo: string) {
+    await this.set(myrmex_autentificacion_simbolica, simbolismo);
   }
 
   logout ( ) {
@@ -115,7 +122,7 @@ class AuthenticationGuard {
 
   canActive(keys: any): boolean {
     for (const key of keys) {
-      if (!this.validateToken(key)) {
+      if (!this.validateKey(key)) {
         return false;
       }
     }
@@ -138,7 +145,7 @@ class AuthenticationGuard {
 export const canActivateAuth: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const active = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
   if (!active) {
-    inject(Router).navigateByUrl('/iniciar_sesion');
+    inject(Router).navigateByUrl(ruta_inicio_sesion);
   }
   return active;
 };
