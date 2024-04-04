@@ -23,6 +23,7 @@
             placeholder="Ej: Usuario19 o usuario19@al.org"
             required
             (input)="ocultar_mensaje()"
+            (keyup.enter)="verificar()"
           />
         </mat-form-field>
 
@@ -36,6 +37,7 @@
             placeholder="Ej: ????????"
             required
             (input)="ocultar_mensaje()"
+            (keyup.enter)="verificar()"
           />
 
           <button

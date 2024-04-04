@@ -20,6 +20,7 @@ import { environment } from 'src/environments/environment';
 /* Claves de la guarda */
 const myrmex_autentificacion_simbolica = 'jwt_myrmex';
 const ruta_inicio_sesion = '/iniciar_sesion';
+const ruta_perfil = '/perfil';
 
 
 @Injectable({
@@ -142,10 +143,18 @@ class AuthenticationGuard {
 
 }
 
-export const canActivateAuth: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
-  const active = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
-  if (!active) {
+export const restrictorNecesitaAutenticar: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const activo = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
+  if (!activo) {
     inject(Router).navigateByUrl(ruta_inicio_sesion);
   }
-  return active;
+  return activo;
+};
+
+export const restrictorNecesitaNoAutenticar: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
+  const activo = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
+  if (activo) {
+    inject(Router).navigateByUrl(ruta_perfil);
+  }
+  return activo;
 };

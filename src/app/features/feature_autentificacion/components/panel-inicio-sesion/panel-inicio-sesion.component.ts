@@ -79,6 +79,8 @@ export class PanelInicioSesionComponent {
 
         if (response.data && response.data['Simbolismo']) {
           this.authStorage.login(response.data['Simbolismo'])
+
+          this.router.navigateByUrl('/perfil')
         } else
           this.mensaje = Object.keys(response.data).join(', ');
       })
