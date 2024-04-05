@@ -3,12 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {
-    ComponentsFeatureAutentificacionModule
+  ComponentsFeatureAutentificacionModule
 } from '../components/components.module';
 
 import {
-    PageLoginComponent
+  PageLoginComponent
 } from './page-login/page-login.component';
+
+import {
+  PageLogupComponent
+} from './page-logup/page-logup.component';
 
 import { PagesRoutingModule } from './pages-routing.module';
 
@@ -16,6 +20,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 @NgModule({
   declarations: [
     PageLoginComponent,
+    PageLogupComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +33,7 @@ import { PagesRoutingModule } from './pages-routing.module';
   ],
   exports: [
     PageLoginComponent,
+    PageLogupComponent,
   ]
 })
 export class PagesFeatureAutentificacionModule { }

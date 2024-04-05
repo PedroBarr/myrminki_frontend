@@ -13,10 +13,19 @@ import {
     PageLoginComponent
 } from './page-login/page-login.component';
 
+import {
+  PageLogupComponent
+} from './page-logup/page-logup.component';
+
 const routes: Routes = [
   {
     path: 'iniciar_sesion',
     component: PageLoginComponent,
+    canActivate: [restrictorNecesitaNoAutenticar],
+  },
+  {
+    path: 'registrar_usuario',
+    component: PageLogupComponent,
     canActivate: [restrictorNecesitaNoAutenticar],
   },
 ];
