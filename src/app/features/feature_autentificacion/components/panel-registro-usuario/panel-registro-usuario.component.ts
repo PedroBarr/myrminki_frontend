@@ -14,11 +14,11 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  selector: 'myrmex-panel-inicio-sesion',
-  templateUrl: './panel-inicio-sesion.component.html',
-  styleUrls: ['./panel-inicio-sesion.component.scss'],
+  selector: 'myrmex-panel-registro-usuario',
+  templateUrl: './panel-registro-usuario.component.html',
+  styleUrls: ['./panel-registro-usuario.component.scss'],
 })
-export class PanelInicioSesionComponent {
+export class PanelRegistroUsuarioComponent {
 
   nombre: string = '';
   apellido: string = '';
