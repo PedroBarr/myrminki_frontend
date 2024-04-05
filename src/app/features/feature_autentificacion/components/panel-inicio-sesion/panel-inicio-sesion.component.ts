@@ -10,7 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
-  AuthenticationStorage
+  AutentificacionInterceptorService,
 } from 'src/app/shared/guards/auth.guard';
 import { environment } from 'src/environments/environment';
 
@@ -34,7 +34,7 @@ export class PanelInicioSesionComponent {
   constructor (
     private router: Router,
     private route: ActivatedRoute,
-    private authStorage: AuthenticationStorage,
+    private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
   private esCorreo (exp: string): boolean {
@@ -80,7 +80,7 @@ export class PanelInicioSesionComponent {
         console.log(response.data);
 
         if (response.data && response.data['Simbolismo']) {
-          this.authStorage.login(response.data['Simbolismo'])
+          this.authIntercepService.setAuth(response.data['Simbolismo'])
 
           this.router.navigateByUrl('/perfil')
         } else

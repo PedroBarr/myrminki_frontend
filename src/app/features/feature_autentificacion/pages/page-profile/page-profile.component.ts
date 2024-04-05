@@ -6,7 +6,7 @@ import {
 import axios from 'axios';
 
 import {
-  AutentificacionInterceptorService
+  AutentificacionInterceptorService,
 } from 'src/app/shared/guards/auth.guard';
 
 import { environment } from 'src/environments/environment';
@@ -44,6 +44,41 @@ export class PageProfileComponent implements OnInit {
         console.log(response.data);
 
         if (response.data) {
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+  * Do signout from API
+  */
+  async doSignout ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    axiosInstance.get(
+      environment.MYRMEX_API + '/sigul_sale',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.authIntercepService.delAuth();
         }
       })
       .catch(error => {

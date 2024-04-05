@@ -1,0 +1,20 @@
+:has(> .perfil-container) {
+  --gap: 20px;
+  --perfil-width: 60%;
+  gap: var(--gap);
+}
+
+.perfil-container {
+  width: calc(var(--perfil-width) - var(--gap));
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.aditamentos-container {
+  display: flex;
+  width: calc(100% - var(--perfil-width));
+
+  flex-direction: column;
+  gap: 10px;
+}
