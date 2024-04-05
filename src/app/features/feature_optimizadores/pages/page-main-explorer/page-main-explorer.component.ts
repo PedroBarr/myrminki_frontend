@@ -16,6 +16,10 @@ import {
   PrevisualizacionSolucion,
 } from '../../models/optimizador.model';
 
+import {
+  AutentificacionInterceptorService
+} from 'src/app/shared/guards/auth.guard';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,6 +35,10 @@ export class PageMainExplorerComponent implements OnInit {
   etiquetasBuscadas: any[] = [];
   terminoBuscado: string = '';
   optimizadores: PrevisualizacionEntrada[] = [];
+
+  constructor (
+    private authIntercepService: AutentificacionInterceptorService,
+  ) { }
 
   ngOnInit ( ) {
     this.loadOptimizers();
@@ -50,7 +58,10 @@ export class PageMainExplorerComponent implements OnInit {
     if (this.terminoBuscado.length >= 3)
       params.termino = this.terminoBuscado;
 
-    axios.get(
+    const axiosInstance = axios.create();
+    const intercep_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+
+    axiosInstance.get(
       environment.MYRMEX_API + '/explorar',
       {
         params,
@@ -146,7 +157,9 @@ export class PageMainExplorerComponent implements OnInit {
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(axiosInstance, intercep_id);
+      });
   }
 
   seleccionEtiqueta(evt: any) {

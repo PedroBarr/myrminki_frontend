@@ -18,6 +18,7 @@ import {
 
 import {
   AxiosInstance,
+  AxiosError,
 } from 'axios';
 
 import { environment } from 'src/environments/environment';
@@ -159,29 +160,66 @@ export class AutentificacionInterceptorService {
     private router: Router,
   ) { }
 
-  errorHandler (err: HttpErrorResponse): HttpErrorResponse {
-
-    if (err.status === 401) this.delAuth();
-
-    return err;
-  }
 
   async delAuth ( ) {
     await this.authStorage.logout();
     this.router.navigateByUrl(ruta_inicio_sesion);
   }
 
+  async setAuth (simbolismo: string) {
+    await this.authStorage.login(simbolismo);
+    window.location.reload();
+  }
+
+  getAuth (): string | null {
+    const simbolismo = this.authStorage.get(myrmex_autentificacion_simbolica);
+    if (typeof simbolismo === 'string') return simbolismo;
+    else return null;
+  }
+
+
+  useAuthHeaders (config: any): any {
+    const simbolismo = this.getAuth();
+    if (simbolismo) config.headers.Authorization = `Bearer ${simbolismo}`;
+    return config;
+  }
+
+  handleAuthError (err: AxiosError) {
+    const status: number = err.response ? err.response.status : 0;
+
+    switch (status) {
+      case 401:
+        this.delAuth();
+        break;
+    }
+
+    return Promise.reject(err);
+  }
+
+
   addAuthInterceptor (axios: AxiosInstance): number {
-    return axios.interceptors.request.use(this.useAuthHeaders);
+    return axios.interceptors.request.use((config: any) => {
+      this.useAuthHeaders(config);
+      return config;
+    });
   }
 
   removeAuthInterceptor (axios: AxiosInstance, interceptor: number) {
     return axios.interceptors.request.eject(interceptor);
   }
 
-  useAuthHeaders (config: any): any {
-    console.log('usó el interceptor');
-    return config;
+
+  addAuthErrorInterceptor (axios: AxiosInstance): number {
+    return axios.interceptors.response.use(
+      response => response,
+      error => {
+        return this.handleAuthError(error);
+      },
+    );
+  }
+
+  removeAuthErrorInterceptor (axios: AxiosInstance, interceptor: number) {
+    return axios.interceptors.response.eject(interceptor);
   }
 
 }

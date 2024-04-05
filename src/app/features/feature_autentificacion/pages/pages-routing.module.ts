@@ -7,7 +7,7 @@ import {
 
 import {
   restrictorNecesitaNoAutenticar,
-} from 'src/app/shared/guard/auth.guard';
+} from 'src/app/shared/guards/auth.guard';
 
 import {
     PageLoginComponent
