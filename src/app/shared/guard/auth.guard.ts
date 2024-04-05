@@ -145,6 +145,7 @@ class AuthenticationGuard {
 
 export const restrictorNecesitaAutenticar: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const activo = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
+
   if (!activo) {
     inject(Router).navigateByUrl(ruta_inicio_sesion);
   }
@@ -153,8 +154,9 @@ export const restrictorNecesitaAutenticar: CanActivateFn = (route: ActivatedRout
 
 export const restrictorNecesitaNoAutenticar: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const activo = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
+
   if (activo) {
     inject(Router).navigateByUrl(ruta_perfil);
   }
-  return activo;
+  return !activo;
 };

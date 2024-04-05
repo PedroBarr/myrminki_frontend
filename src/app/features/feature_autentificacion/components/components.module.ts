@@ -9,12 +9,19 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 
-import { PanelInicioSesionComponent } from './panel-inicio-sesion/panel-inicio-sesion.component';
+import {
+  PanelInicioSesionComponent
+} from './panel-inicio-sesion/panel-inicio-sesion.component';
+
+import {
+  PanelRegistroUsuarioComponent
+} from './panel-registro-usuario/panel-registro-usuario.component';
 
 
 @NgModule({
   declarations: [
     PanelInicioSesionComponent,
+    PanelRegistroUsuarioComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +38,7 @@ import { PanelInicioSesionComponent } from './panel-inicio-sesion/panel-inicio-s
   ],
   exports: [
     PanelInicioSesionComponent,
+    PanelRegistroUsuarioComponent,
   ]
 })
 export class ComponentsFeatureAutentificacionModule { }

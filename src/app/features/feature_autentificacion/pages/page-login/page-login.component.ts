@@ -14,6 +14,8 @@ import axios from 'axios';
 
 export class PageLoginComponent implements OnInit {
 
+  modo: 'In' | 'Up' = 'In';
+
   ngOnInit ( ) {
     // canActiveSirvio?
   }
