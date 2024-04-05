@@ -14,6 +14,10 @@ import {
   PageLogupComponent
 } from './page-logup/page-logup.component';
 
+import {
+  PageProfileComponent
+} from './page-profile/page-profile.component';
+
 import { PagesRoutingModule } from './pages-routing.module';
 
 
@@ -21,6 +25,7 @@ import { PagesRoutingModule } from './pages-routing.module';
   declarations: [
     PageLoginComponent,
     PageLogupComponent,
+    PageProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +39,7 @@ import { PagesRoutingModule } from './pages-routing.module';
   exports: [
     PageLoginComponent,
     PageLogupComponent,
+    PageProfileComponent,
   ]
 })
 export class PagesFeatureAutentificacionModule { }

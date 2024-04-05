@@ -7,6 +7,7 @@ import {
 
 import {
   restrictorNecesitaNoAutenticar,
+  restrictorNecesitaAutenticar,
 } from 'src/app/shared/guards/auth.guard';
 
 import {
@@ -16,6 +17,10 @@ import {
 import {
   PageLogupComponent
 } from './page-logup/page-logup.component';
+
+import {
+  PageProfileComponent
+} from './page-profile/page-profile.component';
 
 const routes: Routes = [
   {
@@ -28,7 +33,13 @@ const routes: Routes = [
     component: PageLogupComponent,
     canActivate: [restrictorNecesitaNoAutenticar],
   },
+  {
+    path: 'perfil',
+    component: PageProfileComponent,
+    canActivate: [restrictorNecesitaAutenticar],
+  },
 ];
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
