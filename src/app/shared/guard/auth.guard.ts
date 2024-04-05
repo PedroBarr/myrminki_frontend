@@ -16,6 +16,10 @@ import {
   HttpErrorResponse,
 } from '@angular/common/http';
 
+import {
+  AxiosInstance,
+} from 'axios';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -148,7 +152,7 @@ class AuthenticationGuard {
 @Injectable({
     providedIn: 'root',
 })
-export class AutentificacionService {
+export class AutentificacionInterceptorService {
 
   constructor(
     private authStorage: AuthenticationStorage,
@@ -165,6 +169,19 @@ export class AutentificacionService {
   async delAuth ( ) {
     await this.authStorage.logout();
     this.router.navigateByUrl(ruta_inicio_sesion);
+  }
+
+  addAuthInterceptor (axios: AxiosInstance): number {
+    return axios.interceptors.request.use(this.useAuthHeaders);
+  }
+
+  removeAuthInterceptor (axios: AxiosInstance, interceptor: number) {
+    return axios.interceptors.request.eject(interceptor);
+  }
+
+  useAuthHeaders (config: any): any {
+    console.log('usó el interceptor');
+    return config;
   }
 
 }
