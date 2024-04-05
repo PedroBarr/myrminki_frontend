@@ -17,8 +17,10 @@ import {
   PagesFeatureComunidadModule
 } from './features/feature_comunidad/pages/pages.module';
 
-import { PagesFeatureAutentificacionModule } from './features/feature_autentificacion/pages/pages.module';
-import { ServicesFeatureAutentificacionModule } from './features/feature_autentificacion/services/services.module';
+import {
+  PagesFeatureAutentificacionModule
+} from './features/feature_autentificacion/pages/pages.module';
+
 
 @NgModule({
   declarations: [
@@ -40,9 +42,7 @@ import { ServicesFeatureAutentificacionModule } from './features/feature_autenti
 
     AppRoutingModule,
   ],
-  providers: [
-    ServicesFeatureAutentificacionModule,
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

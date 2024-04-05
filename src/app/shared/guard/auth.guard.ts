@@ -12,7 +12,9 @@ import {
 } from '@angular/router';
 
 
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import {
+  HttpErrorResponse,
+} from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 
@@ -66,8 +68,8 @@ export class AuthenticationStorage {
     await this.set(myrmex_autentificacion_simbolica, simbolismo);
   }
 
-  logout ( ) {
-    this.remove(myrmex_autentificacion_simbolica);
+  async logout ( ) {
+    await this.remove(myrmex_autentificacion_simbolica);
   }
 
 }
@@ -142,6 +144,31 @@ class AuthenticationGuard {
   }
 
 }
+
+@Injectable({
+    providedIn: 'root',
+})
+export class AutentificacionService {
+
+  constructor(
+    private authStorage: AuthenticationStorage,
+    private router: Router,
+  ) { }
+
+  errorHandler (err: HttpErrorResponse): HttpErrorResponse {
+
+    if (err.status === 401) this.delAuth();
+
+    return err;
+  }
+
+  async delAuth ( ) {
+    await this.authStorage.logout();
+    this.router.navigateByUrl(ruta_inicio_sesion);
+  }
+
+}
+
 
 export const restrictorNecesitaAutenticar: CanActivateFn = (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => {
   const activo = inject(AuthenticationGuard).canActive([myrmex_autentificacion_simbolica]);
