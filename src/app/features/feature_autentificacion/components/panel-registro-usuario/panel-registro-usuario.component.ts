@@ -9,7 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import axios from 'axios';
 
-import { AuthenticationStorage } from 'src/app/shared/guard/auth.guard';
+import { AuthenticationStorage } from 'src/app/shared/guards/auth.guard';
 import { environment } from 'src/environments/environment';
 
 
