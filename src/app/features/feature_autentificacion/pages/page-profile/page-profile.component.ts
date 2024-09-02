@@ -9,6 +9,10 @@ import {
   AutentificacionInterceptorService,
 } from 'src/app/shared/guards/auth.guard';
 
+import {
+  UsuarioPerfil,
+} from '../../models/usuario.model';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -19,6 +23,8 @@ import { environment } from 'src/environments/environment';
 })
 
 export class PageProfileComponent implements OnInit {
+
+  public perfil: UsuarioPerfil = new UsuarioPerfil();
 
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
@@ -44,6 +50,7 @@ export class PageProfileComponent implements OnInit {
         console.log(response.data);
 
         if (response.data) {
+          this.perfil = new UsuarioPerfil(response.data);
         }
       })
       .catch(error => {

@@ -14,7 +14,7 @@ export class UsuarioPerfil {
         id: null,
         correo: null,
         apodo: null,
-    nombres: null,
+        nombres: null,
         apellidos: null,  
     }
   ) {
