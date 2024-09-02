@@ -17,11 +17,16 @@ import {
   PanelRegistroUsuarioComponent
 } from './panel-registro-usuario/panel-registro-usuario.component';
 
+import {
+  PerfilBoxComponent
+} from './perfil-box/perfil-box.component';
+
 
 @NgModule({
   declarations: [
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
+    PerfilBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +44,7 @@ import {
   exports: [
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
+    PerfilBoxComponent,
   ]
 })
 export class ComponentsFeatureAutentificacionModule { }
