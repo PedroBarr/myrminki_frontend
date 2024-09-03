@@ -1,2 +1,83 @@
 <mat-card>
+    <mat-card-header>
+        <mat-icon mat-card-avatar color="primary"> person </mat-icon>
+        <mat-card-title> Usuario </mat-card-title>
+        <mat-card-subtitle> {{subtitulo}} </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="seccion-container">
+        <div class="boxW100 flex-row gap-10 flex-space-between flex-align-center">
+            <mat-form-field class="form-field-fixed boxW100">
+                <div *ngIf="!is_edit_mode" class="form-field-fixed flex-column gap-off">
+                    <mat-label class="field-label"> Nombres </mat-label>
+                    <mat-label> {{perfil.nombres}} </mat-label>
+                </div>
+
+                <div *ngIf="is_edit_mode" class="form-field-fixed">
+                    <mat-label class="field-label"> Nombres </mat-label>
+                    <input
+                        type="text"
+                        placeholder="Nombres"
+                        matInput
+                        [(ngModel)]="perfil.nombres"
+                    >
+                </div>
+            </mat-form-field>
+            
+            <mat-form-field class="form-field-fixed boxW100">
+                <div *ngIf="!is_edit_mode" class="form-field-fixed flex-column gap-off">
+                    <mat-label class="field-label"> Apellidos </mat-label>
+                    <mat-label> {{perfil.apellidos}} </mat-label>
+                </div>
+
+                <div *ngIf="is_edit_mode" class="form-field-fixed">
+                    <mat-label class="field-label"> Apellidos </mat-label>
+                    <input
+                        type="text"
+                        placeholder="Apellidos"
+                        matInput
+                        [(ngModel)]="perfil.apellidos"
+                    >
+                </div>
+            </mat-form-field>
+        </div>
+
+        <div class="boxW100 flex-row gap-10 flex-space-between flex-align-center">
+            <mat-form-field class="form-field-fixed boxW100">
+                <div *ngIf="!is_edit_mode" class="form-field-fixed flex-column gap-off">
+                    <mat-label class="field-label"> Apodo </mat-label>
+                    <mat-label> {{perfil.apodo}} </mat-label>
+                </div>
+
+                <div *ngIf="is_edit_mode" class="form-field-fixed">
+                    <mat-label class="field-label"> Apodo </mat-label>
+                    <input
+                        type="text"
+                        placeholder="Apodo"
+                        matInput
+                        [(ngModel)]="perfil.apodo"
+                    >
+                </div>
+            </mat-form-field>
+        </div>
+
+        <div class="boxW100 flex-row gap-10 flex-space-between flex-align-center">
+            <mat-form-field class="form-field-fixed boxW100">
+                <div *ngIf="!is_edit_mode" class="form-field-fixed flex-column gap-off">
+                    <mat-label class="field-label"> Correo </mat-label>
+                    <mat-label> {{perfil.correo}} </mat-label>
+                </div>
+
+                <div *ngIf="is_edit_mode" class="form-field-fixed">
+                    <mat-label class="field-label"> Correo </mat-label>
+                    <input
+                        type="text"
+                        placeholder="Correo"
+                        matInput
+                        [(ngModel)]="perfil.correo"
+                    >
+                </div>
+            </mat-form-field>
+        </div>
+    </mat-card-content>
 </mat-card>

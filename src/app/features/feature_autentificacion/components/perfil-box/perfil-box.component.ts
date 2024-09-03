@@ -15,11 +15,12 @@ import {
 })
 export class PerfilBoxComponent implements OnInit {
 
+  @Input() public subtitulo: string = '';
   @Input() public perfil: UsuarioPerfil = new UsuarioPerfil();
+  @Input() public is_edit_mode: boolean = false;
 
-  constructor() { }
+  constructor( ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit( ): void { }
 
 }
