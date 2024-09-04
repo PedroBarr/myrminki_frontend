@@ -3,6 +3,8 @@ import {
   OnInit,
 } from '@angular/core';
 
+import { ActivatedRoute } from '@angular/router';
+
 import axios from 'axios';
 
 import {
@@ -11,6 +13,7 @@ import {
 
 import {
   UsuarioPerfil,
+  UsuarioPerfilVistaHabilitada,
 } from '../../models/usuario.model';
 
 import { environment } from 'src/environments/environment';
@@ -25,13 +28,21 @@ import { environment } from 'src/environments/environment';
 export class PageProfileComponent implements OnInit {
 
   public perfil: UsuarioPerfil = new UsuarioPerfil();
+  public tipo_vista: UsuarioPerfilVistaHabilitada =
+    UsuarioPerfilVistaHabilitada.none;
 
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
+    private route: ActivatedRoute,
   ) { }
 
   async ngOnInit ( ) {
-    await this.loadProfile();
+    if (this.route.snapshot.paramMap.get('id') != null) {
+      const id = this.route.snapshot.paramMap.get('id');
+      if (id) await this.loadUserProfile(id);
+    } else {
+      await this.loadProfile();
+    }
   }
 
   /**
@@ -51,10 +62,51 @@ export class PageProfileComponent implements OnInit {
 
         if (response.data) {
           this.perfil = new UsuarioPerfil(response.data);
+          this.tipo_vista = UsuarioPerfilVistaHabilitada.profile;
         }
       })
       .catch(error => {
         console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load user profile from API
+   */
+  async loadUserProfile (id: string) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    axiosInstance.get(
+      environment.MYRMEX_API + '/perfil/apodo/' + id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.perfil = new UsuarioPerfil(response.data);
+          this.tipo_vista = UsuarioPerfilVistaHabilitada.user;
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
       })
       .finally(( ) => {
         this.authIntercepService.removeAuthInterceptor(
@@ -102,6 +154,30 @@ export class PageProfileComponent implements OnInit {
           intercep_error_id
         );
       });
+  }
+
+  private reiniciarVista ( ) {
+    this.perfil = new UsuarioPerfil();
+    this.tipo_vista = UsuarioPerfilVistaHabilitada.none;
+  }
+
+  public getSubtitulo ( ): string {
+    switch (this.tipo_vista) {
+      case UsuarioPerfilVistaHabilitada.profile:
+        return 'Usuario';
+      case UsuarioPerfilVistaHabilitada.user:
+        return 'Perfil';
+      default:
+        return '';
+    }
+  }
+
+  public esCorreoVisible ( ): boolean {
+    return this.tipo_vista === UsuarioPerfilVistaHabilitada.profile;
+  }
+
+  public esCerrarSesionVisible ( ): boolean {
+    return this.tipo_vista === UsuarioPerfilVistaHabilitada.profile;
   }
 
 }

@@ -15,7 +15,7 @@ export class UsuarioPerfil {
         correo: null,
         apodo: null,
         nombres: null,
-        apellidos: null,  
+        apellidos: null,
     }
   ) {
     this.id = obj.id;
@@ -24,6 +24,8 @@ export class UsuarioPerfil {
     this.nombres = obj.nombres;
     this.apellidos = obj.apellidos;
 
+    this.deducirNombres(obj);
+
     this.nombre_completo = this.nombres + ' ' + this.apellidos;
   }
       
@@ -31,4 +33,35 @@ export class UsuarioPerfil {
     return this.nombre_completo;
   }
 
+  public deducirNombres(
+    obj: any = {
+      nombres: null,
+      apellidos: null,
+      nombre: null,
+    }
+  ) {
+    if (obj.nombres == null && obj.apellidos == null && obj.nombre != null) {
+      const espacios = obj.nombre.split(' ').length - 1;
+      if (espacios == 1) {
+        const nombres = obj.nombre.split(' ');
+        this.nombres = nombres[0];
+        this.apellidos = nombres[1];
+      } else if (espacios > 1) {
+        // separar nombre a partir del segundo espacio
+        const nombres = obj.nombre.split(' ');
+        this.nombres = nombres[0] + ' ' + nombres[1];
+        this.apellidos = nombres.slice(2).join(' ');
+      } else {
+        this.nombres = obj.nombre;
+        this.apellidos = '';
+      }
+    }
+  }
+
+}
+
+export enum UsuarioPerfilVistaHabilitada {
+  profile = 'profile', // profile of user logged
+  user = 'user', // profile of other user
+  none = 'none', // no profile
 }

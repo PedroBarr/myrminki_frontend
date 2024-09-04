@@ -61,7 +61,10 @@
             </mat-form-field>
         </div>
 
-        <div class="boxW100 flex-row gap-10 flex-space-between flex-align-center">
+        <div
+            *ngIf="es_correo_visible"
+            class="boxW100 flex-row gap-10 flex-space-between flex-align-center"
+        >
             <mat-form-field class="form-field-fixed boxW100">
                 <div *ngIf="!is_edit_mode" class="form-field-fixed flex-column gap-off">
                     <mat-label class="field-label"> Correo </mat-label>

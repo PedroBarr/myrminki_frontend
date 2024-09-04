@@ -18,6 +18,7 @@ export class PerfilBoxComponent implements OnInit {
   @Input() public subtitulo: string = '';
   @Input() public perfil: UsuarioPerfil = new UsuarioPerfil();
   @Input() public is_edit_mode: boolean = false;
+  @Input() public es_correo_visible: boolean = false;
 
   constructor( ) { }
 

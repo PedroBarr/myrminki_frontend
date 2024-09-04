@@ -3,13 +3,15 @@
     <div class="perfil-container">
       <myrmex-perfil-box
         [perfil]="perfil"
-        subtitulo="Perfil"
+        [subtitulo]="getSubtitulo()"
+        [es_correo_visible]="esCorreoVisible()"
       >
       </myrmex-perfil-box>
     </div>
 
     <div class="aditamentos-container">
       <button
+        *ngIf="esCerrarSesionVisible()"
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
