@@ -164,9 +164,9 @@ export class PageProfileComponent implements OnInit {
   public getSubtitulo ( ): string {
     switch (this.tipo_vista) {
       case UsuarioPerfilVistaHabilitada.profile:
-        return 'Usuario';
-      case UsuarioPerfilVistaHabilitada.user:
         return 'Perfil';
+      case UsuarioPerfilVistaHabilitada.user:
+        return 'Usuario';
       default:
         return '';
     }
