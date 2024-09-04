@@ -20,6 +20,7 @@ import {
 import {
   PerfilBoxComponent
 } from './perfil-box/perfil-box.component';
+import { RolesBoxComponent } from './roles-box/roles-box.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
     PerfilBoxComponent,
+    RolesBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -45,6 +47,7 @@ import {
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
     PerfilBoxComponent,
+    RolesBoxComponent,
   ]
 })
 export class ComponentsFeatureAutentificacionModule { }
