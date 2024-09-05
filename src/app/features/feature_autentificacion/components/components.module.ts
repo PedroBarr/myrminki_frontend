@@ -8,6 +8,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
   PanelInicioSesionComponent
@@ -40,6 +41,7 @@ import { RolesBoxComponent } from './roles-box/roles-box.component';
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
+    MatTooltipModule,
 
     RouterModule,
   ],

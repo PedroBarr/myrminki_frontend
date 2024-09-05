@@ -264,12 +264,17 @@ export class PageProfileComponent implements OnInit {
   private buildPermisos (permisos_data: any): PermisoTipado[] {
     const permisos: PermisoTipado[] = [];
     permisos_data.forEach((permiso_data: any) => {
-      const permiso = FactoriaPermisosTipados.crearPermiso(permiso_data);
+      const data = {nombre: permiso_data};
+      const permiso = FactoriaPermisosTipados.crearPermiso(data);
       if (permiso) {
         permisos.push(permiso);
       }
     });
     return permisos;
+  }
+
+  public esRolesVisible ( ): boolean {
+    return this.permisos.length > 0;
   }
 
 }

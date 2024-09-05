@@ -1,1 +1,21 @@
-<p></p>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title> Roles </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="seccion-container">
+        <div class="boxW100 flex-row gap-30 flex-align-center flex-center">
+            <div *ngFor="let rol of roles">
+                <mat-icon
+                    [matTooltip]="rol.get_nombre()"
+                    [matTooltipPosition]="'above'"
+                    [matTooltipShowDelay]="500"
+                    [matTooltipHideDelay]="0"
+                    color="primary"
+                >
+                    {{rol.get_icono()}}
+                </mat-icon>
+            </div>
+        </div>
+    </mat-card-content>
+</mat-card>

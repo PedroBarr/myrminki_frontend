@@ -1,0 +1,28 @@
+.mat-card {
+  background-color: #f7f7f7;
+  border-color: #0004;
+  border-style: solid;
+  border-radius: 10px;
+  border-width: 1px;
+  
+  width: calc(100% - 35px);
+  margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  justify-content: center;
+}
+  
+.mat-card-header {
+  align-items: center;
+  margin-bottom: auto;
+}
+
+mat-card-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 15px !important;
+  line-height: normal;
+  margin-bottom: 5px !important;
+}

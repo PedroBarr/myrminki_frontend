@@ -4,6 +4,13 @@ enum PermisosEnum {
     verificado = 'verificado',
 }
 
+enum PermisosEnumIconos {
+    explorador = 'travel_explore',
+    moderador = 'policy',
+    verificado = 'workspace_premium',
+    // AdminPanelSettingsIcon
+}
+
 export class Permisos {
     public nombre: string;
 
@@ -19,14 +26,25 @@ export class Permisos {
         return nombre.toLowerCase().replace(' ', '_');
     }
 
+    public get_icono(): string {
+        return '';
+    }
+
+    public get_nombre(): string {
+        return this.nombre.charAt(0).toUpperCase() + this.nombre.slice(1);
+    }
+
 }
 
 export class PermisoTipado extends Permisos {
+
+    private icono: string;
 
     public constructor (
         obj: any = {
             nombre: null,
             tipo_valido: null,
+            icono: '',
         }
     ) {
         if (obj.nombre !== null && 
@@ -36,6 +54,12 @@ export class PermisoTipado extends Permisos {
         } else {
             throw new Error('El permiso no es del tipo correcto');
         }
+
+        this.icono = obj.icono;
+    }
+
+    public override get_icono(): string {
+        return this.icono;
     }
 }
 
@@ -45,7 +69,11 @@ export class PermisoExplorador extends PermisoTipado {
             nombre: null,
         }
     ) {
-        super({nombre: obj.nombre, tipo_valido: PermisosEnum.explorador});
+        super({
+            nombre: obj.nombre,
+            tipo_valido: PermisosEnum.explorador,
+            icono: PermisosEnumIconos.explorador,
+        });
     }
 }
 
@@ -55,7 +83,11 @@ export class PermisoModerador extends PermisoTipado {
             nombre: null,
         }
     ) {
-        super({nombre: obj.nombre, tipo_valido: PermisosEnum.moderador});
+        super({
+            nombre: obj.nombre,
+            tipo_valido: PermisosEnum.moderador,
+            icono: PermisosEnumIconos.moderador,
+        });
     }
 }
 
@@ -65,7 +97,11 @@ export class PermisoVerificado extends PermisoTipado {
             nombre: null,
         }
     ) {
-        super({nombre: obj.nombre, tipo_valido: PermisosEnum.verificado});
+        super({
+            nombre: obj.nombre,
+            tipo_valido: PermisosEnum.verificado,
+            icono: PermisosEnumIconos.verificado,
+        });
     }
 }
 
