@@ -41,7 +41,7 @@ const routes: Routes = [
   {
     path: 'perfil/:id',
     component: PageProfileComponent,
-    canActivate: [restrictorNecesitaAutenticar],
+    canActivate: [],
   },
 ];
 
