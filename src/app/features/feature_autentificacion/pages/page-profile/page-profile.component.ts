@@ -24,6 +24,7 @@ import {
 import {
   PrevisualizacionProblema,
   PrevisualizacionAlgoritmo,
+  PrevisualizacionInstancia,
 } from '../../../feature_optimizadores/models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -46,6 +47,8 @@ export class PageProfileComponent implements OnInit {
   public problemas: PrevisualizacionProblema[] = [];
   public algoritmos: PrevisualizacionAlgoritmo[] = [];
 
+  public instancias: PrevisualizacionInstancia[] = [];
+
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
     private route: ActivatedRoute,
@@ -59,12 +62,14 @@ export class PageProfileComponent implements OnInit {
         await this.loadUserProfilePermissions(id);
         await this.loadUserProfileProblems(id);
         await this.loadUserProfileAlgorithms(id);
+        await this.loadUserProfileInstances(id);
       }
     } else {
       await this.loadProfile();
       await this.loadProfilePermissions();
       await this.loadProfileProblems();
       await this.loadProfileAlgorithms();
+      await this.loadProfileInstances();
     }
   }
 
@@ -397,6 +402,80 @@ export class PageProfileComponent implements OnInit {
       });
   }
 
+  /**
+   * Load profile instances from API
+   */
+  private async loadProfileInstances ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/instancias/perfil',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.instancias = this.buildInstancias(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load user profile instances from API
+   */
+  private async loadUserProfileInstances (id: string) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/instancias/perfil/apodo/' + id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.instancias = this.buildInstancias(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
   private reiniciarVista ( ) {
     this.perfil = new UsuarioPerfil();
     this.tipo_vista = UsuarioPerfilVistaHabilitada.none;
@@ -456,6 +535,21 @@ export class PageProfileComponent implements OnInit {
       etiquetas: algoritmo.etiquetas.map((etiqueta: any) => etiqueta.etiqueta),
       n_parametros: algoritmo.parametrizacion_algoritmo_cantidad_parametros,
       n_implementaciones: algoritmo.cantidad_implementaciones,
+    }));
+  }
+
+  private buildInstancias (instancias: any): PrevisualizacionInstancia[] {
+    return instancias.map((instancia: any) => new PrevisualizacionInstancia({
+      id: instancia.clave_identificadora,
+      titulo_entrada: instancia.nombre,
+      etiquetas: instancia.etiquetas.map((etiqueta: any) => etiqueta.etiqueta),
+      nombre_problema: instancia.problema,
+      n_parametros_problema: (
+        instancia.parametrizacion_problema_cantidad_parametros
+      ),
+      n_argumentaciones: instancia.cantidad_argumentaciones,
+      n_soluciones: instancia.cantidad_soluciones,
+      lenguaje_programacion: instancia.lenguaje_programacion,
     }));
   }
 
