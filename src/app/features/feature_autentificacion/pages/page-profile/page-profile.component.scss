@@ -1,3 +1,7 @@
+.page-wrapper {
+  margin-bottom: 0 !important;
+}
+
 :has(> .perfil-container) {
   --gap: 20px;
   --perfil-width: 60%;
@@ -17,4 +21,42 @@
 
   flex-direction: column;
   gap: 10px;
+}
+
+.profile-content-box {
+  /** mat-card withour background-color */
+  border-style: none;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+}
+
+.profile-content-box-title {
+  color: var(--myrmex-primary);
+  font-family: code-pro-bold, sans-serif;
+  font-size: 16px !important;
+  line-height: normal;
+  // margin-bottom: 5px !important;
+}
+
+.mat-icon.mat-card-avatar {
+  display: flex;
+  align-items: center;
+  
+  width: auto;
+  height: fit-content;
+  padding: 5px;
+  background-color: var(--myrmex-primary);
+  border-radius: 50%;
+  
+  color: white;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-card-header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
