@@ -21,6 +21,10 @@ import {
   FactoriaPermisosTipados,
 } from '../../models/permisos.model';
 
+import {
+  PrevisualizacionProblema,
+} from '../../../feature_optimizadores/models/optimizador.model';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -37,6 +41,7 @@ export class PageProfileComponent implements OnInit {
     UsuarioPerfilVistaHabilitada.none;
 
   public permisos: PermisoTipado[] = [];
+  public problemas: PrevisualizacionProblema[] = [];
 
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
@@ -49,10 +54,12 @@ export class PageProfileComponent implements OnInit {
       if (id) {
         await this.loadUserProfile(id);
         await this.loadUserProfilePermissions(id);
+        await this.loadUserProfileProblems(id);
       }
     } else {
       await this.loadProfile();
       await this.loadProfilePermissions();
+      await this.loadProfileProblems();
     }
   }
 
@@ -237,6 +244,80 @@ export class PageProfileComponent implements OnInit {
       });
   }
 
+  /**
+   * Load profile problems from API
+   */
+  private async loadProfileProblems ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/problemas/perfil',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.problemas = this.buildProblemas(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load user profile problems from API
+   */
+  private async loadUserProfileProblems (id: string) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/problemas/perfil/apodo/' + id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.problemas = this.buildProblemas(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
   private reiniciarVista ( ) {
     this.perfil = new UsuarioPerfil();
     this.tipo_vista = UsuarioPerfilVistaHabilitada.none;
@@ -275,6 +356,18 @@ export class PageProfileComponent implements OnInit {
 
   public esRolesVisible ( ): boolean {
     return this.permisos.length > 0;
+  }
+
+  private buildProblemas (problemas: any): PrevisualizacionProblema[] {
+    return problemas.map((problema: any) => new PrevisualizacionProblema({
+      id: problema.clave_identificadora,
+      titulo_entrada: problema.nombre,
+      etiquetas: problema.etiquetas.map((etiqueta: any) => etiqueta.etiqueta),
+      n_parametros_problema: (
+        problema.parametrizacion_problema_cantidad_parametros
+      ),
+      n_instancias: problema.cantidad_instancias,
+    }));
   }
 
 }

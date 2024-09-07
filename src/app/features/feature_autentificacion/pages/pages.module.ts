@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+
+import {
+  ComponentsFeatureOptimizadoresModule
+} from '../../feature_optimizadores/components/components.module';
 
 import {
   ComponentsFeatureAutentificacionModule
@@ -36,8 +41,10 @@ import { PagesRoutingModule } from './pages-routing.module';
     ReactiveFormsModule,
 
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
 
+    ComponentsFeatureOptimizadoresModule,
     ComponentsFeatureAutentificacionModule,
 
     PagesRoutingModule,
