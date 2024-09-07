@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {
   PermisoTipado,
@@ -9,7 +9,7 @@ import {
   templateUrl: './roles-box.component.html',
   styleUrls: ['./roles-box.component.scss']
 })
-export class RolesBoxComponent implements OnInit, OnChanges {
+export class RolesBoxComponent implements OnInit {
 
   @Input() roles: PermisoTipado[] = [];
 
@@ -19,7 +19,4 @@ export class RolesBoxComponent implements OnInit, OnChanges {
   ngOnInit(): void {
   }
 
-  ngOnChanges(): void {
-    console.log(this.roles);
-  }
 }
