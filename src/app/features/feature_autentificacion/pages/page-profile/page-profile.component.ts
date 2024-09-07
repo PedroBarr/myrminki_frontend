@@ -23,6 +23,7 @@ import {
 
 import {
   PrevisualizacionProblema,
+  PrevisualizacionAlgoritmo,
 } from '../../../feature_optimizadores/models/optimizador.model';
 
 import { environment } from 'src/environments/environment';
@@ -41,7 +42,9 @@ export class PageProfileComponent implements OnInit {
     UsuarioPerfilVistaHabilitada.none;
 
   public permisos: PermisoTipado[] = [];
+
   public problemas: PrevisualizacionProblema[] = [];
+  public algoritmos: PrevisualizacionAlgoritmo[] = [];
 
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
@@ -55,11 +58,13 @@ export class PageProfileComponent implements OnInit {
         await this.loadUserProfile(id);
         await this.loadUserProfilePermissions(id);
         await this.loadUserProfileProblems(id);
+        await this.loadUserProfileAlgorithms(id);
       }
     } else {
       await this.loadProfile();
       await this.loadProfilePermissions();
       await this.loadProfileProblems();
+      await this.loadProfileAlgorithms();
     }
   }
 
@@ -318,6 +323,80 @@ export class PageProfileComponent implements OnInit {
       });
   }
 
+  /**
+   * Load profile algorithms from API
+   */
+  private async loadProfileAlgorithms ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/algoritmos/perfil',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.algoritmos = this.buildAlgoritmos(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load user profile algorithms from API
+   */
+  private async loadUserProfileAlgorithms (id: string) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/algoritmos/perfil/apodo/' + id,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.algoritmos = this.buildAlgoritmos(response.data);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.reiniciarVista();
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
   private reiniciarVista ( ) {
     this.perfil = new UsuarioPerfil();
     this.tipo_vista = UsuarioPerfilVistaHabilitada.none;
@@ -367,6 +446,16 @@ export class PageProfileComponent implements OnInit {
         problema.parametrizacion_problema_cantidad_parametros
       ),
       n_instancias: problema.cantidad_instancias,
+    }));
+  }
+
+  private buildAlgoritmos (algoritmos: any): PrevisualizacionAlgoritmo[] {
+    return algoritmos.map((algoritmo: any) => new PrevisualizacionAlgoritmo({
+      id: algoritmo.clave_identificadora,
+      titulo_entrada: algoritmo.nombre,
+      etiquetas: algoritmo.etiquetas.map((etiqueta: any) => etiqueta.etiqueta),
+      n_parametros: algoritmo.parametrizacion_algoritmo_cantidad_parametros,
+      n_implementaciones: algoritmo.cantidad_implementaciones,
     }));
   }
 
