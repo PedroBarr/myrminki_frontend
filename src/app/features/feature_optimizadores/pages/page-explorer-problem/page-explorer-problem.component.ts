@@ -127,4 +127,11 @@ export class PageExplorerProblemComponent implements OnInit {
       });
   }
 
+  public esEditable ( ) {
+    return (
+      this.problema.problema_id &&
+      this.acciones.actualizar_problema
+    );
+  }
+
 }
