@@ -47,7 +47,7 @@ export class PageExplorerProblemComponent implements OnInit {
   * Load problem from API
   */
   async loadProblem ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/problema/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),

@@ -63,7 +63,7 @@ export class PageExplorerAlgorithmComponent implements OnInit {
   * Load algorithm from API
   */
   async loadAlgorithm ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/algoritmo/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),
