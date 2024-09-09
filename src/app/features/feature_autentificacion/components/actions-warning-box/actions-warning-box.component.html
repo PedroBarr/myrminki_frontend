@@ -1,1 +1,35 @@
-<p>actions warning</p>
+<mat-card>
+    <mat-card-header>
+      <mat-card-title>
+        Contenido bloqueado
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content class="seccion-container">
+        <div class="boxW100 flex-row gap-10" *ngIf="modoRenderizado() == 0">
+            <mat-icon color="primary"> person </mat-icon>
+            <span class="mensaje-error">
+                Debe iniciar sesion para ver este contenido
+            </span>
+        </div>
+        
+        <div class="boxW100 flex-row gap-10" *ngIf="modoRenderizado() == 1">
+            <mat-icon color="primary"> workspace_premium </mat-icon>
+            <span class="mensaje-error">
+                No tiene permisos para ver parte de este contenido
+            </span>
+        </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+        <div *ngIf="modoRenderizado() == 0" class="boxW100">
+            <button
+                mat-flat-button
+                color="primary"
+                (click)="irInicioSesion()"
+            >
+                Iniciar sesion
+            </button>
+        </div>
+    </mat-card-actions>
+</mat-card>
