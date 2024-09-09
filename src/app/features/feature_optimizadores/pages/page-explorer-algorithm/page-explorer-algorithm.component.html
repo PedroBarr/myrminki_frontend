@@ -10,7 +10,7 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
-        *ngIf="algoritmo.algoritmo_id"
+        *ngIf="esEditable()"
         routerLink="/algoritmo/editor/{{algoritmo.algoritmo_id}}"
       >
         <mat-icon>edit</mat-icon>

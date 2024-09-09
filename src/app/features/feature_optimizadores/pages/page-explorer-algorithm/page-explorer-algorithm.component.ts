@@ -146,4 +146,11 @@ export class PageExplorerAlgorithmComponent implements OnInit {
       });
   }
 
+  public esEditable ( ) {
+    return (
+      this.algoritmo.algoritmo_id &&
+      this.acciones.actualizar_algoritmo
+    );
+  }
+
 }
