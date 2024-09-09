@@ -11,6 +11,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 import {
+  ActionsWarningBoxComponent,
+} from './actions-warning-box/actions-warning-box.component';
+
+import {
   PanelInicioSesionComponent
 } from './panel-inicio-sesion/panel-inicio-sesion.component';
 
@@ -21,11 +25,15 @@ import {
 import {
   PerfilBoxComponent
 } from './perfil-box/perfil-box.component';
-import { RolesBoxComponent } from './roles-box/roles-box.component';
+
+import {
+  RolesBoxComponent
+} from './roles-box/roles-box.component';
 
 
 @NgModule({
   declarations: [
+    ActionsWarningBoxComponent,
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
     PerfilBoxComponent,
@@ -46,6 +54,7 @@ import { RolesBoxComponent } from './roles-box/roles-box.component';
     RouterModule,
   ],
   exports: [
+    ActionsWarningBoxComponent,
     PanelInicioSesionComponent,
     PanelRegistroUsuarioComponent,
     PerfilBoxComponent,
