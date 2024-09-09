@@ -94,4 +94,27 @@ export class Acciones {
             }
         });
     }
+
+    public esVacio ( ) {
+        return !this.otorgar_permiso_editar_problema &&
+            !this.actualizar_problema &&
+            !this.crear_instancia_problema &&
+            !this.otorgar_permiso_editar_algoritmo &&
+            !this.actualizar_algoritmo &&
+            !this.crear_implementacion_algoritmo &&
+            !this.otorgar_permiso_editar_instancia &&
+            !this.actualizar_instancia &&
+            !this.ejecutar_comando_instancia &&
+            !this.publicar_argumentos_instancia &&
+            !this.crear_solucion_instancia &&
+            !this.otorgar_permiso_editar_implementacion &&
+            !this.actualizar_implementacion &&
+            !this.ejecutar_comando_implementacion &&
+            !this.publicar_argumentos_implementacion &&
+            !this.crear_solucion_implementacion &&
+            !this.otorgar_permiso_editar_solucion &&
+            !this.actualizar_solucion &&
+            !this.ejecutar_comando_solucion &&
+            !this.ejecutar_solucion;
+    }
 }
