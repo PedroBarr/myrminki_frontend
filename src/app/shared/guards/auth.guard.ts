@@ -26,7 +26,7 @@ import { environment } from 'src/environments/environment';
 
 /* Claves de la guarda */
 const myrmex_autentificacion_simbolica = 'jwt_myrmex';
-const ruta_inicio_sesion = '/iniciar_sesion';
+export const ruta_inicio_sesion = '/iniciar_sesion';
 const ruta_perfil = '/perfil';
 
 
