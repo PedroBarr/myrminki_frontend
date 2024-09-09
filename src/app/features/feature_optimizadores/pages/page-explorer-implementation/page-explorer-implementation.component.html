@@ -16,7 +16,7 @@
 
     <div class="aditamentos-container">
       <myrmex-implmnt-eval-box
-        *ngIf="implementacion.implementacion_id"
+        *ngIf="esEjecutableComando()"
         [implmnt_id]="implementacion.implementacion_id"
         [arg_selecto]="arg_selecto"
         [args_editados]="args_editados"
@@ -27,7 +27,7 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
-        *ngIf="implementacion.implementacion_id"
+        *ngIf="esEditable()"
         routerLink="/implementacion/editor/{{implementacion.implementacion_id}}"
       >
         <mat-icon>edit</mat-icon>
@@ -40,6 +40,7 @@
         [args_editados]="args_editados"
         (emitir_seleccion)="set_arg_selecto($event)"
         (emitir_argumentos)="set_arg_selecto_argumentos($event)"
+        [es_editor]="esPublicableArgumentos()"
       >
       </myrmex-args-implmnt-picker-box>
     </div>

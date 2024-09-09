@@ -146,4 +146,25 @@ export class PageExplorerImplementationComponent implements OnInit {
     this.arg_selecto_argumentos = valor;
   }
 
+  public esEditable ( ) {
+    return (
+      this.implementacion.implementacion_id &&
+      this.acciones.actualizar_implementacion
+    );
+  }
+
+  public esEjecutableComando ( ) {
+    return (
+      this.implementacion.implementacion_id &&
+      this.acciones.ejecutar_comando_implementacion
+    );
+  }
+
+  public esPublicableArgumentos ( ) {
+    return Boolean(
+      this.implementacion.implementacion_id &&
+      this.acciones.publicar_argumentos_implementacion
+    );
+  }
+
 }
