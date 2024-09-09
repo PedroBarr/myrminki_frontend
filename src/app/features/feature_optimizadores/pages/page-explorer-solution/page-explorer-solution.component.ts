@@ -10,10 +10,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
+import {
   Implementacion,
   Instancia,
   Solucion,
 } from '../../models/optimizador.model';
+
+import {
+  Acciones,
+} from '../../models/acciones.model';
 
 import {
   ImplmntBoxComponent
@@ -34,6 +42,7 @@ import { environment } from 'src/environments/environment';
 export class PageExplorerSolutionComponent implements OnInit {
 
   solucion: Solucion = new Solucion();
+  acciones: Acciones = new Acciones();
 
   implementacion: Implementacion = new Implementacion();
   instancia: Instancia = new Instancia();
@@ -49,10 +58,12 @@ export class PageExplorerSolutionComponent implements OnInit {
     private route: ActivatedRoute,
     public implementacion_emergente: MatDialog,
     public instancia_emergente: MatDialog,
+    private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
-  ngOnInit ( ) {
-    this.loadSolution();
+  async ngOnInit ( ) {
+    await this.loadSolution();
+    await this.loadActions();
   }
 
   set_inspector_apertura (variable: boolean) {
@@ -118,7 +129,7 @@ export class PageExplorerSolutionComponent implements OnInit {
   * Load solution from API
   */
   async loadSolution ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/solucion/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),
@@ -271,6 +282,45 @@ export class PageExplorerSolutionComponent implements OnInit {
         console.error(error);
       })
       .finally(( ) => { });
+  }
+
+  /**
+   * Load actions from API
+   */
+  async loadActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/solucion/identificador/' +
+        this.route.snapshot.paramMap.get('identificador') +
+        '/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
   }
 
 }
