@@ -84,7 +84,7 @@
 
     <div class="aditamentos-container">
       <myrmex-solcn-eval-box
-        *ngIf="solucion.solucion_id"
+        *ngIf="esEjecutableComando()"
         [solcn_id]="solucion.solucion_id"
       >
       </myrmex-solcn-eval-box>
@@ -93,7 +93,7 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
-        *ngIf="solucion.solucion_id"
+        *ngIf="esEditable()"
         routerLink="/solucion/editor/{{solucion.solucion_id}}"
       >
         <mat-icon>edit</mat-icon>
@@ -104,7 +104,7 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
-        *ngIf="solucion.implementacion_id && solucion.argumentacion_implementacion_id"
+        *ngIf="esEjecutable()"
       >
         <mat-icon>code</mat-icon>
         Ejecutar la soluci&oacute;n

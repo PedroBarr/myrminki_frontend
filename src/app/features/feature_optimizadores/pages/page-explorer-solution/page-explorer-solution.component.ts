@@ -323,4 +323,27 @@ export class PageExplorerSolutionComponent implements OnInit {
       });
   }
 
+  public esEditable ( ) {
+    return (
+      this.solucion.solucion_id &&
+      this.acciones.actualizar_solucion
+    );
+  }
+
+  public esEjecutableComando ( ) {
+    return (
+      this.solucion.solucion_id &&
+      this.acciones.ejecutar_comando_solucion
+    );
+  }
+
+  public esEjecutable ( ) {
+    return (
+      this.solucion.solucion_id &&
+      this.solucion.implementacion_id &&
+      this.solucion.argumentacion_implementacion_id &&
+      this.acciones.ejecutar_solucion
+    );
+  }
+
 }
