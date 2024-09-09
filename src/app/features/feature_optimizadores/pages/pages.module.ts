@@ -26,6 +26,10 @@ import {
   ComponentsFeatureOptimizadoresModule
 } from '../components/components.module';
 
+import {
+  ComponentsFeatureAutentificacionModule
+} from '../../feature_autentificacion/components/components.module';
+
 import { PagesRoutingModule } from './pages-routing.module';
 
 import {
@@ -112,6 +116,7 @@ import {
     MarkdownModule.forRoot(),
 
     ComponentsFeatureOptimizadoresModule,
+    ComponentsFeatureAutentificacionModule,
 
     PagesRoutingModule,
   ],

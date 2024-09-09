@@ -346,4 +346,10 @@ export class PageExplorerSolutionComponent implements OnInit {
     );
   }
 
+  public esAccionable ( ) {
+    return (
+      !this.acciones.esVacio( )
+    );
+  }
+
 }
