@@ -16,7 +16,7 @@
 
     <div class="aditamentos-container">
       <myrmex-instc-eval-box
-        *ngIf="instancia.instancia_id"
+        *ngIf="esEjecutableComando()"
         [instc_id]="instancia.instancia_id"
         [arg_selecto]="arg_selecto"
         [args_editados]="args_editados"
@@ -27,7 +27,7 @@
         class="boxW100 main-function-button-H"
         mat-flat-button
         color="primary"
-        *ngIf="instancia.instancia_id"
+        *ngIf="esEditable()"
         routerLink="/instancia/editor/{{instancia.instancia_id}}"
       >
         <mat-icon>edit</mat-icon>
@@ -40,6 +40,7 @@
         [args_editados]="args_editados"
         (emitir_seleccion)="set_arg_selecto($event)"
         (emitir_argumentos)="set_arg_selecto_argumentos($event)"
+        [es_editor]="esPublicableArgumentos()"
       >
       </myrmex-args-instc-picker-box>
     </div>
