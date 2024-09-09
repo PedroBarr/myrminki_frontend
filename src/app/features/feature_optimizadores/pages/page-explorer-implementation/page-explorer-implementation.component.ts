@@ -51,7 +51,7 @@ export class PageExplorerImplementationComponent implements OnInit {
   * Load implementation from API
   */
   async loadImplementation ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/implementacion/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),
