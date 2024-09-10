@@ -1,4 +1,11 @@
 export class Acciones {
+
+    public crear_problema: boolean = false;
+    public crear_algoritmo: boolean = false;
+    public crear_instancia: boolean = false;
+    public crear_implementacion: boolean = false;
+    public crear_solucion: boolean = false;
+
     public otorgar_permiso_editar_problema: boolean = false;
     public actualizar_problema: boolean = false;
     public crear_instancia_problema: boolean = false;
@@ -29,6 +36,21 @@ export class Acciones {
     fill_obj (obj: string[] = []) {
         obj.forEach((accion: string) => {
             switch (accion) {
+                case "accion_crear_problema":
+                    this.crear_problema = true;
+                    break;
+                case "accion_crear_algoritmo":
+                    this.crear_algoritmo = true;
+                    break;
+                case "accion_crear_instancia":
+                    this.crear_instancia = true;
+                    break;
+                case "accion_crear_implementacion":
+                    this.crear_implementacion = true;
+                    break;
+                case "accion_crear_solucion":
+                    this.crear_solucion = true;
+                    break;
                 case "accion_otorgar_permiso_editar_problema":
                     this.otorgar_permiso_editar_problema = true;
                     break;
