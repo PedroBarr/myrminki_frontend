@@ -1,11 +1,11 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="problema-container">
+    <div class="problema-container" *ngIf="esEditable()">
       <mat-card>
         <mat-card-header>
           <mat-card-title> Creador de problema </mat-card-title>
         </mat-card-header>
-
+        
         <mat-card-content class="seccion-container">
           <div class="boxW100 flex-row gap-10 flex-space-between">
             <mat-form-field class="boxW100">
@@ -102,10 +102,17 @@
             </mat-form-field>
           </div>
         </mat-card-content>
+
       </mat-card>
+      
+    </div>
+    
+    <div class="problema-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
     </div>
 
-    <div class="aditamentos-container">
+    <div class="aditamentos-container" *ngIf="esEditable()">
       <myrmex-tag-search-box
         [etiquetas_iniciales]="etiquetas"
         [es_editor]="true"
@@ -132,5 +139,9 @@
       >
       </myrmex-paramz-problem-editor-box>
     </div>
+
+    <div class="aditamentos-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
   </div>
 </div>
