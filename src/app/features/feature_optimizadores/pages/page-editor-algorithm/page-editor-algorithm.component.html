@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="algoritmo-container">
+    <div class="algoritmo-container" *ngIf="esEditable()">
       <mat-card>
         <mat-card-header>
           <mat-card-title> Creador de algoritmo </mat-card-title>
@@ -155,7 +155,12 @@
       </mat-card>
     </div>
 
-    <div class="aditamentos-container">
+    <div class="algoritmo-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
+    </div>
+
+    <div class="aditamentos-container" *ngIf="esEditable()">
       <myrmex-tag-search-box
         [etiquetas_iniciales]="etiquetas"
         [es_editor]="true"
@@ -181,6 +186,11 @@
         (emitir_confirmacion)="update_paramz($event)"
       >
       </myrmex-paramz-algrtm-editor-box>
+    </div>
+
+    <div class="aditamentos-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
     </div>
   </div>
 </div>

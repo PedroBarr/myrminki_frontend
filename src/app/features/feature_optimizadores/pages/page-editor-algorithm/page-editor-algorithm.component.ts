@@ -8,6 +8,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
+import {
+  Acciones,
+} from '../../models/acciones.model';
+
+import {
   Algoritmo,
   ParametrizacionEditable,
 } from '../../models/optimizador.model';
@@ -26,6 +34,7 @@ import { environment } from 'src/environments/environment';
 export class PageEditorAlgorithmComponent implements OnInit {
 
   algoritmo: Algoritmo = new Algoritmo();
+  acciones: Acciones = new Acciones();
 
   parametrizacion_id: string | null = null;
   paramz_algrtm: ParametrizacionEditable = new ParametrizacionEditable();
@@ -38,18 +47,24 @@ export class PageEditorAlgorithmComponent implements OnInit {
   constructor (
     private router: Router,
     private route: ActivatedRoute,
+    private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
   async ngOnInit ( ) {
-    if (this.route.snapshot.paramMap.get('identificador') != null)
-      this.loadAlgorithm();
+    if (this.route.snapshot.paramMap.get('identificador') != null) {
+      await this.loadActions();
+      if (this.esEditable()) await this.loadAlgorithm();
+      else this.router.navigateByUrl('/');
+    } else {
+      await this.loadGeneralActions();
+    }
   }
 
   /**
   * Load algorithm from API
   */
   async loadAlgorithm ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/algoritmo/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),
@@ -114,6 +129,82 @@ export class PageEditorAlgorithmComponent implements OnInit {
   }
 
   /**
+   * Load actions from API
+   */
+  async loadActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/algoritmo/identificador/' +
+        this.route.snapshot.paramMap.get('identificador') +
+        '/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load general actions from API
+   */
+  async loadGeneralActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/optimizadores/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+
+  }
+
+  /**
   * Save algorithm from API
   */
   async saveAlgorithm ( ) {
@@ -134,7 +225,12 @@ export class PageEditorAlgorithmComponent implements OnInit {
       }
     );
 
-    await axios.post(
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.post(
       environment.MYRMEX_API + '/algoritmo/actualizar',
       post_data,
     )
@@ -151,7 +247,17 @@ export class PageEditorAlgorithmComponent implements OnInit {
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
   }
 
   toggle_descripcion_vista ( ) {
@@ -205,6 +311,21 @@ export class PageEditorAlgorithmComponent implements OnInit {
   remove_etiqueta (etiqueta_id: string) {
     this.etiquetas = this.etiquetas.filter(
       (etiqueta: Etiqueta) => etiqueta.id != etiqueta_id
+    );
+  }
+
+  public esEditable ( ) {
+    return (
+      (
+        (
+          this.route.snapshot.paramMap.get('identificador') ||
+          this.algoritmo.algoritmo_id
+        ) &&
+        this.acciones.actualizar_algoritmo
+      ) ||
+      (
+        this.acciones.crear_algoritmo
+      )
     );
   }
 
