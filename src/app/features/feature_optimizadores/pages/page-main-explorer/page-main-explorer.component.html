@@ -48,6 +48,7 @@
 
       <div class="boxW100 flex-column gap-5">
         <button
+          *ngIf="esCreableAlgoritmo()"
           class="boxW100 main-function-button-H"
           mat-flat-button
           color="primary"
@@ -58,6 +59,7 @@
         </button>
 
         <button
+          *ngIf="esCreableImplementacion()"
           class="boxW100 main-function-button-H"
           mat-flat-button
           color="primary"
@@ -68,6 +70,7 @@
         </button>
 
         <button
+          *ngIf="esCreableProblema()"
           class="boxW100 main-function-button-H"
           mat-flat-button
           color="primary"
@@ -78,6 +81,7 @@
         </button>
 
         <button
+          *ngIf="esCreableInstancia()"
           class="boxW100 main-function-button-H"
           mat-flat-button
           color="primary"
@@ -88,6 +92,7 @@
         </button>
 
         <button
+          *ngIf="esCreableSolucion()"
           class="boxW100 main-function-button-H"
           mat-flat-button
           color="primary"

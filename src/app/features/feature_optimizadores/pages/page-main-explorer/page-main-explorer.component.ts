@@ -20,6 +20,10 @@ import {
   AutentificacionInterceptorService
 } from 'src/app/shared/guards/auth.guard';
 
+import {
+  Acciones,
+} from '../../models/acciones.model';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,6 +35,7 @@ import { environment } from 'src/environments/environment';
 export class PageMainExplorerComponent implements OnInit {
 
   pageDescriptor: string = pageDescriptores['explorar'];
+  acciones: Acciones = new Acciones();
 
   etiquetasBuscadas: any[] = [];
   terminoBuscado: string = '';
@@ -40,8 +45,9 @@ export class PageMainExplorerComponent implements OnInit {
     private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
-  ngOnInit ( ) {
-    this.loadOptimizers();
+  async ngOnInit ( ) {
+    await this.loadGeneralActions();
+    await this.loadOptimizers();
   }
 
   /**
@@ -60,8 +66,9 @@ export class PageMainExplorerComponent implements OnInit {
 
     const axiosInstance = axios.create();
     const intercep_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
 
-    axiosInstance.get(
+    await axiosInstance.get(
       environment.MYRMEX_API + '/explorar',
       {
         params,
@@ -159,7 +166,49 @@ export class PageMainExplorerComponent implements OnInit {
       })
       .finally(( ) => {
         this.authIntercepService.removeAuthInterceptor(axiosInstance, intercep_id);
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
       });
+  }
+
+  /**
+   * Load general actions from API
+   */
+  async loadGeneralActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/optimizadores/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+
   }
 
   seleccionEtiqueta(evt: any) {
@@ -170,6 +219,26 @@ export class PageMainExplorerComponent implements OnInit {
   remocionEtiqueta(evt: any) {
     this.etiquetasBuscadas = this.etiquetasBuscadas.filter(etiqueta => etiqueta.id != evt);
     this.loadOptimizers();
+  }
+
+  public esCreableAlgoritmo ( ) {
+    return this.acciones.crear_algoritmo;
+  }
+
+  public esCreableImplementacion ( ) {
+    return this.acciones.crear_implementacion;
+  }
+
+  public esCreableProblema ( ) {
+    return this.acciones.crear_problema;
+  }
+
+  public esCreableInstancia ( ) {
+    return this.acciones.crear_instancia;
+  }
+
+  public esCreableSolucion ( ) {
+    return this.acciones.crear_solucion;
   }
 
 }
