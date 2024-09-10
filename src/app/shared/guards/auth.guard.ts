@@ -161,9 +161,9 @@ export class AutentificacionInterceptorService {
   ) { }
 
 
-  async delAuth ( ) {
+  async delAuth (incl_redir: boolean = true) {
     await this.authStorage.logout();
-    this.router.navigateByUrl(ruta_inicio_sesion);
+    if (incl_redir) this.router.navigateByUrl(ruta_inicio_sesion);
   }
 
   async setAuth (simbolismo: string) {
@@ -184,12 +184,15 @@ export class AutentificacionInterceptorService {
     return config;
   }
 
-  handleAuthError (err: AxiosError) {
+  handleAuthError (
+    err: AxiosError,
+    incl_redir: boolean = true,
+  ) {
     const status: number = err.response ? err.response.status : 0;
 
     switch (status) {
       case 401:
-        this.delAuth();
+        this.delAuth(incl_redir);
         break;
     }
 
@@ -209,11 +212,14 @@ export class AutentificacionInterceptorService {
   }
 
 
-  addAuthErrorInterceptor (axios: AxiosInstance): number {
+  addAuthErrorInterceptor (
+    axios: AxiosInstance,
+    incl_redir: boolean = true,
+  ): number {
     return axios.interceptors.response.use(
       response => response,
       error => {
-        return this.handleAuthError(error);
+        return this.handleAuthError(error, incl_redir);
       },
     );
   }
