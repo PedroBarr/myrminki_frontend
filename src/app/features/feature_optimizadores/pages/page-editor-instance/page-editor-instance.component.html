@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="instancia-container">
+    <div class="instancia-container" *ngIf="esEditable()">
       <mat-card>
         <mat-card-header>
           <mat-card-title> Creador de instancia </mat-card-title>
@@ -174,7 +174,12 @@
       </mat-card>
     </div>
 
-    <div class="aditamentos-container">
+    <div class="instancia-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
+    </div>
+
+    <div class="aditamentos-container" *ngIf="esEditable()">
       <div class="boxW100 flex-column gap-10">
         <mat-card>
           <mat-card-header>
@@ -231,6 +236,11 @@
         >
         </myrmex-paramz-problem-box>
       </div>
+    </div>
+
+    <div class="aditamentos-container" *ngIf="!esEditable()">
+      <myrmex-actions-warning-box>
+      </myrmex-actions-warning-box>
     </div>
   </div>
 </div>
