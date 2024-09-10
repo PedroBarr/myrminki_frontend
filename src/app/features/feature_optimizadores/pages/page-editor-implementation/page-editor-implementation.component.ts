@@ -10,6 +10,14 @@ import { Router, ActivatedRoute } from '@angular/router';
 import axios from 'axios';
 
 import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
+import {
+  Acciones,
+} from '../../models/acciones.model';
+
+import {
   Implementacion
 } from '../../models/optimizador.model';
 
@@ -33,6 +41,7 @@ import { environment } from 'src/environments/environment';
 export class PageEditorImplementationComponent implements OnInit {
 
   implementacion: Implementacion = new Implementacion();
+  acciones: Acciones = new Acciones();
 
   lenguajes_habilitados: string[] = [];
   descripcion_vista: 'E' | 'P' = 'E';
@@ -49,20 +58,26 @@ export class PageEditorImplementationComponent implements OnInit {
     private route: ActivatedRoute,
     public algrtm_selector_emergente: MatDialog,
     public algrtm_visor_emergente: MatDialog,
+    private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
   async ngOnInit ( ) {
     await this.loadLangs();
 
-    if (this.route.snapshot.paramMap.get('identificador') != null)
-      this.loadImplementation();
+    if (this.route.snapshot.paramMap.get('identificador') != null) {
+      await this.loadActions();
+      if (this.esEditable()) await this.loadImplementation();
+      else this.router.navigateByUrl('/');
+    } else {
+      await this.loadGeneralActions();
+    }
   }
 
   /**
   * Load languages from API
   */
   async loadLangs ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API + '/lenguajes_programacion_habilitados'
     )
       .then(response => {
@@ -84,10 +99,10 @@ export class PageEditorImplementationComponent implements OnInit {
   }
 
   /**
-  * Load instance from API
+  * Load implementation from API
   */
   async loadImplementation ( ) {
-    axios.get(
+    await axios.get(
       environment.MYRMEX_API +
         '/implementacion/identificador/' +
         this.route.snapshot.paramMap.get('identificador'),
@@ -151,12 +166,93 @@ export class PageEditorImplementationComponent implements OnInit {
   }
 
   /**
+   * Load actions from API
+   */
+  async loadActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/implementacion/identificador/' +
+        this.route.snapshot.paramMap.get('identificador') +
+        '/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load general actions from API
+   */
+  async loadGeneralActions ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/optimizadores/acciones',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.acciones.fill_obj(response.data);
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+
+  }
+
+  /**
   * Save implementation from API
   */
   async saveImplementation ( ) {
     if (this.no_es_guardable_implementacion()) return;
 
-    await axios.post(
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.post(
       environment.MYRMEX_API + '/implementacion/actualizar',
       this.implementacion.build_post()
     )
@@ -170,7 +266,17 @@ export class PageEditorImplementationComponent implements OnInit {
       .catch(error => {
         console.error(error);
       })
-      .finally(( ) => { });
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
   }
 
   toggle_descripcion_vista ( ) {
@@ -268,6 +374,21 @@ export class PageEditorImplementationComponent implements OnInit {
     this.paramz_algrtm_selecto = valor;
 
     if (valor) this.implementacion.parametrizacion_id = valor;
+  }
+
+  public esEditable ( ) {
+    return (
+      (
+        (
+          this.route.snapshot.paramMap.get('identificador') ||
+          this.implementacion.implementacion_id
+        ) &&
+        this.acciones.actualizar_implementacion
+      ) ||
+      (
+        this.acciones.crear_implementacion
+      )
+    );
   }
 
 }
