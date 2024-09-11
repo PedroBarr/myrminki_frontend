@@ -57,6 +57,8 @@
             (input)="ocultar_mensaje()"
             (keyup.enter)="verificar()"
           />
+
+          <mat-hint> {{mostrarCaracteresValidosApodo()}} </mat-hint>
         </mat-form-field>
 
         <mat-form-field class="form-field-fixed">
@@ -109,7 +111,10 @@
           </button>
         </mat-form-field>
 
-        <span *ngIf="es_mostrar_mensaje()" class="mensaje-error">
+        <span
+          *ngIf="es_mostrar_mensaje()"
+          class="mensaje-error {{getClaseMensaje()}}"
+        >
           {{mensaje}}
         </span>
       </div>

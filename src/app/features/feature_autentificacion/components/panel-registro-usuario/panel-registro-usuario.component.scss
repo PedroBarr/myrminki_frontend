@@ -109,3 +109,11 @@ mat-card-actions button {
   padding-top: 4px;
   padding-bottom: 4px;
 }
+
+.mensaje-error {
+  background-color: var(--myrmex-primary-light);
+}
+
+.mensaje-exito {
+  background-color: #4caf50;
+}

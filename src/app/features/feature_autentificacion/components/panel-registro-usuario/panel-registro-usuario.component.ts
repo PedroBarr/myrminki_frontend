@@ -26,8 +26,11 @@ export class PanelRegistroUsuarioComponent {
   apodo: string = '';
   clave: string = '';
   clave_confirmacion: string = '';
+  
+  minCaracteresApodo: number = 7;
 
   mensaje: string = '';
+  es_error: boolean = false;
 
   claveVisible: boolean = false;
   claveConfirmacionVisible: boolean = false;
@@ -46,12 +49,27 @@ export class PanelRegistroUsuarioComponent {
   }
 
   private esApodo (exp: string): boolean {
-    let expApodo = new RegExp('^[^0-9][^@#]\w+$');
+    if (exp.length < this.minCaracteresApodo) return false;
+    let expApodo = new RegExp('^[A-Za-z0-9._%-]+$');
     return expApodo.test(exp);
   }
 
+  mostrarCaracteresValidosApodo ( ): string {
+    return (
+      'Los caracteres válidos son: ' +
+      'letras mayúsculas y minúsculas, ' +
+      'números, ' +
+      'punto (.), ' +
+      'guion bajo (_) ' +
+      'y guion medio (-)' +
+      '; y deben tener al menos ' +
+      this.minCaracteresApodo +
+      ' caracteres.'
+    );
+  }
+
   verificar ( ) {
-    this.mensaje = '';
+    this.ocultar_mensaje();
 
     if (
       this.nombre &&
@@ -67,8 +85,8 @@ export class PanelRegistroUsuarioComponent {
         if (this.esApodo(this.apodo)) {
           if (this.clave == this.clave_confirmacion) {
             dict = {
-              'nombre': this.nombre,
-              'apellido': this.apellido,
+              'nombres': this.nombre,
+              'apellidos': this.apellido,
               'apodo': this.apodo,
               'correo': this.correo,
               'clave': this.clave
@@ -77,16 +95,16 @@ export class PanelRegistroUsuarioComponent {
             if (this.es_emitible) this.emitir_datos_validados.emit(dict);
             else this.doSignUp(dict);
           } else
-          this.mensaje = 'Las claves no coinciden';
+          this.setMensajeError('Las claves no coinciden');
 
         } else
-          this.mensaje = 'Ingrese un apodo valido';
+          this.setMensajeError('Ingrese un apodo valido');
 
       } else
-        this.mensaje = 'Ingrese un correo valido';
+        this.setMensajeError('Ingrese un correo valido');
 
     } else
-      this.mensaje = 'Complete los datos';
+      this.setMensajeError('Complete los datos');
   }
 
   es_mostrar_mensaje ( ): boolean {
@@ -94,7 +112,7 @@ export class PanelRegistroUsuarioComponent {
   }
 
   ocultar_mensaje ( ) {
-    this.mensaje = '';
+    this.setMensajeError('');
   }
 
   /**
@@ -108,22 +126,32 @@ export class PanelRegistroUsuarioComponent {
       .then(response => {
         console.log(response.data);
 
-        /*
-        if (response.data && response.data['Simbolismo']) {
-          this.authStorage.login(response.data['Simbolismo'])
-
-          this.router.navigateByUrl('/perfil')
-        } else
-          this.mensaje = Object.keys(response.data).join(', ');
-        */
+        if (response.data && response.data['Respuesta'])
+          this.setMensajeExito(response.data['Respuesta']);
+        else
+          this.setMensajeError(Object.keys(response.data).join(', '));
       })
       .catch(error => {
         console.error(error);
 
         if (error.response && error.response.data)
-          this.mensaje = Object.keys(error.response.data).join(', ');
+          this.setMensajeError(Object.keys(error.response.data).join(', '));
       })
       .finally(( ) => { });
+  }
+
+  setMensajeError (mensaje: string) {
+    this.mensaje = mensaje;
+    this.es_error = true;
+  }
+
+  setMensajeExito (mensaje: string) {
+    this.mensaje = mensaje;
+    this.es_error = false;
+  }
+
+  getClaseMensaje ( ): string {
+    return this.es_error ? 'mensaje-error' : 'mensaje-exito';
   }
 
 }
