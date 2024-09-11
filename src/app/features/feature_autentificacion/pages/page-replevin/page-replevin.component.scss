@@ -1,0 +1,29 @@
+.replevin-container {
+  --gap: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: var(--gap);
+  row-gap: var(--gap);
+
+  > * {
+    width: 40%;
+  }
+}
+
+.mode-selector {
+  width: 40% !important;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+  a {
+    color: var(--myrmex-primary);
+    text-transform: uppercase;
+    text-decoration: none !important;
+    width: 100%;
+    text-align: center;
+  }
+}

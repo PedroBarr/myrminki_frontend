@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-page-replevin',
+  selector: 'myrmex-page-replevin',
   templateUrl: './page-replevin.component.html',
   styleUrls: ['./page-replevin.component.scss']
 })

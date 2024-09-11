@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-panel-recuperar-clave',
+  selector: 'myrmex-panel-recuperar-clave',
   templateUrl: './panel-recuperar-clave.component.html',
   styleUrls: ['./panel-recuperar-clave.component.scss']
 })
