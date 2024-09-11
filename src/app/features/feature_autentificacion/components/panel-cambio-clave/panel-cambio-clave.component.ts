@@ -40,14 +40,15 @@ export class PanelCambioClaveComponent implements OnInit {
     this.ocultarMensaje();
 
     if (this.clave && this.confirmacion) {
-      let dict = {};
+      let dict: any = {};
 
       if (this.esSimbolico())
         dict = {'simbolismo': this.simbolismo};
 
-      if (this.esConfirmacionValida())
-        dict = {'clave': this.clave, 'confirmacion': this.confirmacion};
-      else {
+      if (this.esConfirmacionValida()) {
+        dict['clave'] = this.clave;
+        dict['confirmacion'] = this.confirmacion;
+      } else {
         this.asignarError('Las claves no coinciden');
         return;
       }
@@ -83,7 +84,7 @@ export class PanelCambioClaveComponent implements OnInit {
     this.es_error = false;
   }
 
-  obtener_clase_mensaje ( ): string {
+  obtenerClaseMensaje ( ): string {
     return this.es_error ? 'alert-danger' : 'alert-success';
   }
 
@@ -126,6 +127,9 @@ export class PanelCambioClaveComponent implements OnInit {
           this.asignarExito(response.data['Respuesta']);
         else
           this.asignarError('No se pudo cambiar la clave');
+
+        if (response.data['redirect'])
+          window.location.href = response.data['redirect'];
       })
       .catch(error => {
         console.error(error);
