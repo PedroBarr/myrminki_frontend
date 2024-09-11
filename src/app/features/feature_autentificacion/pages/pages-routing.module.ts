@@ -26,6 +26,10 @@ import {
   PageReplevinComponent
 } from './page-replevin/page-replevin.component';
 
+import {
+  PageSwapupComponent
+} from './page-swapup/page-swapup.component';
+
 const routes: Routes = [
   {
     path: 'iniciar_sesion',
@@ -51,6 +55,11 @@ const routes: Routes = [
     path: 'recuperar_clave',
     component: PageReplevinComponent,
     canActivate: [restrictorNecesitaNoAutenticar],
+  },
+  {
+    path: 'recuperar_clave/:simbolismo',
+    component: PageSwapupComponent,
+    canActivate: [],
   },
 ];
 

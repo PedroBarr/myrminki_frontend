@@ -34,6 +34,10 @@ import {
   PagesRoutingModule
 } from './pages-routing.module';
 
+import {
+  PageSwapupComponent
+} from './page-swapup/page-swapup.component';
+
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import {
     PageLogupComponent,
     PageProfileComponent,
     PageReplevinComponent,
+    PageSwapupComponent,
   ],
   imports: [
     CommonModule,
@@ -61,6 +66,7 @@ import {
     PageLogupComponent,
     PageProfileComponent,
     PageReplevinComponent,
+    PageSwapupComponent,
   ]
 })
 export class PagesFeatureAutentificacionModule { }
