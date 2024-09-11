@@ -1,4 +1,4 @@
-enum PermisosEnum {
+export enum PermisosEnum {
     explorador = 'explorador',
     moderador = 'moderador',
     verificado = 'verificado',

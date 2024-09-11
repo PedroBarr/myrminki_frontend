@@ -61,6 +61,11 @@ const routes: Routes = [
     component: PageSwapupComponent,
     canActivate: [],
   },
+  {
+    path: 'cambiar_clave',
+    component: PageSwapupComponent,
+    canActivate: [restrictorNecesitaAutenticar],
+  },
 ];
 
 

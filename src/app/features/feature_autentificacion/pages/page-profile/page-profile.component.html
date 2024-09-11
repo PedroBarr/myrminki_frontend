@@ -139,6 +139,28 @@
 
     <div class="aditamentos-container">
       <button
+        *ngIf="esCambiarClaveVisible()"
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+        (click)="irCambiarClave()"
+      >
+        <mat-icon>fingerprint</mat-icon>
+        Cambiar clave
+      </button>
+
+      <button
+        *ngIf="esNoVerificado()"
+        class="boxW100 main-function-button-H"
+        mat-flat-button
+        color="primary"
+        (click)="pedirVerif()"
+      >
+        <mat-icon>workspace_premium</mat-icon>
+        Solicitar correo de verificaci&oacute;n
+      </button>
+
+      <button
         *ngIf="esCerrarSesionVisible()"
         class="boxW100 main-function-button-H"
         mat-flat-button

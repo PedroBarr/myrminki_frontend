@@ -3,7 +3,7 @@ import {
   OnInit,
 } from '@angular/core';
 
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import axios from 'axios';
 
@@ -19,6 +19,7 @@ import {
 import {
   PermisoTipado,
   FactoriaPermisosTipados,
+  PermisosEnum,
 } from '../../models/permisos.model';
 
 import {
@@ -57,6 +58,7 @@ export class PageProfileComponent implements OnInit {
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   async ngOnInit ( ) {
@@ -750,6 +752,24 @@ export class PageProfileComponent implements OnInit {
       ),
       lenguaje_programacion_instancia: solucion.instancia_lenguaje_programacion,
     }));
+  }
+
+  public esNoVerificado() {
+    return !this.permisos.some((permiso: PermisoTipado) => 
+      permiso.get_nombre().toLowerCase() === PermisosEnum.verificado
+    );
+  }
+
+  public esCambiarClaveVisible() {
+    return this.tipo_vista === UsuarioPerfilVistaHabilitada.profile;
+  }
+
+  public irCambiarClave() {
+    this.router.navigate(['/cambiar_clave']);
+  }
+
+  public pedirVerif() {
+
   }
 
 }
