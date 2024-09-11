@@ -12,6 +12,7 @@ import axios from 'axios';
 import {
   AutentificacionInterceptorService,
 } from 'src/app/shared/guards/auth.guard';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -69,7 +70,7 @@ export class PanelInicioSesionComponent {
   }
 
   /**
-  * so sign in from API
+  * Do sign in from API
   */
   async doSignIn (obj: any) {
     axios.post(
