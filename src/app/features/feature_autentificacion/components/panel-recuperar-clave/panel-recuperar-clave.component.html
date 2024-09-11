@@ -1,3 +1,46 @@
-<p>
-  panel-recuperar-clave works!
-</p>
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar color="primary"> person </mat-icon>
+
+      <mat-card-title>
+        Recuperar clave
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        debes tener acceso al correo
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="seccion-container">
+      <div class="boxW100 flex-column gap-off flex-space-between flex-align-center">
+        <mat-form-field class="form-field-fixed">
+          <mat-label> Nombre de usuario o correo </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="usuario"
+            placeholder="Ej: Usuario19 o usuario19@al.org"
+            required
+            (input)="ocultar_mensaje()"
+            (keyup.enter)="verificar()"
+          />
+        </mat-form-field>
+
+        <span *ngIf="es_mostrar_mensaje()" class="mensaje-error">
+          {{mensaje}}
+        </span>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="verificar()"
+      >
+        Enviar correo de recuperación
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
