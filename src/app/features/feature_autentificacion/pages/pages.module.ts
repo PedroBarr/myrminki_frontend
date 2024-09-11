@@ -26,7 +26,13 @@ import {
   PageProfileComponent
 } from './page-profile/page-profile.component';
 
-import { PagesRoutingModule } from './pages-routing.module';
+import {
+  PageReplevinComponent
+} from './page-replevin/page-replevin.component';
+
+import {
+  PagesRoutingModule
+} from './pages-routing.module';
 
 
 @NgModule({
@@ -34,6 +40,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     PageLoginComponent,
     PageLogupComponent,
     PageProfileComponent,
+    PageReplevinComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +60,7 @@ import { PagesRoutingModule } from './pages-routing.module';
     PageLoginComponent,
     PageLogupComponent,
     PageProfileComponent,
+    PageReplevinComponent,
   ]
 })
 export class PagesFeatureAutentificacionModule { }

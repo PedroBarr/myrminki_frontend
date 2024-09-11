@@ -22,6 +22,10 @@ import {
   PageProfileComponent
 } from './page-profile/page-profile.component';
 
+import {
+  PageReplevinComponent
+} from './page-replevin/page-replevin.component';
+
 const routes: Routes = [
   {
     path: 'iniciar_sesion',
@@ -42,6 +46,11 @@ const routes: Routes = [
     path: 'perfil/:id',
     component: PageProfileComponent,
     canActivate: [],
+  },
+  {
+    path: 'recuperar_clave',
+    component: PageReplevinComponent,
+    canActivate: [restrictorNecesitaNoAutenticar],
   },
 ];
 
