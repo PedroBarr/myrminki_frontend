@@ -1,1 +1,83 @@
-<p>panel-cambio-clave works!</p>
+<div>
+  <mat-card>
+    <mat-card-header>
+      <mat-icon mat-card-avatar color="primary"> person </mat-icon>
+
+      <mat-card-title>
+        {{tituloComponente()}}
+      </mat-card-title>
+
+      <mat-card-subtitle>
+        {{subtituloComponente()}}
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="seccion-container">
+      <div class="boxW100 flex-column gap-off flex-space-between flex-align-center">
+        <mat-form-field class="form-field-fixed">
+          <mat-label>Clave</mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="clave"
+            [type]="!clave_visible ? 'password' : 'text'"
+            placeholder="Ej: ????????"
+            required
+            (input)="ocultarMensaje()"
+            (keyup.enter)="verificar()"
+          />
+
+          <button
+            mat-icon-button
+            class="button-on-field"
+            matSuffix
+            (click)="voltearClaveVisible()"
+          >
+            <mat-icon>
+              {{!clave_visible ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+        
+        <mat-form-field class="form-field-fixed">
+          <mat-label>Confirmación Clave</mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="confirmacion"
+            [type]="!confirmacion_visible ? 'password' : 'text'"
+            placeholder="Ej: ????????"
+            required
+            (input)="ocultarMensaje()"
+            (keyup.enter)="verificar()"
+          />
+
+          <button
+            mat-icon-button
+            class="button-on-field"
+            matSuffix
+            (click)="voltearConfirmacionVisible()"
+          >
+            <mat-icon>
+              {{!confirmacion_visible ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <span *ngIf="esMensajeVisible()" class="mensaje-error">
+          {{mensaje}}
+        </span>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="verificar()"
+      >
+        {{botonComponente()}}
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
