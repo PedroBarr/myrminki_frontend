@@ -94,8 +94,8 @@ export class PanelRecuperarClaveComponent implements OnInit {
       .then(response => {
         console.log(response.data);
 
-        if (response.data['mensaje'])
-          this.asignar_exito(response.data['mensaje']);
+        if (response.data['Respuesta'])
+          this.asignar_exito(response.data['Respuesta']);
         else
           this.asignar_error('No se pudo recuperar la clave');
       })

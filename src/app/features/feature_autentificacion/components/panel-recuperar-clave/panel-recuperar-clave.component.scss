@@ -100,3 +100,11 @@ mat-card-actions button {
   padding-top: 4px;
   padding-bottom: 4px;
 }
+
+.alert-danger {
+  background-color: var(--myrmex-primary-light);
+}
+
+.alert-success {
+  background-color: #4caf50;
+}

@@ -27,7 +27,10 @@
           />
         </mat-form-field>
 
-        <span *ngIf="es_mostrar_mensaje()" class="mensaje-error">
+        <span
+          *ngIf="es_mostrar_mensaje()"
+          class="mensaje-error {{obtener_clase_mensaje()}}"
+        >
           {{mensaje}}
         </span>
       </div>
