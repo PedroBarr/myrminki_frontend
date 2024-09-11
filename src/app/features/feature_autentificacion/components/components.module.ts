@@ -34,6 +34,10 @@ import {
   PanelRecuperarClaveComponent
 } from './panel-recuperar-clave/panel-recuperar-clave.component';
 
+import {
+  PanelCambioClaveComponent
+} from './panel-cambio-clave/panel-cambio-clave.component';
+
 
 @NgModule({
   declarations: [
@@ -43,6 +47,7 @@ import {
     PerfilBoxComponent,
     RolesBoxComponent,
     PanelRecuperarClaveComponent,
+    PanelCambioClaveComponent,
   ],
   imports: [
     CommonModule,
@@ -65,6 +70,7 @@ import {
     PerfilBoxComponent,
     RolesBoxComponent,
     PanelRecuperarClaveComponent,
+    PanelCambioClaveComponent,
   ]
 })
 export class ComponentsFeatureAutentificacionModule { }
