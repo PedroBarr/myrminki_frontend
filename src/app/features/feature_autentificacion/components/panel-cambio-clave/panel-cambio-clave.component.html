@@ -14,6 +14,31 @@
 
     <mat-card-content class="seccion-container">
       <div class="boxW100 flex-column gap-off flex-space-between flex-align-center">
+        <mat-form-field class="form-field-fixed" *ngIf="!esSimbolico()">
+          <mat-label>Clave actual</mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="clave_actual"
+            [type]="!clave_actual_visible ? 'password' : 'text'"
+            placeholder="Ej: ????????"
+            required
+            (input)="ocultarMensaje()"
+            (keyup.enter)="verificar()"
+          />
+
+          <button
+            mat-icon-button
+            class="button-on-field"
+            matSuffix
+            (click)="voltearClaveActualVisible()"
+          >
+            <mat-icon>
+              {{!clave_actual_visible ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+          </button>
+        </mat-form-field>
+        
         <mat-form-field class="form-field-fixed">
           <mat-label>Clave</mat-label>
 

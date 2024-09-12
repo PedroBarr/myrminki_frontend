@@ -8,6 +8,10 @@ import {
 
 import axios from 'axios';
 
+import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -17,6 +21,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./panel-cambio-clave.component.scss']
 })
 export class PanelCambioClaveComponent implements OnInit {
+
+  clave_actual:string = '';
+  clave_actual_visible: boolean = false;
 
   clave: string = '';
   confirmacion: string = '';
@@ -31,7 +38,9 @@ export class PanelCambioClaveComponent implements OnInit {
   @Input() es_emitible: boolean = false;
   @Output() emitir_datos_validados = new EventEmitter<any>();
 
-  constructor() { }
+  constructor(
+    private authIntercepService: AutentificacionInterceptorService,
+  ) { }
 
   ngOnInit(): void {
   }
@@ -39,11 +48,16 @@ export class PanelCambioClaveComponent implements OnInit {
   verificar ( ) {
     this.ocultarMensaje();
 
-    if (this.clave && this.confirmacion) {
+    if (this.clave && this.confirmacion && (this.esSimbolico() || this.clave_actual)) {
       let dict: any = {};
 
-      if (this.esSimbolico())
-        dict = {'simbolismo': this.simbolismo};
+      if (this.esSimbolico()) dict['simbolismo'] = this.simbolismo;
+      else {
+        if (this.clave_actual === this.clave) {
+          this.asignarError('La clave actual y la nueva clave no pueden ser iguales');
+          return;
+        } else dict['clave_actual'] = this.clave_actual;
+      }
 
       if (this.esConfirmacionValida()) {
         dict['clave'] = this.clave;
@@ -54,7 +68,8 @@ export class PanelCambioClaveComponent implements OnInit {
       }
 
       if (this.es_emitible) this.emitir_datos_validados.emit(dict);
-      else this.doSwapup(dict);
+      else if (this.esSimbolico()) this.doSwapup(dict);
+      else this.doChangePass(dict);
 
     } else {
       this.asignarError('Complete los datos');
@@ -112,6 +127,10 @@ export class PanelCambioClaveComponent implements OnInit {
     this.confirmacion_visible = !this.confirmacion_visible;
   }
 
+  voltearClaveActualVisible ( ) {
+    this.clave_actual_visible = !this.clave_actual_visible;
+  }
+
   /**
   * Do swapup from API
   */
@@ -140,6 +159,51 @@ export class PanelCambioClaveComponent implements OnInit {
           this.asignarError('No se pudo cambiar la clave');
       })
       .finally(( ) => { });
+  }
+
+  /**
+   * Do change password from API
+   */
+  async doChangePass (obj: any) {
+    const axiosInstance = axios.create();
+    
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+    
+    await axiosInstance.post(
+        environment.MYRMEX_API + '/sigul_reasignar',
+        obj,
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data['Respuesta'])
+          this.asignarExito(response.data['Respuesta']);
+        else
+          this.asignarError('No se pudo cambiar la clave');
+
+        if (response.data['redirect'])
+          window.location.href = response.data['redirect'];
+      })
+      .catch(error => {
+        console.error(error);
+
+        if (error.response && error.response.data)
+          this.asignarError(Object.keys(error.response.data).join(', '));
+        else
+          this.asignarError('No se pudo cambiar la clave');
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
   }
 
 }
