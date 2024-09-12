@@ -170,6 +170,13 @@
         <mat-icon>do_not_disturb_on</mat-icon>
         Cerrar sesi&oacute;n
       </button>
+      
+      <span
+        *ngIf="getMensajeVisible()"
+        class="mensaje-error {{getMensajeClase()}}"
+      >
+        {{mensaje}}
+      </span>
 
       <myrmex-roles-box
         *ngIf="esRolesVisible()"

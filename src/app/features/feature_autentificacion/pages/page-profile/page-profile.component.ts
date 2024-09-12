@@ -55,6 +55,9 @@ export class PageProfileComponent implements OnInit {
 
   public soluciones: PrevisualizacionSolucion[] = [];
 
+  public mensaje: string = '';
+  public es_error: boolean = false;
+
   constructor (
     private authIntercepService: AutentificacionInterceptorService,
     private route: ActivatedRoute,
@@ -635,6 +638,51 @@ export class PageProfileComponent implements OnInit {
       });
   }
 
+  /**
+   * Do beg for verification from API
+   */
+  private async doBegVerif() {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.post(
+      environment.MYRMEX_API + '/sigul_reivindicar',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data['Respuesta'])
+          this.setMensajeExito(response.data['Respuesta']);
+        else
+          this.setMensajeError('No se pudo solicitar la verificación');
+      })
+      .catch(error => {
+        console.error(error);
+
+        if (error.response && error.response.data)
+          this.setMensajeError(Object.keys(error.response.data).join(', '));
+        else
+          this.setMensajeError('No se pudo solicitar la verificación');
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+
+        setTimeout(() => {
+          this.ocultarMensaje();
+        }, 7000);
+      });
+  }
+
   private reiniciarVista ( ) {
     this.perfil = new UsuarioPerfil();
     this.tipo_vista = UsuarioPerfilVistaHabilitada.none;
@@ -753,10 +801,14 @@ export class PageProfileComponent implements OnInit {
       lenguaje_programacion_instancia: solucion.instancia_lenguaje_programacion,
     }));
   }
-
+  
   public esNoVerificado() {
-    return !this.permisos.some((permiso: PermisoTipado) => 
-      permiso.get_nombre().toLowerCase() === PermisosEnum.verificado
+    return (
+      this.tipo_vista === UsuarioPerfilVistaHabilitada.profile &&
+      this.permisos.length > 0 &&
+      !this.permisos.some((permiso: PermisoTipado) => 
+        permiso.get_nombre().toLowerCase() === PermisosEnum.verificado
+      )
     );
   }
 
@@ -769,7 +821,29 @@ export class PageProfileComponent implements OnInit {
   }
 
   public pedirVerif() {
+    if (this.esNoVerificado()) this.doBegVerif();
+  }
 
+  ocultarMensaje() {
+    this.setMensajeError('');
+  }
+
+  setMensajeError(error: string) {
+    this.mensaje = error;
+    this.es_error = true;
+  }
+
+  setMensajeExito(exito: string) {
+    this.mensaje = exito;
+    this.es_error = false;
+  }
+
+  getMensajeVisible() {
+    return this.mensaje !== '';
+  }
+
+  getMensajeClase() {
+    return this.es_error ? 'alert-danger' : 'alert-success';
   }
 
 }
