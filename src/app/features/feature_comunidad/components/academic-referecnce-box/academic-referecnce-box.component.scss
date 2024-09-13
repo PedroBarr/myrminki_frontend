@@ -11,6 +11,12 @@
   font-family: code-pro-bold, sans-serif;
   letter-spacing: 3pt;
   margin-bottom: 0;
+  align-self: center;
+}
+
+mat-card-header {
+  width: 100% !important;
+  flex-flow: column;
 }
 
 .mat-card-title {
@@ -38,7 +44,25 @@ mat-card-subtitle {
   color: var(--myrmex-primary);
 }
 
+mat-card-title mat-chip-list {
+  align-self: center;
+}
+
 mat-card-title mat-chip-list mat-chip {
   background-color: var(--myrmex-primary-light);
   color: #fff;
+}
+
+::ng-deep .mat-menu-content {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-menu-item {
+  height: 40px !important;
+  padding: 0 10px !important;
+}
+
+::ng-deep .mat-menu-item .mat-icon {
+  font-size: 20px !important;
+  margin-right: 10px !important;
 }

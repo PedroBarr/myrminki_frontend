@@ -1,29 +1,68 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
-      <h2 class="reference-title">{{academicReference.titulo_principal}}</h2>
+      <div class="boxW100 flex-row flex-space-between">
+        <mat-chip-list>
+          <ng-container>
 
-      <mat-chip-list>
-        <mat-chip *ngIf="academicReference.tipo_contenido">
-          {{academicReference.tipo_contenido}}
-        </mat-chip>
+            <h2 class="reference-title">
+              {{academicReference.titulo_principal}}
+            </h2>
+              
+            <mat-chip *ngIf="academicReference.tipo_contenido">
+              {{academicReference.tipo_contenido}}
+            </mat-chip>
+              
+            <mat-chip *ngIf="academicReference.volumen_periodico">
+              Vol. {{academicReference.volumen_periodico}}
+            </mat-chip>
 
-        <mat-chip *ngIf="academicReference.volumen_periodico">
-          Vol. {{academicReference.volumen_periodico}}
-        </mat-chip>
+            <mat-chip *ngIf="academicReference.numero_periodico">
+              Num. {{academicReference.numero_periodico}}
+            </mat-chip>
 
-        <mat-chip *ngIf="academicReference.numero_periodico">
-          Num. {{academicReference.numero_periodico}}
-        </mat-chip>
+            <mat-chip *ngIf="academicReference.edicion">
+              Ed. {{academicReference.edicion}}
+            </mat-chip>
+            
+            <mat-chip *ngIf="academicReference.anho">
+              {{academicReference.anho}}
+            </mat-chip>
+          </ng-container>
+        </mat-chip-list>
 
-        <mat-chip *ngIf="academicReference.edicion">
-          Ed. {{academicReference.edicion}}
-        </mat-chip>
+        <div class="flex-row gap-20" *ngIf="esMenuVisible()">
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="null" *ngIf="es_reportable">
+              <mat-icon class="menu-item-icon"> assignment_late </mat-icon>
+              <span> Reportar </span>
+            </button>
+            
+            <button mat-menu-item (click)="null" *ngIf="false">
+              <mat-icon class="menu-item-icon"> bookmarks </mat-icon>
+              <span> Duplicar </span>
+            </button>
 
-        <mat-chip *ngIf="academicReference.anho">
-          {{academicReference.anho}}
-        </mat-chip>
-      </mat-chip-list>
+            <button mat-menu-item (click)="null" *ngIf="false">
+              <mat-icon class="menu-item-icon"> collections_bookmark </mat-icon>
+              <span> Editar </span>
+            </button>
+
+            <button mat-menu-item (click)="null" *ngIf="es_eliminable">
+              <mat-icon class="menu-item-icon"> bookmark_remove </mat-icon>
+              <span> Eliminar </span>
+            </button>
+          </mat-menu>
+        </div>
+      </div>
     </mat-card-title>
 
     <mat-card-subtitle>

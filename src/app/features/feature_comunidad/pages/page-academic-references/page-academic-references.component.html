@@ -20,12 +20,15 @@
   </div>
 
   <div
+    *ngIf="esRevisable()"
     class="flex-center flex-align-center boxW100 flex-column gap-20"
   >
     <myrmex-academic-referecnce-box
       class="boxW100"
       *ngFor="let academicReference of academicReferences"
       [academicReference]="academicReference"
+      [es_reportable]="esReportable()"
+      [es_eliminable]="esEliminable()"
     ></myrmex-academic-referecnce-box>
   </div>
 </div>
