@@ -30,6 +30,12 @@ export class Acciones {
     public actualizar_solucion: boolean = false;
     public ejecutar_comando_solucion: boolean = false;
     public ejecutar_solucion: boolean = false;
+
+    public revisar_referentes: boolean = false;
+    public crear_referentes: boolean = false;
+    public actualizar_referentes: boolean = false;
+    public eliminar_referentes: boolean = false;
+    public reportar_referentes: boolean = false;
     
     constructor ( ) { }
 
@@ -111,6 +117,21 @@ export class Acciones {
                 case "accion_ejecutar_solucion":
                     this.ejecutar_solucion = true;
                     break;
+                case "accion_revisar_referentes":
+                    this.revisar_referentes = true;
+                    break;
+                case "accion_crear_referentes":
+                    this.crear_referentes = true;
+                    break;
+                case "accion_actualizar_referentes":
+                    this.actualizar_referentes = true;
+                    break;
+                case "accion_eliminar_referentes":
+                    this.eliminar_referentes = true;
+                    break;
+                case "accion_reportar_referentes":
+                    this.reportar_referentes = true;
+                    break;
                 default:
                     break;
             }
@@ -118,7 +139,13 @@ export class Acciones {
     }
 
     public esVacio ( ) {
-        return !this.otorgar_permiso_editar_problema &&
+        return (
+            !this.crear_problema &&
+            !this.crear_algoritmo &&
+            !this.crear_instancia &&
+            !this.crear_implementacion &&
+            !this.crear_solucion &&
+            !this.otorgar_permiso_editar_problema &&
             !this.actualizar_problema &&
             !this.crear_instancia_problema &&
             !this.otorgar_permiso_editar_algoritmo &&
@@ -137,6 +164,13 @@ export class Acciones {
             !this.otorgar_permiso_editar_solucion &&
             !this.actualizar_solucion &&
             !this.ejecutar_comando_solucion &&
-            !this.ejecutar_solucion;
+            !this.ejecutar_solucion &&
+            !this.revisar_referentes &&
+            !this.crear_referentes &&
+            !this.actualizar_referentes &&
+            !this.eliminar_referentes &&
+            !this.reportar_referentes &&
+            true
+        );
     }
 }
