@@ -5,6 +5,10 @@ import {
 
 import axios from 'axios';
 
+import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
 import { pageDescriptores } from '../../constants/descriptor.constant';
 
 import { AcademicReference } from '../../models/academic-reference.model';
@@ -23,6 +27,10 @@ export class PageAcademicReferencesComponent implements OnInit {
 
   academicReferences: AcademicReference[] = [];
 
+  constructor(
+    private authIntercepService: AutentificacionInterceptorService,
+  ) { }
+
   ngOnInit ( ) {
     this.loadReferences();
   }
@@ -32,8 +40,12 @@ export class PageAcademicReferencesComponent implements OnInit {
   */
   async loadReferences() {
     const referentes: AcademicReference[] = [];
+    const axiosInstance = axios.create();
 
-    axios.get(
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.get(
       environment.MYRMEX_API + '/referentes'
     )
       .then(response => {
@@ -115,6 +127,17 @@ export class PageAcademicReferencesComponent implements OnInit {
       })
       .finally(() => {
         this.academicReferences = referentes;
+
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+
       });
   }
 }
