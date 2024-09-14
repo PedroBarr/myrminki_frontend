@@ -3,6 +3,10 @@ import {
   OnInit,
 } from '@angular/core';
 
+import {
+  MatDialog,
+} from '@angular/material/dialog';
+
 import { Router, ActivatedRoute } from '@angular/router';
 
 import axios from 'axios';
@@ -19,6 +23,10 @@ import { pageDescriptores } from '../../constants/descriptor.constant';
 
 import { AcademicReference } from '../../models/academic-reference.model';
 
+import {
+  AcademicReferecnceEditorComponent
+} from 'src/app/features/feature_comunidad/components/academic-referecnce-editor/academic-referecnce-editor.component';
+
 import { environment } from 'src/environments/environment';
 
 
@@ -34,9 +42,12 @@ export class PageAcademicReferencesComponent implements OnInit {
   academicReferences: AcademicReference[] = [];
   acciones: Acciones = new Acciones();
 
+  refrt_selector_apertura: boolean = false;
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
+    public refrt_selector_emergente: MatDialog,
     private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
@@ -189,6 +200,30 @@ export class PageAcademicReferencesComponent implements OnInit {
           intercep_error_id
         );
       });
+  }
+
+  setRefrtSelectorApertura (variable: boolean) {
+    this.refrt_selector_apertura = variable;
+
+    const refrt_selector_referencia = this.refrt_selector_emergente.open(
+      AcademicReferecnceEditorComponent,
+      { panelClass: 'emergente-selector'}
+    );
+
+    const refrt_selector_componente = (
+      refrt_selector_referencia.componentInstance
+    );
+
+    // refrt_selector_componente.refrt_selecto = this.refrt_selecto;
+    refrt_selector_componente.es_emergente = true;
+
+    refrt_selector_componente.emitirClausura.subscribe(() => {
+      this.refrt_selector_apertura = !variable;
+    });
+
+    refrt_selector_referencia.afterClosed().subscribe(() => {
+      this.refrt_selector_apertura = !variable;
+    });
   }
 
   public esRevisable ( ) {
