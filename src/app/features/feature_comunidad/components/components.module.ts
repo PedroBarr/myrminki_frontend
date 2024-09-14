@@ -19,11 +19,16 @@ import {
   TutorialBoxComponent
 } from './tutorial-box/tutorial-box.component';
 
+import {
+  AcademicReferecnceEditorComponent
+} from './academic-referecnce-editor/academic-referecnce-editor.component';
+
 
 @NgModule({
   declarations: [
     AcademicReferecnceBoxComponent,
     TutorialBoxComponent,
+    AcademicReferecnceEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -43,6 +48,7 @@ import {
   exports: [
     AcademicReferecnceBoxComponent,
     TutorialBoxComponent,
+    AcademicReferecnceEditorComponent,
   ]
 })
 export class ComponentsFeatureComunidadModule { }
