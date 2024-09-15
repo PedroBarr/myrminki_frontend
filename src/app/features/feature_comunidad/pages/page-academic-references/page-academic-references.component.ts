@@ -42,6 +42,7 @@ export class PageAcademicReferencesComponent implements OnInit {
   academicReferences: AcademicReference[] = [];
   acciones: Acciones = new Acciones();
 
+  private refertente_seleccionado: AcademicReference | null = null;
   refrt_selector_apertura: boolean = false;
 
   constructor(
@@ -214,7 +215,7 @@ export class PageAcademicReferencesComponent implements OnInit {
       refrt_selector_referencia.componentInstance
     );
 
-    // refrt_selector_componente.refrt_selecto = this.refrt_selecto;
+    refrt_selector_componente.refrt_selecto = this.getReferente();
     refrt_selector_componente.es_emergente = true;
 
     refrt_selector_componente.emitirClausura.subscribe(() => {
@@ -238,4 +239,10 @@ export class PageAcademicReferencesComponent implements OnInit {
     return this.acciones.eliminar_referentes;
   }
 
+  private getReferente(): AcademicReference {
+    if (this.refertente_seleccionado)
+      return this.refertente_seleccionado;
+
+    else return new AcademicReference();
+  }
 }

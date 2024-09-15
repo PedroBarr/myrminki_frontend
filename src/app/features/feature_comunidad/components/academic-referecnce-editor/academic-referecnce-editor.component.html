@@ -1,1 +1,225 @@
-ª
+<mat-card [ngClass]="{'expandir-tarjeta': es_emergente}">
+  <mat-card-header>
+    <mat-card-title class="boxW100">
+      <div class="boxW100 flex-row flex-space-between gap-20">
+        <mat-form-field class="boxW100">
+          <mat-label> Titulo principal </mat-label>
+          
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.titulo_principal"
+            name="titulo_principal"
+            required
+          />
+        </mat-form-field>
+        
+        <mat-form-field class="boxW50">
+          <mat-label> Tipo de contenido </mat-label>
+        
+          <mat-select
+            placeholder="Tipo de contenido"
+            [(ngModel)]="refrt_selecto.tipo_contenido"
+            name="tipo_contenido"
+            required
+          >
+            <mat-option *ngFor="let tipo of getTipoContenido()" [value]="tipo">
+              {{refrt_selecto.getTipoContenidoEtiqueta(tipo)}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-title>
+
+    <mat-card-subtitle>
+      {{refrt_selecto.getApaReference()}}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content class="margin-sides-25">
+    <div class="flex-row flex-space-between boxW100 gap-20">
+      <mat-form-field class="{{getAnhoClase()}}" *ngIf="refrt_selecto.esAnuable()">
+        <mat-label> Año </mat-label>
+
+        <input
+          matInput
+          type="number"
+          min="1440"
+          [(ngModel)]="refrt_selecto.anho"
+          name="anho"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="boxW30" *ngIf="refrt_selecto.esEdicionable()">
+        <mat-label> Edición </mat-label>
+
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="refrt_selecto.edicion"
+          name="edicion"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="boxW30" *ngIf="refrt_selecto.esVoluminable()">
+        <mat-label> Volumen </mat-label>
+
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="refrt_selecto.volumen_periodico"
+          name="volumen_periodico"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="boxW30" *ngIf="refrt_selecto.esNumerable()">
+        <mat-label> Número </mat-label>
+
+        <input
+          matInput
+          type="number"
+          min="0"
+          [(ngModel)]="refrt_selecto.numero_periodico"
+          name="numero_periodico"
+          required
+        />
+      </mat-form-field>
+
+      <mat-form-field class="boxW30" *ngIf="refrt_selecto.esPaginable()">
+        <mat-label> Páginas </mat-label>
+
+        <input
+          matInput
+          [(ngModel)]="refrt_selecto.paginas"
+          name="paginas"
+          required
+        />
+      </mat-form-field>
+    </div>
+
+    <div class="boxW100 flex-column gap-20" *ngIf="esTituloSecundarioVisible()">
+      <div class="boxW100 flex-row flex-space-between gap-20">
+        <mat-form-field class="boxW100">
+          <mat-label> Titulo </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.titulo_secundario"
+            name="titulo_secundario"
+            required
+          />
+        </mat-form-field>
+
+        <mat-form-field class="boxW100" *ngIf="refrt_selecto.esAutorable()">
+          <mat-label> Autores </mat-label>
+
+          <input
+            matInput
+            [value]="refrt_selecto.getAutoresEtiqueta()"
+            (input)="refrt_selecto.setAutores($event)"
+            name="autores"
+            required
+          />
+
+          <mat-hint>
+            Separe los autores con punto y coma
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="refrt_selecto.esEdicionable()"
+        class="boxW100 flex-row flex-space-between gap-20"
+      >
+        <mat-form-field class="boxW100">
+          <mat-label> Editores </mat-label>
+
+          <input
+            matInput
+            [value]="refrt_selecto.getEditoresEtiqueta()"
+            (input)="refrt_selecto.setEditores($event)"
+            name="editores"
+            required
+          />
+
+          <mat-hint>
+            Separe los editores con punto y coma
+          </mat-hint>
+        </mat-form-field>
+
+        <mat-form-field class="boxW100">
+          <mat-label> Editorial </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.editorial"
+            name="editorial"
+            required
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="boxW100 flex-row flex-space-between gap-20">
+        <mat-form-field class="boxW100" *ngIf="refrt_selecto.esDOIable()">
+          <mat-label> Enlace DOI </mat-label>
+          
+          <input
+          matInput
+          [(ngModel)]="refrt_selecto.enlace_doi"
+          name="enlace_doi"
+          />
+        </mat-form-field>
+        
+        <mat-form-field class="boxW100" *ngIf="refrt_selecto.esISBNable()">
+          <mat-label> ISBN </mat-label>
+          
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.isbn"
+            name="isbn"
+          />
+        </mat-form-field>
+
+        <mat-form-field class="boxW100" *ngIf="refrt_selecto.esEnlaceable()">
+          <mat-label> Enlace </mat-label>
+          
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.enlace_red"
+            name="enlace_red"
+          />
+        </mat-form-field>
+      </div>
+
+      <div
+        *ngIf="refrt_selecto.esTipoContenidoSecundarioable()"
+        class="boxW100 flex-row flex-space-between gap-20"
+      >
+        <mat-form-field class="boxW100">
+          <mat-label> Nota </mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="refrt_selecto.tipo_contenido_secundario"
+            name="tipo_contenido_secundario"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="verificar()"
+    >
+      Guardar
+    </button>
+  </mat-card-actions>
+</mat-card>

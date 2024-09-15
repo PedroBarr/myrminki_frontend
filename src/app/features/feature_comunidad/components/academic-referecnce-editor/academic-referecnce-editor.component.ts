@@ -6,7 +6,8 @@ import {
 } from '@angular/core';
 
 import {
-  AcademicReference
+  AcademicReference,
+  TipoContenidoEnum,
 } from '../../models/academic-reference.model';
 
 @Component({
@@ -23,5 +24,34 @@ export class AcademicReferecnceEditorComponent {
 
   constructor(
   ) { }
+
+  getTipoContenido ( ): string[] {
+    return Object.values(TipoContenidoEnum);
+  }
+
+  getAnhoClase ( ): string {
+    if (this.refrt_selecto.tipo_contenido === TipoContenidoEnum.web) {
+      return 'boxW100';
+    }
+    return 'boxW30';
+  }
+
+  esTituloSecundarioVisible ( ): boolean {
+    return Boolean(this.refrt_selecto.tipo_contenido);
+  }
+
+  verificar() {
+    if (this.refrt_selecto.tipo_contenido) {
+      if (this.refrt_selecto.validarModelo()) {
+        this.doSaveReferente();
+      }
+    }
+  }
+
+  /**
+   * Do Save Referente
+   */
+  private doSaveReferente () {
+  }
 
 }
