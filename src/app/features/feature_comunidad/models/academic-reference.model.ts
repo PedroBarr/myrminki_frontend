@@ -44,9 +44,22 @@ export class AcademicReference {
     numero_periodico: null,
     enlace_red: null,
   }) {
+    console.log(obj);
     this.refrt_id = obj.refrt_id;
     this.apa_reference = obj.apa_reference;
-    this.tipo_contenido = obj.tipo_contenido;
+
+    if (typeof obj.tipo_contenido === 'string') {
+      if (obj.tipo_contenido.toLowerCase() in TipoContenidoEnum) {
+        this.tipo_contenido = obj.tipo_contenido.toLowerCase();
+      } else if (obj.tipo_contenido.toLowerCase() == 'sitio web') {
+        this.tipo_contenido = 'web';
+      } else {
+        this.tipo_contenido = 'otro';
+      }
+    } else {
+      this.tipo_contenido = 'otro';
+    }
+    
     this.titulo_principal = obj.titulo_principal;
     this.autores = obj.autores;
     this.anho = obj.anho;
@@ -55,7 +68,12 @@ export class AcademicReference {
     this.isbn = obj.isbn;
     this.tipo_contenido_secundario = obj.tipo_contenido_secundario;
     this.titulo_secundario = obj.titulo_secundario;
-    this.edicion = obj.edicion;
+
+    // eliminar letras de edicion
+    if (obj.edicion) {
+      this.edicion = obj.edicion.replace(/[a-zA-Z]/g, '');
+    }
+    
     this.editores = obj.editores;
     this.paginas = obj.paginas;
     this.volumen_periodico = obj.volumen_periodico;
