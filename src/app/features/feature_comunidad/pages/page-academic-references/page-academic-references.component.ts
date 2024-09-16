@@ -81,6 +81,7 @@ export class PageAcademicReferencesComponent implements OnInit {
           response.data.forEach((referente: any) => {
             if (referente.cita_apa) {
               const nuevoReferente: AcademicReference = <AcademicReference>{
+                refrt_id: referente.id,
                 apa_reference: referente.cita_apa,
               };
 

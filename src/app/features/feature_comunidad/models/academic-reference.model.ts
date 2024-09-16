@@ -7,6 +7,7 @@ export enum TipoContenidoEnum {
 
 
 export class AcademicReference {
+  public refrt_id: string | null = null;
   public apa_reference: string | null = null;
   public tipo_contenido: string | null = null;
   public titulo_principal: string | null = null;
@@ -25,6 +26,7 @@ export class AcademicReference {
   public enlace_red: string | null = null;
 
   constructor (obj: any = {
+    refrt_id: null,
     apa_reference: null,
     tipo_contenido: null,
     titulo_principal: null,
@@ -42,6 +44,7 @@ export class AcademicReference {
     numero_periodico: null,
     enlace_red: null,
   }) {
+    this.refrt_id = obj.refrt_id;
     this.apa_reference = obj.apa_reference;
     this.tipo_contenido = obj.tipo_contenido;
     this.titulo_principal = obj.titulo_principal;
