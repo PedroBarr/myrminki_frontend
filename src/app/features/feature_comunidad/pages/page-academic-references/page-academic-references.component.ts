@@ -164,6 +164,8 @@ export class PageAcademicReferencesComponent implements OnInit {
 
       this.loadReferences();
       this.reinitReferenteSeleccionado();
+
+      refrt_selector_referencia.close();
     });
 
     refrt_selector_referencia.afterClosed().subscribe(() => {

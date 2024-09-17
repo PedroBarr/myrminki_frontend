@@ -44,7 +44,6 @@ export class AcademicReference {
     numero_periodico: null,
     enlace_red: null,
   }) {
-    console.log(obj);
     this.refrt_id = obj.refrt_id;
     this.apa_reference = obj.apa_reference;
 
@@ -389,17 +388,15 @@ export class AcademicReference {
 
   private validarModeloRevista(): boolean {
     if (!this.titulo_principal) return false;
-
+    
     if (!this.autores.length) return false;
-
-    if (!this.anho) return false;
-
+    
     if (!this.numero_periodico) return false;
-
+    
     if (!this.volumen_periodico) return false;
-
+    
     if (!this.isbn && !this.enlace_doi) return false;
-
+    
     if (!this.titulo_secundario) return false;
 
     return true;
@@ -414,6 +411,7 @@ export class AcademicReference {
 
     return true;
   }
+
   private validarModeloLSimple(): boolean {
     if (!this.titulo_principal) return false;
 
@@ -424,6 +422,82 @@ export class AcademicReference {
     if (!this.enlace_red) return false;
 
     return true;
+  }
+
+  public toJSON ( ): any {
+    const obj: any = {};
+
+    if (this.refrt_id) obj.id = this.refrt_id;
+
+    obj.cita_apa = this.getApaReference();
+
+    obj.principal_cita = {};
+    obj.secundario_cita = {};
+    obj.complemento_cita = {};
+
+    if (this.tipo_contenido) {
+      obj.principal_cita.tipo = (
+        this.tipo_contenido.charAt(0).toUpperCase() +
+        this.tipo_contenido.slice(1)
+      );
+    } else {
+      obj.principal_cita.tipo = '';
+    }
+
+    switch (this.tipo_contenido) {
+      case TipoContenidoEnum.libro:
+        obj.principal_cita.titulo = this.titulo_principal;
+        obj.principal_cita.anho = this.anho;
+        obj.principal_cita.isbn = this.isbn;
+        obj.principal_cita.autores = this.autores;
+
+        obj.secundario_cita.tipo = 'capítulo';
+        obj.secundario_cita.titulo = this.titulo_secundario;
+        obj.secundario_cita.editorial = this.editorial;
+        obj.secundario_cita.edicion = this.getEdicionEtiqueta();
+
+        obj.complemento_cita.paginas = this.paginas;
+        obj.complemento_cita.editores = this.editores;
+        obj.complemento_cita.doi = this.enlace_doi;
+
+        break;
+      case TipoContenidoEnum.revista:
+        obj.principal_cita.titulo = this.titulo_principal;
+        obj.principal_cita.isbn = this.isbn;
+        obj.principal_cita.autores = this.autores;
+
+        obj.secundario_cita.tipo = 'artículo';
+        obj.secundario_cita.titulo = this.titulo_secundario;
+        obj.secundario_cita.volumen = this.volumen_periodico;
+        obj.secundario_cita.numero = this.numero_periodico;
+
+        obj.complemento_cita.paginas = this.paginas;
+        obj.complemento_cita.doi = this.enlace_doi;
+
+        break;
+      case TipoContenidoEnum.web:
+        obj.principal_cita.titulo = this.titulo_principal;
+        obj.principal_cita.anho = this.anho;
+        obj.principal_cita.autores = this.autores;
+
+        obj.secundario_cita.tipo = 'entrada';
+        obj.secundario_cita.titulo = this.titulo_secundario;
+
+        obj.complemento_cita.enlace_red = this.enlace_red;
+
+        break;
+      case TipoContenidoEnum.otro:
+      default:
+        obj.principal_cita.titulo = this.titulo_principal;
+
+        obj.complemento_cita.tipo_contenido_secundario =
+          this.tipo_contenido_secundario;
+        obj.complemento_cita.enlace_red = this.enlace_red;
+
+        break;
+    }
+
+    return obj;
   }
 
 }

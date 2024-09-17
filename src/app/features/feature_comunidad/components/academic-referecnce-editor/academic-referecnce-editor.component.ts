@@ -5,10 +5,19 @@ import {
   EventEmitter,
 } from '@angular/core';
 
+import axios from 'axios';
+
+import {
+  AutentificacionInterceptorService,
+} from 'src/app/shared/guards/auth.guard';
+
 import {
   AcademicReference,
   TipoContenidoEnum,
 } from '../../models/academic-reference.model';
+
+import { environment } from 'src/environments/environment';
+
 
 @Component({
   selector: 'app-academic-referecnce-editor',
@@ -23,6 +32,7 @@ export class AcademicReferecnceEditorComponent {
   @Output() emitirClausura: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   constructor(
+    private authIntercepService: AutentificacionInterceptorService,
   ) { }
 
   getTipoContenido ( ): string[] {
@@ -51,7 +61,42 @@ export class AcademicReferecnceEditorComponent {
   /**
    * Do Save Referente
    */
-  private doSaveReferente () {
+  private async doSaveReferente () {
+    const axiosInstance = axios.create();
+    
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+    
+    await axiosInstance.post(
+        environment.MYRMEX_API + '/referente/actualizar',
+        this.refrt_selecto.toJSON(),
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data["id"])
+          this.emitirClausura.emit(false);
+      })
+      .catch(error => {
+        console.error(error);
+
+        this.emitirClausura.emit(false);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  public conmutarEsModif( ) {
+    this.refrt_selecto.apa_reference = null;
   }
 
 }
