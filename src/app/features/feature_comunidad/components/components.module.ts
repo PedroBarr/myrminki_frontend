@@ -26,12 +26,17 @@ import {
   AcademicReferecnceEditorComponent
 } from './academic-referecnce-editor/academic-referecnce-editor.component';
 
+import {
+  AcademicReferecnceListComponent
+} from './academic-referecnce-list/academic-referecnce-list.component';
+
 
 @NgModule({
   declarations: [
     AcademicReferecnceBoxComponent,
     TutorialBoxComponent,
     AcademicReferecnceEditorComponent,
+    AcademicReferecnceListComponent,
   ],
   imports: [
     CommonModule,
@@ -55,6 +60,7 @@ import {
     AcademicReferecnceBoxComponent,
     TutorialBoxComponent,
     AcademicReferecnceEditorComponent,
+    AcademicReferecnceListComponent,
   ]
 })
 export class ComponentsFeatureComunidadModule { }

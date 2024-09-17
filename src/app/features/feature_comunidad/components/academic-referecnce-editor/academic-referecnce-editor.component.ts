@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 
 
 @Component({
-  selector: 'app-academic-referecnce-editor',
+  selector: 'myrmex-academic-referecnce-editor',
   templateUrl: './academic-referecnce-editor.component.html',
   styleUrls: ['./academic-referecnce-editor.component.scss']
 })
