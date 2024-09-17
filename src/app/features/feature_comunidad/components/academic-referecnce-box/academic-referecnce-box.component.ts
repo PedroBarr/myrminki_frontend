@@ -24,6 +24,9 @@ export class AcademicReferecnceBoxComponent {
   @Output() emitirEdicion: EventEmitter<AcademicReference> =
     new EventEmitter<AcademicReference>();
 
+  @Output() emitirEliminacion: EventEmitter<AcademicReference> =
+    new EventEmitter<AcademicReference>();
+
   public esMenuVisible ( ) {
     return (
       this.es_reportable ||
@@ -35,6 +38,12 @@ export class AcademicReferecnceBoxComponent {
   public editarReferente ( ) {
     if (this.es_editable && this.academicReference.refrt_id) {
       this.emitirEdicion.emit(this.academicReference);
+    }
+  }
+
+  public eliminarReferente ( ) {
+    if (this.es_eliminable && this.academicReference.refrt_id) {
+      this.emitirEliminacion.emit(this.academicReference);
     }
   }
 

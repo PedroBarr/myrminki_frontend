@@ -144,6 +144,43 @@ export class PageAcademicReferencesComponent implements OnInit {
       });
   }
 
+  /**
+   * Do delete reference
+   */
+  async doDeleteReferente (referente: AcademicReference) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance);
+
+    await axiosInstance.post(
+      environment.MYRMEX_API + '/referente/eliminar',
+      referente.toJSON()
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.status === 204) {
+          this.loadReferences();
+        }
+
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
   setRefrtSelectorApertura (variable: boolean) {
     this.refrt_selector_apertura = variable;
 
@@ -206,6 +243,16 @@ export class PageAcademicReferencesComponent implements OnInit {
   public editarReferente (referente: AcademicReference) {
     this.setReferenteSeleccionado(referente);
     this.setRefrtSelectorApertura(true);
+  }
+
+  public eliminarReferente (referente: AcademicReference) {
+    if (this.esEliminable()) {
+      this.setReferenteSeleccionado(referente);
+      let referente_parseado = this.getReferente();
+      this.reinitReferenteSeleccionado();
+      
+      this.doDeleteReferente(referente_parseado);
+    }
   }
 
   private reinitReferenteSeleccionado ( ) {

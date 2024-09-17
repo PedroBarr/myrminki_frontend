@@ -50,12 +50,20 @@
               <span> Duplicar </span>
             </button>
 
-            <button mat-menu-item (click)="editarReferente()" *ngIf="es_editable">
+            <button
+              mat-menu-item
+              (click)="editarReferente()"
+              *ngIf="es_editable"
+            >
               <mat-icon class="menu-item-icon"> collections_bookmark </mat-icon>
               <span> Editar </span>
             </button>
 
-            <button mat-menu-item (click)="null" *ngIf="es_eliminable">
+            <button
+              mat-menu-item
+              (click)="eliminarReferente()"
+              *ngIf="es_eliminable"
+            >
               <mat-icon class="menu-item-icon"> bookmark_remove </mat-icon>
               <span> Eliminar </span>
             </button>
