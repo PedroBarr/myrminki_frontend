@@ -30,10 +30,19 @@
     class="boxW100 flex-column gap-10"
   >
     <div
+      *ngIf="!es_padre_advertencia"
       class="boxW100 flex-column flex-center gap-10 flex-align-center fc-color-primary"
     >
       <mat-icon>sentiment_very_dissatisfied</mat-icon>
       <span>No hay referentes académicos</span>
+    </div>
+
+    <div
+      *ngIf="es_padre_advertencia"
+      class="boxW100"
+    >
+      <ng-content>
+      </ng-content>
     </div>
   </div>
 </div>

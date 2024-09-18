@@ -25,6 +25,8 @@ export class AcademicReferecnceListComponent implements OnInit {
   
   @Input() academicReferences: AcademicReference[] = [];
 
+  @Input() es_padre_advertencia: boolean = false;
+
   @Input() es_reportable: boolean = false;
   @Input() es_editable: boolean = false;
   @Input() es_eliminable: boolean = false;
