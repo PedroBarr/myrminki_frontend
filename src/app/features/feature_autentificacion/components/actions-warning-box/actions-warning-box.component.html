@@ -1,22 +1,15 @@
 <mat-card>
     <mat-card-header>
       <mat-card-title>
-        Contenido bloqueado
+        {{getTitulo()}}
       </mat-card-title>
     </mat-card-header>
 
     <mat-card-content class="seccion-container">
-        <div class="boxW100 flex-row gap-10" *ngIf="modoRenderizado() == 0">
-            <mat-icon color="primary"> person </mat-icon>
+        <div class="boxW100 flex-row gap-10">
+            <mat-icon color="primary"> {{getIcono()}} </mat-icon>
             <span class="mensaje-error">
-                Debe iniciar sesion para ver este contenido
-            </span>
-        </div>
-        
-        <div class="boxW100 flex-row gap-10" *ngIf="modoRenderizado() == 1">
-            <mat-icon color="primary"> workspace_premium </mat-icon>
-            <span class="mensaje-error">
-                No tiene permisos para ver parte de este contenido
+                {{getMensaje()}}
             </span>
         </div>
     </mat-card-content>
