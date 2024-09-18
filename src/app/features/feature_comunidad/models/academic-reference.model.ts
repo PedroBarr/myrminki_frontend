@@ -24,6 +24,7 @@ export class AcademicReference {
   public volumen_periodico: string | null = null;
   public numero_periodico: string | null = null;
   public enlace_red: string | null = null;
+  public nota: string | null = null;
 
   constructor (obj: any = {
     refrt_id: null,
@@ -43,6 +44,7 @@ export class AcademicReference {
     volumen_periodico: null,
     numero_periodico: null,
     enlace_red: null,
+    nota: null,
   }) {
     this.refrt_id = obj.refrt_id;
     this.apa_reference = obj.apa_reference;
@@ -78,6 +80,8 @@ export class AcademicReference {
     this.volumen_periodico = obj.volumen_periodico;
     this.numero_periodico = obj.numero_periodico;
     this.enlace_red = obj.enlace_red;
+
+    this.nota = obj.nota;
   }
 
   getApaReference ( ): string {
@@ -200,8 +204,8 @@ export class AcademicReference {
 
     if (this.titulo_secundario) reference += this.titulo_secundario + '. ';
 
-    if (this.tipo_contenido_secundario)
-      reference += this.tipo_contenido_secundario + '. ';
+    if (this.nota)
+      reference += this.nota + '. ';
 
     if (this.enlace_red) reference += 'Recuperado de ' + this.enlace_red + '. ';
 
@@ -273,7 +277,7 @@ export class AcademicReference {
     );
   }
 
-  esTipoContenidoSecundarioable ( ) {
+  esNotable ( ) {
     return this.tipo_contenido === TipoContenidoEnum.otro;
   }
 
@@ -292,6 +296,16 @@ export class AcademicReference {
       );
     }
 
+    return '';
+  }
+
+  getTipoContenidoSecundarioEtiqueta ( ): string {
+    if (this.tipo_contenido_secundario) {
+      return (
+        this.tipo_contenido_secundario.charAt(0).toUpperCase() +
+        this.tipo_contenido_secundario.slice(1)
+      );
+    }
     return '';
   }
   
@@ -417,7 +431,7 @@ export class AcademicReference {
 
     if (!this.titulo_secundario) return false;
 
-    if (!this.tipo_contenido_secundario) return false;
+    if (!this.nota) return false;
 
     if (!this.enlace_red) return false;
 
@@ -490,14 +504,85 @@ export class AcademicReference {
       default:
         obj.principal_cita.titulo = this.titulo_principal;
 
-        obj.complemento_cita.tipo_contenido_secundario =
-          this.tipo_contenido_secundario;
+        obj.secundario_cita.tipo = 'desconocido';
+        obj.secundario_cita.titulo = this.titulo_secundario;
+
+        obj.complemento_cita.nota = this.nota;
         obj.complemento_cita.enlace_red = this.enlace_red;
 
         break;
     }
 
     return obj;
+  }
+
+  static fromJSON (referente: any): AcademicReference {
+    const nuevo_referente: AcademicReference = new AcademicReference();
+
+    nuevo_referente.refrt_id = referente.id;
+    nuevo_referente.apa_reference = referente.cita_apa;
+      
+    const principal: any = referente.principal_cita;
+    const secundario: any = referente.secundario_cita;
+    const complemento: any = referente.complemento_cita;
+
+    if (typeof principal === 'object') {
+      if (principal.tipo)
+        nuevo_referente['tipo_contenido'] = principal.tipo.toLowerCase();
+
+      if (principal.titulo)
+        nuevo_referente['titulo_principal'] = principal.titulo;
+
+      if (principal.anho)
+        nuevo_referente['anho'] = principal.anho;
+
+      if (principal.isbn)
+        nuevo_referente['isbn'] = principal.isbn;
+
+      if (principal.autores && principal.autores.length)
+        nuevo_referente['autores'] = principal.autores;
+
+    }
+
+    if (typeof secundario === 'object') {
+      if (secundario.editorial)
+        nuevo_referente['editorial'] = secundario.editorial;
+
+      if (secundario.edicion)
+        nuevo_referente['edicion'] = secundario.edicion;
+
+      if (secundario.volumen)
+        nuevo_referente['volumen_periodico'] = secundario.volumen;
+
+      if (secundario.numero)
+        nuevo_referente['numero_periodico'] = secundario.numero;
+
+      if (secundario.tipo)
+        nuevo_referente['tipo_contenido_secundario'] = secundario.tipo;
+
+      if (secundario.titulo)
+        nuevo_referente['titulo_secundario'] = secundario.titulo;
+
+    }
+
+    if (typeof complemento === 'object') {
+      if (complemento.doi)
+        nuevo_referente['enlace_doi'] = complemento.doi;
+
+      if (complemento.enlace_red)
+        nuevo_referente['enlace_red'] = complemento.enlace_red;
+
+      if (complemento.paginas)
+        nuevo_referente['paginas'] = complemento.paginas;
+
+      if (complemento.editores && complemento.editores.length)
+        nuevo_referente['editores'] = complemento.editores;
+
+      if (complemento.nota)
+        nuevo_referente['nota'] = complemento.nota;
+    }
+
+    return nuevo_referente;
   }
 
 }

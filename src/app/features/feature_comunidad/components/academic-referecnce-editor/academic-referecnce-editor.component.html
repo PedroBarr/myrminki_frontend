@@ -202,7 +202,7 @@
       </div>
 
       <div
-        *ngIf="refrt_selecto.esTipoContenidoSecundarioable()"
+        *ngIf="refrt_selecto.esNotable()"
         class="boxW100 flex-row flex-space-between gap-20"
       >
         <mat-form-field class="boxW100">
@@ -211,8 +211,8 @@
           <input
             matInput
             (input)="conmutarEsModif()"
-            [(ngModel)]="refrt_selecto.tipo_contenido_secundario"
-            name="tipo_contenido_secundario"
+            [(ngModel)]="refrt_selecto.nota"
+            name="nota"
             required
           />
         </mat-form-field>

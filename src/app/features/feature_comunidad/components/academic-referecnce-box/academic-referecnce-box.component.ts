@@ -16,7 +16,7 @@ import { AcademicReference } from '../../models/academic-reference.model';
 
 export class AcademicReferecnceBoxComponent {
 
-  @Input() academicReference: AcademicReference = <AcademicReference>{};
+  @Input() academicReference: AcademicReference = new AcademicReference();
   @Input() es_editable: boolean = false;
   @Input() es_eliminable: boolean = false;
   @Input() es_reportable: boolean = false;

@@ -260,68 +260,7 @@ export class PageAcademicReferencesComponent implements OnInit {
   }
 
   private buildReferente (referente: any) {
-    const nuevoReferente: AcademicReference = <AcademicReference>{
-      refrt_id: referente.id,
-      apa_reference: referente.cita_apa,
-    };
-
-    const principal: any = referente.principal_cita;
-    const secundario: any = referente.secundario_cita;
-    const complemento: any = referente.complemento_cita;
-
-    if (typeof principal === 'object') {
-      if (principal.tipo)
-        nuevoReferente['tipo_contenido'] = principal.tipo;
-
-      if (principal.titulo)
-        nuevoReferente['titulo_principal'] = principal.titulo;
-
-      if (principal.anho)
-        nuevoReferente['anho'] = principal.anho;
-
-      if (principal.isbn)
-        nuevoReferente['isbn'] = principal.isbn;
-
-      if (principal.autores && principal.autores.length)
-        nuevoReferente['autores'] = principal.autores;
-
-    }
-
-    if (typeof secundario === 'object') {
-      if (secundario.editorial)
-        nuevoReferente['editorial'] = secundario.editorial;
-
-      if (secundario.edicion)
-        nuevoReferente['edicion'] = secundario.edicion;
-
-      if (secundario.volumen)
-        nuevoReferente['volumen_periodico'] = secundario.volumen;
-
-      if (secundario.numero)
-        nuevoReferente['numero_periodico'] = secundario.numero;
-
-      if (secundario.tipo)
-        nuevoReferente['tipo_contenido_secundario'] = secundario.tipo;
-
-      if (secundario.titulo)
-        nuevoReferente['titulo_secundario'] = secundario.titulo;
-
-    }
-
-    if (typeof complemento === 'object') {
-      if (complemento.doi)
-        nuevoReferente['enlace_doi'] = complemento.doi;
-
-      if (complemento.enlace_red)
-        nuevoReferente['enlace_red'] = complemento.enlace_red;
-
-      if (complemento.paginas)
-        nuevoReferente['paginas'] = complemento.paginas;
-
-      if (complemento.editores && complemento.editores.length)
-        nuevoReferente['editores'] = complemento.editores;
-
-    }
+    const nuevoReferente: AcademicReference = AcademicReference.fromJSON(referente);
     
     return nuevoReferente;
 
