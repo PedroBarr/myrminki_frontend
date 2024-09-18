@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="solucion-container">
+    <div class="solucion-container flex-column gap-20">
       <mat-card>
         <mat-card-header>
           <mat-card-title>
@@ -80,6 +80,14 @@
           </mat-accordion>
         </mat-card-content>
       </mat-card>
+
+      <myrmex-academic-referecnce-list
+        [academicReferences]="academicReferences"
+        [es_padre_advertencia]="true"
+      >
+        <myrmex-actions-warning-box>
+        </myrmex-actions-warning-box>
+      </myrmex-academic-referecnce-list>
     </div>
 
     <div class="aditamentos-container" *ngIf="esAccionable()">

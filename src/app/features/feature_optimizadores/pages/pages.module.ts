@@ -30,6 +30,10 @@ import {
   ComponentsFeatureAutentificacionModule
 } from '../../feature_autentificacion/components/components.module';
 
+import {
+  ComponentsFeatureComunidadModule
+} from "../../feature_comunidad/components/components.module";
+
 import { PagesRoutingModule } from './pages-routing.module';
 
 import {
@@ -102,7 +106,6 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-
     MatButtonModule,
     MatCardModule,
     MatChipsModule,
@@ -112,14 +115,13 @@ import {
     MatIconModule,
     MatInputModule,
     MatSelectModule,
-
     MarkdownModule.forRoot(),
-
     ComponentsFeatureOptimizadoresModule,
     ComponentsFeatureAutentificacionModule,
-
+    ComponentsFeatureComunidadModule,
     PagesRoutingModule,
-  ],
+    ComponentsFeatureComunidadModule
+],
   exports: [
     PageMainSetUpComponent,
     PageMainExplorerComponent,
