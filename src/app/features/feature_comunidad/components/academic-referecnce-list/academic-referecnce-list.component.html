@@ -24,4 +24,16 @@
     (emitirEliminacion)="eliminarReferente($event)"
   >
   </myrmex-academic-referecnce-box>
+
+  <div
+    *ngIf="!academicReferences.length || academicReferences.length === 0"
+    class="boxW100 flex-column gap-10"
+  >
+    <div
+      class="boxW100 flex-column flex-center gap-10 flex-align-center fc-color-primary"
+    >
+      <mat-icon>sentiment_very_dissatisfied</mat-icon>
+      <span>No hay referentes académicos</span>
+    </div>
+  </div>
 </div>
