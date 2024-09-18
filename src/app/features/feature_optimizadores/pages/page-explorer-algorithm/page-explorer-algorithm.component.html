@@ -1,8 +1,17 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="algoritmo-container">
+    <div class="algoritmo-container flex-column gap-20">
       <myrmex-algrtm-box *ngIf="algoritmo.algoritmo_id" [algoritmo]="algoritmo">
       </myrmex-algrtm-box>
+
+      <myrmex-academic-referecnce-list
+        [academicReferences]="academicReferences"
+        [es_padre_advertencia]="true"
+      >
+        <myrmex-actions-warning-box
+          [modo_alternativo]="2"
+        ></myrmex-actions-warning-box>
+      </myrmex-academic-referecnce-list>
     </div>
 
     <div class="aditamentos-container">
