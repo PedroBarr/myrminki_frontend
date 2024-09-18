@@ -21,31 +21,16 @@
 
   <div
     *ngIf="esRevisable()"
-    class="flex-center flex-align-center boxW100 flex-column gap-20"
+    class="boxW100"
   >
-    <div class="boxW100 flex-row flex-space-between">
-      <div></div>
-
-      <div class="flex-row gap-20">
-        <button
-          mat-icon-button
-          color="primary"
-          (click)="setRefrtSelectorApertura(true)"
-        >
-          <mat-icon> bookmarks </mat-icon>
-        </button>
-      </div>
-    </div>
-
-    <myrmex-academic-referecnce-box
+    <myrmex-academic-referecnce-list
       class="boxW100"
-      *ngFor="let academicReference of academicReferences"
-      [academicReference]="academicReference"
+      [academicReferences]="academicReferences"
       [es_reportable]="esReportable()"
       [es_eliminable]="esEliminable()"
       [es_editable]="esEditable()"
-      (emitirEdicion)="editarReferente($event)"
-      (emitirEliminacion)="eliminarReferente($event)"
-    ></myrmex-academic-referecnce-box>
+      (emitirEditarReferente)="editarReferente($event)"
+      (emitirEliminarReferente)="eliminarReferente($event)"
+    ></myrmex-academic-referecnce-list>
   </div>
 </div>
