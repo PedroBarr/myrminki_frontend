@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="implementacion-container">
+    <div class="implementacion-container flex-column gap-20">
       <myrmex-implmnt-box
         *ngIf="implementacion.implementacion_id"
         [implementacion]="implementacion"
@@ -12,6 +12,15 @@
         (emitir_argumentos)="set_arg_selecto_argumentos($event)"
       >
       </myrmex-implmnt-box>
+
+      <myrmex-academic-referecnce-list
+        [academicReferences]="academicReferences"
+        [es_padre_advertencia]="true"
+      >
+        <myrmex-actions-warning-box
+          [modo_alternativo]="2"
+        ></myrmex-actions-warning-box>
+      </myrmex-academic-referecnce-list>
     </div>
 
     <div class="aditamentos-container">

@@ -19,6 +19,10 @@ import {
   Acciones,
 } from '../../models/acciones.model';
 
+import {
+  AcademicReference,
+} from '../../../feature_comunidad/models/academic-reference.model';
+
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -31,6 +35,8 @@ export class PageExplorerImplementationComponent implements OnInit {
 
   implementacion: Implementacion = new Implementacion();
   acciones: Acciones = new Acciones();
+
+  academicReferences: AcademicReference[] = [];
 
   arg_selecto: string | null = null;
   args_editados: {[clave_param: string]: string} = {};
@@ -45,6 +51,7 @@ export class PageExplorerImplementationComponent implements OnInit {
   async ngOnInit ( ) {
     await this.loadImplementation();
     await this.loadActions();
+    await this.loadAcademicReferences();
   }
 
   /**
@@ -117,6 +124,45 @@ export class PageExplorerImplementationComponent implements OnInit {
           this.acciones.fill_obj(response.data);
         }
 
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load solution academic references from API
+   */
+  async loadAcademicReferences ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/referente/optimizador/' +
+        this.route.snapshot.paramMap.get('identificador'),
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.length) {
+          this.academicReferences = response.data.map(
+            (referente: any) => AcademicReference.fromJSON(referente)
+          );
+        }
       })
       .catch(error => {
         console.error(error);
