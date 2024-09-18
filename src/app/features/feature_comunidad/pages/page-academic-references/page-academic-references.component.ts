@@ -158,9 +158,9 @@ export class PageAcademicReferencesComponent implements OnInit {
       referente.toJSON()
     )
       .then(response => {
-        console.log(response.data);
+        console.log(response);
 
-        if (response.data && response.status === 204) {
+        if (response && response.status == 204) {
           this.loadReferences();
         }
 
