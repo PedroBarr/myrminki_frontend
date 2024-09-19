@@ -183,6 +183,11 @@
         [roles]="permisos"
       >
       </myrmex-roles-box>
+
+      <myrmex-academic-referecnce-list
+        *ngIf="academicReferences.length > 0"	
+        [academicReferences]="academicReferences"
+      ></myrmex-academic-referecnce-list>
     </div>
   </div>
 </div>

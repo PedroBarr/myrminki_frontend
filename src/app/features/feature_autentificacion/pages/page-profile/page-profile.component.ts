@@ -12,6 +12,10 @@ import {
 } from 'src/app/shared/guards/auth.guard';
 
 import {
+  AcademicReference,
+} from '../../../feature_comunidad/models/academic-reference.model';
+
+import {
   UsuarioPerfil,
   UsuarioPerfilVistaHabilitada,
 } from '../../models/usuario.model';
@@ -45,6 +49,7 @@ export class PageProfileComponent implements OnInit {
   public tipo_vista: UsuarioPerfilVistaHabilitada =
     UsuarioPerfilVistaHabilitada.none;
 
+  public academicReferences: AcademicReference[] = [];
   public permisos: PermisoTipado[] = [];
 
   public problemas: PrevisualizacionProblema[] = [];
@@ -84,6 +89,10 @@ export class PageProfileComponent implements OnInit {
       await this.loadProfileInstances();
       await this.loadProfileImplementations();
       await this.loadProfileSolutions();
+    }
+
+    if (this.perfil.apodo) {
+      await this.loadAcademicReferences(this.perfil.apodo);
     }
   }
 
@@ -680,6 +689,44 @@ export class PageProfileComponent implements OnInit {
         setTimeout(() => {
           this.ocultarMensaje();
         }, 7000);
+      });
+  }
+
+  /**
+   * Load perfil academic references from API
+   */
+  async loadAcademicReferences (apodo: string) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/referente/usuario/identificador/' + apodo
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.length) {
+          this.academicReferences = response.data.map(
+            (referente: any) => AcademicReference.fromJSON(referente)
+          );
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
       });
   }
 

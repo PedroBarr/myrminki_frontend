@@ -15,6 +15,10 @@ import {
 } from '../components/components.module';
 
 import {
+  ComponentsFeatureComunidadModule
+} from '../../feature_comunidad/components/components.module';
+
+import {
   PageLoginComponent
 } from './page-login/page-login.component';
 
@@ -58,6 +62,7 @@ import {
 
     ComponentsFeatureOptimizadoresModule,
     ComponentsFeatureAutentificacionModule,
+    ComponentsFeatureComunidadModule,
 
     PagesRoutingModule,
   ],
