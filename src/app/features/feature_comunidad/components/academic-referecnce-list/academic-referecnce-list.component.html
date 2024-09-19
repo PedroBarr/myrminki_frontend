@@ -1,11 +1,23 @@
 <div class="flex-center flex-align-center boxW100 flex-column gap-20">
   <div class="boxW100 flex-row flex-space-between">
-    <div></div>
+    <div class="boxW100">
+      <mat-form-field class="boxW100">
+        <mat-label> Busqueda </mat-label>
+
+        <input
+          type="text"
+          placeholder="Ej: Optimizador"
+          matInput
+          (input)="filtrarReferentes($event)"
+        >
+      </mat-form-field>
+    </div>
 
     <div class="flex-row gap-20">
       <button
         mat-icon-button
         color="primary"
+        *ngIf="es_editable"
         (click)="editarReferente(null)"
       >
         <mat-icon> bookmarks </mat-icon>
@@ -15,7 +27,7 @@
 
   <myrmex-academic-referecnce-box
     class="boxW100"
-    *ngFor="let academicReference of academicReferences"
+    *ngFor="let academicReference of references"
     [academicReference]="academicReference"
     [es_reportable]="es_reportable"
     [es_eliminable]="es_eliminable"
@@ -26,7 +38,7 @@
   </myrmex-academic-referecnce-box>
 
   <div
-    *ngIf="!academicReferences.length || academicReferences.length === 0"
+    *ngIf="esVacio()"
     class="boxW100 flex-column gap-10"
   >
     <div

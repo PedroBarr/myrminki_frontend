@@ -342,8 +342,8 @@ export class AcademicReference {
     return '';
   }
 
-  setAutores ($event: any) {
-    const value: string = $event.target.value;
+  setAutores (event: any) {
+    const value: string = event.target.value;
     this.autores = value
       .toString()
       .split(';')
@@ -359,8 +359,9 @@ export class AcademicReference {
     return '';
   }
 
-  setEditores ($event: any) {
-    const value: string = $event.target.value;
+  setEditores (event: any) {
+    const value: string = event.target.value;
+
     this.editores = value
       .toString()
       .split(';')
@@ -583,6 +584,75 @@ export class AcademicReference {
     }
 
     return nuevo_referente;
+  }
+
+  public toCrudo ( ): string {
+    let crudo: string = '';
+    
+    if (this.tipo_contenido) {
+      crudo += this.getTipoContenidoEtiqueta() + ' ';
+    }
+    
+    if (this.titulo_principal) crudo += this.titulo_principal + ' ';
+    
+    if (this.anho) crudo += this.anho + ' ';
+
+    if (this.edicion) {
+      crudo += this.edicion + ' ';
+      crudo += this.getEdicionEtiqueta() + ' ';
+    }
+
+    if (this.volumen_periodico) crudo += this.volumen_periodico + ' ';
+
+    if (this.numero_periodico) crudo += this.numero_periodico + ' ';
+
+    if (this.paginas) crudo += this.paginas + ' ';
+
+    if (this.tipo_contenido_secundario) {
+      crudo += this.getTipoContenidoSecundarioEtiqueta() + ' ';
+    }
+
+    if (this.titulo_secundario) crudo += this.titulo_secundario + ' ';
+
+    if (this.autores.length) {
+      crudo += this.autores.join(' ') + ' ';
+    }
+
+    if (this.editores.length) {
+      crudo += this.editores.join(' ') + ' ';
+    }
+
+    if (this.editorial) crudo += this.editorial + ' ';
+
+    if (this.enlace_doi) crudo += this.enlace_doi + ' ';
+
+    if (this.isbn) crudo += this.isbn + ' ';
+
+    if (this.enlace_red) crudo += this.enlace_red + ' ';
+
+    if (this.nota) crudo += this.nota + ' ';
+
+    return crudo;
+  }
+
+  public static replaceSpecialCharacters (text: string): string {
+    return text
+      .replace(/á/g, 'a')
+      .replace(/é/g, 'e')
+      .replace(/í/g, 'i')
+      .replace(/ó/g, 'o')
+      .replace(/ú/g, 'u')
+      .replace(/ñ/g, 'n')
+      .replace(/Á/g, 'A')
+      .replace(/É/g, 'E')
+      .replace(/Í/g, 'I')
+      .replace(/Ó/g, 'O')
+      .replace(/Ú/g, 'U')
+      .replace(/Ñ/g, 'N')
+      .replace(/[^a-zA-Z0-9 ]/g, '')
+      .replace(/\s+/g, ' ')
+      .trim()
+    ;
   }
 
 }
