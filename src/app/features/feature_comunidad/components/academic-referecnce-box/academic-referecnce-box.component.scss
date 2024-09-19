@@ -53,6 +53,10 @@ mat-card-title mat-chip-list mat-chip {
   color: #fff;
 }
 
+::ng-deep .mat-menu-panel {
+  min-height: 43px !important;
+}
+
 ::ng-deep .mat-menu-content {
   padding: 0 !important;
 }
@@ -65,4 +69,8 @@ mat-card-title mat-chip-list mat-chip {
 ::ng-deep .mat-menu-item .mat-icon {
   font-size: 20px !important;
   margin-right: 10px !important;
+}
+
+.es-asociada {
+  background-color: var(--myrmex-primary-selected);
 }

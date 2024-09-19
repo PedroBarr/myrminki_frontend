@@ -18,6 +18,10 @@ import {
 } from '../../models/acciones.model';
 
 import {
+  AcademicReference,
+} from '../../../feature_comunidad/models/academic-reference.model';
+
+import {
   ArgumentoParametrizacion,
   Solucion,
 } from '../../models/optimizador.model';
@@ -79,6 +83,9 @@ export class PageEditorSolutionComponent implements OnInit {
   args_instc_selecto: string | null = null;
   argumentacion_instc: ArgumentoParametrizacion = new ArgumentoParametrizacion();
 
+  academicReferences: AcademicReference[] = [];
+  academicReferencesAsoc: AcademicReference[] = [];
+
   constructor (
     private router: Router,
     private route: ActivatedRoute,
@@ -96,11 +103,15 @@ export class PageEditorSolutionComponent implements OnInit {
 
     if (this.route.snapshot.paramMap.get('identificador') != null) {
       await this.loadActions();
-      if (this.esEditable()) await this.loadSolution();
-      else this.router.navigateByUrl('/');
+
+      if (this.esEditable()) {
+        await this.loadSolution();
+      } else this.router.navigateByUrl('/');
     } else {
       await this.loadGeneralActions();
     }
+
+    await this.reloadAcademicReferences();
   }
 
   /**
@@ -358,6 +369,82 @@ export class PageEditorSolutionComponent implements OnInit {
 
         if (response.data && response.data.id) {
           this.router.navigateByUrl('/solucion/visor/' + response.data.diminutivo);
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load academic references from API
+   */
+  async loadAcademicReferences ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API + '/referentes',
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.length) {
+          this.academicReferences = response.data.map(
+            (referente: any) => AcademicReference.fromJSON(referente)
+          );
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  /**
+   * Load academic references asoc from API
+   */
+  async loadAcademicReferencesAsoc ( ) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.get(
+      environment.MYRMEX_API +
+        '/referente/optimizador/' +
+        this.route.snapshot.paramMap.get('identificador'),
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data && response.data.length) {
+          this.academicReferencesAsoc = response.data.map(
+            (referente: any) => AcademicReference.fromJSON(referente)
+          );
         }
       })
       .catch(error => {
@@ -662,6 +749,36 @@ export class PageEditorSolutionComponent implements OnInit {
         this.acciones.crear_solucion
       )
     );
+  }
+
+  public esAsociable (): boolean {
+    return Boolean(
+      this.route.snapshot.paramMap.get('identificador') ||
+      this.solucion.solucion_id
+    );
+  }
+
+  public getCredentId ( ): string | null {
+    if (this.route.snapshot.paramMap.get('identificador')) {
+      return this.route.snapshot.paramMap.get('identificador');
+    }
+
+    if (this.solucion.solucion_id) {
+      return this.solucion.solucion_id;
+    }
+
+    return null;
+  }
+
+  public async reloadAcademicReferences ( ) {
+    await this.loadAcademicReferences();
+    
+    if (this.esAsociable()) {
+      await this.loadAcademicReferencesAsoc();
+    } else {
+      this.academicReferencesAsoc = [];
+    }
+  
   }
 
 }

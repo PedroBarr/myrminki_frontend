@@ -17,9 +17,12 @@ import { AcademicReference } from '../../models/academic-reference.model';
 export class AcademicReferecnceBoxComponent {
 
   @Input() academicReference: AcademicReference = new AcademicReference();
+
   @Input() es_editable: boolean = false;
   @Input() es_eliminable: boolean = false;
   @Input() es_reportable: boolean = false;
+  @Input() es_reasociable: boolean = false;
+  @Input() es_asociado: boolean = false;
 
   @Output() emitirEdicion: EventEmitter<AcademicReference> =
     new EventEmitter<AcademicReference>();
@@ -27,10 +30,21 @@ export class AcademicReferecnceBoxComponent {
   @Output() emitirEliminacion: EventEmitter<AcademicReference> =
     new EventEmitter<AcademicReference>();
 
+  @Output() emitirReasociacion:
+    EventEmitter<{
+      refrt: AcademicReference,
+      accion: string,
+    }> = new EventEmitter<{
+      refrt: AcademicReference,
+      accion: string,
+    }>();
+
   public esMenuVisible ( ) {
     return (
       this.es_reportable ||
       this.es_eliminable ||
+      this.es_editable ||
+      this.es_reasociable ||
       false
     );
   }
@@ -46,5 +60,24 @@ export class AcademicReferecnceBoxComponent {
       this.emitirEliminacion.emit(this.academicReference);
     }
   }
+
+  public asociarReferente ( ) {
+    if (this.es_reasociable && this.academicReference.refrt_id) {
+      this.emitirReasociacion.emit({
+        refrt: this.academicReference,
+        accion: 'asociar',
+      });
+    }
+  }
+
+  public desasociarReferente ( ) {
+    if (this.es_reasociable && this.academicReference.refrt_id) {
+      this.emitirReasociacion.emit({
+        refrt: this.academicReference,
+        accion: 'desasociar',
+      });
+    }
+  }
+    
 
 }

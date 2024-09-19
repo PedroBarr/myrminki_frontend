@@ -32,8 +32,11 @@
     [es_reportable]="es_reportable"
     [es_eliminable]="es_eliminable"
     [es_editable]="es_editable"
+    [es_reasociable]="es_asociable"
+    [es_asociado]="esAsociado(academicReference)"
     (emitirEdicion)="editarReferente($event)"
     (emitirEliminacion)="eliminarReferente($event)"
+    (emitirReasociacion)="interpretarReasociacion($event.refrt, $event.accion)"
   >
   </myrmex-academic-referecnce-box>
 

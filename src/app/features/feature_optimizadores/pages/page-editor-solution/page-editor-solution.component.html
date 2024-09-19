@@ -1,6 +1,6 @@
 <div class="page-wrapper">
   <div class="boxW100 flex-row flex-space-between">
-    <div class="solucion-container" *ngIf="esEditable()">
+    <div class="solucion-container flex-column gap-20" *ngIf="esEditable()">
       <mat-card>
         <mat-card-header>
           <mat-card-title> Creador de soluci&oacute;n </mat-card-title>
@@ -86,6 +86,20 @@
           </div>
         </mat-card-content>
       </mat-card>
+
+      <myrmex-academic-referecnce-list
+        *ngIf="esAsociable()"
+        [academicReferences]="academicReferences"
+        [es_padre_advertencia]="true"
+        [es_asociable]="esAsociable()"
+        [asociados]="academicReferencesAsoc"
+        [credencial_id]="getCredentId()"
+        (emitirReAsociacion)="reloadAcademicReferences()"
+      >
+        <myrmex-actions-warning-box
+          [modo_alternativo]="2"
+        ></myrmex-actions-warning-box>
+      </myrmex-academic-referecnce-list>
     </div>
 
     <div class="solucion-container" *ngIf="!esEditable()">

@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card [ngClass]="{'es-asociada': es_asociado}">
   <mat-card-header>
     <mat-card-title>
       <div class="boxW100 flex-row flex-space-between">
@@ -34,7 +34,6 @@
           <button
             mat-icon-button
             [matMenuTriggerFor]="menu"
-            aria-label="Example icon-button with a menu"
           >
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -66,6 +65,24 @@
             >
               <mat-icon class="menu-item-icon"> bookmark_remove </mat-icon>
               <span> Eliminar </span>
+            </button>
+
+            <button
+              mat-menu-item
+              (click)="asociarReferente()"
+              *ngIf="es_reasociable && !es_asociado"
+            >
+              <mat-icon class="menu-item-icon"> bookmark_add </mat-icon>
+              <span> Asociar </span>
+            </button>
+
+            <button
+              mat-menu-item
+              (click)="desasociarReferente()"
+              *ngIf="es_reasociable && es_asociado"
+            >
+              <mat-icon class="menu-item-icon"> bookmark_remove </mat-icon>
+              <span> Desasociar </span>
             </button>
           </mat-menu>
         </div>
