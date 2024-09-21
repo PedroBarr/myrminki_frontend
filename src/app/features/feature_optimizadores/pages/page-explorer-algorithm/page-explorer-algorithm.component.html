@@ -26,6 +26,12 @@
         Editar el problema
       </button>
 
+      <myrmex-calif-box
+        *ngIf="getIdentificador()"
+        [credencial]="getIdentificador()"
+        [es_calificable]="esCalificable()"
+      ></myrmex-calif-box>
+
       <myrmex-paramz-algorithm-box
         *ngIf="algoritmo.parametrizacion_id"
         [paramz_algrtm_id]="algoritmo.parametrizacion_id"

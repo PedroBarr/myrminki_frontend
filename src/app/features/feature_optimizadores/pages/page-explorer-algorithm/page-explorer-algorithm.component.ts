@@ -132,9 +132,7 @@ export class PageExplorerAlgorithmComponent implements OnInit {
       .then(response => {
         console.log(response.data);
 
-        if (response.data) {
-          this.acciones.fill_obj(response.data);
-        }
+        if (response.data) this.acciones.fill_obj(response.data);
 
       })
       .catch(error => {
@@ -197,6 +195,22 @@ export class PageExplorerAlgorithmComponent implements OnInit {
       this.algoritmo.algoritmo_id &&
       this.acciones.actualizar_algoritmo
     );
+  }
+
+  public esCalificable ( ): boolean {
+    return Boolean(
+      this.algoritmo.algoritmo_id &&
+      this.acciones.calificar_algoritmo
+    );
+  }
+
+  public getIdentificador ( ) {
+    if (this.algoritmo.algoritmo_id)
+      return this.algoritmo.algoritmo_id;
+    else if (this.route.snapshot.paramMap.get('identificador'))
+      return this.route.snapshot.paramMap.get('identificador');
+    else
+      return null;
   }
 
 }
