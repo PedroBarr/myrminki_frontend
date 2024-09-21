@@ -1,1 +1,57 @@
-<p>calif-box works!</p>
+<mat-card>
+  <mat-card-content class="seccion-container">
+    <div
+      class="boxW100 flex-column gap-off flex-space-between flex-align-center"
+    >
+      <div class="boxW100 flex-row flex-space-between">
+        <div
+          class="calificacion-container"
+          *ngIf="esCalificadoGlobal()"
+        >
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_global}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación global</span>
+        </div>
+
+        <div
+          class="calificacion-container"
+          *ngIf="esCalificadoPersonal()"
+        >
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_personal}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación personal</span>
+        </div>
+      </div>
+      
+      <div class="boxW100" *ngIf="esCalificable()">
+        <mat-form-field class="form-field-fixed">
+          <mat-label>Calificación</mat-label>
+
+          <input
+            matInput
+            [(ngModel)]="calificacion_personal_interna"
+            placeholder="Calificación de 0 a 5"
+            type="number"
+            [min]="0"
+            [max]="5"
+            required
+          />
+        </mat-form-field>
+      </div>
+    </div>
+  </mat-card-content>
+
+  <mat-card-actions align="end">
+    <button
+      *ngIf="esCalificable()"
+      mat-flat-button
+      color="primary"
+    >
+      Calificar
+    </button>
+  </mat-card-actions>
+</mat-card>
