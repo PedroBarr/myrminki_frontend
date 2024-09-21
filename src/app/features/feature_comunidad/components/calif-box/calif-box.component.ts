@@ -89,6 +89,59 @@ export class CalifBoxComponent implements OnChanges, OnInit {
       });
   }
 
+  /**
+   * Do calif from API
+   */
+  async doCalif (obj: any) {
+    const axiosInstance = axios.create();
+
+    const intercep_auth_id = this.authIntercepService.addAuthInterceptor(axiosInstance);
+    const intercep_error_id = this.authIntercepService.addAuthErrorInterceptor(axiosInstance, false);
+
+    await axiosInstance.post(
+      environment.MYRMEX_API + '/calificacion/calificar',
+        obj
+    )
+      .then(response => {
+        console.log(response.data);
+
+        if (response.data) {
+          this.loadCalif();
+          this.emitirCalificacion.emit();
+        }
+      })
+      .catch(error => {
+        console.error(error);
+      })
+      .finally(( ) => {
+        this.authIntercepService.removeAuthInterceptor(
+          axiosInstance,
+          intercep_auth_id
+        );
+
+        this.authIntercepService.removeAuthErrorInterceptor(
+          axiosInstance,
+          intercep_error_id
+        );
+      });
+  }
+
+  public verificar ( ) {
+    if (this.esCalificable()) {
+      if (
+        this.calificacion_personal_interna >= 0 &&
+        this.calificacion_personal_interna <= 5
+      ) {
+        const obj: any = {}
+
+        obj['credencial'] = this.credencial;
+        obj['calificacion'] = this.calificacion_personal_interna;
+
+        this.doCalif(obj);
+      }
+    }
+  }
+
   esCalificable ( ) {
     return (
       this.es_calificable &&

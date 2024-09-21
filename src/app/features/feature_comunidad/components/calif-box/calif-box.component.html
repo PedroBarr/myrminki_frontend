@@ -39,6 +39,7 @@
             [min]="0"
             [max]="5"
             required
+            (keyup.enter)="verificar()"
           />
         </mat-form-field>
       </div>
@@ -50,6 +51,7 @@
       *ngIf="esCalificable()"
       mat-flat-button
       color="primary"
+      (click)="verificar()"
     >
       Calificar
     </button>
