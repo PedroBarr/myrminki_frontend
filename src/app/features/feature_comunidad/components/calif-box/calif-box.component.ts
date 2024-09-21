@@ -67,7 +67,7 @@ export class CalifBoxComponent implements OnChanges, OnInit {
           if (response.data.calif_glbl)
             this.calificacion_global = response.data.calif_glbl;
 
-          if (response.data.calif_prsnl) {
+          if (response.data.calif_prsnl !== undefined) {
             this.calificacion_personal = response.data.calif_prsnl;
             this.calificacion_personal_interna = response.data.calif_prsnl;
           }
