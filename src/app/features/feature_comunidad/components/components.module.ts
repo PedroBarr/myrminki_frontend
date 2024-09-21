@@ -30,6 +30,10 @@ import {
   AcademicReferecnceListComponent
 } from './academic-referecnce-list/academic-referecnce-list.component';
 
+import {
+  CalifBoxComponent
+} from './calif-box/calif-box.component';
+
 
 @NgModule({
   declarations: [
@@ -37,6 +41,7 @@ import {
     TutorialBoxComponent,
     AcademicReferecnceEditorComponent,
     AcademicReferecnceListComponent,
+    CalifBoxComponent,
   ],
   imports: [
     CommonModule,
@@ -61,6 +66,7 @@ import {
     TutorialBoxComponent,
     AcademicReferecnceEditorComponent,
     AcademicReferecnceListComponent,
+    CalifBoxComponent,
   ]
 })
 export class ComponentsFeatureComunidadModule { }
