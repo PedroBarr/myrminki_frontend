@@ -1,1 +1,51 @@
-<p>profile-calif-box works!</p>
+<mat-card>
+  <mat-card-content class="seccion-container">
+    <div
+      class="boxW100 flex-column gap-off flex-space-between flex-align-center"
+    >
+      <div class="boxW100 flex-row flex-space-between">
+        <div class="calificacion-container">
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_algoritmos}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación algoritmos</span>
+        </div>
+
+        <div class="calificacion-container">
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_problemas}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación problemas</span>
+        </div>
+      </div>
+
+      <div class="boxW100 flex-row flex-space-between">
+        <div class="calificacion-container">
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_implementaciones}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación implementaciones</span>
+        </div>
+
+        <div class="calificacion-container">
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_instancias}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación instancias</span>
+        </div>
+        
+        <div class="calificacion-container">
+          <span class="calificacion">
+            <span class="numerador">{{calificacion_soluciones}}</span>
+            <span class="denominador">/5</span>
+          </span>
+          <span class="titulo">Calificación soluciones</span>
+        </div>
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>
