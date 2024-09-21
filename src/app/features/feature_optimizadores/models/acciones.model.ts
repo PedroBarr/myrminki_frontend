@@ -36,6 +36,12 @@ export class Acciones {
     public actualizar_referentes: boolean = false;
     public eliminar_referentes: boolean = false;
     public reportar_referentes: boolean = false;
+
+    public calificar_problema: boolean = false;
+    public calificar_instancia: boolean = false;
+    public calificar_algoritmo: boolean = false;
+    public calificar_implementacion: boolean = false;
+    public calificar_solucion: boolean = false;
     
     constructor ( ) { }
 
@@ -132,6 +138,21 @@ export class Acciones {
                 case "accion_reportar_referentes":
                     this.reportar_referentes = true;
                     break;
+                case "accion_calificar_problema":
+                    this.calificar_problema = true;
+                    break;
+                case "accion_calificar_instancia":
+                    this.calificar_instancia = true;
+                    break;
+                case "accion_calificar_algoritmo":
+                    this.calificar_algoritmo = true;
+                    break;
+                case "accion_calificar_implementacion":
+                    this.calificar_implementacion = true;
+                    break;
+                case "accion_calificar_solucion":
+                    this.calificar_solucion = true;
+                    break;
                 default:
                     break;
             }
@@ -170,6 +191,11 @@ export class Acciones {
             !this.actualizar_referentes &&
             !this.eliminar_referentes &&
             !this.reportar_referentes &&
+            !this.calificar_problema &&
+            !this.calificar_instancia &&
+            !this.calificar_algoritmo &&
+            !this.calificar_implementacion &&
+            !this.calificar_solucion &&
             true
         );
     }
