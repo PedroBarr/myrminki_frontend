@@ -24,6 +24,12 @@
     </div>
 
     <div class="aditamentos-container">
+      <myrmex-calif-box
+        *ngIf="getIdentificador()"
+        [credencial]="getIdentificador()"
+        [es_calificable]="esCalificable()"
+      ></myrmex-calif-box>
+      
       <myrmex-implmnt-eval-box
         *ngIf="esEjecutableComando()"
         [implmnt_id]="implementacion.implementacion_id"

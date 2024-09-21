@@ -213,4 +213,20 @@ export class PageExplorerImplementationComponent implements OnInit {
     );
   }
 
+  public esCalificable ( ): boolean {
+    return Boolean(
+      this.implementacion.implementacion_id &&
+      this.acciones.calificar_implementacion
+    );
+  }
+
+  public getIdentificador ( ) {
+    if (this.implementacion.implementacion_id)
+      return this.implementacion.implementacion_id;
+    else if (this.route.snapshot.paramMap.get('identificador'))
+      return this.route.snapshot.paramMap.get('identificador');
+    else
+      return null;
+  }
+
 }
