@@ -893,4 +893,8 @@ export class PageProfileComponent implements OnInit {
     return this.es_error ? 'alert-danger' : 'alert-success';
   }
 
+  esApodado() {
+    return this.perfil.apodo !== undefined;
+  }
+
 }

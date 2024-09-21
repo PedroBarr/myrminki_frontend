@@ -184,6 +184,11 @@
       >
       </myrmex-roles-box>
 
+      <myrmex-profile-calif-box
+        *ngIf="esApodado()"
+        [apodo]="perfil.apodo"
+      ></myrmex-profile-calif-box>
+
       <myrmex-academic-referecnce-list
         *ngIf="academicReferences.length > 0"	
         [academicReferences]="academicReferences"
