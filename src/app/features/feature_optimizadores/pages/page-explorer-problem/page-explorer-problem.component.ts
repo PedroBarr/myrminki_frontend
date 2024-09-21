@@ -180,4 +180,20 @@ export class PageExplorerProblemComponent implements OnInit {
     );
   }
 
+  public esCalificable ( ): boolean {
+    return Boolean(
+      this.problema.problema_id &&
+      this.acciones.calificar_problema
+    );
+  }
+
+  public getIdentificador ( ) {
+    if (this.problema.problema_id)
+      return this.problema.problema_id;
+    else if (this.route.snapshot.paramMap.get('identificador'))
+      return this.route.snapshot.paramMap.get('identificador');
+    else
+      return null;
+  }
+
 }
