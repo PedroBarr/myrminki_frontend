@@ -398,4 +398,20 @@ export class PageExplorerSolutionComponent implements OnInit {
     );
   }
 
+  public esCalificable ( ): boolean {
+    return Boolean(
+      this.solucion.solucion_id &&
+      this.acciones.calificar_solucion
+    );
+  }
+
+  public getIdentificador ( ) {
+    if (this.solucion.solucion_id)
+      return this.solucion.solucion_id;
+    else if (this.route.snapshot.paramMap.get('identificador'))
+      return this.route.snapshot.paramMap.get('identificador');
+    else
+      return null;
+  }
+
 }

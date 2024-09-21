@@ -92,6 +92,12 @@
     </div>
 
     <div class="aditamentos-container" *ngIf="esAccionable()">
+      <myrmex-calif-box
+        *ngIf="getIdentificador()"
+        [credencial]="getIdentificador()"
+        [es_calificable]="esCalificable()"
+      ></myrmex-calif-box>
+      
       <myrmex-solcn-eval-box
         *ngIf="esEjecutableComando()"
         [solcn_id]="solucion.solucion_id"
@@ -121,6 +127,12 @@
     </div>
 
     <div class="aditamentos-container" *ngIf="!esAccionable()">
+      <myrmex-calif-box
+        *ngIf="getIdentificador()"
+        [credencial]="getIdentificador()"
+        [es_calificable]="esCalificable()"
+      ></myrmex-calif-box>
+
       <myrmex-actions-warning-box>
       </myrmex-actions-warning-box>
     </div>
